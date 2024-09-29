@@ -14,6 +14,7 @@ import { createTheme } from "./theme";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import "./App.css";
+import SidebarLayout from "./layouts/SidebarLayout";
 
 export const App = () => {
   const mode = useAppSelector(selectMode);
@@ -24,13 +25,7 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      <Button variant="contained" startIcon={"icon"}>
-        Hello
-      </Button>
-
-      <Button variant="outlined">Hello</Button>
-
-      <Input />
+      <SidebarLayout />
 
       {/* <BrowserRouter>
         <Routes>

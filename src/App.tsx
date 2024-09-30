@@ -13,6 +13,7 @@ import { useAppSelector } from "./store";
 import { createTheme } from "./theme/index";
 import "./App.css";
 import SidebarLayout from "./layouts/SidebarLayout";
+import { BookCard } from "@components/BookCard";
 
 export const App = () => {
   const mode = useAppSelector(selectMode);
@@ -24,7 +25,17 @@ export const App = () => {
       <CssBaseline />
 
       <SidebarLayout>
-        <h1>Hello</h1>
+        <BookCard title="The Great Gatsby" date="Nov 23, 2024 at 8:12 PM" />
+        <BookCard
+          title="To Kill a Mockingbird"
+          date="Nov 23, 2024 at 8:12 PM"
+        />
+        <BookCard title="1984" date="Nov 23, 2024 at 8:12 PM" />
+        <BookCard title="Pride and Prejudice" date="Nov 23, 2024 at 8:12 PM" />
+        <BookCard
+          title="The Catcher in the Rye"
+          date="Nov 23, 2024 at 8:12 PM"
+        />
       </SidebarLayout>
 
       {/* <BrowserRouter>

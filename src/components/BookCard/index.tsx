@@ -1,23 +1,29 @@
 import { DotsIcon } from "@/icons/DotsIcon";
-import { StatusChip } from "@components/Chip";
-import {
-  alpha,
-  Chip,
-  IconButton,
-  styled,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { StatusChip } from "@components/StatusChip";
+import { alpha, styled, Typography, useTheme } from "@mui/material";
+import { FC } from "react";
 
-export const BookCard = () => {
+interface BookCardProps {
+  title: string;
+  date: string;
+  coverImage?: string;
+}
+
+export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
   const theme = useTheme();
 
   return (
     <Wrapper>
       <CoverImageWrapper>
-        <MockImage />
+        {coverImage ? (
+          <ImageContainer>
+            <Image src={coverImage} alt={title} />
+          </ImageContainer>
+        ) : (
+          <MockImage />
+        )}
         <ActionPanel className="action-panel">
-          <StatusChip label="Active" />
+          <StatusChip label="Active" status="success" />
 
           <DotsWrapper>
             <DotsIcon />
@@ -26,10 +32,10 @@ export const BookCard = () => {
       </CoverImageWrapper>
       <Data>
         <BookTitle variant="h5" color={theme.palette.grey[400]}>
-          Color Mastery in Web Design: Master
+          {title}
         </BookTitle>
         <Typography variant="h6" color={theme.palette.grey[200]}>
-          Nov 23, 2024 at 8:12 PM
+          {date}
         </Typography>
       </Data>
     </Wrapper>
@@ -40,6 +46,7 @@ const Wrapper = styled("div")`
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
   max-width: 250px;
+  width: fill-available;
   cursor: pointer;
 `;
 
@@ -107,4 +114,21 @@ const DotsWrapper = styled("div")`
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   background-color: ${({ theme }) => theme.palette.text.primary};
+`;
+
+const ImageContainer = styled("div")`
+  width: 112px;
+  height: 164px;
+  border-radius: 4px;
+  box-shadow:
+    0px 0px 0.5px 0px #0000008f,
+    0px 1.38px 2.77px 0px #00000014,
+    0px 2.77px 5.54px 0px #0000000a,
+    0px 5.54px 11.07px 0px #0000000a;
+`;
+
+const Image = styled("img")`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

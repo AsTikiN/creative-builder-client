@@ -1,16 +1,19 @@
 import { FC } from "react";
 import { alpha, styled, Typography, useTheme } from "@mui/material";
 
+type ChipStatus = "success" | "error";
+
 interface Props {
   label: string;
+  status: ChipStatus;
 }
 
-export const StatusChip: FC<Props> = ({ label }) => {
+export const StatusChip: FC<Props> = ({ label, status }) => {
   const theme = useTheme();
 
   return (
     <Wrapper>
-      <StatusCircle />
+      <StatusCircle status={status} />
       <Typography variant="h6" color={theme.palette.grey[200]}>
         {label}
       </Typography>
@@ -28,9 +31,12 @@ const Wrapper = styled("div")`
   padding: 4px 8px 4px 9px;
 `;
 
-const StatusCircle = styled("div")`
+const StatusCircle = styled("div")<{ status: ChipStatus }>`
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.success.main};
+  background-color: ${({ theme, status }) =>
+    status === "success"
+      ? theme.palette.success.main
+      : theme.palette.error.main};
 `;

@@ -1,4 +1,3 @@
-import { BookCard } from "@components/BookCard";
 import { Header } from "@modules/Header";
 import { Sidebar } from "@modules/Sidebar";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
@@ -13,14 +12,7 @@ export const SidebarLayout: FC<PropsWithChildren> = ({ children }) => {
       <Main>
         <Header />
 
-        <Content>
-          <BookCard />
-          <BookCard />
-          <BookCard />
-          <BookCard />
-          <BookCard />
-          {/* {children} */}
-        </Content>
+        <Content>{children}</Content>
       </Main>
     </Wrapper>
   );

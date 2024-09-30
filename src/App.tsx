@@ -10,9 +10,7 @@ import { selectMode } from "@store/features/theme";
 // import { Signup } from "@modules/auth/pages/Signup";
 // import { AuthLayout } from "@modules/auth/components/AuthLayout";
 import { useAppSelector } from "./store";
-import { createTheme } from "./theme";
-import { Button } from "@components/Button";
-import { Input } from "@components/Input";
+import { createTheme } from "./theme/index";
 import "./App.css";
 import SidebarLayout from "./layouts/SidebarLayout";
 

@@ -1,5 +1,5 @@
 import { PlusIcon } from "@/icons/PlusIcon";
-import { Avatar, Badge, styled } from "@mui/material";
+import { alpha, Avatar, Badge, IconButton, Stack, styled } from "@mui/material";
 import { Workspace } from "./components/Workspace";
 import { FigmaIcon } from "@/icons/FigmaIcon";
 import { FramerIcon } from "@/icons/FramerIcon";
@@ -29,41 +29,28 @@ export const WorkspacesBoard = () => {
   );
 };
 
-const Wrapper = styled("div")`
-  display: flex;
-  flex-direction: column;
-
+const Wrapper = styled(Stack)`
   //TODO: move to theme
   padding: 12px;
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid ${({ theme }) => theme.palette.grey[100]};
 `;
 
-const Workspaces = styled("div")`
-  display: flex;
-  flex-direction: column;
+const Workspaces = styled(Stack)`
   flex: 1;
-
-  //TODO: move to theme
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
-const AddButton = styled("button")`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const AddButton = styled(IconButton)`
   width: 40px;
   height: 40px;
 
-  //TODO: move to theme
-  border-radius: 8px;
-  border: 0.5px solid rgba(36, 36, 36, 0.1);
-  background-color: #fff;
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
-    backgroundColor: "#44b700",
-    color: "#44b700",
+    backgroundColor: theme.palette.success.main,
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
 
     "&::after": {

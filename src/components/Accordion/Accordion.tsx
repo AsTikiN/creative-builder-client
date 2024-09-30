@@ -3,6 +3,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  alpha,
+  css,
   styled,
   Tab,
   Tabs,
@@ -59,7 +61,7 @@ export const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
 
 const AccordionWrapper = styled(Accordion)`
   box-shadow: none;
-  color: #5c5c5c;
+  color: ${({ theme }) => theme.palette.grey[200]};
 
   &:before {
     display: none;
@@ -75,7 +77,7 @@ const Summary = styled(AccordionSummary)`
   min-height: auto;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing(2)};
 
   .MuiAccordionSummary-content {
     margin: 0;
@@ -96,7 +98,7 @@ const StyledTabs = styled(Tabs)`
   & .MuiTabs-indicator {
     left: 0;
     right: auto;
-    background-color: #0d0d0d;
+    background-color: ${({ theme }) => theme.palette.grey[400]};
     border-radius: 2px;
   }
 
@@ -107,12 +109,12 @@ const StyledTabs = styled(Tabs)`
   & .MuiTab-root {
     position: relative;
     overflow: visible;
-    color: #5c5c5c;
+    color: ${({ theme }) => theme.palette.grey[200]};
 
     &::before {
       content: "";
-      //TODO: move to theme
-      border-left: 2px solid rgba(166, 166, 166, 0.16);
+      border-left: 2px solid
+        ${({ theme }) => alpha(theme.palette.grey[50], 0.16)};
       height: calc(100% + 4px);
       position: absolute;
       top: -4px;
@@ -139,14 +141,16 @@ const StyledTabs = styled(Tabs)`
 `;
 
 const StyledTab = styled(Tab)`
+  ${({ theme }) => css`
+    ${theme.typography.titleSmall}
+  `}
+
   align-items: flex-start;
   text-align: left;
   flex-direction: row-reverse;
   justify-content: flex-end;
   padding: 6px 20px;
   min-height: auto;
-  font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
   text-transform: none;
 `;
@@ -160,5 +164,5 @@ const Details = styled(AccordionDetails)`
 const SummaryText = styled("div")`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing(2)};
 `;

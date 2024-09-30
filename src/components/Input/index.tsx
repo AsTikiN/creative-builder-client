@@ -1,5 +1,5 @@
 import React from "react";
-import { styled, TextField, TextFieldProps } from "@mui/material";
+import { alpha, css, styled, TextField, TextFieldProps } from "@mui/material";
 
 export type InputProps = TextFieldProps;
 
@@ -9,17 +9,15 @@ export const Input: React.FC<InputProps> = (props) => {
 
 const StyledInput = styled(TextField)`
   width: 320px;
-  //TODO: move to theme
-  border: 0.5px solid rgba(36, 36, 36, 0.1);
-  border-radius: 8px;
+  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
 
   .MuiInputBase-input {
     padding: 6px 8px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    //TODO: move to theme
-    color: #5c5c5c;
+    ${({ theme }) => css`
+      ${theme.typography.label}
+    `}
+    color: ${({ theme }) => theme.palette.grey[200]};
   }
 
   .MuiOutlinedInput-notchedOutline {

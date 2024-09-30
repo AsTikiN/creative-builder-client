@@ -23,7 +23,9 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      <SidebarLayout />
+      <SidebarLayout>
+        <h1>Hello</h1>
+      </SidebarLayout>
 
       {/* <BrowserRouter>
         <Routes>

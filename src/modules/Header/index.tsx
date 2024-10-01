@@ -1,14 +1,13 @@
-import {
-  alpha,
-  Button,
-  Stack,
-  styled,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
+import { Button } from "@components/Button";
+import { BasicSelect } from "@components/Select";
+import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
+import { useState } from "react";
 
 export const Header = () => {
   const theme = useTheme();
+
+  const [open, setIsOpen] = useState(false);
 
   return (
     <Wrapper>
@@ -22,7 +21,17 @@ export const Header = () => {
       </HeaderData>
 
       <HeaderActions>
-        <Button variant="contained">New offer</Button>
+        <BasicSelect
+          open={open}
+          setIsOpen={setIsOpen}
+          options={[
+            { value: "display", label: "Display" },
+            { value: "hide", label: "Hide" },
+          ]}
+        />
+        <Button startIcon={<SmallPlusIcon />} variant="contained">
+          New offer
+        </Button>
       </HeaderActions>
     </Wrapper>
   );
@@ -41,7 +50,8 @@ const HeaderData = styled(Stack)`
   flex: 1;
 `;
 
-const HeaderActions = styled(Stack)`
-  /* flex-direction: row; */
-  /* gap: ${({ theme }) => theme.spacing(2)}; */
+const HeaderActions = styled("div")`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(3)};
+  align-items: center;
 `;

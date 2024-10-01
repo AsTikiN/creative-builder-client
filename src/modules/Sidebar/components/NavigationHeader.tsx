@@ -1,12 +1,22 @@
 import { DualChevronIcon } from "@/icons/DualChevronIcon";
+import { BasicSelect } from "@components/Select";
 import { alpha, Avatar, Box, css, styled } from "@mui/material";
+import { useState } from "react";
 
 export const NavigationHeader = () => {
+  const [open, setIsOpen] = useState(false);
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={(e) => {
+        e.stopPropagation();
+        setIsOpen(!open);
+      }}
+    >
       <UserData>
         <Box>
-          <Avatar variant="rounded" sizes="large" />
+          {/* <Avatar variant="rounded" sizes="large" /> */}
+          <MockAvatar />
         </Box>
 
         <Box>
@@ -18,11 +28,22 @@ export const NavigationHeader = () => {
       <ChevronWrapper>
         <DualChevronIcon />
       </ChevronWrapper>
+
+      <SelectWrapper>
+        <BasicSelect
+          open={open}
+          setIsOpen={setIsOpen}
+          options={[{ value: "Manage members", label: "Manage members" }]}
+          dropdownWidth={247}
+        />
+      </SelectWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled("div")`
+  cursor: pointer;
+  position: relative;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 
@@ -56,4 +77,52 @@ const SelectedPlan = styled("div")`
   `}
 
   color: ${({ theme }) => theme.palette.grey[200]};
+`;
+
+const SelectWrapper = styled("div")`
+  position: absolute;
+  left: 0;
+  top: 30px;
+
+  .MuiBox-root {
+    pointer-events: none;
+    opacity: 0;
+  }
+`;
+
+const MockAvatar = styled("div")`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  position: relative;
+  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: ${alpha("#fff", 0.72)};
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+  }
+
+  /* background-color: ${({ theme }) => theme.palette.grey[300]}; */
 `;

@@ -1,6 +1,6 @@
 import { DotsIcon } from "@/icons/DotsIcon";
 import { StatusChip } from "@components/StatusChip";
-import { alpha, styled, Typography, useTheme } from "@mui/material";
+import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
 
 interface BookCardProps {
@@ -34,7 +34,7 @@ export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
         <BookTitle variant="h5" color={theme.palette.grey[400]}>
           {title}
         </BookTitle>
-        <Typography variant="h6" color={theme.palette.grey[200]}>
+        <Typography variant="h6" color={theme.palette.grey[50]}>
           {date}
         </Typography>
       </Data>
@@ -53,6 +53,7 @@ const Wrapper = styled("div")`
 const CoverImageWrapper = styled("div")`
   border-bottom: 0.5px solid
     ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
+  background-color: ${({ theme }) => theme.palette.grey[500]};
   display: flex;
   justify-content: center;
   padding: 24px;
@@ -63,8 +64,9 @@ const CoverImageWrapper = styled("div")`
   }
 `;
 
-const Data = styled("div")`
+const Data = styled(Stack)`
   padding: 8px 12px;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
 
 const BookTitle = styled(Typography)`
@@ -84,6 +86,12 @@ const MockImage = styled("div")`
     0px 1.38px 2.77px 0px #00000014,
     0px 2.77px 5.54px 0px #0000000a,
     0px 5.54px 11.07px 0px #0000000a;
+  background: linear-gradient(
+    225deg,
+    ${({ theme }) => alpha(theme.palette.grey[600], 1)} 0%,
+    ${({ theme }) => alpha(theme.palette.grey[600], 0)} 78%
+  );
+
   border: 1px solid ${({ theme }) => alpha(theme.palette.text.primary, 0.24)};
 `;
 

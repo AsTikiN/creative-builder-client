@@ -100,6 +100,8 @@ const StyledTabs = styled(Tabs)`
     right: auto;
     background-color: ${({ theme }) => theme.palette.grey[400]};
     border-radius: 2px;
+    height: 28px;
+    transform: translateY(6px);
   }
 
   & .MuiTabs-scroller {
@@ -110,6 +112,10 @@ const StyledTabs = styled(Tabs)`
     position: relative;
     overflow: visible;
     color: ${({ theme }) => theme.palette.grey[200]};
+
+    &.Mui-selected {
+      color: ${({ theme }) => theme.palette.grey[200]};
+    }
 
     &::before {
       content: "";

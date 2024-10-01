@@ -9,12 +9,20 @@ import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { SidebarAccordion } from "@components/Accordion/Accordion";
 import { Input } from "@components/Input";
-import { alpha, IconButton, Stack, styled } from "@mui/material";
+import {
+  alpha,
+  css,
+  IconButton,
+  Stack,
+  styled,
+  Typography,
+} from "@mui/material";
 import { NavigationHeader } from "./components/NavigationHeader";
 import {
   financesAccordionData,
   marketingAccordionData,
 } from "./static/AccordionData";
+import { FilePlusIcon } from "@/icons/FilePlusIcon";
 
 export const Sidebar = () => {
   return (
@@ -35,41 +43,67 @@ export const Sidebar = () => {
       </SearchWrapper>
       <Navigation>
         <NavItem>
-          <BarChartIcon />
-          Overview
+          <NavTextWrapper>
+            <BarChartIcon />
+            Overview
+          </NavTextWrapper>
+        </NavItem>
+
+        <NavItem active={true}>
+          <NavTextWrapper>
+            <FilePlusIcon />
+            Apps
+          </NavTextWrapper>
         </NavItem>
 
         <NavItem>
-          <TagIcon />
-          Offers
+          <NavTextWrapper>
+            <TagIcon />
+            Offers
+          </NavTextWrapper>
         </NavItem>
 
         <NavItem>
-          <RouteIcon />
-          Funnels
+          <NavTextWrapper>
+            <RouteIcon />
+            Funnels
+          </NavTextWrapper>
         </NavItem>
 
         <NavItem>
-          <StoreIcon />
-          Store
+          <NavTextWrapper>
+            <StoreIcon />
+            Store
+          </NavTextWrapper>
         </NavItem>
 
         <SidebarAccordion {...marketingAccordionData} />
 
         <NavItem>
-          <CheckDoneIcon />
-          Orders
+          <NavTextWrapper>
+            <CheckDoneIcon />
+            Orders
+          </NavTextWrapper>
+          <Chip>
+            <Typography variant="h6" color="grey.200">
+              23,345
+            </Typography>
+          </Chip>
         </NavItem>
 
         <NavItem>
-          <UsersIcon />
-          Audience
+          <NavTextWrapper>
+            <UsersIcon />
+            Audience
+          </NavTextWrapper>
         </NavItem>
         <SidebarAccordion {...financesAccordionData} />
       </Navigation>
       <NavItem>
-        <SettingsIcon />
-        Brand settings
+        <NavTextWrapper>
+          <SettingsIcon />
+          Brand settings
+        </NavTextWrapper>
       </NavItem>
     </Wrapper>
   );
@@ -104,12 +138,32 @@ const IconButtonWrapper = styled(IconButton)`
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
 
-const NavItem = styled("div")`
+const NavItem = styled("div")<{ active?: boolean }>`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 
   color: ${({ theme }) => theme.palette.grey[200]};
   gap: ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   padding: 6px 8px;
+
+  ${({ active, theme }) =>
+    active &&
+    css`
+      border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)};
+    `}
+`;
+
+const Chip = styled("div")`
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+`;
+
+const NavTextWrapper = styled("div")`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(2)};
 `;

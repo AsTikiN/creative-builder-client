@@ -6,33 +6,45 @@ import { ShareIcon } from "@/icons/ShareIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
 import { StatusChip } from "@components/StatusChip";
-import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
-import { FC, useState } from "react";
+import { alpha, Stack, styled } from "@mui/material";
+import { FC, PropsWithChildren, useState } from "react";
+import { MockOfferImage } from "./components/MockOfferImage";
+import { MockBookImage } from "./components/MockBookImage";
 
-interface BookCardProps {
-  title: string;
-  date: string;
+interface CardLayoutProps extends PropsWithChildren {
   coverImage?: string;
+  dropdownOptions: DropdownOption[];
+  variant?: "book" | "offer" | "funnel";
 }
 
-export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
+export const CardLayout: FC<CardLayoutProps> = ({
+  coverImage,
+  children,
+  dropdownOptions,
+  variant = "book",
+}) => {
   const [selectedOption, setSelectedOption] = useState<DropdownOption>({
     id: 1,
     label: "Manage members",
     value: "Manage members",
   });
   const [isOpen, setIsOpen] = useState(false);
-  const theme = useTheme();
+
+  const mockImages = {
+    book: <MockBookImage />,
+    offer: <MockOfferImage />,
+    funnel: <MockOfferImage />,
+  };
 
   return (
     <Wrapper>
-      <CoverImageWrapper>
+      <CoverImageWrapper variant={variant}>
         {coverImage ? (
           <ImageContainer>
-            <Image src={coverImage} alt={title} />
+            <Image src={coverImage} />
           </ImageContainer>
         ) : (
-          <MockImage />
+          mockImages[variant]
         )}
         <ActionPanel open={isOpen} className="action-panel">
           <StatusChip label="Active" status="success" />
@@ -43,54 +55,16 @@ export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
           <DropdownAnchor>
             <Dropdown
               dropdownWidth={182}
-              options={[
-                {
-                  id: 1,
-                  label: "Preview",
-                  value: "Preview",
-                  icon: <ShareIcon />,
-                },
-                {
-                  id: 2,
-                  label: "Edit mockup",
-                  value: "Edit mockup",
-                  icon: <ImageIcon />,
-                },
-                {
-                  id: 3,
-                  label: "Duplicate",
-                  value: "Duplicate",
-                  icon: <CopyIcon />,
-                },
-                {
-                  id: 4,
-                  label: "Rename",
-                  value: "Rename",
-                  icon: <EditIcon />,
-                },
-                {
-                  id: 5,
-                  label: "Delete book",
-                  value: "Delete book",
-                  icon: <TrashIcon />,
-                },
-              ]}
+              options={dropdownOptions}
               selectedOption={selectedOption}
               setSelectedOption={setSelectedOption}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
-            ></Dropdown>
+            />
           </DropdownAnchor>
         </ActionPanel>
       </CoverImageWrapper>
-      <Data>
-        <BookTitle variant="h5" color={theme.palette.grey[400]}>
-          {title}
-        </BookTitle>
-        <Typography variant="h6" color={theme.palette.grey[50]}>
-          {date}
-        </Typography>
-      </Data>
+      <Data>{children}</Data>
     </Wrapper>
   );
 };
@@ -98,12 +72,13 @@ export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
 const Wrapper = styled("div")`
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
-  max-width: 250px;
   width: fill-available;
   cursor: pointer;
 `;
 
-const CoverImageWrapper = styled("div")`
+const CoverImageWrapper = styled("div")<{
+  variant: "book" | "offer" | "funnel";
+}>`
   border-bottom: 0.5px solid
     ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
   background-color: ${({ theme }) => theme.palette.grey[500]};
@@ -111,6 +86,7 @@ const CoverImageWrapper = styled("div")`
   justify-content: center;
   padding: 24px;
   position: relative;
+  height: ${({ variant }) => (variant === "book" ? "212px" : "164px")};
 
   &:hover .action-panel {
     opacity: 1;
@@ -122,36 +98,11 @@ const Data = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
 `;
 
-const BookTitle = styled(Typography)`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  display: block;
-`;
-
-const MockImage = styled("div")`
-  width: 112px;
-  height: 164px;
-  border-radius: 4px;
-  box-shadow:
-    0px 0px 0.5px 0px #0000008f,
-    0px 1.38px 2.77px 0px #00000014,
-    0px 2.77px 5.54px 0px #0000000a,
-    0px 5.54px 11.07px 0px #0000000a;
-  background: linear-gradient(
-    225deg,
-    ${({ theme }) => alpha(theme.palette.grey[600], 1)} 0%,
-    ${({ theme }) => alpha(theme.palette.grey[600], 0)} 78%
-  );
-
-  border: 1px solid ${({ theme }) => alpha(theme.palette.text.primary, 0.24)};
-`;
-
 const ActionPanel = styled("div")<{ open: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 100;
   padding: 8px;
   width: 100%;
   height: 100%;

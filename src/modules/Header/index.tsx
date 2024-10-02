@@ -2,9 +2,14 @@ import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
 import { Button } from "@components/Button";
 import { BasicSelect } from "@components/Select";
 import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
+import { FC, useState } from "react";
 
-export const Header = () => {
+export interface HeaderProps {
+  title: string;
+  description: string;
+}
+
+export const Header: FC<HeaderProps> = ({ title, description }) => {
   const theme = useTheme();
 
   const [open, setIsOpen] = useState(false);
@@ -13,10 +18,10 @@ export const Header = () => {
     <Wrapper>
       <HeaderData>
         <Typography variant="h3" component="p" color={theme.palette.grey[400]}>
-          Apps
+          {title}
         </Typography>
         <Typography variant="h5" component="p" color={theme.palette.grey[200]}>
-          Create and customize apps for your offers.
+          {description}
         </Typography>
       </HeaderData>
 

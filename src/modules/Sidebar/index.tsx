@@ -29,14 +29,21 @@ import { ProfileIcon } from "@/icons/ProfileIcon";
 import { SwapIcon } from "@/icons/SwapIcon";
 import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
 import { LogOutIcon } from "@/icons/LogOutIcon";
+import { useNavigate } from "react-router-dom";
+import { routes } from "@config/routes";
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption>({
     id: 1,
     label: "Account settings",
     value: "Account settings",
   });
+
+  const handleNavigate = (path: string) => () => {
+    navigate(path);
+  };
 
   return (
     <Wrapper>
@@ -62,14 +69,20 @@ export const Sidebar = () => {
           </NavTextWrapper>
         </NavItem>
 
-        <NavItem active={true}>
+        <NavItem
+          active={location.pathname === routes.apps()}
+          onClick={handleNavigate(routes.apps())}
+        >
           <NavTextWrapper>
             <FilePlusIcon />
             Apps
           </NavTextWrapper>
         </NavItem>
 
-        <NavItem>
+        <NavItem
+          active={location.pathname === routes.offers()}
+          onClick={handleNavigate(routes.offers())}
+        >
           <NavTextWrapper>
             <TagIcon />
             Offers
@@ -204,6 +217,7 @@ const NavItem = styled("div")<{ active?: boolean }>`
   gap: ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   padding: 6px 8px;
+  border: 0.5px solid transparent;
 
   ${({ active, theme }) =>
     active &&

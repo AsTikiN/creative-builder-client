@@ -1,16 +1,23 @@
-import { Header } from "@modules/Header";
+import { Header, HeaderProps } from "@modules/Header";
 import { Sidebar } from "@modules/Sidebar";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 
-export const SidebarLayout: FC<PropsWithChildren> = ({ children }) => {
+export interface SidebarLayoutProps extends PropsWithChildren {
+  headerProps: HeaderProps;
+}
+
+export const SidebarLayout: FC<SidebarLayoutProps> = ({
+  children,
+  headerProps,
+}) => {
   return (
     <Wrapper>
       <WorkspacesBoard />
       <Sidebar />
       <Main>
-        <Header />
+        <Header {...headerProps} />
 
         <Content>{children}</Content>
       </Main>

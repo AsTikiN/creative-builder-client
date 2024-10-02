@@ -1,5 +1,11 @@
 import { Dropdown as MuiDropdown } from "@mui/base/Dropdown";
-import { Menu, MenuItem, PopoverOrigin, styled } from "@mui/material";
+import {
+  Menu,
+  MenuItem,
+  PopoverOrigin,
+  styled,
+  Typography,
+} from "@mui/material";
 import {
   Dispatch,
   FC,
@@ -14,6 +20,7 @@ export interface DropdownOption {
   label: string;
   value: string;
   icon?: ReactNode;
+  color?: string;
 }
 
 interface DropdownProps extends PropsWithChildren {
@@ -67,7 +74,9 @@ export const Dropdown: FC<DropdownProps> = ({
             selected={selectedOption.id === option.id}
           >
             {option.icon}
-            {option.label}
+            <Typography color={`${option.color || "grey.400"}`} variant="h5">
+              {option.label}
+            </Typography>
           </StyledMenuItem>
         ))}
       </CustomMenu>

@@ -23,8 +23,21 @@ import {
   marketingAccordionData,
 } from "./static/AccordionData";
 import { FilePlusIcon } from "@/icons/FilePlusIcon";
+import { Dropdown, DropdownOption } from "@components/Dropdown";
+import { useState } from "react";
+import { ProfileIcon } from "@/icons/ProfileIcon";
+import { SwapIcon } from "@/icons/SwapIcon";
+import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
+import { LogOutIcon } from "@/icons/LogOutIcon";
 
 export const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
+    id: 1,
+    label: "Account settings",
+    value: "Account settings",
+  });
+
   return (
     <Wrapper>
       <NavigationHeader />
@@ -99,12 +112,55 @@ export const Sidebar = () => {
         </NavItem>
         <SidebarAccordion {...financesAccordionData} />
       </Navigation>
-      <NavItem>
-        <NavTextWrapper>
-          <SettingsIcon />
-          Brand settings
-        </NavTextWrapper>
-      </NavItem>
+
+      <BrandSettingsWrapper>
+        <NavItem onClick={() => setIsOpen(true)}>
+          <NavTextWrapper>
+            <SettingsIcon />
+            Brand settings
+          </NavTextWrapper>
+        </NavItem>
+
+        <DropDownAnchor>
+          <Dropdown
+            isOpen={isOpen}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            options={[
+              {
+                id: 1,
+                label: "Account settings",
+                value: "Account settings",
+                icon: <ProfileIcon />,
+              },
+              {
+                id: 2,
+                label: "Switch to consumer",
+                value: "Switch to consumer",
+                icon: <SwapIcon />,
+              },
+              {
+                id: 3,
+                label: "Help & support",
+                value: "Help & support",
+                icon: <LifeBuoyIcon />,
+              },
+              {
+                id: 4,
+                label: "Log out",
+                value: "Log out",
+                icon: <LogOutIcon />,
+              },
+            ]}
+            setIsOpen={setIsOpen}
+            dropdownWidth={205}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          ></Dropdown>
+        </DropDownAnchor>
+      </BrandSettingsWrapper>
     </Wrapper>
   );
 };
@@ -166,4 +222,14 @@ const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
+`;
+
+const BrandSettingsWrapper = styled("div")`
+  position: relative;
+`;
+
+const DropDownAnchor = styled("div")`
+  position: absolute;
+  bottom: 60px;
+  left: -90px;
 `;

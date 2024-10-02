@@ -1,13 +1,20 @@
 import { DualChevronIcon } from "@/icons/DualChevronIcon";
-import { BasicSelect } from "@components/Select";
-import { alpha, Avatar, Box, css, styled } from "@mui/material";
+import { GroupPeopleIcon } from "@/icons/GroupPeopleIcon";
+import { Dropdown, DropdownOption } from "@components/Dropdown";
+import { alpha, Box, css, styled } from "@mui/material";
 import { useState } from "react";
 
 export const NavigationHeader = () => {
   const [open, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
+    id: 1,
+    label: "Account settings",
+    value: "Account settings",
+  });
 
   return (
     <Wrapper
+      open={open}
       onClick={(e) => {
         e.stopPropagation();
         setIsOpen(!open);
@@ -29,19 +36,28 @@ export const NavigationHeader = () => {
         <DualChevronIcon />
       </ChevronWrapper>
 
-      <SelectWrapper>
-        <BasicSelect
-          open={open}
-          setIsOpen={setIsOpen}
-          options={[{ value: "Manage members", label: "Manage members" }]}
+      <DropDownAnchor>
+        <Dropdown
+          options={[
+            {
+              id: 1,
+              label: "Manage members",
+              value: "Manage members",
+              icon: <GroupPeopleIcon />,
+            },
+          ]}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
           dropdownWidth={247}
-        />
-      </SelectWrapper>
+          isOpen={open}
+          setIsOpen={setIsOpen}
+        ></Dropdown>
+      </DropDownAnchor>
     </Wrapper>
   );
 };
 
-const Wrapper = styled("div")`
+const Wrapper = styled("div")<{ open: boolean }>`
   cursor: pointer;
   position: relative;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
@@ -51,6 +67,21 @@ const Wrapper = styled("div")`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${({ open, theme }) =>
+    open &&
+    css`
+      &:before {
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        width: calc(100% + 8px);
+        height: calc(100% + 8px);
+        border: 2px solid #eaeaea;
+        border-radius: 12px;
+      }
+    `}
 `;
 
 const UserData = styled("div")`
@@ -79,15 +110,21 @@ const SelectedPlan = styled("div")`
   color: ${({ theme }) => theme.palette.grey[200]};
 `;
 
-const SelectWrapper = styled("div")`
-  position: absolute;
-  left: 0;
-  top: 30px;
+// const SelectWrapper = styled("div")`
+//   position: absolute;
+//   left: 0;
+//   top: 30px;
 
-  .MuiBox-root {
-    pointer-events: none;
-    opacity: 0;
-  }
+//   .MuiBox-root {
+//     pointer-events: none;
+//     opacity: 0;
+//   }
+// `;
+
+const DropDownAnchor = styled("div")`
+  position: absolute;
+  left: 0px;
+  top: 60px;
 `;
 
 const MockAvatar = styled("div")`

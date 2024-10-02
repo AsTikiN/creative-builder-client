@@ -1,7 +1,13 @@
+import { CopyIcon } from "@/icons/CopyIcon";
 import { DotsIcon } from "@/icons/DotsIcon";
+import { EditIcon } from "@/icons/EditIcon";
+import { ImageIcon } from "@/icons/ImageIcon";
+import { ShareIcon } from "@/icons/ShareIcon";
+import { TrashIcon } from "@/icons/TrashIcon";
+import { Dropdown, DropdownOption } from "@components/Dropdown";
 import { StatusChip } from "@components/StatusChip";
 import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface BookCardProps {
   title: string;
@@ -10,6 +16,12 @@ interface BookCardProps {
 }
 
 export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
+  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
+    id: 1,
+    label: "Manage members",
+    value: "Manage members",
+  });
+  const [isOpen, setIsOpen] = useState(false);
   const theme = useTheme();
 
   return (
@@ -22,12 +34,53 @@ export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
         ) : (
           <MockImage />
         )}
-        <ActionPanel className="action-panel">
+        <ActionPanel open={isOpen} className="action-panel">
           <StatusChip label="Active" status="success" />
 
-          <DotsWrapper>
+          <DotsWrapper onClick={() => setIsOpen(!isOpen)}>
             <DotsIcon />
           </DotsWrapper>
+          <DropdownAnchor>
+            <Dropdown
+              dropdownWidth={182}
+              options={[
+                {
+                  id: 1,
+                  label: "Preview",
+                  value: "Preview",
+                  icon: <ShareIcon />,
+                },
+                {
+                  id: 2,
+                  label: "Edit mockup",
+                  value: "Edit mockup",
+                  icon: <ImageIcon />,
+                },
+                {
+                  id: 3,
+                  label: "Duplicate",
+                  value: "Duplicate",
+                  icon: <CopyIcon />,
+                },
+                {
+                  id: 4,
+                  label: "Rename",
+                  value: "Rename",
+                  icon: <EditIcon />,
+                },
+                {
+                  id: 5,
+                  label: "Delete book",
+                  value: "Delete book",
+                  icon: <TrashIcon />,
+                },
+              ]}
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+            ></Dropdown>
+          </DropdownAnchor>
         </ActionPanel>
       </CoverImageWrapper>
       <Data>
@@ -95,7 +148,7 @@ const MockImage = styled("div")`
   border: 1px solid ${({ theme }) => alpha(theme.palette.text.primary, 0.24)};
 `;
 
-const ActionPanel = styled("div")`
+const ActionPanel = styled("div")<{ open: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -105,7 +158,7 @@ const ActionPanel = styled("div")`
   background-color: rgba(0, 0, 0, 0.06);
   border-radius: ${({ theme }) => theme.shape.borderRadius}px
     ${({ theme }) => theme.shape.borderRadius}px 0 0;
-  opacity: 0;
+  opacity: ${({ open }) => (open ? 1 : 0)};
   transition: opacity 0.2s ease-in-out;
 
   display: flex;
@@ -139,4 +192,10 @@ const Image = styled("img")`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+const DropdownAnchor = styled("div")`
+  position: absolute;
+  top: 40px;
+  right: 40px;
 `;

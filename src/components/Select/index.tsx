@@ -54,7 +54,7 @@ export const BasicSelect: FC<BasicSelectProps> = ({
           MenuProps={{
             MenuListProps: {
               sx: {
-                padding: 0,
+                padding: "4px",
               },
             },
             PaperProps: {
@@ -138,4 +138,15 @@ const ChevronWrapper = styled(Box)`
 const StyledMenuItem = styled(MenuItem)`
   padding: 11px 12px;
   background-color: #fff;
+  height: 34px;
+  border: 0.5px solid transparent;
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+
+  &:not(:first-child) {
+    margin-top: 4px;
+  }
+
+  &:hover {
+    border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  }
 `;

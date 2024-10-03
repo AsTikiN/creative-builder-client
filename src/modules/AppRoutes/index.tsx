@@ -4,6 +4,7 @@ import { routes } from "@config/routes";
 
 import { AppsPage } from "@/pages/Apps";
 import { OffersPage } from "@/pages/Offers";
+import { FunnelsPage } from "@/pages/Funnels";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ export const AppRoutes: React.FC = () => {
       <Routes>
         <Route path={routes.apps()} element={<AppsPage />} />
         <Route path={routes.offers()} element={<OffersPage />} />
+        <Route path={routes.funnels()} element={<FunnelsPage />} />
       </Routes>
     </Router>
   );

@@ -1,5 +1,6 @@
 import { Dropdown as MuiDropdown } from "@mui/base/Dropdown";
 import {
+  css,
   Menu,
   MenuItem,
   PopoverOrigin,
@@ -21,11 +22,12 @@ export interface DropdownOption {
   value: string;
   icon?: ReactNode;
   color?: string;
+  hasDivider?: boolean;
 }
 
 interface DropdownProps extends PropsWithChildren {
-  selectedOption: DropdownOption;
-  setSelectedOption: Dispatch<SetStateAction<DropdownOption>>;
+  selectedOption: DropdownOption | null;
+  setSelectedOption: Dispatch<SetStateAction<DropdownOption | null>>;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   dropdownWidth?: number;
@@ -71,7 +73,8 @@ export const Dropdown: FC<DropdownProps> = ({
               setSelectedOption(option);
               setIsOpen(false);
             }}
-            selected={selectedOption.id === option.id}
+            selected={selectedOption?.id === option.id}
+            divider={option.hasDivider}
           >
             {option.icon}
             <Typography color={`${option.color || "grey.400"}`} variant="h5">
@@ -107,7 +110,7 @@ const CustomMenu = styled(Menu)<{ dropdownWidth?: number }>`
   }
 `;
 
-const StyledMenuItem = styled(MenuItem)`
+const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
   padding: 11px 12px;
   background-color: #fff;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
@@ -116,10 +119,26 @@ const StyledMenuItem = styled(MenuItem)`
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
   height: 34px;
+  position: relative;
 
   &:not(:first-child) {
     margin-top: 4px;
   }
+
+  ${({ divider, theme }) =>
+    divider &&
+    css`
+      margin-top: 8px !important;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: -5px;
+        width: calc(100% + 10px);
+        height: 0.5px;
+        background-color: ${theme.palette.grey[100]};
+    `}
 
   &:hover {
     border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};

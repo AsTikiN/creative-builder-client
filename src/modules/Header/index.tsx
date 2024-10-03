@@ -7,9 +7,10 @@ import { FC, useState } from "react";
 export interface HeaderProps {
   title: string;
   description: string;
+  buttonText: string;
 }
 
-export const Header: FC<HeaderProps> = ({ title, description }) => {
+export const Header: FC<HeaderProps> = ({ title, description, buttonText }) => {
   const theme = useTheme();
 
   const [open, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ export const Header: FC<HeaderProps> = ({ title, description }) => {
           ]}
         />
         <Button startIcon={<SmallPlusIcon />} variant="contained">
-          New offer
+          {buttonText}
         </Button>
       </HeaderActions>
     </Wrapper>

@@ -3,12 +3,12 @@ import { alpha, styled, Typography, useTheme } from "@mui/material";
 
 type ChipStatus = "success" | "error";
 
-interface Props {
+export interface StatusChipProps {
   label: string;
   status: ChipStatus;
 }
 
-export const StatusChip: FC<Props> = ({ label, status }) => {
+export const StatusChip: FC<StatusChipProps> = ({ label, status }) => {
   const theme = useTheme();
 
   return (

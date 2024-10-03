@@ -1,20 +1,17 @@
-import { CopyIcon } from "@/icons/CopyIcon";
 import { DotsIcon } from "@/icons/DotsIcon";
-import { EditIcon } from "@/icons/EditIcon";
-import { ImageIcon } from "@/icons/ImageIcon";
-import { ShareIcon } from "@/icons/ShareIcon";
-import { TrashIcon } from "@/icons/TrashIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
-import { StatusChip } from "@components/StatusChip";
+import { StatusChip, StatusChipProps } from "@components/StatusChip";
 import { alpha, Stack, styled } from "@mui/material";
 import { FC, PropsWithChildren, useState } from "react";
 import { MockOfferImage } from "./components/MockOfferImage";
 import { MockBookImage } from "./components/MockBookImage";
+import { MockFunnelImage } from "./components/MockFunnelImage";
 
 interface CardLayoutProps extends PropsWithChildren {
   coverImage?: string;
   dropdownOptions: DropdownOption[];
   variant?: "book" | "offer" | "funnel";
+  statusChipProps: StatusChipProps;
 }
 
 export const CardLayout: FC<CardLayoutProps> = ({
@@ -22,18 +19,17 @@ export const CardLayout: FC<CardLayoutProps> = ({
   children,
   dropdownOptions,
   variant = "book",
+  statusChipProps,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
-    id: 1,
-    label: "Manage members",
-    value: "Manage members",
-  });
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    null
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   const mockImages = {
     book: <MockBookImage />,
     offer: <MockOfferImage />,
-    funnel: <MockOfferImage />,
+    funnel: <MockFunnelImage />,
   };
 
   return (
@@ -47,7 +43,7 @@ export const CardLayout: FC<CardLayoutProps> = ({
           mockImages[variant]
         )}
         <ActionPanel open={isOpen} className="action-panel">
-          <StatusChip label="Active" status="success" />
+          <StatusChip {...statusChipProps} />
 
           <DotsWrapper onClick={() => setIsOpen(!isOpen)}>
             <DotsIcon />

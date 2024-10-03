@@ -23,23 +23,11 @@ import {
   marketingAccordionData,
 } from "./static/AccordionData";
 import { FilePlusIcon } from "@/icons/FilePlusIcon";
-import { Dropdown, DropdownOption } from "@components/Dropdown";
-import { useState } from "react";
-import { ProfileIcon } from "@/icons/ProfileIcon";
-import { SwapIcon } from "@/icons/SwapIcon";
-import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
-import { LogOutIcon } from "@/icons/LogOutIcon";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@config/routes";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
-    id: 1,
-    label: "Account settings",
-    value: "Account settings",
-  });
 
   const handleNavigate = (path: string) => () => {
     navigate(path);
@@ -89,7 +77,10 @@ export const Sidebar = () => {
           </NavTextWrapper>
         </NavItem>
 
-        <NavItem>
+        <NavItem
+          active={location.pathname === routes.funnels()}
+          onClick={handleNavigate(routes.funnels())}
+        >
           <NavTextWrapper>
             <RouteIcon />
             Funnels
@@ -126,54 +117,12 @@ export const Sidebar = () => {
         <SidebarAccordion {...financesAccordionData} />
       </Navigation>
 
-      <BrandSettingsWrapper>
-        <NavItem onClick={() => setIsOpen(true)}>
-          <NavTextWrapper>
-            <SettingsIcon />
-            Brand settings
-          </NavTextWrapper>
-        </NavItem>
-
-        <DropDownAnchor>
-          <Dropdown
-            isOpen={isOpen}
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            options={[
-              {
-                id: 1,
-                label: "Account settings",
-                value: "Account settings",
-                icon: <ProfileIcon />,
-              },
-              {
-                id: 2,
-                label: "Switch to consumer",
-                value: "Switch to consumer",
-                icon: <SwapIcon />,
-              },
-              {
-                id: 3,
-                label: "Help & support",
-                value: "Help & support",
-                icon: <LifeBuoyIcon />,
-              },
-              {
-                id: 4,
-                label: "Log out",
-                value: "Log out",
-                icon: <LogOutIcon />,
-              },
-            ]}
-            setIsOpen={setIsOpen}
-            dropdownWidth={205}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-          ></Dropdown>
-        </DropDownAnchor>
-      </BrandSettingsWrapper>
+      <NavItem>
+        <NavTextWrapper>
+          <SettingsIcon />
+          Brand settings
+        </NavTextWrapper>
+      </NavItem>
     </Wrapper>
   );
 };
@@ -182,8 +131,14 @@ const Wrapper = styled(Stack)`
   width: 272px;
   gap: ${({ theme }) => theme.spacing(3)};
   padding: ${({ theme }) => theme.spacing(3)};
+  overflow: auto;
+  position: relative;
+  z-index: 10;
 
   border-right: 1px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+  box-shadow:
+    -5px 0px 20px 0px rgba(0, 0, 0, 0.05),
+    -2px 0px 4px 0px rgba(0, 0, 0, 0.03);
 `;
 
 const SearchWrapper = styled("div")`
@@ -202,7 +157,9 @@ const IconButtonWrapper = styled(IconButton)`
   justify-content: center;
   width: 32px;
   height: 32px;
+  padding: 0;
 
+  box-shadow: 0px 1px 2px 0px #0a0d1408;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
@@ -219,9 +176,19 @@ const NavItem = styled("div")<{ active?: boolean }>`
   padding: 6px 8px;
   border: 0.5px solid transparent;
 
+  svg path {
+    stroke: ${({ theme }) => theme.palette.grey[200]};
+  }
+
   ${({ active, theme }) =>
     active &&
     css`
+      color: ${theme.palette.grey[400]};
+
+      svg path {
+        stroke: ${theme.palette.grey[400]};
+      }
+
       border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)};
     `}
 `;
@@ -236,14 +203,4 @@ const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
-`;
-
-const BrandSettingsWrapper = styled("div")`
-  position: relative;
-`;
-
-const DropDownAnchor = styled("div")`
-  position: absolute;
-  bottom: 60px;
-  left: -90px;
 `;

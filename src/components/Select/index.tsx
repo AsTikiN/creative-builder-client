@@ -102,7 +102,7 @@ const Wrapper = styled(Box)`
 
 const StyledSelect = styled(Select)`
   padding: 0;
-  color: #000;
+  color: ${({ theme }) => theme.palette.grey[200]};
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
 
   &:hover .MuiSelect-select {

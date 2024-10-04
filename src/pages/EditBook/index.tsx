@@ -90,7 +90,7 @@ const CoverImageWrapper = styled(Box)`
   height: 48px;
   border-radius: 6px;
   border-bottom: 0.1px solid ${({ theme }) => theme.palette.grey[100]};
-  background-color: ${({ theme }) => theme.palette.grey[500gb]};
+  background-color: ${({ theme }) => theme.palette.grey[500]};
   display: flex;
   align-items: center;
   justify-content: center;

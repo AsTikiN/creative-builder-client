@@ -1,31 +1,31 @@
 import SidebarLayout from "@/layouts/SidebarLayout";
-import { OfferCard } from "@components/Card/OfferCard";
+import { FunnelCard } from "@components/Card/FunnelCard";
 import { styled } from "@mui/material";
 
-export const OffersPage = () => {
+export const FunnelsPage = () => {
   return (
     <SidebarLayout
       headerProps={{
-        title: "Offers",
-        description: "Design compelling offers for your funnels.",
-        buttonText: "New offer",
+        title: "Funnels",
+        description: "Build and manage your sales funnels with ease.",
+        buttonText: "New funnel",
       }}
     >
       <CardsList>
-        <OfferCard
+        <FunnelCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
-          statusChipProps={{ label: "Active", status: "success" }}
+          statusChipProps={{ label: "Book a Call", status: "success" }}
         />
-        <OfferCard
+        <FunnelCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
-          statusChipProps={{ label: "Active", status: "success" }}
+          statusChipProps={{ label: "Book a Call", status: "success" }}
         />
-        <OfferCard
+        <FunnelCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
-          statusChipProps={{ label: "Active", status: "success" }}
+          statusChipProps={{ label: "Book a Call", status: "success" }}
         />
       </CardsList>
     </SidebarLayout>
@@ -40,6 +40,6 @@ const CardsList = styled("div")`
   gap: ${({ theme }) => theme.spacing(5)};
 
   & > * {
-    flex-basis: calc(33.33% - ${({ theme }) => theme.spacing(5)});
+    flex-basis: calc(50% - ${({ theme }) => theme.spacing(2.5)});
   }
 `;

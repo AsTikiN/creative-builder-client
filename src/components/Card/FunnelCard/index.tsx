@@ -1,20 +1,21 @@
 import { CopyIcon } from "@/icons/CopyIcon";
 import { EditIcon } from "@/icons/EditIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
+import { LinkIcon } from "@/icons/LinkIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
 import { CardLayout } from "@/layouts/CardLayout";
 import { StatusChipProps } from "@components/StatusChip";
 import { Stack, styled, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
 
-interface OfferCardProps {
+interface FunnelCardProps {
   title: string;
   date: string;
   coverImage?: string;
   statusChipProps: StatusChipProps;
 }
 
-export const OfferCard: FC<OfferCardProps> = ({
+export const FunnelCard: FC<FunnelCardProps> = ({
   title,
   date,
   coverImage,
@@ -26,6 +27,12 @@ export const OfferCard: FC<OfferCardProps> = ({
     <CardLayout
       coverImage={coverImage}
       dropdownOptions={[
+        {
+          id: 0,
+          label: "Funnel link",
+          value: "Funnel link",
+          icon: <LinkIcon />,
+        },
         {
           id: 1,
           label: "Edit mockup",
@@ -46,14 +53,14 @@ export const OfferCard: FC<OfferCardProps> = ({
         },
         {
           id: 4,
-          label: "Delete offer",
+          label: "Delete funnel",
           value: "Delete offer",
           icon: <TrashIcon />,
           color: "error",
           hasDivider: true,
         },
       ]}
-      variant="offer"
+      variant="funnel"
       statusChipProps={statusChipProps}
     >
       <BookTitle variant="h5" color={theme.palette.grey[400]}>
@@ -68,47 +75,63 @@ export const OfferCard: FC<OfferCardProps> = ({
             Revenue
           </Typography>
           <Typography variant="h6" color={theme.palette.grey[400]}>
-            $100,394,329
+            $293,394,329
           </Typography>
         </CardInfoSection>
         <CardInfoSection>
           <Typography variant="body2" color={theme.palette.grey[50]}>
-            Customers
+            Total Traffic
           </Typography>
           <Typography variant="h6" color={theme.palette.grey[400]}>
-            124,293
+            230,124,293
           </Typography>
         </CardInfoSection>
         <CardInfoSection>
           <Typography variant="body2" color={theme.palette.grey[50]}>
-            Apps
+            Conversion Rate
           </Typography>
           <Typography variant="h6" color={theme.palette.grey[400]}>
-            5
+            25.30%
           </Typography>
         </CardInfoSection>
         <CardInfoSection>
           <Typography variant="body2" color={theme.palette.grey[50]}>
-            CSAT
+            AOV
           </Typography>
           <Typography variant="h6" color={theme.palette.grey[400]}>
-            4.5/5
+            $26.46
           </Typography>
         </CardInfoSection>
         <CardInfoSection>
           <Typography variant="body2" color={theme.palette.grey[50]}>
-            NPS
+            Time in Funnel
           </Typography>
           <Typography variant="h6" color={theme.palette.grey[400]}>
-            89
+            4m 34s
           </Typography>
         </CardInfoSection>
         <CardInfoSection>
           <Typography variant="body2" color={theme.palette.grey[50]}>
-            CES
+            Upsell Rate
           </Typography>
           <Typography variant="h6" color={theme.palette.grey[400]}>
-            3.4
+            89.32%
+          </Typography>
+        </CardInfoSection>
+        <CardInfoSection>
+          <Typography variant="body2" color={theme.palette.grey[50]}>
+            Downsell Rate
+          </Typography>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
+            3.42%
+          </Typography>
+        </CardInfoSection>
+        <CardInfoSection>
+          <Typography variant="body2" color={theme.palette.grey[50]}>
+            Steps
+          </Typography>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
+            10
           </Typography>
         </CardInfoSection>
       </CardInfo>
@@ -132,14 +155,14 @@ const CardInfo = styled("div")`
   display: flex;
   flex-wrap: wrap;
   padding-top: 12px;
-  margin-top: 12px;
+  margin-top: 8px;
 `;
 
 const CardInfoSection = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
-  flex: 0 0 33.33%;
+  flex: 0 0 25%;
 
-  &:not(:nth-last-child(-n + 3)) {
+  &:not(:nth-last-child(-n + 4)) {
     padding-bottom: 12px;
   }
 `;

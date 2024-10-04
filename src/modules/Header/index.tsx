@@ -1,5 +1,8 @@
+import { LayoutTopIcon } from "@/icons/LayoutTopIcon";
+import { MenuIcon } from "@/icons/MenuIcon";
 import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
 import { Button } from "@components/Button";
+import { MultipleSelect } from "@components/MultipleSelect";
 import { BasicSelect } from "@components/Select";
 import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
 import { FC, useState } from "react";
@@ -7,9 +10,10 @@ import { FC, useState } from "react";
 export interface HeaderProps {
   title: string;
   description: string;
+  buttonText: string;
 }
 
-export const Header: FC<HeaderProps> = ({ title, description }) => {
+export const Header: FC<HeaderProps> = ({ title, description, buttonText }) => {
   const theme = useTheme();
 
   const [open, setIsOpen] = useState(false);
@@ -26,16 +30,30 @@ export const Header: FC<HeaderProps> = ({ title, description }) => {
       </HeaderData>
 
       <HeaderActions>
-        <BasicSelect
+        <MultipleSelect
           open={open}
           setIsOpen={setIsOpen}
           options={[
-            { value: "display", label: "Display" },
-            { value: "hide", label: "Hide" },
+            {
+              value: "Display density",
+              label: "Display density",
+              type: "title",
+            },
+            { value: "Compact", label: "Compact", icon: <MenuIcon /> },
+            {
+              value: "Comfortable",
+              label: "Comfortable",
+              icon: <LayoutTopIcon />,
+            },
+            { value: "", label: "", type: "divider" },
+            { value: "Ordering", label: "Ordering", type: "title" },
+            { value: "Recent activity", label: "Recent activity" },
+            { value: "Created", label: "Created" },
           ]}
         />
+
         <Button startIcon={<SmallPlusIcon />} variant="contained">
-          New offer
+          {buttonText}
         </Button>
       </HeaderActions>
     </Wrapper>

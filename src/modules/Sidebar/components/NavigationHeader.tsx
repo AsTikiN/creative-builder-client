@@ -6,11 +6,9 @@ import { useState } from "react";
 
 export const NavigationHeader = () => {
   const [open, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
-    id: 1,
-    label: "Account settings",
-    value: "Account settings",
-  });
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    null
+  );
 
   return (
     <Wrapper
@@ -62,22 +60,23 @@ const Wrapper = styled("div")<{ open: boolean }>`
   position: relative;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+  box-shadow: 0px 1px 3px 0px #a6a6a633;
 
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  ${({ open, theme }) =>
+  ${({ open }) =>
     open &&
     css`
       &:before {
         content: "";
         position: absolute;
-        top: -4px;
-        left: -4px;
-        width: calc(100% + 8px);
-        height: calc(100% + 8px);
+        top: -5px;
+        left: -5px;
+        width: calc(100% + 10px);
+        height: calc(100% + 11px);
         border: 2px solid #eaeaea;
         border-radius: 12px;
       }

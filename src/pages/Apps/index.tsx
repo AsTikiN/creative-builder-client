@@ -8,19 +8,34 @@ export const AppsPage = () => {
       headerProps={{
         title: "Apps",
         description: "Create and customize apps for your offers.",
+        buttonText: "New app",
       }}
     >
       <CardsList>
-        <BookCard title="The Great Gatsby" date="Nov 23, 2024 at 8:12 PM" />
+        <BookCard
+          title="The Great Gatsby"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Active", status: "success" }}
+        />
         <BookCard
           title="To Kill a Mockingbird"
           date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Book", status: "success" }}
         />
-        <BookCard title="1984" date="Nov 23, 2024 at 8:12 PM" />
-        <BookCard title="Pride and Prejudice" date="Nov 23, 2024 at 8:12 PM" />
+        <BookCard
+          title="1984"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Book", status: "success" }}
+        />
+        <BookCard
+          title="Pride and Prejudice"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Active", status: "success" }}
+        />
         <BookCard
           title="The Catcher in the Rye"
           date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Active", status: "success" }}
         />
       </CardsList>
     </SidebarLayout>

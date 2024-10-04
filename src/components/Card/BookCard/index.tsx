@@ -4,6 +4,7 @@ import { ImageIcon } from "@/icons/ImageIcon";
 import { ShareIcon } from "@/icons/ShareIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
 import { CardLayout } from "@/layouts/CardLayout";
+import { StatusChipProps } from "@components/StatusChip";
 import { styled, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
 
@@ -11,9 +12,15 @@ interface BookCardProps {
   title: string;
   date: string;
   coverImage?: string;
+  statusChipProps: StatusChipProps;
 }
 
-export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
+export const BookCard: FC<BookCardProps> = ({
+  title,
+  date,
+  coverImage,
+  statusChipProps,
+}) => {
   const theme = useTheme();
 
   return (
@@ -50,14 +57,16 @@ export const BookCard: FC<BookCardProps> = ({ title, date, coverImage }) => {
           value: "Delete book",
           icon: <TrashIcon />,
           color: "error",
+          hasDivider: true,
         },
       ]}
       variant="book"
+      statusChipProps={statusChipProps}
     >
       <BookTitle variant="h5" color={theme.palette.grey[400]}>
         {title}
       </BookTitle>
-      <Typography variant="h6" color={theme.palette.grey[50]}>
+      <Typography variant="body2" color={theme.palette.grey[50]}>
         {date}
       </Typography>
     </CardLayout>

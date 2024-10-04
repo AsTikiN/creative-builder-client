@@ -1,5 +1,5 @@
-import { Sidebar } from "@modules/Sidebar";
 import { styled } from "@mui/material";
+import { Sidebar } from "@modules/Sidebar";
 
 export const SidebarStory = () => {
   return (

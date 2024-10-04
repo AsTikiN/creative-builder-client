@@ -27,8 +27,8 @@ export const App = () => {
 
       <AppRoutes />
 
-      {/* <SidebarLayout> */}
-      {/* <BookCard title="The Great Gatsby" date="Nov 23, 2024 at 8:12 PM" />
+      <SidebarLayout>
+        <BookCard title="The Great Gatsby" date="Nov 23, 2024 at 8:12 PM" />
         <BookCard
           title="To Kill a Mockingbird"
           date="Nov 23, 2024 at 8:12 PM"
@@ -38,9 +38,9 @@ export const App = () => {
         <BookCard
           title="The Catcher in the Rye"
           date="Nov 23, 2024 at 8:12 PM"
-        /> */}
+        />
 
-      {/* <CardsList>
+        <CardsList>
           <OfferCard
             title="Unlock Your Growth: 30-Day Marketing Mastery Program"
             date="November 23, 2024 at 8:12 PM"
@@ -53,8 +53,8 @@ export const App = () => {
             title="Unlock Your Growth: 30-Day Marketing Mastery Program"
             date="November 23, 2024 at 8:12 PM"
           />
-        </CardsList> */}
-      {/* </SidebarLayout> */}
+        </CardsList>
+      </SidebarLayout>
 
       {/* <BrowserRouter>
         <Routes>

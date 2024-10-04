@@ -12,7 +12,7 @@ interface FunnelCardProps {
   title: string;
   date: string;
   coverImage?: string;
-  statusChipProps: StatusChipProps;
+  statusChipProps?: StatusChipProps;
 }
 
 export const FunnelCard: FC<FunnelCardProps> = ({

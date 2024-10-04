@@ -1,4 +1,4 @@
-import { AppCard } from "@components/AppCard";
+import { AppCard } from "@components/Card/AppCard";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -19,6 +19,30 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    title:
+      "The Incredibly Long and Unnecessarily Verbose Title of a Book That Goes On and On",
+    date: "Nov 23, 2024 at 8:12 PM",
+    coverImage:
+      "https://plus.unsplash.com/premium_photo-1681426414801-f36575c2de9e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXJ8ZW58MHx8MHx8fDA%3D",
+  },
+};
+
+
+export const Stack: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", gap: "20px" }}>
+      <div style={{ maxWidth: "251px" }}>
+        <AppCard {...args} />
+      </div>
+      <div style={{ maxWidth: "251px" }}>
+        <AppCard {...args} />
+      </div>
+      <div style={{ maxWidth: "251px" }}>
+        <AppCard {...args} />
+      </div>
+    </div>
+  ),
   args: {
     title:
       "The Incredibly Long and Unnecessarily Verbose Title of a Book That Goes On and On",

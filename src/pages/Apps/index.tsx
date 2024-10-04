@@ -1,5 +1,5 @@
 import SidebarLayout from "@/layouts/SidebarLayout";
-import { BookCard } from "@components/Card/BookCard";
+import { AppCard } from "@components/Card/AppCard";
 import { styled } from "@mui/material";
 
 export const AppsPage = () => {
@@ -12,27 +12,27 @@ export const AppsPage = () => {
       }}
     >
       <CardsList>
-        <BookCard
+        <AppCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
           statusChipProps={{ label: "Active", status: "success" }}
         />
-        <BookCard
+        <AppCard
           title="To Kill a Mockingbird"
           date="Nov 23, 2024 at 8:12 PM"
           statusChipProps={{ label: "Book", status: "success" }}
         />
-        <BookCard
+        <AppCard
           title="1984"
           date="Nov 23, 2024 at 8:12 PM"
           statusChipProps={{ label: "Book", status: "success" }}
         />
-        <BookCard
+        <AppCard
           title="Pride and Prejudice"
           date="Nov 23, 2024 at 8:12 PM"
           statusChipProps={{ label: "Active", status: "success" }}
         />
-        <BookCard
+        <AppCard
           title="The Catcher in the Rye"
           date="Nov 23, 2024 at 8:12 PM"
           statusChipProps={{ label: "Active", status: "success" }}

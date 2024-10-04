@@ -8,14 +8,14 @@ import { StatusChipProps } from "@components/StatusChip";
 import { styled, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
 
-interface BookCardProps {
+interface AppCardProps {
   title: string;
   date: string;
   coverImage?: string;
-  statusChipProps: StatusChipProps;
+  statusChipProps?: StatusChipProps;
 }
 
-export const BookCard: FC<BookCardProps> = ({
+export const AppCard: FC<AppCardProps> = ({
   title,
   date,
   coverImage,

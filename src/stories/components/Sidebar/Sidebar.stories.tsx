@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SidebarStory } from "./SidebarStory";
 
 const meta = {
-  title: "Components/Sidebar",
+  title: "Components/BrandSidebar",
   component: SidebarStory,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof SidebarStory>;
 
 export default meta;

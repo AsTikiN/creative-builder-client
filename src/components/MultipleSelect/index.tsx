@@ -2,7 +2,7 @@ import { Dispatch, FC, ReactNode, SetStateAction, useState } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { alpha, OutlinedInput, Stack, styled, Typography } from "@mui/material";
 import { SmallChevronIconDown } from "@/icons/SmallChevronIconDown"; // Assuming you have this custom icon
 import { CheckIcon } from "@/icons/CheckIcon";
@@ -32,14 +32,12 @@ interface BasicSelectProps {
 const DEFAULT_DROPDOWN_WIDTH = 200;
 
 export const MultipleSelect: FC<BasicSelectProps> = ({
-  open,
-  setIsOpen,
   options,
   dropdownWidth,
 }) => {
   const [personName, setPersonName] = useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: any) => {
     const {
       target: { value },
     } = event;

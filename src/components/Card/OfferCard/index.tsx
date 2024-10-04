@@ -11,7 +11,7 @@ interface OfferCardProps {
   title: string;
   date: string;
   coverImage?: string;
-  statusChipProps: StatusChipProps;
+  statusChipProps?: StatusChipProps;
 }
 
 export const OfferCard: FC<OfferCardProps> = ({

@@ -2,6 +2,7 @@ import React from "react";
 import { createTheme } from "../src/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import type { Preview } from "@storybook/react";
+import { BrowserRouter } from "react-router-dom"; // Import BrowserRouter
 
 const preview: Preview = {
   parameters: {
@@ -14,10 +15,16 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ThemeProvider theme={createTheme("light")}>
-        <CssBaseline />
-        <Story />
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={createTheme("light")}>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+            rel="stylesheet"
+          />
+          <CssBaseline />
+          <Story />
+        </ThemeProvider>
+      </BrowserRouter>
     ),
   ],
 };

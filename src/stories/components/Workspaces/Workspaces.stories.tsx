@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { WorkspacesStory } from "./Workspaces";
 
 const meta = {
-  title: "Components/WorkspacesBoard",
+  title: "Components/BrandSwitcher",
   component: WorkspacesStory,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
+
 } satisfies Meta<typeof WorkspacesStory>;
 
 export default meta;

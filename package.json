@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "api:generate": "npx @rtk-query/codegen-openapi openapi.config.ts",
     "prepare": "husky",
+    "type-check": "tsc -b",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

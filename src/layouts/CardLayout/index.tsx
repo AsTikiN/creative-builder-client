@@ -11,7 +11,7 @@ interface CardLayoutProps extends PropsWithChildren {
   coverImage?: string;
   dropdownOptions: DropdownOption[];
   variant?: "book" | "offer" | "funnel";
-  statusChipProps: StatusChipProps;
+  statusChipProps?: StatusChipProps;
 }
 
 export const CardLayout: FC<CardLayoutProps> = ({
@@ -43,7 +43,7 @@ export const CardLayout: FC<CardLayoutProps> = ({
           mockImages[variant]
         )}
         <ActionPanel open={isOpen} className="action-panel">
-          <StatusChip {...statusChipProps} />
+          {statusChipProps && <StatusChip {...statusChipProps} />}
 
           <DotsWrapper onClick={() => setIsOpen(!isOpen)}>
             <DotsIcon />

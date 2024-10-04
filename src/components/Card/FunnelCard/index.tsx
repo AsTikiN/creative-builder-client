@@ -74,7 +74,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Revenue
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             $293,394,329
           </Typography>
         </CardInfoSection>
@@ -82,7 +82,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Total Traffic
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             230,124,293
           </Typography>
         </CardInfoSection>
@@ -90,7 +90,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Conversion Rate
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             25.30%
           </Typography>
         </CardInfoSection>
@@ -98,7 +98,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             AOV
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             $26.46
           </Typography>
         </CardInfoSection>
@@ -106,7 +106,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Time in Funnel
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             4m 34s
           </Typography>
         </CardInfoSection>
@@ -114,7 +114,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Upsell Rate
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             89.32%
           </Typography>
         </CardInfoSection>
@@ -122,7 +122,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Downsell Rate
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             3.42%
           </Typography>
         </CardInfoSection>
@@ -130,7 +130,7 @@ export const FunnelCard: FC<FunnelCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Steps
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             10
           </Typography>
         </CardInfoSection>
@@ -155,14 +155,14 @@ const CardInfo = styled("div")`
   display: flex;
   flex-wrap: wrap;
   padding-top: 12px;
-  margin-top: 12px;
+  margin-top: 8px;
 `;
 
 const CardInfoSection = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
   flex: 0 0 25%;
 
-  &:not(:nth-last-child(-n + 3)) {
+  &:not(:nth-last-child(-n + 4)) {
     padding-bottom: 12px;
   }
 `;

@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, ReactNode, SetStateAction, useState } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -17,6 +17,7 @@ const ChevronIcon = () => {
 export interface SelectOption {
   value: string;
   label: string;
+  icon?: ReactNode;
 }
 
 interface BasicSelectProps {
@@ -87,6 +88,7 @@ export const BasicSelect: FC<BasicSelectProps> = ({
         >
           {options.map((option) => (
             <StyledMenuItem key={option.value} value={option.value}>
+              {option.icon}
               {option.label}
             </StyledMenuItem>
           ))}
@@ -97,7 +99,7 @@ export const BasicSelect: FC<BasicSelectProps> = ({
 };
 
 const Wrapper = styled(Box)`
-  width: 100px;
+  /* width: 300px; */
 `;
 
 const StyledSelect = styled(Select)`
@@ -114,6 +116,7 @@ const StyledSelect = styled(Select)`
     display: flex;
     align-items: center;
     padding: 6px 8px;
+    padding-right: 6px !important;
     height: 32px;
     box-sizing: border-box;
 
@@ -121,11 +124,19 @@ const StyledSelect = styled(Select)`
       /* border: 0.5px solid ${({ theme }) =>
         alpha(theme.palette.grey[200], 0.2)}; */
     }
+
+    svg {
+      display: none;
+    }
   }
 
   fieldset {
     border: none;
   }
+
+  /* svg {
+    display: none;
+  } */
 `;
 
 const ChevronWrapper = styled(Box)`
@@ -141,6 +152,9 @@ const StyledMenuItem = styled(MenuItem)`
   height: 34px;
   border: 0.5px solid transparent;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   &:not(:first-child) {
     margin-top: 4px;

@@ -9,14 +9,7 @@ import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { SidebarAccordion } from "@components/Accordion/Accordion";
 import { Input } from "@components/Input";
-import {
-  alpha,
-  css,
-  IconButton,
-  Stack,
-  styled,
-  Typography,
-} from "@mui/material";
+import { alpha, css, Stack, styled, Typography } from "@mui/material";
 import { NavigationHeader } from "./components/NavigationHeader";
 import {
   financesAccordionData,
@@ -25,6 +18,7 @@ import {
 import { FilePlusIcon } from "@/icons/FilePlusIcon";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@config/routes";
+import { IconButton } from "@components/IconButton";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -45,9 +39,9 @@ export const Sidebar = () => {
           }}
           placeholder="Search"
         />
-        <IconButtonWrapper>
+        <IconButton>
           <InboxIcon />
-        </IconButtonWrapper>
+        </IconButton>
       </SearchWrapper>
       <Navigation>
         <NavItem>
@@ -149,19 +143,6 @@ const SearchWrapper = styled("div")`
 const Navigation = styled(Stack)`
   flex: 1;
   gap: ${({ theme }) => theme.spacing(1)};
-`;
-
-const IconButtonWrapper = styled(IconButton)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-
-  box-shadow: 0px 1px 2px 0px #0a0d1408;
-  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
 
 const NavItem = styled("div")<{ active?: boolean }>`

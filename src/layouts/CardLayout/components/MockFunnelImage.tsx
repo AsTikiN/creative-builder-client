@@ -3,12 +3,12 @@ import { alpha, styled } from "@mui/material";
 export const MockFunnelImage = () => {
   return (
     <Wrapper>
-      <MockOfferBackImage x={20} y={-48} zIndex={1} />
+      <MockOfferBackImage x={-20} y={-48} zIndex={1} />
       <MockOfferMainImage />
       <MockOfferMainImage />
       <MockOfferMainImage />
       <MockOfferMainImage />
-      <MockOfferBackImage x={-20} y={48} zIndex={2} />
+      <MockOfferBackImage x={20} y={48} zIndex={2} />
     </Wrapper>
   );
 };

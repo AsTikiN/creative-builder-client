@@ -67,7 +67,8 @@ export const CardLayout: FC<CardLayoutProps> = ({
 
 const Wrapper = styled("div")`
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
+  border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  /* border: 0.5px solid var(--stroke-soft-200, #E0E0E0) */
   width: fill-available;
   cursor: pointer;
 `;

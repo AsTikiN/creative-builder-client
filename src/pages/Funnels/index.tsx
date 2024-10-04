@@ -40,6 +40,6 @@ const CardsList = styled("div")`
   gap: ${({ theme }) => theme.spacing(5)};
 
   & > * {
-    flex-basis: calc(50% - ${({ theme }) => theme.spacing(5)});
+    flex-basis: calc(50% - ${({ theme }) => theme.spacing(2.5)});
   }
 `;

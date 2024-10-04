@@ -67,7 +67,7 @@ export const OfferCard: FC<OfferCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Revenue
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             $100,394,329
           </Typography>
         </CardInfoSection>
@@ -75,7 +75,7 @@ export const OfferCard: FC<OfferCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Customers
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             124,293
           </Typography>
         </CardInfoSection>
@@ -83,7 +83,7 @@ export const OfferCard: FC<OfferCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             Apps
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             5
           </Typography>
         </CardInfoSection>
@@ -91,7 +91,7 @@ export const OfferCard: FC<OfferCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             CSAT
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             4.5/5
           </Typography>
         </CardInfoSection>
@@ -99,7 +99,7 @@ export const OfferCard: FC<OfferCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             NPS
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             89
           </Typography>
         </CardInfoSection>
@@ -107,7 +107,7 @@ export const OfferCard: FC<OfferCardProps> = ({
           <Typography variant="body2" color={theme.palette.grey[50]}>
             CES
           </Typography>
-          <Typography variant="h5" color={theme.palette.grey[400]}>
+          <Typography variant="h6" color={theme.palette.grey[400]}>
             3.4
           </Typography>
         </CardInfoSection>

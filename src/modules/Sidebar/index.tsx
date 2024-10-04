@@ -1,46 +1,50 @@
 import { BarChartIcon } from "@/icons/BarChartIcon";
 import { CheckDoneIcon } from "@/icons/CheckDoneIcon";
-import { CoinsIcon } from "@/icons/CoinsIcon";
 import { InboxIcon } from "@/icons/InboxIcon";
 import { RouteIcon } from "@/icons/RouteIcon";
 import { SearchIcon } from "@/icons/SearchIcon";
-import { SendIcon } from "@/icons/SendIcon";
 import { SettingsIcon } from "@/icons/SettingsIcon";
 import { StoreIcon } from "@/icons/StoreIcon";
 import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
-import {
-  SidebarAccordion,
-  SidebarAccordionProps,
-} from "@components/Accordion/Accordion";
+import { SidebarAccordion } from "@components/Accordion/Accordion";
 import { Input } from "@components/Input";
-import { styled } from "@mui/material";
+import {
+  alpha,
+  css,
+  IconButton,
+  Stack,
+  styled,
+  Typography,
+} from "@mui/material";
 import { NavigationHeader } from "./components/NavigationHeader";
-
-const mockAccordionData: SidebarAccordionProps[] = [
-  {
-    title: "Marketing",
-    icon: <SendIcon />,
-    tabs: [
-      { id: 1, label: "Email" },
-      { id: 2, label: "SMS" },
-      { id: 3, label: "Messages" },
-      { id: 4, label: "Discounts" },
-      { id: 5, label: "Affiliates" },
-    ],
-  },
-  {
-    title: "Finances",
-    icon: <CoinsIcon />,
-    tabs: [
-      { id: 1, label: "Transactions" },
-      { id: 2, label: "Payouts" },
-      { id: 3, label: "Disputes" },
-    ],
-  },
-];
+import {
+  financesAccordionData,
+  marketingAccordionData,
+} from "./static/AccordionData";
+import { FilePlusIcon } from "@/icons/FilePlusIcon";
+import { Dropdown, DropdownOption } from "@components/Dropdown";
+import { useState } from "react";
+import { ProfileIcon } from "@/icons/ProfileIcon";
+import { SwapIcon } from "@/icons/SwapIcon";
+import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
+import { LogOutIcon } from "@/icons/LogOutIcon";
+import { useNavigate } from "react-router-dom";
+import { routes } from "@config/routes";
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<DropdownOption>({
+    id: 1,
+    label: "Account settings",
+    value: "Account settings",
+  });
+
+  const handleNavigate = (path: string) => () => {
+    navigate(path);
+  };
+
   return (
     <Wrapper>
       <NavigationHeader />
@@ -53,96 +57,193 @@ export const Sidebar = () => {
           }}
           placeholder="Search"
         />
-        <IconButton>
+        <IconButtonWrapper>
           <InboxIcon />
-        </IconButton>
+        </IconButtonWrapper>
       </SearchWrapper>
       <Navigation>
         <NavItem>
-          <BarChartIcon />
-          Overview
+          <NavTextWrapper>
+            <BarChartIcon />
+            Overview
+          </NavTextWrapper>
+        </NavItem>
+
+        <NavItem
+          active={location.pathname === routes.apps()}
+          onClick={handleNavigate(routes.apps())}
+        >
+          <NavTextWrapper>
+            <FilePlusIcon />
+            Apps
+          </NavTextWrapper>
+        </NavItem>
+
+        <NavItem
+          active={location.pathname === routes.offers()}
+          onClick={handleNavigate(routes.offers())}
+        >
+          <NavTextWrapper>
+            <TagIcon />
+            Offers
+          </NavTextWrapper>
         </NavItem>
 
         <NavItem>
-          <TagIcon />
-          Offers
+          <NavTextWrapper>
+            <RouteIcon />
+            Funnels
+          </NavTextWrapper>
         </NavItem>
 
         <NavItem>
-          <RouteIcon />
-          Funnels
+          <NavTextWrapper>
+            <StoreIcon />
+            Store
+          </NavTextWrapper>
+        </NavItem>
+
+        <SidebarAccordion {...marketingAccordionData} />
+
+        <NavItem>
+          <NavTextWrapper>
+            <CheckDoneIcon />
+            Orders
+          </NavTextWrapper>
+          <Chip>
+            <Typography variant="h6" color="grey.200">
+              23,345
+            </Typography>
+          </Chip>
         </NavItem>
 
         <NavItem>
-          <StoreIcon />
-          Store
+          <NavTextWrapper>
+            <UsersIcon />
+            Audience
+          </NavTextWrapper>
         </NavItem>
-
-        <SidebarAccordion {...mockAccordionData[0]} />
-
-        <NavItem>
-          <CheckDoneIcon />
-          Orders
-        </NavItem>
-
-        <NavItem>
-          <UsersIcon />
-          Audience
-        </NavItem>
-        <SidebarAccordion {...mockAccordionData[1]} />
+        <SidebarAccordion {...financesAccordionData} />
       </Navigation>
-      <NavItem>
-        <SettingsIcon />
-        Brand settings
-      </NavItem>
+
+      <BrandSettingsWrapper>
+        <NavItem onClick={() => setIsOpen(true)}>
+          <NavTextWrapper>
+            <SettingsIcon />
+            Brand settings
+          </NavTextWrapper>
+        </NavItem>
+
+        <DropDownAnchor>
+          <Dropdown
+            isOpen={isOpen}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            options={[
+              {
+                id: 1,
+                label: "Account settings",
+                value: "Account settings",
+                icon: <ProfileIcon />,
+              },
+              {
+                id: 2,
+                label: "Switch to consumer",
+                value: "Switch to consumer",
+                icon: <SwapIcon />,
+              },
+              {
+                id: 3,
+                label: "Help & support",
+                value: "Help & support",
+                icon: <LifeBuoyIcon />,
+              },
+              {
+                id: 4,
+                label: "Log out",
+                value: "Log out",
+                icon: <LogOutIcon />,
+              },
+            ]}
+            setIsOpen={setIsOpen}
+            dropdownWidth={205}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          ></Dropdown>
+        </DropDownAnchor>
+      </BrandSettingsWrapper>
     </Wrapper>
   );
 };
 
-const Wrapper = styled("div")`
-  display: flex;
-  flex-direction: column;
+const Wrapper = styled(Stack)`
   width: 272px;
+  gap: ${({ theme }) => theme.spacing(3)};
+  padding: ${({ theme }) => theme.spacing(3)};
 
-  //TODO: move to theme
-  gap: 12px;
-  padding: 12px;
-  border-right: 1px solid rgba(36, 36, 36, 0.1);
+  border-right: 1px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
 
 const SearchWrapper = styled("div")`
   display: flex;
-
-  //TODO: move to theme
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
-const Navigation = styled("div")`
-  display: flex;
-  flex-direction: column;
+const Navigation = styled(Stack)`
   flex: 1;
-  //TODO: move to theme
-  gap: 4px;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
 
-const IconButton = styled("button")`
+const IconButtonWrapper = styled(IconButton)`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  //TODO: move to theme
-  border-radius: 8px;
-  border: 0.5px solid rgba(36, 36, 36, 0.1);
-  background-color: #fff;
+
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
 
-const NavItem = styled("div")`
+const NavItem = styled("div")<{ active?: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  color: ${({ theme }) => theme.palette.grey[200]};
+  gap: ${({ theme }) => theme.spacing(2)};
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  padding: 6px 8px;
+  border: 0.5px solid transparent;
+
+  ${({ active, theme }) =>
+    active &&
+    css`
+      border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)};
+    `}
+`;
+
+const Chip = styled("div")`
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+`;
+
+const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
-  //TODO: move to theme
-  color: #5c5c5c;
-  gap: 8px;
-  border-radius: 8px;
-  padding: 6px 8px;
+  gap: ${({ theme }) => theme.spacing(2)};
+`;
+
+const BrandSettingsWrapper = styled("div")`
+  position: relative;
+`;
+
+const DropDownAnchor = styled("div")`
+  position: absolute;
+  bottom: 60px;
+  left: -90px;
 `;

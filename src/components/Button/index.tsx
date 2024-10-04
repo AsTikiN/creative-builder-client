@@ -15,12 +15,11 @@ export const Button = ({ children, ...props }: ButtonProps) => {
 
 export const StyledButton = styled(LoadingButton)`
   text-transform: none;
-  // TODO: add padding to theme
   padding: 6px;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   display: flex;
-  gap: 2px;
   align-items: center;
+  gap: ${({ theme }) => theme.spacing(0.5)};
 
   & .MuiButton-icon {
     margin: 0;
@@ -53,8 +52,7 @@ export const StyledButton = styled(LoadingButton)`
     props.variant === "outlined" &&
     css`
       border: 0.5px solid ${props.theme.palette.grey[100]};
-      /* color: ${props.theme.palette.grey[200]}; */
-      color: #5c5c5c;
+      color: ${props.theme.palette.grey[200]};
       box-shadow: none;
     `}
 

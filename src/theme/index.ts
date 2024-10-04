@@ -6,12 +6,14 @@ import { Mode } from "@store/features/theme";
 import { darkPalette } from "./palettes/darkPalette";
 import { lightPalette } from "./palettes/lightPalette";
 import { typography } from "./typography";
+import { shape } from "./shape";
 
 export const createTheme = (mode: Mode) => {
   const themeOptions: ThemeOptions = {
     palette: { ...(mode === "dark" ? darkPalette : lightPalette), mode },
-    shape: { borderRadius: 8 },
     typography: typography,
+    shape,
+    spacing: (factor: number) => `${0.25 * factor}rem`,
   };
 
   const theme = createMuiTheme(themeOptions);

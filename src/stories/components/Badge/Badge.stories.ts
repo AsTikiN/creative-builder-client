@@ -2,7 +2,7 @@ import { StatusChip } from "@components/StatusChip";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Components/Chip",
+  title: "Components/Badge",
   component: StatusChip,
   parameters: {
     layout: "centered",

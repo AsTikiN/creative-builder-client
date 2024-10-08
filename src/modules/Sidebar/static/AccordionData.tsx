@@ -1,6 +1,6 @@
 import { CoinsIcon } from "@/icons/CoinsIcon";
 import { SendIcon } from "@/icons/SendIcon";
-import { SidebarAccordionProps } from "@components/Accordion/Accordion";
+import { SidebarAccordionProps } from "@components/Accordion/SidebarAccordion";
 
 export const marketingAccordionData: SidebarAccordionProps = {
   title: "Marketing",

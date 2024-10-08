@@ -68,9 +68,10 @@ export const CardLayout: FC<CardLayoutProps> = ({
 const Wrapper = styled("div")`
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
-  /* border: 0.5px solid var(--stroke-soft-200, #E0E0E0) */
-  width: fill-available;
+  box-shadow: 0px 1px 2px 0px ${alpha("#0A0D14", 0.03)};
+
   cursor: pointer;
+  overflow: hidden;
 `;
 
 const CoverImageWrapper = styled("div")<{

@@ -7,7 +7,7 @@ import { SettingsIcon } from "@/icons/SettingsIcon";
 import { StoreIcon } from "@/icons/StoreIcon";
 import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
-import { SidebarAccordion } from "@components/Accordion/Accordion";
+import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";
 import { Input } from "@components/Input";
 import { alpha, css, Stack, styled, Typography } from "@mui/material";
 import { NavigationHeader } from "./components/NavigationHeader";

@@ -28,8 +28,8 @@ export const OfferCard: FC<OfferCardProps> = ({
       dropdownOptions={[
         {
           id: 1,
-          label: "Edit mockup",
-          value: "Edit mockup",
+          label: "Edit thumbnail",
+          value: "Edit thumbnail",
           icon: <ImageIcon />,
         },
         {

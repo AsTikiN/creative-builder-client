@@ -36,10 +36,13 @@ const CardsList = styled("div")`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  max-height: calc(100vh - 72.5px);
+  overflow-y: auto;
 
   gap: ${({ theme }) => theme.spacing(5)};
 
   & > * {
+    /* width: 341px; */
     flex-basis: calc(33.33% - ${({ theme }) => theme.spacing(5)});
   }
 `;

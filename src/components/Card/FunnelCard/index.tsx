@@ -35,8 +35,8 @@ export const FunnelCard: FC<FunnelCardProps> = ({
         },
         {
           id: 1,
-          label: "Edit mockup",
-          value: "Edit mockup",
+          label: "Edit thumbnail",
+          value: "Edit thumbnail",
           icon: <ImageIcon />,
         },
         {
@@ -155,7 +155,7 @@ const CardInfo = styled("div")`
   display: flex;
   flex-wrap: wrap;
   padding-top: 12px;
-  margin-top: 8px;
+  margin-top: 12px;
 `;
 
 const CardInfoSection = styled(Stack)`

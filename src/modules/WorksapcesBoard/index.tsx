@@ -4,6 +4,7 @@ import {
   Avatar,
   Badge,
   Box,
+  css,
   IconButton,
   Stack,
   styled,
@@ -44,8 +45,13 @@ export const WorkspacesBoard = () => {
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           variant="dot"
           onClick={() => setIsOpen(true)}
+          isOpen={isOpen}
         >
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <StyledAvatar
+            isOpen={isOpen}
+            alt="Remy Sharp"
+            src="/static/images/avatar/1.jpg"
+          />
         </StyledBadge>
 
         <DropDownAnchor>
@@ -112,26 +118,27 @@ const AddButton = styled(IconButton)`
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;
 
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  cursor: "pointer",
+const StyledBadge = styled(Badge)<{ isOpen: boolean }>`
+  cursor: pointer;
 
-  "& .MuiBadge-badge": {
-    backgroundColor: theme.palette.success.main,
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+  & .MuiBadge-badge {
+    display: ${({ isOpen }) => (isOpen ? "none" : "block")};
+    background-color: ${({ theme }) => theme.palette.success.main};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.palette.background.paper};
 
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-}));
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: ripple 1.2s infinite ease-in-out;
+      border: 1px solid currentColor;
+      content: "";
+    }
+  }
+`;
 
 const AvatarWrapper = styled(Box)`
   position: relative;
@@ -141,4 +148,28 @@ const DropDownAnchor = styled("div")`
   position: absolute;
   bottom: 60px;
   /* left: -90px; */
+`;
+
+const StyledAvatar = styled(Avatar)<{ isOpen: boolean }>`
+  width: 36px;
+  height: 36px;
+  background-color: ${({ theme }) => theme.palette.grey[200]};
+  color: transparent;
+  position: relative;
+  overflow: visible;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      &:before {
+        content: "";
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid #eaeaea;
+        position: absolute;
+        top: -4px;
+        left: -4px;
+      }
+    `}
 `;

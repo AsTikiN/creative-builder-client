@@ -35,8 +35,8 @@ export const AppCard: FC<AppCardProps> = ({
         },
         {
           id: 2,
-          label: "Edit mockup",
-          value: "Edit mockup",
+          label: "Edit thumbnail",
+          value: "Edit thumbnail",
           icon: <ImageIcon />,
         },
         {

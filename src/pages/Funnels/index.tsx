@@ -15,17 +15,43 @@ export const FunnelsPage = () => {
         <FunnelCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
-          statusChipProps={{ label: "Book a Call", status: "success" }}
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
         />
         <FunnelCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
-          statusChipProps={{ label: "Book a Call", status: "success" }}
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
         />
         <FunnelCard
           title="The Great Gatsby"
           date="Nov 23, 2024 at 8:12 PM"
-          statusChipProps={{ label: "Book a Call", status: "success" }}
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
+        />
+        <FunnelCard
+          title="The Great Gatsby"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
+        />
+        <FunnelCard
+          title="The Great Gatsby"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
+        />
+        <FunnelCard
+          title="The Great Gatsby"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
+        />
+        <FunnelCard
+          title="The Great Gatsby"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
+        />
+
+        <FunnelCard
+          title="The Great Gatsby"
+          date="Nov 23, 2024 at 8:12 PM"
+          statusChipProps={{ label: "Lead Funnel", status: "success" }}
         />
       </CardsList>
     </SidebarLayout>
@@ -36,10 +62,13 @@ const CardsList = styled("div")`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  max-height: calc(100vh - 112.5px);
+  overflow-y: auto;
 
   gap: ${({ theme }) => theme.spacing(5)};
 
   & > * {
+    /* width: 522px; */
     flex-basis: calc(50% - ${({ theme }) => theme.spacing(2.5)});
   }
 `;

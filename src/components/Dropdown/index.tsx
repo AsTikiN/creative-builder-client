@@ -87,10 +87,13 @@ export const Dropdown: FC<DropdownProps> = ({
   );
 };
 
-const CustomDropdown = styled(MuiDropdown)``;
+const CustomDropdown = styled(MuiDropdown)`
+  border-radius: 30px;
+`;
 
 const CustomMenu = styled(Menu)<{ dropdownWidth?: number }>`
   & .MuiPaper-root {
+    border-radius: 10px;
     width: ${({ dropdownWidth }) => dropdownWidth}px;
     margin-top: 9px;
     color: #000;
@@ -128,12 +131,12 @@ const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
   ${({ divider, theme }) =>
     divider &&
     css`
-      margin-top: 8px !important;
+      margin-top: 11.5px !important;
 
       &:before {
         content: "";
         position: absolute;
-        top: -4px;
+        top: -5.5px;
         left: -5px;
         width: calc(100% + 10px);
         height: 0.5px;

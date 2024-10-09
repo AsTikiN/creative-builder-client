@@ -4,57 +4,55 @@ import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
 import { Button } from "@components/Button";
 import { MultipleSelect } from "@components/MultipleSelect";
 import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 
 export interface HeaderProps {
   title: string;
   description: string;
-  buttonText: string;
+  variant?: "small" | "large";
+  actions?: ReactNode;
 }
 
-export const Header: FC<HeaderProps> = ({ title, description, buttonText }) => {
+export const Header: FC<HeaderProps> = ({
+  title,
+  description,
+  variant = "large",
+  actions,
+}) => {
   const theme = useTheme();
+  const variantProps = {
+    large: {
+      titleVariant: "h3" as const,
+      descriptionVariant: "h5" as const,
+    },
+    small: {
+      titleVariant: "titleLarge" as const,
+      descriptionVariant: "h6" as const,
+    },
+  };
 
   const [open, setIsOpen] = useState(false);
 
   return (
     <Wrapper>
       <HeaderData>
-        <Typography variant="h3" component="p" color={theme.palette.grey[400]}>
+        <Typography
+          variant={variantProps[variant].titleVariant}
+          component="p"
+          color={theme.palette.grey[400]}
+        >
           {title}
         </Typography>
-        <Typography variant="h5" component="p" color={theme.palette.grey[200]}>
+        <Typography
+          variant={variantProps[variant].descriptionVariant}
+          component="p"
+          color={theme.palette.grey[200]}
+        >
           {description}
         </Typography>
       </HeaderData>
 
-      <HeaderActions>
-        <MultipleSelect
-          open={open}
-          setIsOpen={setIsOpen}
-          options={[
-            {
-              value: "Display density",
-              label: "Display density",
-              type: "title",
-            },
-            { value: "Compact", label: "Compact", icon: <MenuIcon /> },
-            {
-              value: "Comfortable",
-              label: "Comfortable",
-              icon: <LayoutTopIcon />,
-            },
-            { value: "", label: "", type: "divider" },
-            { value: "Ordering", label: "Ordering", type: "title" },
-            { value: "Recent activity", label: "Recent activity" },
-            { value: "Created", label: "Created" },
-          ]}
-        />
-
-        <Button startIcon={<SmallPlusIcon />} variant="contained">
-          {buttonText}
-        </Button>
-      </HeaderActions>
+      <HeaderActions>{actions}</HeaderActions>
     </Wrapper>
   );
 };

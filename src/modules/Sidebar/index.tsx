@@ -43,6 +43,7 @@ export const Sidebar = () => {
           <InboxIcon />
         </IconButton>
       </SearchWrapper>
+
       <Navigation>
         <NavItem>
           <NavTextWrapper>

@@ -2,7 +2,7 @@ import { FunnelCard } from "@components/Card/FunnelCard";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Application/FunnelCard",
+  title: "Components/FunnelCard",
   component: FunnelCard,
   parameters: {
     layout: "centered",

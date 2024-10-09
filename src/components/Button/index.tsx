@@ -20,6 +20,7 @@ export const StyledButton = styled(LoadingButton)`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(0.5)};
+  ${({ theme }) => theme.typography.body1};
 
   & .MuiButton-icon {
     margin: 0;
@@ -28,14 +29,14 @@ export const StyledButton = styled(LoadingButton)`
   ${(props) =>
     props.variant === "contained" &&
     css`
-      background-color: ${props.theme.palette.primary.main};
+      /* background-color: ${props.theme.palette.primary.main}; */
       color: ${props.theme.palette.primary.contrastText};
       box-shadow:
         0 4px 4px rgba(0, 0, 0, 0.25),
         inset 0 0 0 1px rgba(0, 0, 0, 0.16),
         inset 0 -2px 0 0 rgba(0, 0, 0, 0.05);
 
-      &:before {
+      /* &:before {
         content: "";
         position: absolute;
         top: 0;
@@ -45,7 +46,7 @@ export const StyledButton = styled(LoadingButton)`
         border: 1px solid #3183d9;
         box-sizing: border-box;
         border-radius: 8px;
-      }
+      } */
     `}
 
   ${(props) =>

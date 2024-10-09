@@ -132,7 +132,7 @@ const CardInfo = styled("div")`
   display: flex;
   flex-wrap: wrap;
   padding-top: 12px;
-  margin-top: 12px;
+  margin-top: 8px;
 `;
 
 const CardInfoSection = styled(Stack)`

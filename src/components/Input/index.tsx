@@ -15,6 +15,20 @@ const StyledInput = styled(TextField)`
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   box-shadow: 0px 1px 2px 0px ${alpha("#0A0D14", 0.03)};
+  height: 32px;
+  padding-left: 8px;
+
+  &:has(.MuiInputBase-adornedStart) .MuiInputBase-root {
+    padding-left: 0;
+  }
+
+  .MuiInputBase-root {
+    display: flex;
+    gap: 6px;
+
+    &::placeholder {
+    }
+  }
 
   &:has(.MuiInputBase-adornedStart) .MuiInputBase-root {
     padding-left: 8px;
@@ -30,7 +44,7 @@ const StyledInput = styled(TextField)`
     ${({ theme }) => css`
       ${theme.typography.label}
     `}
-    color: ${({ theme }) => theme.palette.grey[200]};
+    color: ${({ theme }) => theme.palette.grey[400]};
   }
 
   .MuiOutlinedInput-notchedOutline {

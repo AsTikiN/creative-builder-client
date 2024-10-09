@@ -8,8 +8,8 @@ export const OffersPage = () => {
       headerProps={{
         title: "Offers",
         description: "Design compelling offers for your funnels.",
-        buttonText: "New offer",
       }}
+      buttonText="New offer"
     >
       <CardsList>
         <OfferCard

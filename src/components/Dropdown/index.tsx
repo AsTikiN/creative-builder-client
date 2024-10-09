@@ -23,9 +23,10 @@ export interface DropdownOption {
   icon?: ReactNode;
   color?: string;
   hasDivider?: boolean;
+  onClick?: () => void;
 }
 
-interface DropdownProps extends PropsWithChildren {
+export interface DropdownProps extends PropsWithChildren {
   selectedOption: DropdownOption | null;
   setSelectedOption: Dispatch<SetStateAction<DropdownOption | null>>;
   isOpen: boolean;
@@ -72,6 +73,7 @@ export const Dropdown: FC<DropdownProps> = ({
             onClick={() => {
               setSelectedOption(option);
               setIsOpen(false);
+              option.onClick?.();
             }}
             selected={selectedOption?.id === option.id}
             divider={option.hasDivider}
@@ -114,7 +116,7 @@ const CustomMenu = styled(Menu)<{ dropdownWidth?: number }>`
 `;
 
 const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
-  padding: 11px 12px;
+  padding: 7px 8px;
   background-color: #fff;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid transparent;

@@ -20,8 +20,12 @@ import { ProfileIcon } from "@/icons/ProfileIcon";
 import { SwapIcon } from "@/icons/SwapIcon";
 import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
 import { LogOutIcon } from "@/icons/LogOutIcon";
+import { routes } from "@config/routes";
+import { useNavigate } from "react-router-dom";
 
 export const WorkspacesBoard = () => {
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     null
@@ -30,7 +34,7 @@ export const WorkspacesBoard = () => {
   return (
     <Wrapper>
       <Workspaces>
-        <Workspace icon={<FramerIcon />} />
+        <Workspace active icon={<FramerIcon />} />
         <Workspace icon={<FigmaIcon />} />
         <Workspace icon={<SketchIcon />} />
         <Workspace icon={<CanvaIcon />} />
@@ -64,6 +68,9 @@ export const WorkspacesBoard = () => {
                 id: 1,
                 label: "Account settings",
                 value: "Account settings",
+                onClick: () => {
+                  navigate(routes.accountSettings());
+                },
                 icon: <ProfileIcon />,
               },
               {
@@ -103,6 +110,8 @@ const Wrapper = styled(Stack)`
   //TODO: move to theme
   padding: 12px;
   border-right: 1px solid ${({ theme }) => theme.palette.grey[100]};
+  box-sizing: border-box;
+  width: 64px;
 `;
 
 const Workspaces = styled(Stack)`

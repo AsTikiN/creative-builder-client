@@ -8,8 +8,8 @@ export const AppsPage = () => {
       headerProps={{
         title: "Apps",
         description: "Create and customize apps for your offers.",
-        buttonText: "New app",
       }}
+      buttonText="New app"
     >
       <CardsList>
         <AppCard

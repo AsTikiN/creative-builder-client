@@ -4,4 +4,6 @@ export const routes = {
   offers: () => "/offers",
   funnels: () => "/funnels",
   editBook: (id: string) => `/book/edit/${id}`,
+  accountSettings: () => "/account-settings",
+  appearance: () => "/appearance",
 };

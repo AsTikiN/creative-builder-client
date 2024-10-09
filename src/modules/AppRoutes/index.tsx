@@ -6,6 +6,8 @@ import { AppsPage } from "@/pages/Apps";
 import { OffersPage } from "@/pages/Offers";
 import { FunnelsPage } from "@/pages/Funnels";
 import { EditBookPage } from "@/pages/EditBook";
+import { AccountSettingsPage } from "@/pages/AccountSettingsPage";
+import { AppearancePage } from "@/pages/AppearancePage";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -15,6 +17,11 @@ export const AppRoutes: React.FC = () => {
         <Route path={routes.offers()} element={<OffersPage />} />
         <Route path={routes.funnels()} element={<FunnelsPage />} />
         <Route path={routes.editBook(":id")} element={<EditBookPage />} />
+        <Route
+          path={routes.accountSettings()}
+          element={<AccountSettingsPage />}
+        />
+        <Route path={routes.appearance()} element={<AppearancePage />} />
       </Routes>
     </Router>
   );

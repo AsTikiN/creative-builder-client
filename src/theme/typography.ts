@@ -38,6 +38,7 @@ export const typography: TypographyOptions = {
     fontSize: "14px",
     fontWeight: 500,
     lineHeight: "20px",
+    letterSpacing: "-0.006em",
   },
   body2: {
     fontSize: "12px",
@@ -53,15 +54,22 @@ export const typography: TypographyOptions = {
     fontSize: "14px",
     fontWeight: 400,
     lineHeight: "20px",
+    letterSpacing: "-0.006em",
   },
   subtitle1: {
-    fontSize: "12px",
-    fontWeight: 400,
-    lineHeight: "16px",
+    fontSize: "11px",
+    fontWeight: 500,
+    lineHeight: "12px",
+    letterSpacing: "0.02em",
   },
   titleSmall: {
     fontSize: "14px",
     lineHeight: "20px",
+    fontWeight: 500,
+  },
+  titleLarge: {
+    fontSize: "16px",
+    lineHeight: "24px",
     fontWeight: 500,
   },
 };

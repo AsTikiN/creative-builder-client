@@ -149,7 +149,7 @@ export const AppearancePage = () => {
         <InterfaceVariants>
           <InterfaceCard
             selected={selectedTheme === "system"}
-            onClick={handleThemeChange("system")}
+            onClick={handleThemeChange()}
           >
             <DarkTheme />
             <CutLightTheme>
@@ -159,14 +159,14 @@ export const AppearancePage = () => {
 
           <InterfaceCard
             selected={selectedTheme === "light"}
-            onClick={handleThemeChange("light")}
+            onClick={handleThemeChange()}
           >
             <LightTheme />
           </InterfaceCard>
 
           <InterfaceCard
             selected={selectedTheme === "dark"}
-            onClick={handleThemeChange("dark")}
+            onClick={handleThemeChange()}
           >
             <DarkTheme />
           </InterfaceCard>

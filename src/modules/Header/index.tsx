@@ -1,10 +1,5 @@
-import { LayoutTopIcon } from "@/icons/LayoutTopIcon";
-import { MenuIcon } from "@/icons/MenuIcon";
-import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
-import { Button } from "@components/Button";
-import { MultipleSelect } from "@components/MultipleSelect";
 import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode } from "react";
 
 export interface HeaderProps {
   title: string;
@@ -31,7 +26,6 @@ export const Header: FC<HeaderProps> = ({
     },
   };
 
-  const [open, setIsOpen] = useState(false);
 
   return (
     <Wrapper>

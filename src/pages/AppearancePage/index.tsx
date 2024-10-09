@@ -1,11 +1,4 @@
-import { DarkTheme } from "@/icons/DarkTheme";
-import { LightTheme } from "@/icons/LightTheme";
-import { SystemTheme } from "@/icons/SystemTheme";
-import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
-import { Button } from "@components/Button";
-import { Input } from "@components/Input";
 import {
-  Avatar,
   Box,
   css,
   Stack,
@@ -14,7 +7,11 @@ import {
   Divider as MuiDivider,
   alpha,
 } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { DarkTheme } from "@/icons/DarkTheme";
+import { LightTheme } from "@/icons/LightTheme";
+import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
+import { Input } from "@components/Input";
 
 const initialColors = [
   {
@@ -60,7 +57,7 @@ const initialColors = [
 ];
 
 export const AppearancePage = () => {
-  const [selectedTheme, setSelectedTheme] = useState("system");
+  const [selectedTheme] = useState("system");
   const [colors, setColors] = useState(initialColors);
   const [customColor, setCustomColor] = useState("#007CFE");
 
@@ -81,7 +78,7 @@ export const AppearancePage = () => {
   //   setCustomColor(e.target.value);
   // };
 
-  const handleThemeChange = (theme: string) => () => {
+  const handleThemeChange = () => () => {
     // setSelectedTheme(theme);
   };
 
@@ -210,7 +207,7 @@ const Colors = styled(Box)`
   margin: ${({ theme }) => theme.spacing(4)} 0;
 `;
 
-const Color = styled(Box)<{
+const Color = styled(Box) <{
   color: string;
   selected: boolean;
   initialColor: string;
@@ -275,7 +272,7 @@ const InterfaceVariants = styled(Box)`
   gap: ${({ theme }) => theme.spacing(4)};
 `;
 
-const InterfaceCard = styled(Box)<{ selected: boolean }>`
+const InterfaceCard = styled(Box) <{ selected: boolean }>`
   width: 148px;
   height: 96px;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;

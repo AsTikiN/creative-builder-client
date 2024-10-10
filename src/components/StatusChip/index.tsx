@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { alpha, styled, Typography, useTheme } from "@mui/material";
+import { styled, Typography, useTheme } from "@mui/material";
 
 type ChipStatus = "success" | "error";
 
@@ -24,7 +24,7 @@ export const StatusChip: FC<StatusChipProps> = ({ label, status }) => {
 const Wrapper = styled("div")`
   border-radius: 6px;
   background-color: ${({ theme }) => theme.palette.text.primary};
-  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
+  border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};

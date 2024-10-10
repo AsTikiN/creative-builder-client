@@ -25,3 +25,22 @@ declare module "@mui/material/Typography" {
     body3: true;
   }
 }
+
+declare module "@mui/material/styles" {
+  interface Palette {
+    background: Palette["background"] & {
+      primary: string;
+    };
+  }
+
+  interface PaletteOptions {
+    background?: Partial<Palette["background"]>;
+  }
+}
+
+declare module "@mui/material/styles/createPalette" {
+  interface TypeBackground {
+    primary: string;
+  }
+}
+

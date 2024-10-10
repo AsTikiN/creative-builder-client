@@ -29,111 +29,133 @@ export const Sidebar = () => {
 
   return (
     <Wrapper>
-      <NavigationHeader />
-      <SearchWrapper>
-        <Input
-          slotProps={{
-            input: {
-              startAdornment: <SearchIcon />,
-            },
-          }}
-          placeholder="Search"
-        />
-        <IconButton>
-          <InboxIcon />
-        </IconButton>
-      </SearchWrapper>
+      <SidebarShadow />
+      <SidebarContentWrapper>
+        <NavigationHeader />
+        <SearchWrapper>
+          <Input
+            slotProps={{
+              input: {
+                startAdornment: <SearchIcon />,
+              },
+            }}
+            placeholder="Search"
+          />
+          <IconButton>
+            <InboxIcon />
+          </IconButton>
+        </SearchWrapper>
 
-      <Navigation>
+        <Navigation>
+          <NavItem>
+            <NavTextWrapper>
+              <BarChartIcon />
+              Overview
+            </NavTextWrapper>
+          </NavItem>
+
+          <NavItem
+            active={location.pathname === routes.apps()}
+            onClick={handleNavigate(routes.apps())}
+          >
+            <NavTextWrapper>
+              <FilePlusIcon />
+              Apps
+            </NavTextWrapper>
+          </NavItem>
+
+          <NavItem
+            active={location.pathname === routes.offers()}
+            onClick={handleNavigate(routes.offers())}
+          >
+            <NavTextWrapper>
+              <TagIcon />
+              Offers
+            </NavTextWrapper>
+          </NavItem>
+
+          <NavItem
+            active={location.pathname === routes.funnels()}
+            onClick={handleNavigate(routes.funnels())}
+          >
+            <NavTextWrapper>
+              <RouteIcon />
+              Funnels
+            </NavTextWrapper>
+          </NavItem>
+
+          <NavItem>
+            <NavTextWrapper>
+              <StoreIcon />
+              Store
+            </NavTextWrapper>
+          </NavItem>
+
+          <SidebarAccordion {...marketingAccordionData} />
+
+          <NavItem>
+            <NavTextWrapper>
+              <CheckDoneIcon />
+              Orders
+            </NavTextWrapper>
+            <Chip>
+              <Typography variant="h6" color="grey.200">
+                23,345
+              </Typography>
+            </Chip>
+          </NavItem>
+
+          <NavItem>
+            <NavTextWrapper>
+              <UsersIcon />
+              Audience
+            </NavTextWrapper>
+          </NavItem>
+          <SidebarAccordion {...financesAccordionData} />
+        </Navigation>
+
         <NavItem>
           <NavTextWrapper>
-            <BarChartIcon />
-            Overview
+            <SettingsIcon />
+            Brand settings
           </NavTextWrapper>
         </NavItem>
-
-        <NavItem
-          active={location.pathname === routes.apps()}
-          onClick={handleNavigate(routes.apps())}
-        >
-          <NavTextWrapper>
-            <FilePlusIcon />
-            Apps
-          </NavTextWrapper>
-        </NavItem>
-
-        <NavItem
-          active={location.pathname === routes.offers()}
-          onClick={handleNavigate(routes.offers())}
-        >
-          <NavTextWrapper>
-            <TagIcon />
-            Offers
-          </NavTextWrapper>
-        </NavItem>
-
-        <NavItem
-          active={location.pathname === routes.funnels()}
-          onClick={handleNavigate(routes.funnels())}
-        >
-          <NavTextWrapper>
-            <RouteIcon />
-            Funnels
-          </NavTextWrapper>
-        </NavItem>
-
-        <NavItem>
-          <NavTextWrapper>
-            <StoreIcon />
-            Store
-          </NavTextWrapper>
-        </NavItem>
-
-        <SidebarAccordion {...marketingAccordionData} />
-
-        <NavItem>
-          <NavTextWrapper>
-            <CheckDoneIcon />
-            Orders
-          </NavTextWrapper>
-          <Chip>
-            <Typography variant="h6" color="grey.200">
-              23,345
-            </Typography>
-          </Chip>
-        </NavItem>
-
-        <NavItem>
-          <NavTextWrapper>
-            <UsersIcon />
-            Audience
-          </NavTextWrapper>
-        </NavItem>
-        <SidebarAccordion {...financesAccordionData} />
-      </Navigation>
-
-      <NavItem>
-        <NavTextWrapper>
-          <SettingsIcon />
-          Brand settings
-        </NavTextWrapper>
-      </NavItem>
+      </SidebarContentWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled(Stack)`
   width: 272px;
-  gap: ${({ theme }) => theme.spacing(3)};
-  padding: ${({ theme }) => theme.spacing(3)};
-  overflow: auto;
+
   position: relative;
   z-index: 10;
+`;
 
-  border-right: 1px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+const SidebarShadow = styled("div")`
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100px;
   box-shadow:
     -5px 0px 20px 0px rgba(0, 0, 0, 0.05),
     -2px 0px 4px 0px rgba(0, 0, 0, 0.03);
+  z-index: 50;
+`;
+
+const SidebarContentWrapper = styled(Stack)`
+  gap: ${({ theme }) => theme.spacing(3)};
+  padding: ${({ theme }) => theme.spacing(3)};
+  overflow: auto;
+  border-right: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  background-color: ${({ theme }) => theme.palette.background.primary};
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
 `;
 
 const SearchWrapper = styled("div")`
@@ -151,6 +173,7 @@ const NavItem = styled("div")<{ active?: boolean }>`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  height: 32px;
 
   color: ${({ theme }) => theme.palette.grey[200]};
   gap: ${({ theme }) => theme.spacing(2)};

@@ -109,7 +109,7 @@ export const WorkspacesBoard = () => {
 const Wrapper = styled(Stack)`
   //TODO: move to theme
   padding: 12px;
-  border-right: 1px solid ${({ theme }) => theme.palette.grey[100]};
+  border-right: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   box-sizing: border-box;
   width: 64px;
 `;

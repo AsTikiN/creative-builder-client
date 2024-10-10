@@ -77,7 +77,10 @@ const Main = styled("div")`
 `;
 
 const Content = styled("div")`
-  padding: 20px;
+  & > div {
+    padding: 20px;
+  }
+
   display: flex;
   flex-wrap: wrap;
   gap: 20px;

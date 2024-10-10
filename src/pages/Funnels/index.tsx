@@ -62,7 +62,7 @@ const CardsList = styled("div")`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  max-height: calc(100vh - 112.5px);
+  max-height: calc(100vh - 72.5px);
   overflow-y: auto;
 
   gap: ${({ theme }) => theme.spacing(5)};

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   css,
@@ -7,11 +8,14 @@ import {
   Divider as MuiDivider,
   alpha,
 } from "@mui/material";
-import { useState } from "react";
+
+import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
+
+import { Input } from "@components/Input";
+
 import { DarkTheme } from "@/icons/DarkTheme";
 import { LightTheme } from "@/icons/LightTheme";
-import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
-import { Input } from "@components/Input";
+import { CircleFilledCheckIcon } from "@/icons/CircleFilledCheckIcon";
 
 const initialColors = [
   {
@@ -57,7 +61,7 @@ const initialColors = [
 ];
 
 export const AppearancePage = () => {
-  const [selectedTheme] = useState("system");
+  const [selectedTheme, setSelectedTheme] = useState("system");
   const [colors, setColors] = useState(initialColors);
   const [customColor, setCustomColor] = useState("#007CFE");
 
@@ -74,12 +78,8 @@ export const AppearancePage = () => {
     );
   };
 
-  // const handleCustomColorChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setCustomColor(e.target.value);
-  // };
-
-  const handleThemeChange = () => () => {
-    // setSelectedTheme(theme);
+  const handleThemeChange = (theme: string) => () => {
+    setSelectedTheme(theme);
   };
 
   return (
@@ -115,7 +115,7 @@ export const AppearancePage = () => {
           <TextedDivider>OR</TextedDivider>
 
           <CustomColorWrapper>
-            <Typography variant="label" color="grey.400">
+            <Typography variant="body1" color="grey.400">
               Custom color
             </Typography>
 
@@ -147,29 +147,74 @@ export const AppearancePage = () => {
         </SectionTitleData>
 
         <InterfaceVariants>
-          <InterfaceCard
-            selected={selectedTheme === "system"}
-            onClick={handleThemeChange()}
-          >
-            <DarkTheme />
-            <CutLightTheme>
-              <LightTheme />
-            </CutLightTheme>
-          </InterfaceCard>
+          <InterfaceCardWrapper>
+            <InterfaceCard
+              selected={selectedTheme === "system"}
+              onClick={handleThemeChange("system")}
+              system
+            >
+              <DarkTheme />
+              <CutLightTheme>
+                <LightTheme />
+              </CutLightTheme>
+              {selectedTheme === "system" && (
+                <CheckThemeWrapper>
+                  <CircleFilledCheckIcon />
+                </CheckThemeWrapper>
+              )}
+            </InterfaceCard>
+            <Typography
+              variant="h6"
+              color={selectedTheme === "system" ? "grey.400" : "grey.50"}
+            >
+              System preference
+            </Typography>
+          </InterfaceCardWrapper>
 
-          <InterfaceCard
-            selected={selectedTheme === "light"}
-            onClick={handleThemeChange()}
-          >
-            <LightTheme />
-          </InterfaceCard>
+          <InterfaceCardWrapper>
+            <InterfaceCard
+              selected={selectedTheme === "light"}
+              onClick={handleThemeChange("light")}
+            >
+              <ThemeWrapper>
+                <LightTheme />
+              </ThemeWrapper>
+              {selectedTheme === "light" && (
+                <CheckThemeWrapper>
+                  <CircleFilledCheckIcon />
+                </CheckThemeWrapper>
+              )}
+            </InterfaceCard>
+            <Typography
+              variant="h6"
+              color={selectedTheme === "light" ? "grey.400" : "grey.50"}
+            >
+              Light
+            </Typography>
+          </InterfaceCardWrapper>
 
-          <InterfaceCard
-            selected={selectedTheme === "dark"}
-            onClick={handleThemeChange()}
-          >
-            <DarkTheme />
-          </InterfaceCard>
+          <InterfaceCardWrapper>
+            <InterfaceCard
+              selected={selectedTheme === "dark"}
+              onClick={handleThemeChange("dark")}
+              dark
+            >
+              <ThemeWrapper>
+                <DarkTheme />
+              </ThemeWrapper>
+              {selectedTheme === "dark" && (
+                <CheckThemeWrapper>
+                  <CircleFilledCheckIcon />
+                </CheckThemeWrapper>
+              )}
+            </InterfaceCard>
+            <Typography
+              variant="h6"
+              color={selectedTheme === "dark" ? "grey.400" : "grey.50"}
+            >
+              Dark
+            </Typography>
+          </InterfaceCardWrapper>
         </InterfaceVariants>
       </AccountManagementSection>
     </AccountSidebarLayout>
@@ -207,7 +252,7 @@ const Colors = styled(Box)`
   margin: ${({ theme }) => theme.spacing(4)} 0;
 `;
 
-const Color = styled(Box) <{
+const Color = styled(Box)<{
   color: string;
   selected: boolean;
   initialColor: string;
@@ -272,7 +317,11 @@ const InterfaceVariants = styled(Box)`
   gap: ${({ theme }) => theme.spacing(4)};
 `;
 
-const InterfaceCard = styled(Box) <{ selected: boolean }>`
+const InterfaceCard = styled(Box)<{
+  selected: boolean;
+  dark?: boolean;
+  system?: boolean;
+}>`
   width: 148px;
   height: 96px;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
@@ -303,6 +352,19 @@ const InterfaceCard = styled(Box) <{ selected: boolean }>`
         border-radius: 12px;
       }
     `}
+
+  ${({ dark, theme }) =>
+    dark &&
+    css`
+      background-color: ${theme.palette.grey[400]};
+    `}
+
+  ${({ system }) =>
+    system &&
+    css`
+      background: rgb(255, 255, 255);
+      background: linear-gradient(90deg, #fff 50%, #0d0d0d 50%);
+    `}
 `;
 
 const CutLightTheme = styled(Box)`
@@ -313,4 +375,24 @@ const CutLightTheme = styled(Box)`
   overflow: hidden;
   height: 100%;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+`;
+
+const ThemeWrapper = styled(Box)`
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+`;
+
+const CheckThemeWrapper = styled(Box)`
+  position: absolute;
+  top: 66px;
+  left: 8px;
+`;
+
+const InterfaceCardWrapper = styled(Stack)`
+  gap: ${({ theme }) => theme.spacing(3)};
+  align-items: flex-start;
 `;

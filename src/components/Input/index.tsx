@@ -31,7 +31,7 @@ const StyledInput = styled(TextField)`
   }
 
   &:has(.MuiInputBase-adornedStart) .MuiInputBase-root {
-    padding-left: 8px;
+    padding-left: 0;
   }
 
   .MuiInputBase-root {

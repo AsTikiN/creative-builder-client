@@ -16,6 +16,9 @@ export const lightPalette: PaletteOptions = {
     primary: "#fff",
     secondary: "#000",
   },
+  background: {
+    primary: "#fff",
+  },
   grey: {
     50: "#A6A6A6",
     100: "#e0e0e0",

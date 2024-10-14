@@ -16,6 +16,7 @@ import { Input } from "@components/Input";
 import { DarkTheme } from "@/icons/DarkTheme";
 import { LightTheme } from "@/icons/LightTheme";
 import { CircleFilledCheckIcon } from "@/icons/CircleFilledCheckIcon";
+import {Divider} from "@components/Divider";
 
 const initialColors = [
   {
@@ -231,13 +232,6 @@ const BrandContainer = styled(Box)`
 
 const SectionTitleData = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
-`;
-
-const Divider = styled(Box)`
-  width: 100%;
-  height: 0.5px;
-  background-color: ${({ theme }) => theme.palette.grey[100]};
-  margin: 1.5px 0;
 `;
 
 const AccountManagementSection = styled(Stack)`

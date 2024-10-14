@@ -50,7 +50,10 @@ export const AccountSidebar = () => {
             </NavTextWrapper>
           </NavItem>
 
-          <NavItem>
+          <NavItem
+            active={location.pathname === routes.notifications()}
+            onClick={handleNavigate(routes.notifications())}
+          >
             <NavTextWrapper>
               <BellIcon />
               Notifications

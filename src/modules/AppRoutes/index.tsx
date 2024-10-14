@@ -8,6 +8,7 @@ import { FunnelsPage } from "@/pages/Funnels";
 import { EditBookPage } from "@/pages/EditBook";
 import { AccountSettingsPage } from "@/pages/AccountSettingsPage";
 import { AppearancePage } from "@/pages/AppearancePage";
+import Notifications from "@/pages/Notifications";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ export const AppRoutes: React.FC = () => {
           element={<AccountSettingsPage />}
         />
         <Route path={routes.appearance()} element={<AppearancePage />} />
+        <Route path={routes.notifications()} element={<Notifications />} />
       </Routes>
     </Router>
   );

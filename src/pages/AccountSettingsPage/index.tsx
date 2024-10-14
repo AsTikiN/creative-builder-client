@@ -5,6 +5,7 @@ import { Textarea } from "@components/Textarea";
 import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
 import { ChangeEvent } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import {Divider} from "@components/Divider";
 
 type FormValues = {
   fullName: string;
@@ -153,13 +154,6 @@ const UserDataInfoWrapper = styled(Stack)`
 
 const InformationSection = styled(Box)`
   padding: 16px 0 13px;
-`;
-
-const Divider = styled(Box)`
-  width: 100%;
-  height: 0.5px;
-  background-color: ${({ theme }) => theme.palette.grey[100]};
-  margin: 1.5px 0;
 `;
 
 const ProfileForm = styled("form")`

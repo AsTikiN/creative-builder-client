@@ -72,4 +72,16 @@ export const typography: TypographyOptions = {
     lineHeight: "24px",
     fontWeight: 500,
   },
+  editorH1: {
+    fontSize: "40px",
+    lineHeight: "48px",
+    fontWeight: 600,
+    letterSpacing: "-0.005em",
+  },
+  editorH2: {
+    fontSize: "32px",
+    lineHeight: "40px",
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+  },
 };

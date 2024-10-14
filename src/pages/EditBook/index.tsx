@@ -8,6 +8,8 @@ import { BasicSelect } from "@components/Select";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { alpha, Box, Stack, styled, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
+import { EditBookSidebar } from "./components/EditBookSidebar";
+import { Editor } from "@modules/Editor";
 
 export const EditBookPage = () => {
   const theme = useTheme();
@@ -47,13 +49,17 @@ export const EditBookPage = () => {
                   icon: <UsersIcon />,
                 },
               ]}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
             />
             <IconButton>
               <SettingsSixAnglesIcon />
-            </IconButton>
-
-            <IconButton>
-              <LinkIcon />
             </IconButton>
 
             <IconButton>
@@ -61,6 +67,12 @@ export const EditBookPage = () => {
             </IconButton>
           </Actions>
         </PageHeader>
+        <SidebarContent>
+          <EditBookSidebar />
+          <EditorWrapper>
+            <Editor />
+          </EditorWrapper>
+        </SidebarContent>
       </Content>
     </Wrapper>
   );
@@ -75,7 +87,8 @@ const Content = styled(Box)`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 24px;
+  /* gap: 24px; */
+  height: 100vh;
 `;
 
 const PageHeader = styled(Box)`
@@ -123,4 +136,16 @@ const BookData = styled(Box)`
 
 const BookTextData = styled(Stack)`
   gap: 4px;
+`;
+
+const SidebarContent = styled(Box)`
+  display: flex;
+  height: 100%;
+`;
+
+const EditorWrapper = styled(Box)`
+  flex: 1;
+  padding: 20px 24px;
+  height: calc(100vh - 72.5px);
+  overflow-y: auto;
 `;

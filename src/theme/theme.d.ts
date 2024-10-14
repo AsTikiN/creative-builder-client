@@ -7,6 +7,8 @@ declare module "@mui/material/styles" {
     titleLarge: CSSObject;
     label: CSSObject;
     body3: CSSObject;
+    editorH1: CSSObject;
+    editorH2: CSSObject;
   }
 
   interface TypographyVariantsOptions {
@@ -14,6 +16,8 @@ declare module "@mui/material/styles" {
     titleLarge?: CSSObject;
     label?: CSSObject;
     body3?: CSSObject;
+    editorH1: CSSObject;
+    editorH2: CSSObject;
   }
 }
 
@@ -23,6 +27,8 @@ declare module "@mui/material/Typography" {
     titleLarge: true;
     label: true;
     body3: true;
+    editorH1: true;
+    editorH2: true;
   }
 }
 

@@ -41,7 +41,7 @@ export const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
         id="panel1-header"
       >
         <SummaryText>
-          {icon} {title}
+          <div className="main-icon">{icon}</div> {title}
         </SummaryText>
       </Summary>
       <Details>
@@ -62,6 +62,7 @@ export const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
 const AccordionWrapper = styled(Accordion)`
   box-shadow: none;
   color: ${({ theme }) => theme.palette.grey[200]};
+  position: relative;
 
   &:before {
     display: none;
@@ -69,6 +70,24 @@ const AccordionWrapper = styled(Accordion)`
 
   &.Mui-expanded {
     margin: 0;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 1px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow:
+        0px 0px 0.5px #e0e0e0,
+        0px 1px 3px 0px #a6a6a633;
+      width: 100%;
+      height: 32px;
+      border-radius: 8px;
+      opacity: 1;
+      background-color: transparent;
+    }
   }
 `;
 
@@ -87,8 +106,18 @@ const Summary = styled(AccordionSummary)`
     }
   }
 
+  .MuiAccordionSummary-expandIconWrapper {
+    position: relative;
+    top: -1px;
+  }
+
   &.Mui-expanded {
     min-height: auto;
+    color: ${({ theme }) => theme.palette.grey[400]};
+
+    .main-icon svg path {
+      color: ${({ theme }) => theme.palette.grey[400]};
+    }
   }
 `;
 
@@ -114,7 +143,7 @@ const StyledTabs = styled(Tabs)`
     color: ${({ theme }) => theme.palette.grey[200]};
 
     &.Mui-selected {
-      color: ${({ theme }) => theme.palette.grey[200]};
+      color: ${({ theme }) => theme.palette.grey[400]};
     }
 
     &::before {
@@ -123,21 +152,21 @@ const StyledTabs = styled(Tabs)`
       height: calc(100% + 4px);
       width: 2px;
       position: absolute;
-      top: -4px;
+      top: 1px;
       left: 0;
       bottom: 0;
     }
 
     &:first-child:before {
       border-radius: 2px 2px 0 0;
-      height: calc(100% + 5px);
-      top: -5px;
+      height: calc(100% + 4px);
+      top: 1px;
     }
 
     &:last-child:before {
       border-radius: 0 0 2px 2px;
-      height: calc(100% + 9px);
-      top: -4px;
+      height: calc(100% + 1px);
+      top: 1px;
     }
   }
 
@@ -163,7 +192,7 @@ const StyledTab = styled(Tab)`
 
 const Details = styled(AccordionDetails)`
   padding: 0;
-  padding-left: 16px;
+  padding-left: 17px;
   margin-top: 4px;
 `;
 

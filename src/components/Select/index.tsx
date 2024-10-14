@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { alpha, styled } from "@mui/material";
+import { alpha, PopoverOrigin, styled } from "@mui/material";
 import { SmallChevronIconDown } from "@/icons/SmallChevronIconDown"; // Assuming you have this custom icon
 
 const ChevronIcon = () => {
@@ -25,15 +25,19 @@ interface BasicSelectProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   options: SelectOption[];
   dropdownWidth?: number;
+  anchorOrigin?: PopoverOrigin;
+  transformOrigin?: PopoverOrigin;
 }
 
-const DEFAULT_DROPDOWN_WIDTH = 200;
+const DEFAULT_DROPDOWN_WIDTH = 175;
 
 export const BasicSelect: FC<BasicSelectProps> = ({
   open,
   setIsOpen,
   options,
   dropdownWidth,
+  anchorOrigin,
+  transformOrigin,
 }) => {
   const [mode, setMode] = useState(options[0]?.value || "");
 
@@ -60,6 +64,7 @@ export const BasicSelect: FC<BasicSelectProps> = ({
             },
             PaperProps: {
               style: {
+                boxSizing: "border-box",
                 width: dropdownWidth || DEFAULT_DROPDOWN_WIDTH,
                 marginTop: "9px",
                 color: "#000",
@@ -76,13 +81,13 @@ export const BasicSelect: FC<BasicSelectProps> = ({
                 `,
               },
             },
-            anchorOrigin: {
+            anchorOrigin: anchorOrigin || {
               vertical: "bottom",
-              horizontal: "left",
+              horizontal: "right",
             },
-            transformOrigin: {
+            transformOrigin: transformOrigin || {
               vertical: "top",
-              horizontal: "left",
+              horizontal: "right",
             },
           }}
         >

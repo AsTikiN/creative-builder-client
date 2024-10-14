@@ -67,6 +67,7 @@ export const StyledButton = styled(LoadingButton)`
       border: 0.5px solid ${props.theme.palette.grey[100]};
       color: ${props.theme.palette.grey[200]};
       box-shadow: none;
+      height: 32px;
     `}
 
     line-height: 20px;

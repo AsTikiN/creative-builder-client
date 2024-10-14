@@ -179,7 +179,6 @@ const NavItem = styled("div")<{ active?: boolean }>`
   gap: ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   padding: 6px 8px;
-  border: 0.5px solid transparent;
 
   svg path {
     stroke: ${({ theme }) => theme.palette.grey[200]};
@@ -194,7 +193,10 @@ const NavItem = styled("div")<{ active?: boolean }>`
         stroke: ${theme.palette.grey[400]};
       }
 
-      border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)};
+      /* border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)}; */
+      box-shadow:
+        0px 0px 0.5px #e0e0e0,
+        0px 1px 3px 0px #a6a6a633;
     `}
 `;
 

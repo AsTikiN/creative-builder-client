@@ -35,9 +35,7 @@ const dynamicSwitchStyle = ({ theme }: { theme: Theme }) => css`
       & + .MuiSwitch-track {
         opacity: 1;
         background-color: ${theme.palette.primary.main};
-        ${theme.applyStyles("dark", {
-          backgroundColor: "#177ddc",
-        })}
+        backgroundcolor: "#177ddc";
       }
     }
   }
@@ -49,9 +47,7 @@ const dynamicSwitchStyle = ({ theme }: { theme: Theme }) => css`
     width: 12px;
     height: 12px;
     border-radius: 6px;
-    transition: ${theme.transitions.create(["width"], {
-      duration: 200,
-    })};
+    transition: 0.2s;
   }
 
   & .MuiSwitch-track {
@@ -60,9 +56,7 @@ const dynamicSwitchStyle = ({ theme }: { theme: Theme }) => css`
     border: 0.5px solid rgba(36, 36, 36, 0.1);
     background-color: ${theme.palette.grey[100]};
     box-sizing: border-box;
-    ${theme.applyStyles("dark", {
-      backgroundColor: "rgba(255,255,255,.35)",
-    })}
+    backgroundcolor: "rgba(255,255,255,.35)";
   }
 `;
 

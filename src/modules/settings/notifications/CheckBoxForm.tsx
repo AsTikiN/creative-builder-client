@@ -28,12 +28,12 @@ const CheckBoxForm = ({ defaultFormValues, fields }: ICheckBoxForm) => {
     console.log("Current switch states:", watchAllFields);
   }, [watchAllFields]);
 
-  const renderSwitch = (name, title, subtitle) => (
+  const renderSwitch = (name: string, title: string, subtitle: string) => (
     <Grid container spacing={2} alignItems="flex-start">
       <Controller
         name={name}
         control={control}
-        render={({ field }) => <Switch {...field} />}
+        render={({ field }) => <Switch checked={false} {...field} />}
       />
       <HeadingBlock title={title} subtitle={subtitle} />
     </Grid>

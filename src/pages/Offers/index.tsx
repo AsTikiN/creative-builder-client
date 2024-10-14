@@ -1,6 +1,6 @@
+import { styled } from "@mui/material";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { OfferCard } from "@components/Card/OfferCard";
-import { styled } from "@mui/material";
 
 export const OffersPage = () => {
   return (

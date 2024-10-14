@@ -1,15 +1,14 @@
+import { alpha, Box, Stack, styled, Typography, useTheme } from "@mui/material";
+import { useState } from "react";
 import { CrossIcon } from "@/icons/CrossIcon";
 import { EditIcon } from "@/icons/EditIcon";
-import { LinkIcon } from "@/icons/LinkIcon";
 import { SettingsSixAnglesIcon } from "@/icons/SettingsSixAnglesIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { IconButton } from "@components/IconButton";
 import { BasicSelect } from "@components/Select";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
-import { alpha, Box, Stack, styled, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
-import { EditBookSidebar } from "./components/EditBookSidebar";
 import { Editor } from "@modules/Editor";
+import { EditBookSidebar } from "./components/EditBookSidebar";
 
 export const EditBookPage = () => {
   const theme = useTheme();

@@ -59,7 +59,7 @@ export const AccountSettingsPage = () => {
           <StyledAvatar />
           <UserDataInfoWrapper>
             <Typography variant="body2" color="grey.200">
-              We support PNGs, JPEGs and GIFs under 10MB
+              We support PNGs, JPEGs under 10MB
             </Typography>
             <UserActions>
               <Button variant="contained" color="error">
@@ -99,6 +99,7 @@ export const AccountSettingsPage = () => {
                 onChange={handleInputChange("username")}
                 error={!!errors.username}
                 helperText={errors.username?.message}
+                startIcon={<CustomTagIcon>@</CustomTagIcon>}
               />
             </ProfileInputsWrapper>
             <Textarea
@@ -184,4 +185,9 @@ const StyledAvatar = styled(Avatar)`
   height: 60px;
   background-color: ${({ theme }) => theme.palette.grey[200]};
   color: transparent;
+`;
+
+const CustomTagIcon = styled(Box)`
+  ${({ theme }) => theme.typography.label}
+  color: ${({ theme }) => theme.palette.grey[200]};
 `;

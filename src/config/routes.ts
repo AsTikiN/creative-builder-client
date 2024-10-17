@@ -8,4 +8,6 @@ export const routes = {
   appearance: () => "/appearance",
   editor: () => "/editor",
   notifications: () => "/notifications",
+  brandSettings: () => "/brand-settings",
+  members: () => "/members",
 };

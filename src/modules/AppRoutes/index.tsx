@@ -10,6 +10,8 @@ import { AccountSettingsPage } from "@/pages/AccountSettingsPage";
 import { AppearancePage } from "@/pages/AppearancePage";
 import { Editor } from "@modules/Editor";
 import Notifications from "@/pages/Notifications";
+import { BrandSettingsPage } from "@/pages/BrandSettingsPage";
+import { MembersPage } from "@/pages/MembersPage";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -23,6 +25,8 @@ export const AppRoutes: React.FC = () => {
           path={routes.accountSettings()}
           element={<AccountSettingsPage />}
         />
+        <Route path={routes.brandSettings()} element={<BrandSettingsPage />} />
+        <Route path={routes.members()} element={<MembersPage />} />
         <Route path={routes.appearance()} element={<AppearancePage />} />
         <Route path={routes.editor()} element={<Editor />} />
         <Route path={routes.notifications()} element={<Notifications />} />

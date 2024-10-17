@@ -37,11 +37,11 @@ const IconWrapper = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
   height: 32px;
   border-right: 0.5px solid
     ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
   margin-right: 2px;
+  padding: 6px 10px;
 `;
 
 const StyledInput = styled(TextField)`
@@ -52,6 +52,7 @@ const StyledInput = styled(TextField)`
   box-shadow: 0px 1px 2px 0px ${alpha("#0A0D14", 0.03)};
   height: 32px;
   padding-left: 8px;
+  width: 100%;
 
   &:has(.MuiInputBase-adornedStart) .MuiInputBase-root {
     padding-left: 0;
@@ -60,9 +61,8 @@ const StyledInput = styled(TextField)`
   .MuiInputBase-root {
     display: flex;
     gap: 6px;
-
-    &::placeholder {
-    }
+    width: 100%;
+    padding-right: 6px;
   }
 
   &:has(.MuiInputBase-adornedStart) .MuiInputBase-root {

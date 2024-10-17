@@ -79,6 +79,7 @@ export const BasicSelect: FC<BasicSelectProps> = ({
                   0px 10px 10px -5px rgba(13, 13, 13, 0.03),
                   0px 24px 24px -8px rgba(13, 13, 13, 0.03)
                 `,
+                boxSizing: "border-box",
               },
             },
             anchorOrigin: anchorOrigin || {

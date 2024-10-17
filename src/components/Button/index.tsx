@@ -22,16 +22,6 @@ export const StyledButton = styled(LoadingButton)`
   gap: ${({ theme }) => theme.spacing(0.5)};
   ${({ theme }) => theme.typography.body1};
 
-  &.MuiButtonBase-root {
-    box-shadow: inset 0px 10px 10px 0px rgba(255, 255, 255, 0.16) !important;
-    border: 1px solid !important;
-    border-image-source: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ) !important;
-  }
-
   & .MuiButton-icon {
     margin: 0;
   }
@@ -39,6 +29,16 @@ export const StyledButton = styled(LoadingButton)`
   ${(props) =>
     props.variant === "contained" &&
     css`
+      &.MuiButtonBase-root {
+        box-shadow: inset 0px 10px 10px 0px rgba(255, 255, 255, 0.16) !important;
+        border: 1px solid !important;
+        border-image-source: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.12) 0%,
+          rgba(255, 255, 255, 0) 100%
+        ) !important;
+      }
+
       /* background-color: ${props.theme.palette.primary.main}; */
       padding: 5px;
 
@@ -68,6 +68,10 @@ export const StyledButton = styled(LoadingButton)`
       color: ${props.theme.palette.grey[200]};
       box-shadow: none;
       height: 32px;
+
+      &.MuiButton-root {
+        box-shadow: 0px 1px 2px 0px #0a0d1408;
+      }
     `}
 
     line-height: 20px;

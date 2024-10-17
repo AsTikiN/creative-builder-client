@@ -39,6 +39,14 @@ export const Outlined: Story = {
   },
 };
 
+export const Error: Story = {
+  args: {
+    children: "Error",
+    variant: "contained",
+    color: "error",
+  },
+};
+
 export const ContainedWithStartIcon: Story = {
   args: {
     children: "Icon",

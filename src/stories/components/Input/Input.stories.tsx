@@ -1,4 +1,5 @@
 import { Input } from "@components/Input";
+import { Typography } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -27,6 +28,17 @@ export const Disabled: Story = {
   args: {
     placeholder: "Disabled input",
     disabled: true,
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    placeholder: "With icon input",
+    startIcon: (
+      <Typography variant="label" color="grey.200">
+        booklab.ai/
+      </Typography>
+    ),
   },
 };
 

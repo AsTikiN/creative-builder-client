@@ -7,12 +7,20 @@ import { UsersIcon } from "@/icons/UsersIcon";
 import { IconButton } from "@components/IconButton";
 import { BasicSelect } from "@components/Select";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
-import { Editor } from "@modules/Editor";
 import { EditBookSidebar } from "./components/EditBookSidebar";
+import { Editor } from "@modules/Editor";
+import { ModalLayout } from "@/layouts/ModalLayout";
+import { Accordion } from "@components/Accordion/Accordion";
+import { ImageIcon } from "@/icons/ImageIcon";
+import { FileTextIcon } from "@/icons/FileTextIcon";
+import { LowIcon } from "@/icons/LowIcon";
+import { FileSearchIcon } from "@/icons/FileSearchIcon";
+import { FolderIcon } from "@/icons/FolderIcon";
 
 export const EditBookPage = () => {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState<number | null>(0);
 
   return (
     <Wrapper>
@@ -67,12 +75,77 @@ export const EditBookPage = () => {
           </Actions>
         </PageHeader>
         <SidebarContent>
-          <EditBookSidebar />
+          <EditBookSidebar handleAddContent={() => setCurrentStep(0)} />
           <EditorWrapper>
             <Editor />
           </EditorWrapper>
         </SidebarContent>
       </Content>
+
+      <ModalLayout
+        open={currentStep === 0}
+        handleClose={() => setCurrentStep(null)}
+        onCancel={() => setCurrentStep(null)}
+        onNext={() => setCurrentStep(1)}
+      >
+        <Accordions>
+          <Accordion title="Cover" icon={<ImageIcon />} tabs={[]} />
+          <Accordion title="Title Page" icon={<FileTextIcon />} tabs={[]} />
+          <Accordion title="Copyright" icon={<LowIcon />} tabs={[]} />
+          <Accordion
+            title="Table of Contents"
+            icon={<FileSearchIcon />}
+            tabs={[]}
+          />
+          <Accordion title="Part" icon={<FolderIcon />} tabs={[]} />
+          <Accordion title="Introduction" icon={<FileTextIcon />} tabs={[]} />
+          <Accordion title="Chapter" icon={<FileTextIcon />} tabs={[]} />
+          <Accordion title="Conclusion" icon={<FileTextIcon />} tabs={[]} />
+        </Accordions>
+      </ModalLayout>
+
+      <ModalLayout
+        open={currentStep === 1}
+        handleClose={() => setCurrentStep(null)}
+        onCancel={() => setCurrentStep(0)}
+        onNext={() => setCurrentStep(2)}
+      >
+        <Accordions>
+          <Accordion title="Cover" icon={<ImageIcon />} tabs={[]} />
+          <Accordion title="Title Page" icon={<FileTextIcon />} tabs={[]} />
+          <Accordion title="Copyright" icon={<LowIcon />} tabs={[]} />
+          <Accordion
+            title="Table of Contents"
+            icon={<FileSearchIcon />}
+            tabs={[]}
+          />
+        </Accordions>
+      </ModalLayout>
+
+      <ModalLayout
+        open={currentStep === 2}
+        handleClose={() => setCurrentStep(null)}
+        onCancel={() => setCurrentStep(1)}
+        onNext={() => setCurrentStep(null)}
+      >
+        <Accordions>
+          <Accordion title="Cover" disabled icon={<ImageIcon />} tabs={[]} />
+          <Accordion
+            title="Title Page"
+            disabled
+            icon={<FileTextIcon />}
+            tabs={[]}
+            isFilledIcon
+          />
+          <Accordion title="Copyright" disabled icon={<LowIcon />} tabs={[]} />
+          <Accordion
+            title="Table of Contents"
+            disabled
+            icon={<FileSearchIcon />}
+            tabs={[]}
+          />
+        </Accordions>
+      </ModalLayout>
     </Wrapper>
   );
 };
@@ -147,4 +220,8 @@ const EditorWrapper = styled(Box)`
   padding: 20px 24px;
   height: calc(100vh - 72.5px);
   overflow-y: auto;
+`;
+
+const Accordions = styled(Stack)`
+  gap: ${({ theme }) => theme.spacing(3)};
 `;

@@ -69,7 +69,7 @@ const Wrapper = styled(Stack)`
   width: 212px;
 
   position: relative;
-  z-index: 10;
+  z-index: 10;  
 `;
 
 const SidebarShadow = styled("div")`

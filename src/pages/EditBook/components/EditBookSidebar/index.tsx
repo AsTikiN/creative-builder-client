@@ -2,6 +2,7 @@ import { AudioIcon } from "@/icons/AudioIcon";
 import { DashedCopyIcon } from "@/icons/DashedCopyIcon";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
+import { FolderIcon } from "@/icons/FolderIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
 import { LayoutSidebarIcon } from "@/icons/LayoutSidebarIcon";
 import { LayoutTopBarIcon } from "@/icons/LayoutTopBarIcon";
@@ -9,9 +10,47 @@ import { LineChartIcon } from "@/icons/LineChartIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
-import { alpha, Box, css, Stack, styled, Typography } from "@mui/material";
+import {
+  alpha,
+  Box,
+  css,
+  IconButton,
+  Stack,
+  styled,
+  Typography,
+} from "@mui/material";
+import { FC } from "react";
 
-export const EditBookSidebar = () => {
+const bookStructure = [
+  {
+    id: 1,
+    type: "folder",
+    title: "Part",
+    files: [
+      {
+        id: 1,
+        type: "file",
+        title: "Chapter",
+      },
+      {
+        id: 2,
+        type: "file",
+        title: "Chapter",
+      },
+    ],
+  },
+  {
+    id: 2,
+    type: "file",
+    title: "Chapter",
+  },
+];
+
+interface Props {
+  handleAddContent: () => void;
+}
+
+export const EditBookSidebar: FC<Props> = ({ handleAddContent }) => {
   return (
     <Wrapper>
       <TopSections>
@@ -47,7 +86,9 @@ export const EditBookSidebar = () => {
             Content
           </Typography>
 
-          <SidebarPlusIcon />
+          <IconButton onClick={handleAddContent}>
+            <SidebarPlusIcon />
+          </IconButton>
         </SectionTitleWrapper>
 
         <NavItem>
@@ -82,6 +123,33 @@ export const EditBookSidebar = () => {
             Introduction
           </NavTextWrapper>
         </NavItem>
+
+        {bookStructure.map((item) => {
+          const isFolder = item.type === "folder";
+          const icon = isFolder ? <FolderIcon /> : <FileTextIcon />;
+
+          return (
+            <Folder key={item.id}>
+              <NavItem isFilledIcon={!isFolder}>
+                <NavTextWrapper>
+                  {icon}
+                  {item.title}
+                </NavTextWrapper>
+              </NavItem>
+
+              {item?.files?.map((file) => (
+                <SubFile key={file.id}>
+                  <NavItem isFilledIcon>
+                    <NavTextWrapper>
+                      <FileTextIcon />
+                      {file.title}
+                    </NavTextWrapper>
+                  </NavItem>
+                </SubFile>
+              ))}
+            </Folder>
+          );
+        })}
       </TopSections>
 
       <NavItem>
@@ -183,4 +251,14 @@ const NavTextWrapper = styled("div")`
 const TopSections = styled(Stack)`
   flex: 1;
   gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const Folder = styled(Stack)`
+  gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const SubFile = styled(Stack)`
+  & > div {
+    padding-left: 24px;
+  }
 `;

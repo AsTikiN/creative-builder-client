@@ -27,5 +27,6 @@ export const lightPalette: PaletteOptions = {
     400: "#0d0d0d",
     500: "#F7F7F7",
     600: "#f2f2f2",
+    700: "#CCCCCC",
   },
 };

@@ -1,10 +1,13 @@
+import { CircleCheckIcon } from "@/icons/CIrcleCheckIcon";
 import {
   Accordion as MuiAccordion,
   AccordionDetails,
   AccordionSummary,
   styled,
   Typography,
+  css,
 } from "@mui/material";
+import { FC } from "react";
 
 interface TabItem {
   id: number;
@@ -15,17 +18,30 @@ export interface AccordionProps {
   title: string;
   icon: React.ReactNode;
   tabs: TabItem[];
+  disabled?: boolean;
+  isFilledIcon?: boolean;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({ title, icon }) => {
+export const Accordion: FC<AccordionProps> = ({
+  title,
+  icon,
+  disabled,
+  isFilledIcon,
+}) => {
   return (
-    <AccordionWrapper>
+    <AccordionWrapper isDisabled={disabled}>
       <Summary
-        expandIcon={<ExpandIcon className="expand-icon" />}
+        expandIcon={
+          disabled ? (
+            <CircleCheckIcon />
+          ) : (
+            <ExpandIcon className="expand-icon" />
+          )
+        }
         aria-controls="panel1-content"
         id="panel1-header"
       >
-        <SummaryText>
+        <SummaryText isDisabled={disabled} isFilledIcon={isFilledIcon}>
           {icon} {title}
         </SummaryText>
       </Summary>
@@ -39,22 +55,28 @@ export const Accordion: React.FC<AccordionProps> = ({ title, icon }) => {
   );
 };
 
-const AccordionWrapper = styled(MuiAccordion)`
+const AccordionWrapper = styled(MuiAccordion)<{ isDisabled?: boolean }>`
   box-shadow: none;
   color: ${({ theme }) => theme.palette.grey[200]};
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
-  margin: 10px;
   max-width: 408px;
   cursor: pointer;
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
 
   &:before {
     display: none;
   }
 
   &.Mui-expanded {
-    margin: 10px !important;
+    margin: 0;
     background-color: ${({ theme }) => theme.palette.grey[500]};
   }
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      pointer-events: none;
+    `}
 `;
 
 const Summary = styled(AccordionSummary)`
@@ -91,10 +113,31 @@ const Details = styled(AccordionDetails)`
   padding: 0 40px 12px;
 `;
 
-const SummaryText = styled("div")`
+const SummaryText = styled("div")<{
+  isDisabled?: boolean;
+  isFilledIcon?: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
+
+  ${({ theme, isDisabled, isFilledIcon }) =>
+    isDisabled &&
+    css`
+      color: ${theme.palette.grey[700]};
+
+      svg path {
+        ${isFilledIcon &&
+        css`
+          fill: ${theme.palette.grey[700]};
+        `}
+
+        ${!isFilledIcon &&
+        css`
+          stroke: ${theme.palette.grey[700]};
+        `}
+      }
+    `}
 `;
 
 const ExpandIcon = styled("div")`
@@ -108,7 +151,7 @@ const ExpandIcon = styled("div")`
     position: absolute;
     height: 12px;
     width: 2px;
-    background-color: ${({ theme }) => theme.palette.grey[200]};
+    background-color: ${({ theme }) => theme.palette.grey[50]};
     border-radius: 2px;
   }
 

@@ -1,6 +1,6 @@
 import { ButtonPlusIcon } from "@/icons/ButtonPlusIcon";
 import { SearchIcon } from "@/icons/SearchIcon";
-import { ShortcutIcon } from "@/icons/ShortCutIcon";
+import { ShortcutIcon } from "@/icons/ShortcutIcon";
 import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
 import { TableLayout } from "@/layouts/TableLayout";
 import { Button } from "@components/Button";

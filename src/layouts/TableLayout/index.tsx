@@ -2,7 +2,6 @@ import { TrashIcon } from "@/icons/TrashIcon";
 import { VerticalDots } from "@/icons/VerticalDots";
 import { Checkbox } from "@components/Checkbox";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
-import { IconButton } from "@components/IconButton";
 import { BasicSelect } from "@components/Select";
 import {
   styled,

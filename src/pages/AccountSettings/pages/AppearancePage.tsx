@@ -319,7 +319,7 @@ const InterfaceCard = styled(Box)<{
 
   svg {
     position: absolute;
-    top: 5px;
+    top: 4px;
     left: 0;
   }
 

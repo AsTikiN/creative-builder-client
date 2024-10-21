@@ -5,6 +5,8 @@ import { FC, PropsWithChildren } from "react";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { IconButton } from "@components/IconButton";
 import { CrossIcon } from "@/icons/CrossIcon";
+import { routes } from "@config/routes";
+import { useNavigate } from "react-router-dom";
 
 export interface AccountSidebarLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
@@ -14,6 +16,8 @@ export const AccountSidebarLayout: FC<AccountSidebarLayoutProps> = ({
   children,
   headerProps,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <WorkspacesBoard />
@@ -23,7 +27,7 @@ export const AccountSidebarLayout: FC<AccountSidebarLayoutProps> = ({
           {...headerProps}
           variant="small"
           actions={
-            <IconButton>
+            <IconButton onClick={() => navigate(routes.apps())}>
               <CrossIcon />
             </IconButton>
           }

@@ -9,7 +9,7 @@ interface ILinkWithArrow {
 export const LinkWithArrow = ({ title, link = "#" }: ILinkWithArrow) => {
   return (
     <Link
-      href={link}
+      to={link}
       underline="none"
       color="primary.main"
       display="flex"

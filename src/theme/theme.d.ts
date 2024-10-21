@@ -9,6 +9,7 @@ declare module "@mui/material/styles" {
     body3: CSSObject;
     editorH1: CSSObject;
     editorH2: CSSObject;
+    planTitle: CSSObject;
   }
 
   interface TypographyVariantsOptions {
@@ -18,6 +19,7 @@ declare module "@mui/material/styles" {
     body3?: CSSObject;
     editorH1: CSSObject;
     editorH2: CSSObject;
+    planTitle?: CSSObject;
   }
 }
 
@@ -29,6 +31,7 @@ declare module "@mui/material/Typography" {
     body3: true;
     editorH1: true;
     editorH2: true;
+    planTitle: true;
   }
 }
 
@@ -49,4 +52,3 @@ declare module "@mui/material/styles/createPalette" {
     primary: string;
   }
 }
-

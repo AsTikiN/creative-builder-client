@@ -13,6 +13,7 @@ import { AccountSettingsPage } from "@/pages/AccountSettings";
 import { ProfilePage } from "@/pages/AccountSettings/pages/ProfilePage";
 import { AppearancePage } from "@/pages/AccountSettings/pages/AppearancePage";
 import { NotificationsPage } from "@/pages/AccountSettings/pages/NotificationsPage";
+import { PlansPage } from "@/pages/BrandSettings/pages/PlansPage";
 import { AccountBillingPage } from "@/pages/AccountSettings/pages/BillingPage";
 import { BrandBillingPage } from "@/pages/BrandSettings/pages/BillingPage";
 
@@ -39,18 +40,16 @@ export const AppRoutes: React.FC = () => {
           <Route index element={<ProfilePage />} />
           <Route path={routes.appearance()} element={<AppearancePage />} />
           <Route
-            path={routes.accountBilling()}
-            element={<AccountBillingPage />}
-          />
-          <Route
             path={routes.notifications()}
             element={<NotificationsPage />}
           />
+          <Route path={routes.accountBilling()} element={<AccountBillingPage />} />
         </Route>
 
         <Route path={routes.brandSettings()} element={<BrandSettings />}>
           <Route index element={<GeneralPage />} />
           <Route path={routes.members()} element={<MembersPage />} />
+          <Route path={routes.plans()} element={<PlansPage />} />
           <Route path={routes.brandBilling()} element={<BrandBillingPage />} />
         </Route>
 

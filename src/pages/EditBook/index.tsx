@@ -187,11 +187,11 @@ const MockImage = styled(Box)`
   border: 1px solid ${({ theme }) => alpha(theme.palette.text.primary, 0.24)};
   background: linear-gradient(0deg, #ffffff, #ffffff),
     linear-gradient(209.36deg, #f2f2f2 0%, rgba(242, 242, 242, 0) 77.82%);
-  box-shadow:
+  /* box-shadow:
     0px 0px 0.5px 0px #0000008f,
     0px 1.38px 2.77px 0px #00000014,
     0px 2.77px 5.54px 0px #0000000a,
-    0px 5.54px 11.07px 0px #0000000a;
+    0px 5.54px 11.07px 0px #0000000a; */
 `;
 
 const Actions = styled(Box)`

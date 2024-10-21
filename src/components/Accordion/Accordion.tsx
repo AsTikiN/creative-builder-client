@@ -167,31 +167,3 @@ const SummaryText = styled("div")<{
       }
     `}
 `;
-
-// const ExpandIcon = styled("div")`
-//   height: 20px;
-//   width: 20px;
-//   position: relative;
-//
-//   &:before,
-//   &:after {
-//     content: "";
-//     position: absolute;
-//     height: 12px;
-//     width: 1.5px;
-//     background-color: ${({ theme }) => theme.palette.grey[50]};
-//     border-radius: 2px;
-//   }
-//
-//   &:before {
-//     transform: rotate(90deg);
-//     left: 10px;
-//     top: 4px;
-//   }
-//
-//   &:after {
-//     transform: rotate(0deg);
-//     left: 10px;
-//     top: 4px;
-//   }
-// `;

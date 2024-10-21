@@ -77,7 +77,6 @@ export const MultipleSelect: FC<BasicSelectProps> = ({
                 width: dropdownWidth || DEFAULT_DROPDOWN_WIDTH,
                 marginTop: "9px",
                 color: "#000",
-                border: "0.5px solid #E0E0E0",
                 boxShadow: `
                   0px 0px 0.5px 0px rgba(13, 13, 13, 0.40),
                   0px 0px 0px 0.5px rgba(0, 42, 87, 0.06),

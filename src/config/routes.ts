@@ -7,22 +7,23 @@ export const routes = {
 
   accountSettings: () => "/account-settings",
   appearance: () => `${routes.accountSettings()}/appearance`,
-  accountBilling: () => `${routes.accountSettings()}/billing`,
-  notifications: () => `${routes.accountSettings()}/notifications`,
-
   editor: () => "/editor",
-
-  brandSettings: () => "/brand-settings",
+  notifications: () => `${routes.accountSettings()}/notifications`,
   general: () => `${routes.brandSettings()}/general`,
   members: () => `${routes.brandSettings()}/members`,
+
+  plans: () => `${routes.brandSettings()}/plans`,
+  integrations: () => `${routes.brandSettings()}/integrations`,
+  accountBilling: () => `${routes.accountSettings()}/billing`,
+
+  brandSettings: () => "/brand-settings",
   brandBilling: () => `${routes.brandSettings()}/billing`,
 
-  plans: () => "/plans",
-  integrations: () => "/integrations",
   legal: () => "/legal",
   domain: () => "/domain",
   phones: () => "/phones",
   agents: () => "/agents",
   usage: () => "/usage",
   emails: () => "/emails",
+  brandAppearance: () => `${routes.brandSettings()}/appearance`,
 };

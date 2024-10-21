@@ -46,7 +46,7 @@ const CheckBoxForm = ({ defaultFormValues, fields }: ICheckBoxForm) => {
       }}
     >
       {fields.map(({ id, title, subtitle }) =>
-        renderSwitch(id, title, subtitle),
+        renderSwitch(id, title, subtitle)
       )}
     </FormGroup>
   );

@@ -73,7 +73,7 @@ const SidebarShadow = styled("div")`
 
 const SidebarContentWrapper = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
-  padding: ${({ theme }) => theme.spacing(3)};
+  padding: ${({ theme }) => theme.spacing(2)};
   overflow: auto;
   border-right: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   background-color: ${({ theme }) => theme.palette.background.primary};
@@ -142,7 +142,7 @@ const NavItem = styled("div")<{ active?: boolean; isFilled?: boolean }>`
 const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing(2)};
+  gap: ${({ theme }) => theme.spacing(1.5)};
 `;
 
 const Title = styled(Box)`

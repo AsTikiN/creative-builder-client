@@ -84,4 +84,10 @@ export const typography: TypographyOptions = {
     fontWeight: 600,
     letterSpacing: "-0.01em",
   },
+  planTitle: {
+    fontSize: "24px",
+    fontWeight: 500,
+    lineHeight: "32px",
+    letterSpacing: "-0.015em",
+  },
 };

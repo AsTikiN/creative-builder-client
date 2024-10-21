@@ -4,7 +4,7 @@ import { ShortcutIcon } from "@/icons/ShortcutIcon";
 import { TableLayout } from "@/layouts/TableLayout";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
-import { styled, Stack, Typography } from "@mui/material";
+import { styled, Stack, Typography, Box } from "@mui/material";
 
 export const MembersPage = () => {
   return (
@@ -19,7 +19,11 @@ export const MembersPage = () => {
             slotProps={{
               input: {
                 startAdornment: <SearchIcon />,
-                endAdornment: <ShortcutIcon />,
+                endAdornment: (
+                  <ShortcutWrapper>
+                    <ShortcutIcon />
+                  </ShortcutWrapper>
+                ),
               },
             }}
           />
@@ -45,4 +49,14 @@ const Actions = styled(Stack)`
   flex-direction: row;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(3)};
+`;
+
+const ShortcutWrapper = styled(Box)`
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

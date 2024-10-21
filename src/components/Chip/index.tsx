@@ -1,5 +1,4 @@
-import { Chip as MUIChip, ChipProps, css } from "@mui/material";
-import { styled } from "@mui/system";
+import { Chip as MUIChip, ChipProps, css, styled } from "@mui/material";
 
 interface CustomChipProps extends ChipProps {
   customVariant: "default" | "success" | "primary";
@@ -27,13 +26,11 @@ const Chip = ({
 
 const StyledChip = styled(MUIChip)<CustomChipProps>`
   // default style
-  ${(props) => css`
-    ${props.theme.typography.subtitle1};
-    height: auto;
-    span {
-      padding: 0;
-    }
-  `}
+  ${({ theme }) => theme.typography.subtitle1}
+  height: auto;
+  span {
+    padding: 0;
+  }
 
   // custom custom radius
   ${(props) =>

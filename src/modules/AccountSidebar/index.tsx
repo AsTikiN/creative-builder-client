@@ -24,7 +24,7 @@ const navItems: SmallSidebarNavItem[] = [
   {
     id: 3,
     icon: <CreditCardIcon />,
-    label: "BillingPage",
+    label: "Billing",
     path: routes.accountBilling(),
     disabled: true,
   },

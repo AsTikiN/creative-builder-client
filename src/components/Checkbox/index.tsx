@@ -20,6 +20,17 @@ const CheckboxWrapper = styled("span")`
   position: relative;
   background-color: #fff;
 
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid #a6a6a61a;
+    border-radius: 4px;
+  }
+
   &::after {
     content: "";
     position: absolute;

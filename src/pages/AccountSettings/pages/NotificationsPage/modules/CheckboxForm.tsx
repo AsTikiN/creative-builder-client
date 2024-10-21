@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { FormGroup, Grid2 as Grid } from "@mui/material";
-import HeadingBlock from "@components/HeadingBlock";
 import { Switch } from "@components/Switch";
+import HeadingBlock from "@components/HeadingBlock ";
 
 interface IDefaultValuesForm {
   [key: string]: boolean;
@@ -33,9 +33,9 @@ const CheckBoxForm = ({ defaultFormValues, fields }: ICheckBoxForm) => {
       <Controller
         name={name}
         control={control}
-        render={({ field }) => <Switch checked={false} {...field} />}
+        render={({ field }) => <Switch {...field} />}
       />
-      <HeadingBlock title={title} subtitle={subtitle} />
+      <HeadingBlock variant="medium" title={title} subtitle={subtitle} />
     </Grid>
   );
 

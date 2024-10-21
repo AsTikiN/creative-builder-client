@@ -1,7 +1,6 @@
 import { ButtonPlusIcon } from "@/icons/ButtonPlusIcon";
 import { SearchIcon } from "@/icons/SearchIcon";
 import { ShortcutIcon } from "@/icons/ShortcutIcon";
-import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
 import { TableLayout } from "@/layouts/TableLayout";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
@@ -9,12 +8,7 @@ import { styled, Stack, Typography } from "@mui/material";
 
 export const MembersPage = () => {
   return (
-    <AccountSidebarLayout
-      headerProps={{
-        title: "Members",
-        description: "Add, remove, or update your team members",
-      }}
-    >
+    <>
       <TableActionsPanel>
         <Typography color="grey.400" variant="h6">
           1 active member
@@ -36,7 +30,7 @@ export const MembersPage = () => {
         </Actions>
       </TableActionsPanel>
       <TableLayout />
-    </AccountSidebarLayout>
+    </>
   );
 };
 
@@ -44,7 +38,7 @@ const TableActionsPanel = styled(Stack)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: ${({ theme }) => theme.spacing(4)};
 `;
 
 const Actions = styled(Stack)`

@@ -136,8 +136,8 @@ const StyledSelect = styled(Select)`
   .MuiSelect-select {
     display: flex;
     align-items: center;
-    padding: 6px 8px;
-    padding-right: 6px !important;
+    padding: ${({ theme }) => theme.spacing(1.5, 2)};
+    padding-right: ${({ theme }) => theme.spacing(1.5)} !important;
     height: 32px;
     box-sizing: border-box;
     color: transparent;
@@ -169,14 +169,14 @@ const ChevronWrapper = styled(Box)`
 `;
 
 const StyledMenuItem = styled(MenuItem)`
-  padding: 7px 8px;
+  padding: ${({ theme }) => theme.spacing(1.75, 2)};
   background-color: #fff;
   height: 34px;
   border: 0.5px solid transparent;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing(2)};
 
   &.Mui-selected {
     background-color: transparent;
@@ -186,7 +186,7 @@ const StyledMenuItem = styled(MenuItem)`
   }
 
   &:not(:first-child) {
-    margin-top: 4px;
+    margin-top: ${({ theme }) => theme.spacing(1)};
   }
 
   &:hover {
@@ -196,15 +196,15 @@ const StyledMenuItem = styled(MenuItem)`
 
 const MenuTitle = styled(Typography)`
   color: ${({ theme }) => theme.palette.grey[50]};
-  padding: 4px 8px;
+  padding: ${({ theme }) => theme.spacing(1, 2)};
 `;
 
 const MenuDivider = styled(Box)`
   height: 1px;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.grey[100]};
-  margin-bottom: 4px;
-  margin-top: 4px;
+  margin-bottom: ${({ theme }) => theme.spacing(1)};
+  margin-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 const CheckIconWrapper = styled(Stack)`

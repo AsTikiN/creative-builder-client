@@ -1,4 +1,3 @@
-import { CircleCheckIcon } from "@/icons/CIrcleCheckIcon";
 import {
   Accordion as MuiAccordion,
   AccordionDetails,
@@ -8,6 +7,9 @@ import {
   css,
 } from "@mui/material";
 import { FC } from "react";
+import { CircleCheckIcon } from "@/icons/CIrcleCheckIcon";
+import { MinusIcon } from "@/icons/MinusIcon";
+import { PlusIcon } from "@/icons/PlusIcon";
 
 interface TabItem {
   id: number;
@@ -35,7 +37,15 @@ export const Accordion: FC<AccordionProps> = ({
           disabled ? (
             <CircleCheckIcon />
           ) : (
-            <ExpandIcon className="expand-icon" />
+            <>
+              <ExpandIconWrapper className="expand-icon-minus">
+                <MinusIcon />
+              </ExpandIconWrapper>
+              <ExpandIconWrapper className="expand-icon-plus">
+                <PlusIcon />
+              </ExpandIconWrapper>
+              {/* <ExpandIcon className="expand-icon" /> */}
+            </>
           )
         }
         aria-controls="panel1-content"
@@ -79,8 +89,24 @@ const AccordionWrapper = styled(MuiAccordion)<{ isDisabled?: boolean }>`
     `}
 `;
 
+const ExpandIconWrapper = styled("div")`
+  display: flex;
+
+  &.expand-icon-minus {
+    display: none;
+  }
+
+  &.expand-icon-plus {
+    display: flex;
+
+    svg path {
+      stroke: ${({ theme }) => theme.palette.grey[50]};
+    }
+  }
+`;
+
 const Summary = styled(AccordionSummary)`
-  padding: 12px;
+  padding: ${({ theme }) => `${theme.spacing(2.875)} ${theme.spacing(3)}`};
   min-height: auto;
   display: flex;
   align-items: center;
@@ -101,16 +127,18 @@ const Summary = styled(AccordionSummary)`
   &.Mui-expanded {
     min-height: auto;
 
-    .expand-icon {
-      &:after {
-        display: none;
-      }
+    .expand-icon-minus {
+      display: flex;
+    }
+
+    .expand-icon-plus {
+      display: none;
     }
   }
 `;
 
 const Details = styled(AccordionDetails)`
-  padding: 0 40px 12px;
+  padding: ${({ theme }) => `0 ${theme.spacing(10)} ${theme.spacing(3)}`};
 `;
 
 const SummaryText = styled("div")<{
@@ -140,30 +168,30 @@ const SummaryText = styled("div")<{
     `}
 `;
 
-const ExpandIcon = styled("div")`
-  height: 20px;
-  width: 20px;
-  position: relative;
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    height: 12px;
-    width: 2px;
-    background-color: ${({ theme }) => theme.palette.grey[50]};
-    border-radius: 2px;
-  }
-
-  &:before {
-    transform: rotate(90deg);
-    left: 10px;
-    top: 4px;
-  }
-
-  &:after {
-    transform: rotate(0deg);
-    left: 10px;
-    top: 4px;
-  }
-`;
+// const ExpandIcon = styled("div")`
+//   height: 20px;
+//   width: 20px;
+//   position: relative;
+//
+//   &:before,
+//   &:after {
+//     content: "";
+//     position: absolute;
+//     height: 12px;
+//     width: 1.5px;
+//     background-color: ${({ theme }) => theme.palette.grey[50]};
+//     border-radius: 2px;
+//   }
+//
+//   &:before {
+//     transform: rotate(90deg);
+//     left: 10px;
+//     top: 4px;
+//   }
+//
+//   &:after {
+//     transform: rotate(0deg);
+//     left: 10px;
+//     top: 4px;
+//   }
+// `;

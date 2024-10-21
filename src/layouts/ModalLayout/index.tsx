@@ -59,6 +59,7 @@ const Wrapper = styled(Stack)`
   border-radius: 16px;
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   outline: none;
+  max-height: calc(100vh - 20px);
 `;
 
 const TopSection = styled("div")`
@@ -67,19 +68,22 @@ const TopSection = styled("div")`
   align-items: center;
   padding: ${({ theme }) => theme.spacing(4)};
   border-bottom: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  height: 52px;
 `;
 
 const ModalContent = styled("div")`
   display: flex;
   padding: ${({ theme }) => theme.spacing(4)};
+  overflow-y: auto;
 `;
 
 const Actions = styled("div")`
   display: flex;
-  padding: 16px;
+  padding: ${({ theme }) => theme.spacing(4)};
   justify-content: flex-end;
   gap: ${({ theme }) => theme.spacing(3)};
   border-top: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  height: 64px;
 `;
 
 const CloseWrapper = styled("div")`

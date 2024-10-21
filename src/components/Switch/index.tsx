@@ -2,7 +2,7 @@ import { Switch as CustomSwitch, SwitchProps, Theme } from "@mui/material";
 import { styled, css } from "@mui/material/styles";
 
 interface CustomSwitchProps extends SwitchProps {
-  checked: boolean;
+  checked?: boolean;
 }
 
 export const Switch = ({ checked, ...props }: CustomSwitchProps) => {
@@ -35,7 +35,6 @@ const dynamicSwitchStyle = ({ theme }: { theme: Theme }) => css`
       & + .MuiSwitch-track {
         opacity: 1;
         background-color: ${theme.palette.primary.main};
-        backgroundcolor: "#177ddc";
       }
     }
   }
@@ -51,12 +50,11 @@ const dynamicSwitchStyle = ({ theme }: { theme: Theme }) => css`
   }
 
   & .MuiSwitch-track {
-    border-radius: 16px / 2;
+    border-radius: 8px;
     opacity: 1;
     border: 0.5px solid rgba(36, 36, 36, 0.1);
     background-color: ${theme.palette.grey[100]};
     box-sizing: border-box;
-    backgroundcolor: "rgba(255,255,255,.35)";
   }
 `;
 

@@ -97,7 +97,7 @@ const CustomMenu = styled(Menu)<{ dropdownWidth?: number }>`
   & .MuiPaper-root {
     border-radius: 10px;
     width: ${({ dropdownWidth }) => dropdownWidth}px;
-    margin-top: 9px;
+    margin-top: ${({ theme }) => theme.spacing(2.25)};
     color: #000;
     box-shadow:
       0px 0px 0.5px 0px rgba(13, 13, 13, 0.4),
@@ -111,12 +111,12 @@ const CustomMenu = styled(Menu)<{ dropdownWidth?: number }>`
   }
 
   & .MuiList-root {
-    padding: 4px;
+    padding: ${({ theme }) => theme.spacing(1)};
   }
 `;
 
 const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
-  padding: 7px 8px;
+  padding: ${({ theme }) => theme.spacing(1.75, 2)};
   background-color: #fff;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid transparent;
@@ -127,13 +127,13 @@ const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
   position: relative;
 
   &:not(:first-child) {
-    margin-top: 4px;
+    margin-top: ${({ theme }) => theme.spacing(1)};
   }
 
   ${({ divider, theme }) =>
     divider &&
     css`
-      margin-top: 11.5px !important;
+      margin-top: ${theme.spacing(2.875)} !important;
 
       &:before {
         content: "";

@@ -28,7 +28,7 @@ const Wrapper = styled("div")`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
-  padding: 4px 8px 4px 9px;
+  padding: ${({ theme }) => theme.spacing(1, 2, 1, 2.25)};
 `;
 
 const StatusCircle = styled("div")<{ status: ChipStatus }>`

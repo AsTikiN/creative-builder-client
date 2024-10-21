@@ -1,15 +1,10 @@
-import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
+import { ChangeEvent } from "react";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import { Textarea } from "@components/Textarea";
 import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
-import { ChangeEvent } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Divider } from "@components/Divider";
-import { CopyIcon } from "@/icons/CopyIcon";
-import { SolidCopyIcon } from "@/icons/SolidCopyIcon";
-import { BezierIcon } from "@/icons/BezierIcon";
-import { StopCircleIcon } from "@/icons/StopCircleIcon";
 
 type FormValues = {
   fullName: string;
@@ -17,7 +12,7 @@ type FormValues = {
   description: string;
 };
 
-export const BrandSettingsPage = () => {
+export const ProfilePage = () => {
   const {
     handleSubmit,
     formState: { errors },
@@ -43,24 +38,19 @@ export const BrandSettingsPage = () => {
     };
 
   return (
-    <AccountSidebarLayout
-      headerProps={{
-        title: "General",
-        description: "Provide essential details about your brand",
-      }}
-    >
+    <>
       <UserSection>
         <SectionTitleData>
           <Typography variant="h5" color="grey.400">
-            Logo
+            Avatar
           </Typography>
           <Typography variant="body2" color="grey.200">
-            Upload your brand’s logo
+            Upload your account avatar
           </Typography>
         </SectionTitleData>
 
         <UserData>
-          <StyledAvatar variant="square">FDS</StyledAvatar>
+          <StyledAvatar />
           <UserDataInfoWrapper>
             <Typography variant="body2" color="grey.200">
               We support PNGs, JPEGs under 10MB
@@ -84,31 +74,30 @@ export const BrandSettingsPage = () => {
               Information
             </Typography>
             <Typography variant="body2" color="grey.200">
-              Set your brand's identity by providing a name and a unique URL
-              slug
+              Provide your full name and set your username
             </Typography>
           </SectionTitleData>
 
           <ProfileForm onSubmit={handleSubmit(onSubmit)}>
             <ProfileInputsWrapper>
               <Input
-                placeholder="Brand name"
+                placeholder="Full name"
                 value={watch("fullName")}
                 onChange={handleInputChange("fullName")}
                 error={!!errors.fullName}
                 helperText={errors.fullName?.message}
               />
               <Input
-                placeholder="Brand URL"
+                placeholder="Username"
                 value={watch("username")}
                 onChange={handleInputChange("username")}
                 error={!!errors.username}
                 helperText={errors.username?.message}
-                startIcon={<CustomTagIcon>booklab.ai/</CustomTagIcon>}
+                startIcon={<CustomTagIcon>@</CustomTagIcon>}
               />
             </ProfileInputsWrapper>
             <Textarea
-              placeholder="Who do you help and how do you help them"
+              placeholder="Describe your professional achievements."
               value={watch("description")}
               onChange={handleInputChange("description")}
             />
@@ -121,33 +110,19 @@ export const BrandSettingsPage = () => {
       <AccountManagementSection>
         <SectionTitleData>
           <Typography variant="h5" color="grey.400">
-            Brand Management
+            Account Management
           </Typography>
           <Typography variant="body2" color="grey.200">
             Proceed with caution as these actions have significant impacts on
-            your brand data
+            your data
           </Typography>
         </SectionTitleData>
 
-        <ManagmentButtons>
-          <Button variant="outlined" startIcon={<SolidCopyIcon />}>
-            Duplicate
-          </Button>
-          <Button variant="outlined" startIcon={<CopyIcon />}>
-            Templatize
-          </Button>
-          <Button variant="outlined" startIcon={<BezierIcon />}>
-            Merge
-          </Button>
-          <Button variant="outlined" startIcon={<StopCircleIcon />}>
-            Deactivate
-          </Button>
-          <Button variant="contained" color="error">
-            Delete brand
-          </Button>
-        </ManagmentButtons>
+        <Button variant="contained" color="error">
+          Delete account
+        </Button>
       </AccountManagementSection>
-    </AccountSidebarLayout>
+    </>
   );
 };
 
@@ -160,7 +135,7 @@ const SectionTitleData = styled(Stack)`
 const UserData = styled(Box)`
   display: flex;
   gap: ${({ theme }) => theme.spacing(4)};
-  margin: 16px 0;
+  margin: ${({ theme }) => theme.spacing(4)} 0;
 `;
 
 const UserActions = styled(Box)`
@@ -173,18 +148,18 @@ const UserDataInfoWrapper = styled(Stack)`
 `;
 
 const InformationSection = styled(Box)`
-  padding: 16px 0 13px;
+  padding: ${({ theme }) => `${theme.spacing(4)} 0 ${theme.spacing(3.25)}`};
 `;
 
 const ProfileForm = styled("form")`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(4)};
-  margin-top: 16px;
+  margin-top: ${({ theme }) => theme.spacing(4)};
 `;
 
 const AccountManagementSection = styled(Stack)`
-  padding: 16px 0;
+  padding: ${({ theme }) => `${theme.spacing(4)} 0`};
   align-items: flex-start;
   gap: ${({ theme }) => theme.spacing(4)};
 `;
@@ -202,18 +177,11 @@ const SectionContainer = styled(Box)`
 const StyledAvatar = styled(Avatar)`
   width: 60px;
   height: 60px;
-  ${({ theme }) => theme.typography.h3}
-  background-color: ${({ theme }) => theme.palette.grey[100]};
-  color: ${({ theme }) => theme.palette.grey[400]};
-  border-radius: 12px;
+  background-color: ${({ theme }) => theme.palette.grey[200]};
+  color: transparent;
 `;
 
 const CustomTagIcon = styled(Box)`
   ${({ theme }) => theme.typography.label}
   color: ${({ theme }) => theme.palette.grey[200]};
-`;
-
-const ManagmentButtons = styled(Box)`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(4)};
 `;

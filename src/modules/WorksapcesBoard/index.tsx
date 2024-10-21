@@ -1,4 +1,3 @@
-import { PlusIcon } from "@/icons/PlusIcon";
 import {
   alpha,
   Avatar,
@@ -9,26 +8,27 @@ import {
   Stack,
   styled,
 } from "@mui/material";
-import { Workspace } from "./components/Workspace";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FigmaIcon } from "@/icons/FigmaIcon";
 import { FramerIcon } from "@/icons/FramerIcon";
 import { SketchIcon } from "@/icons/SketchIcon";
 import { CanvaIcon } from "@/icons/CanvaIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
-import { useState } from "react";
 import { ProfileIcon } from "@/icons/ProfileIcon";
 import { SwapIcon } from "@/icons/SwapIcon";
 import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
 import { LogOutIcon } from "@/icons/LogOutIcon";
 import { routes } from "@config/routes";
-import { useNavigate } from "react-router-dom";
+import { PlusIcon } from "@/icons/PlusIcon";
+import { Workspace } from "./components/Workspace";
 
 export const WorkspacesBoard = () => {
   const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null
+    null,
   );
 
   return (
@@ -66,8 +66,8 @@ export const WorkspacesBoard = () => {
             options={[
               {
                 id: 1,
-                label: "Account settings",
-                value: "Account settings",
+                label: "Account Settings",
+                value: "Account Settings",
                 onClick: () => {
                   navigate(routes.accountSettings());
                 },
@@ -108,7 +108,7 @@ export const WorkspacesBoard = () => {
 
 const Wrapper = styled(Stack)`
   //TODO: move to theme
-  padding: 12px;
+  padding: ${({ theme }) => theme.spacing(3)};
   border-right: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   box-sizing: border-box;
   width: 64px;

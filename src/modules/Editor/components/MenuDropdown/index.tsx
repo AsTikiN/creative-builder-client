@@ -20,18 +20,18 @@ export const MenuDropdown = ({ icon, onClick, variant = "text" }: Props) => {
 const Wrapper = styled(Box)<{ variant: "text" | "icon" }>`
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: ${({ theme }) => theme.spacing(0.5)};
   cursor: pointer;
 
-  ${({ variant }) =>
+  ${({ variant, theme }) =>
     variant === "text" &&
     css`
-      padding: 4px 6px 4px 10px;
+      padding: ${theme.spacing(1, 1.5, 1, 2.5)};
     `}
 
-  ${({ variant }) =>
+  ${({ variant, theme }) =>
     variant === "icon" &&
     css`
-      padding: 4px 6px;
+      padding: ${theme.spacing(1, 1.5)};
     `}
 `;

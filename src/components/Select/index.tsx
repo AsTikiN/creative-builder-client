@@ -120,8 +120,8 @@ const StyledSelect = styled(Select)`
   .MuiSelect-select {
     display: flex;
     align-items: center;
-    padding: 6px 8px;
-    padding-right: 6px !important;
+    padding: ${({ theme }) => theme.spacing(1.5, 2)};
+    padding-right: ${({ theme }) => theme.spacing(1.5)} !important;
     height: 32px;
     box-sizing: border-box;
 
@@ -152,14 +152,14 @@ const ChevronWrapper = styled(Box)`
 `;
 
 const StyledMenuItem = styled(MenuItem)`
-  padding: 11px 12px;
+  padding: ${({ theme }) => theme.spacing(2.75, 3)};
   background-color: #fff;
   height: 34px;
   border: 0.5px solid transparent;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing(2)};
 
   &:not(:first-child) {
     margin-top: 4px;

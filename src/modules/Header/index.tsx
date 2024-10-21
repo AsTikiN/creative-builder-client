@@ -52,7 +52,7 @@ export const Header: FC<HeaderProps> = ({
 };
 
 const Wrapper = styled("div")`
-  padding: 12px 20px;
+  padding: ${({ theme }) => theme.spacing(3, 5)};
   display: flex;
   align-items: center;
   border-bottom: 0.5px solid

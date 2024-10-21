@@ -92,7 +92,7 @@ const AccordionWrapper = styled(Accordion)`
 `;
 
 const Summary = styled(AccordionSummary)`
-  padding: 6px 8px;
+  padding: ${({ theme }) => theme.spacing(1.5, 2)};
   min-height: auto;
   display: flex;
   align-items: center;
@@ -171,7 +171,7 @@ const StyledTabs = styled(Tabs)`
   }
 
   .MuiTabs-flexContainer {
-    gap: 4px;
+    gap: ${({ theme }) => theme.spacing(1)};
   }
 `;
 
@@ -184,7 +184,7 @@ const StyledTab = styled(Tab)`
   text-align: left;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  padding: 6px 20px;
+  padding: ${({ theme }) => theme.spacing(1.5, 5)};
   min-height: auto;
   white-space: nowrap;
   text-transform: none;
@@ -193,7 +193,7 @@ const StyledTab = styled(Tab)`
 const Details = styled(AccordionDetails)`
   padding: 0;
   padding-left: 17px;
-  margin-top: 4px;
+  margin-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 const SummaryText = styled("div")`

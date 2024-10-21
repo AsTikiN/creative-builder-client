@@ -114,7 +114,7 @@ export const Sidebar = () => {
           <SidebarAccordion {...financesAccordionData} />
         </Navigation>
 
-        <NavItem>
+        <NavItem onClick={handleNavigate(routes.brandSettings())}>
           <NavTextWrapper>
             <SettingsIcon />
             Brand settings
@@ -178,7 +178,7 @@ const NavItem = styled("div")<{ active?: boolean }>`
   color: ${({ theme }) => theme.palette.grey[200]};
   gap: ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  padding: 6px 8px;
+  padding: ${({ theme }) => theme.spacing(1.5, 2)};
 
   svg path {
     stroke: ${({ theme }) => theme.palette.grey[200]};
@@ -201,7 +201,7 @@ const NavItem = styled("div")<{ active?: boolean }>`
 `;
 
 const Chip = styled("div")`
-  padding: 3px 8px;
+  padding: ${({ theme }) => theme.spacing(0.75, 2)};
   border-radius: 6px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
 `;

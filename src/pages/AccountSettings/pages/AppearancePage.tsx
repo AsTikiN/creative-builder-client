@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   css,
@@ -9,14 +8,13 @@ import {
   alpha,
 } from "@mui/material";
 
-import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
-
 import { Input } from "@components/Input";
 
 import { DarkTheme } from "@/icons/DarkTheme";
 import { LightTheme } from "@/icons/LightTheme";
 import { CircleFilledCheckIcon } from "@/icons/CircleFilledCheckIcon";
-import {Divider} from "@components/Divider";
+import { Divider } from "@components/Divider";
+import { useState } from "react";
 
 const initialColors = [
   {
@@ -84,12 +82,7 @@ export const AppearancePage = () => {
   };
 
   return (
-    <AccountSidebarLayout
-      headerProps={{
-        title: "Appearance",
-        description: "Customize the look and feel of your account",
-      }}
-    >
+    <>
       <BrandSection>
         <BrandContainer>
           <SectionTitleData>
@@ -218,7 +211,7 @@ export const AppearancePage = () => {
           </InterfaceCardWrapper>
         </InterfaceVariants>
       </AccountManagementSection>
-    </AccountSidebarLayout>
+    </>
   );
 };
 
@@ -235,7 +228,7 @@ const SectionTitleData = styled(Stack)`
 `;
 
 const AccountManagementSection = styled(Stack)`
-  padding: 16px 0;
+  padding: ${({ theme }) => theme.spacing(4, 0)};
   align-items: flex-start;
   gap: ${({ theme }) => theme.spacing(4)};
 `;

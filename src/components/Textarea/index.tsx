@@ -29,7 +29,7 @@ const StyledTextarea = styled(TextareaAutosize)`
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
   border-radius: 12px;
   box-shadow: 0px 1px 2px 0px ${alpha("#0A0D14", 0.03)};
-  padding: 10px 12px 30px;
+  padding: ${({ theme }) => theme.spacing(2.5, 3, 7.5)};
   width: 100%;
   min-height: calc(156px - 39px);
 

@@ -11,6 +11,7 @@ export const lightPalette: PaletteOptions = {
   },
   success: {
     main: "#1FC16B",
+    light: "#E0FAEC",
   },
   text: {
     primary: "#fff",
@@ -29,4 +30,8 @@ export const lightPalette: PaletteOptions = {
     600: "#f2f2f2",
     700: "#CCCCCC",
   },
+  // info: {
+  //   lighter: "#E5F1FE",
+  //   light: "#A4D0FE",
+  // },
 };

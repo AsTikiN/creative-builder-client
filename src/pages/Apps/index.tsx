@@ -1,6 +1,6 @@
+import { styled } from "@mui/material";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { AppCard } from "@components/Card/AppCard";
-import { styled } from "@mui/material";
 
 export const AppsPage = () => {
   return (

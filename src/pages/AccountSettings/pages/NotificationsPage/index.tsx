@@ -1,23 +1,18 @@
 import { Grid2 } from "@mui/material";
-import AccountSidebarLayout from "@/layouts/AccountSidebarLayout";
 import { Divider } from "@components/Divider";
-import CheckBoxForm from "@modules/settings/notifications/CheckBoxForm.tsx";
+
+import HeadingBlock from "@components/HeadingBlock ";
+import CheckBoxForm from "./modules/CheckboxForm";
 import {
   defaultNotificationsSwitchData,
   defaultPushSwitchData,
   emailNotificationsData,
   pushNotificationsData,
-} from "@modules/settings/notifications/settings.ts";
-import HeadingBlock from "../../components/HeadingBlock";
+} from "./static";
 
-const Notifications = () => {
+export const NotificationsPage = () => {
   return (
-    <AccountSidebarLayout
-      headerProps={{
-        title: "Notifications",
-        description: "Customize the look and feel of your account",
-      }}
-    >
+    <>
       <Grid2 container direction="column" spacing={4}>
         <HeadingBlock
           title="Email notifications"
@@ -37,8 +32,6 @@ const Notifications = () => {
           fields={pushNotificationsData}
         />
       </Grid2>
-    </AccountSidebarLayout>
+    </>
   );
 };
-
-export default Notifications;

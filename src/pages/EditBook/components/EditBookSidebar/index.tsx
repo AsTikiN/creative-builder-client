@@ -190,7 +190,7 @@ const SectionTitleWrapper = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 8px;
+  padding: ${({ theme }) => theme.spacing(1, 2)};
 `;
 
 const NavItem = styled("div")<{ active?: boolean; isFilledIcon?: boolean }>`
@@ -203,7 +203,7 @@ const NavItem = styled("div")<{ active?: boolean; isFilledIcon?: boolean }>`
   color: ${({ theme }) => theme.palette.grey[200]};
   gap: ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  padding: 6px 8px;
+  padding: ${({ theme }) => theme.spacing(1.5, 2)};
   border: 0.5px solid transparent;
 
   svg path {

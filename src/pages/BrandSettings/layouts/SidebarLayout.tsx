@@ -1,29 +1,33 @@
 import { Header, HeaderProps } from "@modules/Header";
-import { AccountSidebar } from "@modules/AccountSidebar";
+import { BrandSettingsSidebar } from "../modules/BrandSettingsSidebar";
 import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { IconButton } from "@components/IconButton";
 import { CrossIcon } from "@/icons/CrossIcon";
+import { routes } from "@config/routes";
+import { useNavigate } from "react-router-dom";
 
-export interface AccountSidebarLayoutProps extends PropsWithChildren {
+export interface BrandSettingsLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
 }
 
-export const AccountSidebarLayout: FC<AccountSidebarLayoutProps> = ({
+export const BrandSidebarLayout: FC<BrandSettingsLayoutProps> = ({
   children,
   headerProps,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <WorkspacesBoard />
-      <AccountSidebar />
+      <BrandSettingsSidebar />
       <Main>
         <Header
           {...headerProps}
           variant="small"
           actions={
-            <IconButton>
+            <IconButton onClick={() => navigate(routes.apps())}>
               <CrossIcon />
             </IconButton>
           }
@@ -46,7 +50,5 @@ const Main = styled("div")`
 `;
 
 const Content = styled("div")`
-  padding: 20px;
+  padding: ${({ theme }) => theme.spacing(5)};
 `;
-
-export default AccountSidebarLayout;

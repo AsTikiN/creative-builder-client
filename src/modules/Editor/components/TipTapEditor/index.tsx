@@ -82,7 +82,7 @@ const EditorWrapper = styled(Box)`
   & h4:not(:first-child),
   & h5:not(:first-child),
   & h6:not(:first-child) {
-    margin-top: 16px;
+    margin-top: ${({ theme }) => theme.spacing(4)};
   }
 
   & > div {
@@ -134,7 +134,7 @@ const EditorWrapper = styled(Box)`
 
   h2 {
     font-size: 18px;
-    margin: 24px 0 0 0;
+    margin: ${({ theme }) => theme.spacing(6)} 0 0 0;
   }
 
   h3 {
@@ -260,7 +260,7 @@ const Bubble = styled(BubbleMenu)`
 `;
 
 const IconButton = styled("button")`
-  padding: 4px 6px;
+  padding: ${({ theme }) => theme.spacing(1, 1.5)};
   background: transparent;
   border: none;
   display: inline-flex;

@@ -132,18 +132,18 @@ const HeaderCell = styled(TableCell)`
   ${({ theme }) => theme.typography.label}
   background-color: ${({ theme }) => theme.palette.grey[500]};
   color: ${({ theme }) => theme.palette.grey[200]};
-  padding: 8px 12px;
+  padding: ${({ theme }) => theme.spacing(2, 3)};
   border: none;
 `;
 
 const FlexTableCell = styled(Stack)`
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: ${({ theme }) => theme.spacing(2.5)};
 `;
 
 const BodyCell = styled(TableCell)`
-  padding: 8px 12px;
+  padding: ${({ theme }) => theme.spacing(2, 3)};
   border: none;
 `;
 
@@ -162,7 +162,7 @@ const CustomBadge = styled(Chip)`
   height: 24px;
 
   .MuiChip-label {
-    padding: 0 6px;
+    padding: ${({ theme }) => theme.spacing(0, 1.5)};
   }
 `;
 

@@ -20,7 +20,7 @@ const Wrapper = styled("div")`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing(2)};
 `;
 
 const MockOfferMainImage = styled("div")`

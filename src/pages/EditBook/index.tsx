@@ -165,8 +165,8 @@ const Content = styled(Box)`
 
 const PageHeader = styled(Box)`
   display: flex;
-  gap: 24px;
-  padding: 12px;
+  gap: ${({ theme }) => theme.spacing(6)};
+  padding: ${({ theme }) => theme.spacing(3)};
   border-bottom: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
 `;
 
@@ -197,17 +197,17 @@ const MockImage = styled(Box)`
 const Actions = styled(Box)`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
 const BookData = styled(Box)`
   display: flex;
   flex: 1;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
 const BookTextData = styled(Stack)`
-  gap: 4px;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
 
 const SidebarContent = styled(Box)`
@@ -217,7 +217,7 @@ const SidebarContent = styled(Box)`
 
 const EditorWrapper = styled(Box)`
   flex: 1;
-  padding: 20px 24px;
+  padding: ${({ theme }) => theme.spacing(5, 6)};
   height: calc(100vh - 72.5px);
   overflow-y: auto;
 `;

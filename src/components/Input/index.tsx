@@ -40,8 +40,8 @@ const IconWrapper = styled(Box)`
   height: 32px;
   border-right: 0.5px solid
     ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
-  margin-right: 2px;
-  padding: 6px 10px;
+  margin-right: ${({ theme }) => theme.spacing(0.5)};
+  padding: ${({ theme }) => theme.spacing(1.5, 2.5)};
 `;
 
 const StyledInput = styled(TextField)`
@@ -60,7 +60,7 @@ const StyledInput = styled(TextField)`
 
   .MuiInputBase-root {
     display: flex;
-    gap: 6px;
+    gap: ${({ theme }) => theme.spacing(1.5)};
     width: 100%;
     padding-right: 6px;
   }
@@ -71,7 +71,7 @@ const StyledInput = styled(TextField)`
 
   .MuiInputBase-root {
     display: flex;
-    gap: 6px;
+    gap: ${({ theme }) => theme.spacing(1.5)};
   }
 
   .MuiInputBase-input {

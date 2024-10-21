@@ -82,7 +82,7 @@ const CoverImageWrapper = styled("div")<{
   background-color: ${({ theme }) => theme.palette.grey[500]};
   display: flex;
   justify-content: center;
-  padding: 24px;
+  padding: ${({ theme }) => theme.spacing(6)};
   position: relative;
   height: ${({ variant }) => (variant === "book" ? "212px" : "164px")};
 
@@ -92,7 +92,7 @@ const CoverImageWrapper = styled("div")<{
 `;
 
 const Data = styled(Stack)`
-  padding: 8px 12px;
+  padding: ${({ theme }) => theme.spacing(2, 3)};
   gap: ${({ theme }) => theme.spacing(1)};
 `;
 
@@ -101,7 +101,7 @@ const ActionPanel = styled("div")<{ open: boolean }>`
   top: 0;
   left: 0;
   z-index: 100;
-  padding: 8px;
+  padding: ${({ theme }) => theme.spacing(2)};
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.06);

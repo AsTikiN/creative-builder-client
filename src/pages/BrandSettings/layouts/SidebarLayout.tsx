@@ -1,12 +1,12 @@
-import { Header, HeaderProps } from "@modules/Header";
-import { BrandSettingsSidebar } from "../modules/BrandSettingsSidebar";
 import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
+import { useNavigate } from "react-router-dom";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { IconButton } from "@components/IconButton";
 import { CrossIcon } from "@/icons/CrossIcon";
 import { routes } from "@config/routes";
-import { useNavigate } from "react-router-dom";
+import { Header, HeaderProps } from "@modules/Header";
+import { BrandSettingsSidebar } from "../modules/BrandSettingsSidebar";
 
 export interface BrandSettingsLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
@@ -51,4 +51,6 @@ const Main = styled("div")`
 
 const Content = styled("div")`
   padding: ${({ theme }) => theme.spacing(5)};
+  height: calc(100vh - 72.5px);
+  overflow-x: auto;
 `;

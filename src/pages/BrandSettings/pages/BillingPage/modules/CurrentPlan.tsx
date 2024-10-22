@@ -5,22 +5,19 @@ import { LinkWithArrow } from "@modules/LinkWithArrow";
 
 export const CurrentPlan = () => {
   return (
-    // TODO - need fix height
-    <Box display="flex" flexDirection="column" gap={4} height="120px">
+    <Box display="flex" flexDirection="column" gap={4}>
       <HeadingBlock
         variant="medium"
         title="Current plan"
         subtitle="You can see information about your current plan here"
       />
-      <Box display="flex" height="fit-content" flexWrap="nowrap">
-        <Grid2
-          container
-          direction="column"
-          gap={1}
-          width="100%"
-          maxWidth="370px"
-          height="fit-content"
-        >
+      <Box
+        display="grid"
+        gridTemplateColumns="370px auto"
+        height="fit-content"
+        flexWrap="nowrap"
+      >
+        <Grid2 container direction="column" gap={1} height="fit-content">
           <Grid2
             container
             alignItems="center"

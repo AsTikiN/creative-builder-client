@@ -2,7 +2,12 @@ import { Box, Grid2, Typography } from "@mui/material";
 import HeadingBlock from "@components/HeadingBlock ";
 
 export const Address = () => (
-  <Box display="flex" flexWrap="nowrap">
+  <Box
+    display="grid"
+    gridTemplateColumns="370px auto"
+    height="fit-content"
+    flexWrap="nowrap"
+  >
     <Grid2
       container
       direction="column"

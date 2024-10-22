@@ -6,6 +6,7 @@ import {
   styled,
   TextField,
   TextFieldProps,
+  Typography,
 } from "@mui/material";
 
 export type InputProps = TextFieldProps & {
@@ -14,10 +15,22 @@ export type InputProps = TextFieldProps & {
 
 export const Input: React.FC<InputProps> = ({ startIcon, ...props }) => {
   return (
-    <Wrapper>
-      {startIcon && <IconWrapper>{startIcon}</IconWrapper>}
-      <StyledInput {...props} />
-    </Wrapper>
+    <>
+      {props.label && (
+        <Typography variant="body1" color="grey.400" sx={{ marginBottom: 1 }}>
+          {props.label}
+          {props.required && (
+            <Typography component="span" variant="body1" color="primary.main">
+              *
+            </Typography>
+          )}
+        </Typography>
+      )}
+      <Wrapper>
+        {startIcon && <IconWrapper>{startIcon}</IconWrapper>}
+        <StyledInput {...props} />
+      </Wrapper>
+    </>
   );
 };
 
@@ -82,5 +95,13 @@ const StyledInput = styled(TextField)`
 
   .MuiOutlinedInput-notchedOutline {
     border: none;
+  }
+
+  .MuiFormLabel-root {
+    display: none;
+  }
+
+  .MuiInputLabel-root {
+    display: none;
   }
 `;

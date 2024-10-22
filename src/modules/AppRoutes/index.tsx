@@ -16,6 +16,7 @@ import { NotificationsPage } from "@/pages/AccountSettings/pages/NotificationsPa
 import { PlansPage } from "@/pages/BrandSettings/pages/PlansPage";
 import { AccountBillingPage } from "@/pages/AccountSettings/pages/BillingPage";
 import { BrandBillingPage } from "@/pages/BrandSettings/pages/BillingPage";
+import { IntegrationsPage } from "@/pages/BrandSettings/pages/IntegrationsPage";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -43,7 +44,10 @@ export const AppRoutes: React.FC = () => {
             path={routes.notifications()}
             element={<NotificationsPage />}
           />
-          <Route path={routes.accountBilling()} element={<AccountBillingPage />} />
+          <Route
+            path={routes.accountBilling()}
+            element={<AccountBillingPage />}
+          />
         </Route>
 
         <Route path={routes.brandSettings()} element={<BrandSettings />}>
@@ -51,6 +55,7 @@ export const AppRoutes: React.FC = () => {
           <Route path={routes.members()} element={<MembersPage />} />
           <Route path={routes.plans()} element={<PlansPage />} />
           <Route path={routes.brandBilling()} element={<BrandBillingPage />} />
+          <Route path={routes.integrations()} element={<IntegrationsPage />} />
         </Route>
 
         {/* <Route path={routes.plans()} element={<PlansPage />} /> */}

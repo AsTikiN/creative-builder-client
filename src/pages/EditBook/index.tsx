@@ -174,7 +174,6 @@ const CoverImageWrapper = styled(Box)`
   width: 48px;
   height: 48px;
   border-radius: 6px;
-  border-bottom: 0.1px solid ${({ theme }) => theme.palette.grey[100]};
   background-color: ${({ theme }) => theme.palette.grey[500]};
   display: flex;
   align-items: center;
@@ -202,6 +201,7 @@ const Actions = styled(Box)`
 
 const BookData = styled(Box)`
   display: flex;
+  align-items: center;
   flex: 1;
   gap: ${({ theme }) => theme.spacing(3)};
 `;
@@ -218,6 +218,7 @@ const SidebarContent = styled(Box)`
 const EditorWrapper = styled(Box)`
   flex: 1;
   padding: ${({ theme }) => theme.spacing(5, 6)};
+  padding-top: ${({ theme }) => theme.spacing(25)};
   height: calc(100vh - 72.5px);
   overflow-y: auto;
 `;

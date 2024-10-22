@@ -59,7 +59,7 @@ const Wrapper = styled(Stack)`
   border-radius: 16px;
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   outline: none;
-  max-height: 360px;
+  max-height: 440px;
 `;
 
 const TopSection = styled("div")`

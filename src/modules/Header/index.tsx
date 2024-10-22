@@ -22,7 +22,7 @@ export const Header: FC<HeaderProps> = ({
     },
     small: {
       titleVariant: "titleLarge" as const,
-      descriptionVariant: "h6" as const,
+      descriptionVariant: "h5" as const,
     },
   };
 

@@ -76,4 +76,10 @@ const StyledToggleButton = styled(MuiToggleButton)<{ isSelected: boolean }>`
         0px 0px 0px 0.5px #002a570f,
         0px 0px 0.5px 0px #0d0d0d66;
     `}
+
+  ${({ isSelected, theme }) =>
+    !isSelected &&
+    css`
+      color: ${theme.palette.grey[50]} !important;
+    `}
 `;

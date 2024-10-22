@@ -139,8 +139,8 @@ const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
         content: "";
         position: absolute;
         top: -5.5px;
-        left: -5px;
-        width: calc(100% + 10px);
+        left: -1px;
+        width: calc(100% + 2px);
         height: 0.5px;
         background-color: ${theme.palette.grey[100]};
     `}

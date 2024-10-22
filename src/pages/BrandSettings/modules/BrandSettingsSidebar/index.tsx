@@ -1,10 +1,10 @@
 import { AtIcon } from "@/icons/AtIcon";
 import { BagIcon } from "@/icons/BagIcon";
 import { BrandSettingsIcon } from "@/icons/BrandSettingsIcon";
+import { ColorPaletteIcon } from "@/icons/ColorPaletteIcon";
 import { CreditCardIcon } from "@/icons/CreditCardIcon";
 import { EmailsIcon } from "@/icons/EmailIcon";
 import { FileChartIcon } from "@/icons/FileChartIcon";
-import { GroupIcon } from "@/icons/GroupIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { PhoneIcon } from "@/icons/PhoneIcon";
 import { SettingsToggleIcon } from "@/icons/SettingsToggleIcon";
@@ -24,33 +24,35 @@ export const BrandSettingsSidebar = () => {
         },
         {
           id: 2,
-          icon: <UsersIcon />,
-          label: "Members",
-          path: routes.members(),
+          icon: <ColorPaletteIcon />,
+          label: "Appearance",
+          path: routes.brandAppearance(),
+          isFilled: true,
         },
         {
           id: 3,
+          icon: <UsersIcon />,
+          label: "Team",
+          path: routes.members(),
+        },
+        {
+          id: 4,
           icon: <BagIcon />,
           label: "Plans",
           path: routes.plans(),
         },
         {
-          id: 4,
-          icon: <CreditCardIcon />,
-          label: "Billing",
-          path: routes.brandBilling(),
-        },
-        {
           id: 5,
-          icon: <SettingsToggleIcon />,
-          label: "Integrations",
-          path: routes.integrations(),
+          icon: <FileChartIcon />,
+          label: "Usage",
+          path: routes.usage(),
+          isFilled: true,
         },
         {
           id: 6,
-          icon: <LowIcon />,
-          label: "Legal",
-          path: routes.legal(),
+          icon: <CreditCardIcon />,
+          label: "Billing",
+          path: routes.brandBilling(),
         },
         {
           id: 7,
@@ -60,29 +62,28 @@ export const BrandSettingsSidebar = () => {
         },
         {
           id: 8,
-          icon: <PhoneIcon />,
-          label: "Phones",
-          path: routes.phones(),
+          icon: <EmailsIcon />,
+          label: "Email",
+          path: routes.email(),
+          isFilled: true,
         },
         {
           id: 9,
-          icon: <GroupIcon />,
-          label: "Agents",
-          path: routes.agents(),
+          icon: <PhoneIcon />,
+          label: "Phone",
+          path: routes.phone(),
         },
         {
           id: 10,
-          icon: <FileChartIcon />,
-          label: "Usage",
-          path: routes.usage(),
-          isFilled: true,
+          icon: <LowIcon />,
+          label: "Legal",
+          path: routes.legal(),
         },
         {
           id: 11,
-          icon: <EmailsIcon />,
-          label: "Emails",
-          path: routes.emails(),
-          isFilled: true,
+          icon: <SettingsToggleIcon />,
+          label: "Integrations",
+          path: routes.integrations(),
         },
       ]}
       title="Brand Settings"

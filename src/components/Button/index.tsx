@@ -14,7 +14,7 @@ export const Button = ({ children, ...props }: ButtonProps) => {
 };
 
 export const StyledButton = styled(LoadingButton)`
-  width: fit-content;
+  /* width: fit-content; */
   text-transform: none;
   padding: ${({ theme }) => theme.spacing(1.5)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
@@ -22,7 +22,7 @@ export const StyledButton = styled(LoadingButton)`
   align-items: center;
   gap: ${({ theme }) => theme.spacing(0.5)};
   ${({ theme }) => theme.typography.body1};
-    
+
   & .MuiButton-icon {
     margin: 0;
   }

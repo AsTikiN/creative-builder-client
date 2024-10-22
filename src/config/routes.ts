@@ -21,9 +21,9 @@ export const routes = {
 
   legal: () => "/legal",
   domain: () => "/domain",
-  phones: () => "/phones",
+  phone: () => "/phone",
   agents: () => "/agents",
   usage: () => "/usage",
-  emails: () => "/emails",
+  email: () => "/email",
   brandAppearance: () => `${routes.brandSettings()}/appearance`,
 };

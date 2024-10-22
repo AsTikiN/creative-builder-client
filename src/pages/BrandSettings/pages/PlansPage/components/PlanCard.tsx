@@ -1,7 +1,9 @@
+import { ChevronDownSmallIcon } from "@/icons/ChevronDownSmallIcon";
 import { CircleOutlinedCheckIcon } from "@/icons/CircleOutlinedCheckIcon";
 import { Button } from "@components/Button";
-import { css, Stack, styled, Typography } from "@mui/material";
-import { FC } from "react";
+import { Dropdown, DropdownOption } from "@components/Dropdown";
+import { Box, css, Stack, styled, Typography } from "@mui/material";
+import { FC, useState } from "react";
 
 interface Benefit {
   id: string;
@@ -23,6 +25,11 @@ export const PlanCard: FC<Props> = ({
   description,
   benefits,
 }) => {
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    null
+  );
+  const [open, setIsOpen] = useState(false);
+
   return (
     <Wrapper isActive={isActive}>
       <PlanInfo>
@@ -38,9 +45,47 @@ export const PlanCard: FC<Props> = ({
       </PlanInfo>
 
       <PlanBenefitsWrapper>
-        <Button variant={isActive ? "outlined" : "contained"}>
-          {isActive ? "Current Plan" : "Upgrade"}
-        </Button>
+        <ButtonWrapper>
+          <Button
+            fullWidth
+            onClick={isActive ? () => setIsOpen(true) : undefined}
+            variant={isActive ? "outlined" : "contained"}
+          >
+            {isActive ? "Current Plan" : "Upgrade"}
+          </Button>
+
+          {isActive && (
+            <ChevronWrapper>
+              <ChevronDownSmallIcon />
+            </ChevronWrapper>
+          )}
+        </ButtonWrapper>
+
+        <DropDownAnchor>
+          <Dropdown
+            options={[
+              {
+                id: 1,
+                label: "Terminate immediately",
+                value: "Terminate immediately",
+                // icon: <GroupPeopleIcon />,
+              },
+              {
+                id: 2,
+                label: "Cancel subscription",
+                value: "Cancel subscription",
+                color: "error",
+                hasDivider: true,
+                // icon: <GroupPeopleIcon />,
+              },
+            ]}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            dropdownWidth={176}
+            isOpen={open}
+            setIsOpen={setIsOpen}
+          ></Dropdown>
+        </DropDownAnchor>
 
         <PlanBenefitsList>
           {benefits.map((benefit) => (
@@ -88,6 +133,7 @@ const PlanBenefitsWrapper = styled(Stack)`
   // Maintain 8px padding-top to account for 4px gap between sections
   padding-top: ${({ theme }) => theme.spacing(2)};
   border-top: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  position: relative;
 `;
 
 const PlanBenefitsList = styled(Stack)`
@@ -99,4 +145,28 @@ const PlanBenefitItem = styled(Stack)`
   flex-direction: row;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const DropDownAnchor = styled("div")`
+  position: absolute;
+  left: 0px;
+  top: 40.5px;
+`;
+
+const ButtonWrapper = styled(Stack)`
+  flex-direction: row;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const ChevronWrapper = styled(Box)`
+  position: absolute;
+  right: 0;
+  top: 8px;
+  height: 32px;
+  width: 32px;
+  border-left: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  padding: 6px;
+  pointer-events: none;
+  display: flex;
 `;

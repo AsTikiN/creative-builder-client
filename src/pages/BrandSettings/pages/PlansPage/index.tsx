@@ -129,4 +129,5 @@ const PlansList = styled(Stack)`
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)};
+  background-color: ${({ theme }) => theme.palette.grey[500]};
 `;

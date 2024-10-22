@@ -106,7 +106,7 @@ const ExpandIconWrapper = styled("div")`
 `;
 
 const Summary = styled(AccordionSummary)`
-  padding: ${({ theme }) => `${theme.spacing(2.875)} ${theme.spacing(3)}`};
+  padding: ${({ theme }) => `${theme.spacing(3)} ${theme.spacing(3)}`};
   min-height: auto;
   display: flex;
   align-items: center;

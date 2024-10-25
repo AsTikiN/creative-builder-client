@@ -1,5 +1,5 @@
 import { styled, css } from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Checkbox } from ".";
 
 interface TabItem {

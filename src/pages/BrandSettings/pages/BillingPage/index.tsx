@@ -36,6 +36,7 @@ export const BrandBillingPage = () => {
       />
       <Stack alignItems="flex-start">
         <Button variant="outlined">Add payment method</Button>
+      </Stack>
       <Divider />
       <HeadingBlock
         variant="medium"

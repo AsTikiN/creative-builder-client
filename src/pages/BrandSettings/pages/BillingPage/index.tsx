@@ -34,7 +34,9 @@ export const BrandBillingPage = () => {
         title="Payment methods"
         subtitle="No card registered to your account"
       />
-      <Button variant="outlined">Add payment method</Button>
+      <Button variant="outlined" s>
+        Add payment method
+      </Button>
       <Divider />
       <HeadingBlock
         variant="medium"

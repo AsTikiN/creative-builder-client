@@ -42,7 +42,6 @@ export const StyledButton = styled(LoadingButton)`
 
       /* background-color: ${props.theme.palette.primary.main}; */
       padding: ${props.theme.spacing(1.25)};
-s
       color: ${props.theme.palette.primary.contrastText};
       /* box-shadow:
         0 4px 4px rgba(0, 0, 0, 0.25),
@@ -65,6 +64,7 @@ s
   ${(props) =>
     props.variant === "outlined" &&
     css`
+      width: fit-content;
       border: 0.5px solid ${props.theme.palette.grey[100]};
       color: ${props.theme.palette.grey[200]};
       box-shadow: none;

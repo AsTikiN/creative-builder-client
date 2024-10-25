@@ -42,11 +42,12 @@ const CheckBoxForm = ({ defaultFormValues, fields }: ICheckBoxForm) => {
   return (
     <FormGroup
       style={{
+        paddingTop: "1px",
         gap: "12px",
       }}
     >
       {fields.map(({ id, title, subtitle }) =>
-        renderSwitch(id, title, subtitle)
+        renderSwitch(id, title, subtitle),
       )}
     </FormGroup>
   );

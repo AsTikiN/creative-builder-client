@@ -1,5 +1,5 @@
 import { Grid2 } from "@mui/material";
-import { Divider } from "@components/Divider";
+import { Divider } from "@components/Divider/Divider";
 
 import HeadingBlock from "@components/HeadingBlock ";
 import CheckBoxForm from "./modules/CheckboxForm";

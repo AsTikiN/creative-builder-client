@@ -22,7 +22,7 @@ export const StyledButton = styled(LoadingButton)`
   align-items: center;
   gap: ${({ theme }) => theme.spacing(0.5)};
   ${({ theme }) => theme.typography.body1};
-
+  min-width: auto;
   & .MuiButton-icon {
     margin: 0;
   }

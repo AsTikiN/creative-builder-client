@@ -11,12 +11,13 @@ import { GeneralPage } from "@/pages/BrandSettings/pages/GeneralPage";
 import { MembersPage } from "@/pages/BrandSettings/pages/MembersPage";
 import { AccountSettingsPage } from "@/pages/AccountSettings";
 import { ProfilePage } from "@/pages/AccountSettings/pages/ProfilePage";
-import { AppearancePage } from "@/pages/AccountSettings/pages/AppearancePage";
+import { AppearancePage as AccountAppearancePage } from "@/pages/AccountSettings/pages/AppearancePage";
 import { NotificationsPage } from "@/pages/AccountSettings/pages/NotificationsPage";
 import { PlansPage } from "@/pages/BrandSettings/pages/PlansPage";
 import { AccountBillingPage } from "@/pages/AccountSettings/pages/BillingPage";
 import { BrandBillingPage } from "@/pages/BrandSettings/pages/BillingPage";
 import { IntegrationsPage } from "@/pages/BrandSettings/pages/IntegrationsPage";
+import { AppearancePage as BrandAppearancePage } from "@/pages/BrandSettings/pages/AppearancePage";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -30,7 +31,7 @@ export const AppRoutes: React.FC = () => {
           path={routes.accountSettings()}
           element={<AccountSettingsPage />}
         /> */}
-        {/* <Route path={routes.appearance()} element={<AppearancePage />} /> */}
+        {/* <Route path={routes.accountAppearance()} element={<AppearancePage />} /> */}
         <Route path={routes.editor()} element={<Editor />} />
         {/* <Route path={routes.notifications()} element={<Notifications />} /> */}
 
@@ -39,7 +40,10 @@ export const AppRoutes: React.FC = () => {
           element={<AccountSettingsPage />}
         >
           <Route index element={<ProfilePage />} />
-          <Route path={routes.appearance()} element={<AppearancePage />} />
+          <Route
+            path={routes.accountAppearance()}
+            element={<AccountAppearancePage />}
+          />
           <Route
             path={routes.notifications()}
             element={<NotificationsPage />}
@@ -56,6 +60,10 @@ export const AppRoutes: React.FC = () => {
           <Route path={routes.plans()} element={<PlansPage />} />
           <Route path={routes.brandBilling()} element={<BrandBillingPage />} />
           <Route path={routes.integrations()} element={<IntegrationsPage />} />
+          <Route
+            path={routes.brandAppearance()}
+            element={<BrandAppearancePage />}
+          />
         </Route>
 
         {/* <Route path={routes.plans()} element={<PlansPage />} /> */}

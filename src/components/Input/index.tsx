@@ -28,7 +28,7 @@ export const Input: React.FC<InputProps> = ({ startIcon, ...props }) => {
       )}
       <Wrapper>
         {startIcon && <IconWrapper>{startIcon}</IconWrapper>}
-        <StyledInput {...props} />
+        <StyledInput {...props} label={undefined} />
       </Wrapper>
     </>
   );
@@ -38,7 +38,8 @@ const Wrapper = styled(Box)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
 
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;

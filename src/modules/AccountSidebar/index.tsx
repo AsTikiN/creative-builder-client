@@ -1,25 +1,42 @@
 import { routes } from "@config/routes";
-import { UserEditIcon } from "@/icons/UserEditIcon";
 import {
   SmallSidebarLayout,
   SmallSidebarNavItem,
 } from "@/layouts/SmallSidebarLayout";
-import { LightBulbIcon } from "@/icons/LightBulbIcon";
 import { CreditCardIcon } from "@/icons/CreditCardIcon";
 import { BellIcon } from "@/icons/BellIcon";
+import { ProfileCircleIcon } from "@/icons/ProfileCircleIcon";
+import { UnblurIcon } from "@/icons/UnblurIcon";
+import { Stack, styled } from "@mui/material";
+
+const UnblurWrapper = styled(Stack)`
+  svg path {
+    fill: #5c5c5c !important;
+    stroke: transparent !important;
+
+    &:last-child {
+      fill: transparent !important;
+      stroke: #5c5c5c !important;
+    }
+  }
+`;
 
 const navItems: SmallSidebarNavItem[] = [
   {
     id: 1,
-    icon: <UserEditIcon />,
+    icon: <ProfileCircleIcon />,
     label: "Profile",
     path: routes.accountSettings(),
   },
   {
     id: 2,
-    icon: <LightBulbIcon />,
-    label: "Appearance",
-    path: routes.appearance(),
+    icon: (
+      // <UnblurWrapper>
+      <UnblurIcon />
+      // </UnblurWrapper>
+    ),
+    label: "Theme",
+    path: routes.accountAppearance(),
   },
   {
     id: 3,

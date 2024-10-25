@@ -91,7 +91,7 @@ export const EditBookSidebar: FC<Props> = ({ handleAddContent }) => {
           </IconButton>
         </SectionTitleWrapper>
 
-        <NavItem>
+        <NavItem isFilledIcon>
           <NavTextWrapper>
             <ImageIcon />
             Cover

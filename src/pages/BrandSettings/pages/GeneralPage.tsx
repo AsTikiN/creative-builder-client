@@ -4,11 +4,11 @@ import { Textarea } from "@components/Textarea";
 import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
 import { ChangeEvent } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Divider } from "@components/Divider";
+import { Divider } from "@components/Divider/Divider";
 import { CopyIcon } from "@/icons/CopyIcon";
-import { SolidCopyIcon } from "@/icons/SolidCopyIcon";
-import { BezierIcon } from "@/icons/BezierIcon";
+import { UnionIcon } from "@/icons/UnionIcon";
 import { StopCircleIcon } from "@/icons/StopCircleIcon";
+import { DashedCopyIcon } from "@/icons/DashedCopyIcon";
 
 type FormValues = {
   fullName: string;
@@ -124,13 +124,13 @@ export const GeneralPage = () => {
         </SectionTitleData>
 
         <ManagmentButtons>
-          <Button variant="outlined" startIcon={<SolidCopyIcon />}>
+          <Button variant="outlined" startIcon={<CopyIcon />}>
             Duplicate
           </Button>
-          <Button variant="outlined" startIcon={<CopyIcon />}>
+          <Button variant="outlined" startIcon={<DashedCopyIcon />}>
             Templatize
           </Button>
-          <Button variant="outlined" startIcon={<BezierIcon />}>
+          <Button variant="outlined" startIcon={<UnionIcon />}>
             Merge
           </Button>
           <Button variant="outlined" startIcon={<StopCircleIcon />}>

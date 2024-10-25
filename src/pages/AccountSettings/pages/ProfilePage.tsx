@@ -4,7 +4,7 @@ import { Input } from "@components/Input";
 import { Textarea } from "@components/Textarea";
 import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Divider } from "@components/Divider";
+import { Divider } from "@components/Divider/Divider";
 
 type FormValues = {
   fullName: string;

@@ -1,10 +1,10 @@
-import { CoinsIcon } from "@/icons/CoinsIcon";
-import { SendIcon } from "@/icons/SendIcon";
+import { MoneyHandIcon } from "@/icons/MoneyHandIcon";
+import { PaperPlaneIcon } from "@/icons/PaperPlaneIcon";
 import { SidebarAccordionProps } from "@components/Accordion/SidebarAccordion";
 
 export const marketingAccordionData: SidebarAccordionProps = {
   title: "Marketing",
-  icon: <SendIcon />,
+  icon: <PaperPlaneIcon />,
   tabs: [
     { id: 1, label: "Email" },
     { id: 2, label: "SMS" },
@@ -16,7 +16,7 @@ export const marketingAccordionData: SidebarAccordionProps = {
 
 export const financesAccordionData: SidebarAccordionProps = {
   title: "Finances",
-  icon: <CoinsIcon />,
+  icon: <MoneyHandIcon />,
   tabs: [
     { id: 1, label: "Transactions" },
     { id: 2, label: "Payouts" },

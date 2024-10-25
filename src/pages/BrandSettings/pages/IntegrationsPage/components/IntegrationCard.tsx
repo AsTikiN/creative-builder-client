@@ -15,7 +15,7 @@ export const IntegrationCard: FC<Props> = ({ onSettingsClick }) => {
         <Icon>
           <FigmaIcon />
         </Icon>
-        <IconButton>
+        <IconButton sx={{ padding: 0 }}>
           <ShareIntegrationIcon />
         </IconButton>
       </TopSection>
@@ -31,7 +31,7 @@ export const IntegrationCard: FC<Props> = ({ onSettingsClick }) => {
 
       <Actions>
         <Button fullWidth variant="outlined" onClick={onSettingsClick}>
-          Connect
+          Settings
         </Button>
       </Actions>
     </Wrapper>
@@ -42,13 +42,13 @@ const Wrapper = styled(Box)`
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px #0a0d1408;
-  padding: ${({ theme }) => theme.spacing(3)};
 `;
 
 const TopSection = styled(Stack)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: ${({ theme }) => theme.spacing(3, 3, 2, 3)};
 `;
 
 const Icon = styled(Box)`
@@ -68,12 +68,12 @@ const Icon = styled(Box)`
 `;
 
 const Info = styled(Stack)`
-  margin-top: ${({ theme }) => theme.spacing(2)};
   gap: ${({ theme }) => theme.spacing(1)};
+  padding: ${({ theme }) => theme.spacing(0, 3)};
 `;
 
 const Actions = styled(Box)`
   border-top: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
-  padding-top: ${({ theme }) => theme.spacing(3)};
   margin-top: ${({ theme }) => theme.spacing(4)};
+  padding: ${({ theme }) => theme.spacing(3)};
 `;

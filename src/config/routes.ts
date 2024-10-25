@@ -6,7 +6,7 @@ export const routes = {
   editBook: (id: string) => `/book/edit/${id}`,
 
   accountSettings: () => "/account-settings",
-  appearance: () => `${routes.accountSettings()}/appearance`,
+  accountAppearance: () => `${routes.accountSettings()}/appearance`,
   editor: () => "/editor",
   notifications: () => `${routes.accountSettings()}/notifications`,
   general: () => `${routes.brandSettings()}/general`,

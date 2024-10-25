@@ -1,6 +1,17 @@
 import React from "react";
 import { Checkbox as MuiCheckbox, CheckboxProps, styled } from "@mui/material";
 
+export const Checkbox: React.FC<CheckboxProps> = (props) => {
+  return (
+    <CustomCheckbox
+      {...props}
+      icon={<CheckboxWrapper />}
+      checkedIcon={<CheckedIcon checked={props.checked} />}
+      checked={props.disabled || props.checked}
+    />
+  );
+};
+
 const CustomCheckbox = styled(MuiCheckbox)`
   padding: 0;
   &:hover {
@@ -8,6 +19,16 @@ const CustomCheckbox = styled(MuiCheckbox)`
   }
   & .MuiSvgIcon-root {
     font-size: 18px;
+  }
+
+  &.Mui-disabled span {
+    border: 1px solid ${({ theme }) => theme.palette.grey[700]};
+    background-color: #eaeaea;
+
+    &::after {
+      border-bottom: solid ${({ theme }) => theme.palette.grey[700]};
+      border-right: solid ${({ theme }) => theme.palette.grey[700]};
+    }
   }
 `;
 
@@ -48,7 +69,7 @@ const CheckboxWrapper = styled("span")`
   }
 `;
 
-const CheckedIcon = styled("span")`
+const CheckedIcon = styled("span")<{ checked?: boolean }>`
   width: 16px;
   height: 16px;
   background-color: ${({ theme }) => theme.palette.primary.main};
@@ -57,7 +78,7 @@ const CheckedIcon = styled("span")`
   &::after {
     content: "";
     position: absolute;
-    top: 2px;
+    top: ${({ checked }) => (checked ? "2px" : "1px")};
     left: 5px;
     width: 5px;
     height: 9px;
@@ -66,13 +87,3 @@ const CheckedIcon = styled("span")`
     transform: rotate(45deg);
   }
 `;
-
-export const Checkbox: React.FC<CheckboxProps> = (props) => {
-  return (
-    <CustomCheckbox
-      {...props}
-      icon={<CheckboxWrapper />}
-      checkedIcon={<CheckedIcon />}
-    />
-  );
-};

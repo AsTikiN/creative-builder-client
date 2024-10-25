@@ -2,8 +2,14 @@ import { Dispatch, FC, ReactNode, SetStateAction, useState } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { alpha, PopoverOrigin, styled } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
+import {
+  alpha,
+  PopoverOrigin,
+  styled,
+  Select as MuiSelect,
+  Typography,
+} from "@mui/material";
 import { SmallChevronIconDown } from "@/icons/SmallChevronIconDown"; // Assuming you have this custom icon
 
 const ChevronIcon = () => {
@@ -27,17 +33,19 @@ interface BasicSelectProps {
   dropdownWidth?: number;
   anchorOrigin?: PopoverOrigin;
   transformOrigin?: PopoverOrigin;
+  label?: string | ReactNode;
 }
 
 const DEFAULT_DROPDOWN_WIDTH = 175;
 
-export const BasicSelect: FC<BasicSelectProps> = ({
+export const Select: FC<BasicSelectProps> = ({
   open,
   setIsOpen,
   options,
   dropdownWidth,
   anchorOrigin,
   transformOrigin,
+  label,
 }) => {
   const [mode, setMode] = useState(options[0]?.value || "");
 
@@ -49,6 +57,28 @@ export const BasicSelect: FC<BasicSelectProps> = ({
     <Wrapper>
       <FormControl fullWidth>
         <StyledSelect
+          label={label}
+          displayEmpty
+          renderValue={(selected) => {
+            if (!selected) {
+              return (
+                <Typography variant="body1" color="grey.300">
+                  {label}
+                </Typography>
+              );
+            }
+            const selectedOption = options.find(
+              (option) => option.value === selected
+            );
+            return (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                {selectedOption?.icon}
+                <Typography variant="body1" color="grey.200">
+                  {selectedOption?.label}
+                </Typography>
+              </Box>
+            );
+          }}
           open={open}
           onOpen={() => setIsOpen(true)}
           onClose={() => setIsOpen(false)}
@@ -107,7 +137,7 @@ const Wrapper = styled(Box)`
   /* width: 300px; */
 `;
 
-const StyledSelect = styled(Select)`
+const StyledSelect = styled(MuiSelect)`
   padding: 0;
   color: ${({ theme }) => theme.palette.grey[200]};
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};

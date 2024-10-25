@@ -1,10 +1,8 @@
 import { BarChartIcon } from "@/icons/BarChartIcon";
-import { CheckDoneIcon } from "@/icons/CheckDoneIcon";
 import { InboxIcon } from "@/icons/InboxIcon";
 import { RouteIcon } from "@/icons/RouteIcon";
 import { SearchIcon } from "@/icons/SearchIcon";
 import { SettingsIcon } from "@/icons/SettingsIcon";
-import { StoreIcon } from "@/icons/StoreIcon";
 import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";
@@ -19,6 +17,8 @@ import { FilePlusIcon } from "@/icons/FilePlusIcon";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@config/routes";
 import { IconButton } from "@components/IconButton";
+import { InviteIcon } from "@/icons/InviteIcon";
+import { StoreIcon } from "@/icons/StoreIcon";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -95,7 +95,7 @@ export const Sidebar = () => {
 
           <NavItem>
             <NavTextWrapper>
-              <CheckDoneIcon />
+              <InviteIcon />
               Orders
             </NavTextWrapper>
             <Chip>

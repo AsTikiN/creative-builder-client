@@ -1,5 +1,5 @@
-import { Grid2 } from "@mui/material";
-import { Divider } from "@components/Divider";
+import { Grid2, Stack } from "@mui/material";
+import { Divider } from "@components/Divider/Divider";
 import { Button } from "@components/Button";
 import HeadingBlock from "@components/HeadingBlock ";
 import Table from "@components/Table";
@@ -34,9 +34,8 @@ export const BrandBillingPage = () => {
         title="Payment methods"
         subtitle="No card registered to your account"
       />
-      <Button variant="outlined" s>
-        Add payment method
-      </Button>
+      <Stack alignItems="flex-start">
+        <Button variant="outlined">Add payment method</Button>
       <Divider />
       <HeadingBlock
         variant="medium"

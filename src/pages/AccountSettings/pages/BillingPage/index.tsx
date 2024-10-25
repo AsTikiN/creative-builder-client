@@ -1,5 +1,5 @@
-import { Box, Grid2, Typography } from "@mui/material";
-import { Divider } from "@components/Divider";
+import { Box, Grid2, Stack, Typography } from "@mui/material";
+import { Divider } from "@components/Divider/Divider";
 import { tableAccountBillingColumns } from "@/pages/AccountSettings/pages/BillingPage/static/settings.tsx";
 import { mockAccountBillingData } from "@/pages/AccountSettings/pages/BillingPage/static/mock.tsx";
 import { Button } from "@components/Button";
@@ -46,7 +46,9 @@ export const AccountBillingPage = () => {
         title="Payment methods"
         subtitle="No card registered to your account"
       />
-      <Button variant="outlined">Add payment method</Button>
+      <Stack alignItems="flex-start">
+        <Button variant="outlined">Add payment method</Button>
+      </Stack>
       <Divider />
       <HeadingBlock
         variant="medium"

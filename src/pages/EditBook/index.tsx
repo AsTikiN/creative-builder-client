@@ -5,7 +5,7 @@ import { EditIcon } from "@/icons/EditIcon";
 import { SettingsSixAnglesIcon } from "@/icons/SettingsSixAnglesIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { IconButton } from "@components/IconButton";
-import { BasicSelect } from "@components/Select";
+import { Select } from "@components/Select";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { EditBookSidebar } from "./components/EditBookSidebar";
 import { Editor } from "@modules/Editor";
@@ -16,6 +16,8 @@ import { FileTextIcon } from "@/icons/FileTextIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
+import { SettingsIcon } from "@/icons/SettingsIcon";
+import { CheckboxBlock } from "@components/Checkbox/CheckboxBlock";
 
 export const EditBookPage = () => {
   const theme = useTheme();
@@ -41,7 +43,7 @@ export const EditBookPage = () => {
             </BookTextData>
           </BookData>
           <Actions>
-            <BasicSelect
+            <Select
               open={isOpen}
               setIsOpen={setIsOpen}
               options={[
@@ -66,7 +68,7 @@ export const EditBookPage = () => {
               }}
             />
             <IconButton>
-              <SettingsSixAnglesIcon />
+              <SettingsIcon />
             </IconButton>
 
             <IconButton>
@@ -89,60 +91,33 @@ export const EditBookPage = () => {
         onNext={() => setCurrentStep(1)}
       >
         <Accordions>
-          <Accordion title="Cover" icon={<ImageIcon />} tabs={[]} />
-          <Accordion title="Title Page" icon={<FileTextIcon />} tabs={[]} />
-          <Accordion title="Copyright" icon={<LowIcon />} tabs={[]} />
-          <Accordion
-            title="Table of Contents"
-            icon={<FileSearchIcon />}
+          <CheckboxBlock
+            title="Cover"
+            isFilledIcon
+            icon={<ImageIcon />}
             tabs={[]}
-          />
-          <Accordion title="Part" icon={<FolderIcon />} tabs={[]} />
-          <Accordion title="Introduction" icon={<FileTextIcon />} tabs={[]} />
-          <Accordion title="Chapter" icon={<FileTextIcon />} tabs={[]} />
-          <Accordion title="Conclusion" icon={<FileTextIcon />} tabs={[]} />
-        </Accordions>
-      </ModalLayout>
-
-      <ModalLayout
-        open={currentStep === 1}
-        handleClose={() => setCurrentStep(null)}
-        onCancel={() => setCurrentStep(0)}
-        onNext={() => setCurrentStep(2)}
-      >
-        <Accordions>
-          <Accordion title="Cover" icon={<ImageIcon />} tabs={[]} />
-          <Accordion title="Title Page" icon={<FileTextIcon />} tabs={[]} />
-          <Accordion title="Copyright" icon={<LowIcon />} tabs={[]} />
-          <Accordion
-            title="Table of Contents"
-            icon={<FileSearchIcon />}
-            tabs={[]}
-          />
-        </Accordions>
-      </ModalLayout>
-
-      <ModalLayout
-        open={currentStep === 2}
-        handleClose={() => setCurrentStep(null)}
-        onCancel={() => setCurrentStep(1)}
-        onNext={() => setCurrentStep(null)}
-      >
-        <Accordions>
-          <Accordion title="Cover" disabled icon={<ImageIcon />} tabs={[]} />
-          <Accordion
-            title="Title Page"
             disabled
+          />
+          <CheckboxBlock
+            title="Title Page"
+            isFilledIcon
             icon={<FileTextIcon />}
             tabs={[]}
-            isFilledIcon
+            checked={false}
           />
-          <Accordion title="Copyright" disabled icon={<LowIcon />} tabs={[]} />
-          <Accordion
+          <CheckboxBlock
+            title="Copyright"
+            isFilledIcon
+            icon={<LowIcon />}
+            tabs={[]}
+            checked={true}
+          />
+          <CheckboxBlock
             title="Table of Contents"
-            disabled
+            isFilledIcon
             icon={<FileSearchIcon />}
             tabs={[]}
+            checked={false}
           />
         </Accordions>
       </ModalLayout>
@@ -225,4 +200,5 @@ const EditorWrapper = styled(Box)`
 
 const Accordions = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(3)};
+  min-width: 408px;
 `;

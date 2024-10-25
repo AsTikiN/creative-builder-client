@@ -2,8 +2,8 @@ import { AtIcon } from "@/icons/AtIcon";
 import { BagIcon } from "@/icons/BagIcon";
 import { BrandSettingsIcon } from "@/icons/BrandSettingsIcon";
 import { ColorPaletteIcon } from "@/icons/ColorPaletteIcon";
+import { CompassIcon } from "@/icons/CompassIcon";
 import { CreditCardIcon } from "@/icons/CreditCardIcon";
-import { EmailsIcon } from "@/icons/EmailIcon";
 import { FileChartIcon } from "@/icons/FileChartIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { PhoneIcon } from "@/icons/PhoneIcon";
@@ -56,16 +56,16 @@ export const BrandSettingsSidebar = () => {
         },
         {
           id: 7,
-          icon: <AtIcon />,
+          icon: <CompassIcon />,
           label: "Domain",
           path: routes.domain(),
         },
         {
           id: 8,
-          icon: <EmailsIcon />,
+          icon: <AtIcon />,
+          // icon: <EmailsIcon />,
           label: "Email",
           path: routes.email(),
-          isFilled: true,
         },
         {
           id: 9,

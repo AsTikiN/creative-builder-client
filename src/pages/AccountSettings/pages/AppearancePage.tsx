@@ -1,81 +1,12 @@
-import {
-  Box,
-  css,
-  Stack,
-  styled,
-  Typography,
-  Divider as MuiDivider,
-  alpha,
-} from "@mui/material";
-
-import { Input } from "@components/Input";
+import { Box, css, Stack, styled, Typography, alpha } from "@mui/material";
 
 import { DarkTheme } from "@/icons/DarkTheme";
 import { LightTheme } from "@/icons/LightTheme";
 import { CircleFilledCheckIcon } from "@/icons/CircleFilledCheckIcon";
-import { Divider } from "@components/Divider";
 import { useState } from "react";
-
-const initialColors = [
-  {
-    id: 1,
-    color: "#007CFE",
-    selected: true,
-  },
-  {
-    id: 2,
-    color: "#7A7A7A",
-    selected: false,
-  },
-  {
-    id: 3,
-    color: "#FF8447",
-    selected: false,
-  },
-  {
-    id: 4,
-    color: "#FB3748",
-    selected: false,
-  },
-  {
-    id: 5,
-    color: "#1FC16B",
-    selected: false,
-  },
-  {
-    id: 6,
-    color: "#7D52F4",
-    selected: false,
-  },
-  {
-    id: 7,
-    color: "#47C2FF",
-    selected: false,
-  },
-  {
-    id: 8,
-    color: "#FB4BA3",
-    selected: false,
-  },
-];
 
 export const AppearancePage = () => {
   const [selectedTheme, setSelectedTheme] = useState("system");
-  const [colors, setColors] = useState(initialColors);
-  const [customColor, setCustomColor] = useState("#007CFE");
-
-  const handleColorClick = (id: number) => () => {
-    setColors(
-      colors.map((color) =>
-        color.id === id
-          ? { ...color, selected: true }
-          : { ...color, selected: false }
-      )
-    );
-    setCustomColor(
-      colors.find((color) => color.id === id)?.color || initialColors[0].color
-    );
-  };
 
   const handleThemeChange = (theme: string) => () => {
     setSelectedTheme(theme);
@@ -83,53 +14,6 @@ export const AppearancePage = () => {
 
   return (
     <>
-      <BrandSection>
-        <BrandContainer>
-          <SectionTitleData>
-            <Typography variant="h5" color="grey.400">
-              Brand color
-            </Typography>
-            <Typography variant="body2" color="grey.200">
-              Select or customize your brand color
-            </Typography>
-          </SectionTitleData>
-
-          <Colors>
-            {colors.map((color) => (
-              <Color
-                key={color.id}
-                selected={color.selected}
-                initialColor={initialColors[0].color}
-                color={color.color}
-                onClick={handleColorClick(color.id)}
-              />
-            ))}
-          </Colors>
-
-          <TextedDivider>OR</TextedDivider>
-
-          <CustomColorWrapper>
-            <Typography variant="body1" color="grey.400">
-              Custom color
-            </Typography>
-
-            <CustomColorInput>
-              <Input
-                value={customColor}
-                onChange={(e) => setCustomColor(e.target.value)}
-              />
-              <Color
-                initialColor={initialColors[0].color}
-                color={customColor}
-                selected
-              />
-            </CustomColorInput>
-          </CustomColorWrapper>
-        </BrandContainer>
-      </BrandSection>
-
-      <Divider />
-
       <AccountManagementSection>
         <SectionTitleData>
           <Typography variant="h5" color="grey.400">
@@ -215,88 +99,13 @@ export const AppearancePage = () => {
   );
 };
 
-const BrandSection = styled(Box)`
-  padding-bottom: 16px;
-`;
-
-const BrandContainer = styled(Box)`
-  max-width: 248px;
-`;
-
 const SectionTitleData = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
 `;
 
 const AccountManagementSection = styled(Stack)`
-  padding: ${({ theme }) => theme.spacing(4, 0)};
   align-items: flex-start;
   gap: ${({ theme }) => theme.spacing(4)};
-`;
-
-const Colors = styled(Box)`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(4)};
-  margin: ${({ theme }) => theme.spacing(4)} 0;
-`;
-
-const Color = styled(Box)<{
-  color: string;
-  selected: boolean;
-  initialColor: string;
-}>`
-  border-radius: 50%;
-  min-width: 16px;
-  min-height: 16px;
-  width: 16px;
-  height: 16px;
-  background-color: ${({ initialColor }) => initialColor};
-  background-color: ${({ color, initialColor }) => color || initialColor};
-  position: relative;
-  cursor: pointer;
-
-  ${({ selected, color, initialColor }) =>
-    selected &&
-    css`
-      border: 2px solid #fff;
-
-      &:before {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        width: 20px;
-        height: 20px;
-        border: 2px solid ${initialColor};
-        border: 2px solid ${color || initialColor};
-        border-radius: 50%;
-      }
-    `}
-`;
-
-const TextedDivider = styled(MuiDivider)`
-  ${({ theme }) => theme.typography.subtitle1}
-  color: ${({ theme }) => theme.palette.grey[50]};
-
-  &:before {
-    border-width: 0.5px;
-    border-color: ${({ theme }) => theme.palette.grey[100]};
-  }
-
-  &:after {
-    border-width: 0.5px;
-    border-color: ${({ theme }) => theme.palette.grey[100]};
-  }
-`;
-
-const CustomColorWrapper = styled(Stack)`
-  margin-top: ${({ theme }) => theme.spacing(4)};
-  gap: ${({ theme }) => theme.spacing(1)};
-`;
-
-const CustomColorInput = styled(Box)`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
 const InterfaceVariants = styled(Box)`

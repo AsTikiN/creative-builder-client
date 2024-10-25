@@ -44,6 +44,7 @@ export const typography: TypographyOptions = {
     fontSize: "12px",
     fontWeight: 400,
     lineHeight: "16px",
+    letterSpacing: "-0.015em",
   },
   body3: {
     fontSize: "12px",

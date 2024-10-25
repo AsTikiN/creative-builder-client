@@ -29,7 +29,7 @@ export const useRenderPageDataByRoute = () => {
       title: "Account",
       description: "Review and update your account information",
     },
-    [routes.appearance()]: {
+    [routes.accountAppearance()]: {
       title: "Appearance",
       description: "Customize the look and feel of your account",
     },

@@ -47,8 +47,10 @@ const TableActionsPanel = styled(Stack)`
 
 const Actions = styled(Stack)`
   flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(3)};
+  flex: 1;
 `;
 
 const ShortcutWrapper = styled(Box)`

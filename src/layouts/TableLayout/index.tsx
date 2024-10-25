@@ -2,7 +2,7 @@ import { TrashIcon } from "@/icons/TrashIcon";
 import { VerticalDots } from "@/icons/VerticalDots";
 import { Checkbox } from "@components/Checkbox";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
-import { BasicSelect } from "@components/Select";
+import { Select } from "@components/Select";
 import {
   styled,
   Table,
@@ -72,7 +72,7 @@ export const TableLayout = () => {
             </BodyCell>
             <BodyCell>
               <SelectContainer>
-                <BasicSelect
+                <Select
                   open={isOpen}
                   setIsOpen={() => {
                     setIsOpen(!isOpen);

@@ -1,31 +1,38 @@
-import { FigmaIcon } from "@/icons/FigmaIcon";
 import { ShareIntegrationIcon } from "@/icons/ShareIntegrationIcon";
 import { Button } from "@components/Button";
 import { Box, IconButton, Stack, styled, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 interface Props {
   onSettingsClick: () => void;
+  icon: ReactNode;
+  title: string;
+  description: string;
+  href: string;
 }
 
-export const IntegrationCard: FC<Props> = ({ onSettingsClick }) => {
+export const IntegrationCard: FC<Props> = ({
+  onSettingsClick,
+  icon,
+  title,
+  description,
+  href,
+}) => {
   return (
     <Wrapper>
       <TopSection>
-        <Icon>
-          <FigmaIcon />
-        </Icon>
-        <IconButton sx={{ padding: 0 }}>
+        <Icon>{icon}</Icon>
+        <IconButton sx={{ padding: 0 }} href={href} target="_blank">
           <ShareIntegrationIcon />
         </IconButton>
       </TopSection>
 
       <Info>
         <Typography color="grey.400" variant="body1">
-          Figma
+          {title}
         </Typography>
         <Typography color="grey.200" variant="body2">
-          Seamless collaboration and document management.
+          {description}
         </Typography>
       </Info>
 

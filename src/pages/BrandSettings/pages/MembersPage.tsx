@@ -1,5 +1,5 @@
 import { ButtonPlusIcon } from "@/icons/ButtonPlusIcon";
-import { SearchIcon } from "@/icons/SearchIcon";
+import { DefaultSearchIcon } from "@/icons/DefaultSearchIcon";
 import { ShortcutIcon } from "@/icons/ShortcutIcon";
 import { TableLayout } from "@/layouts/TableLayout";
 import { Button } from "@components/Button";
@@ -18,7 +18,11 @@ export const MembersPage = () => {
             placeholder="Search..."
             slotProps={{
               input: {
-                startAdornment: <SearchIcon />,
+                startAdornment: (
+                  <SearchWrapper>
+                    <DefaultSearchIcon />
+                  </SearchWrapper>
+                ),
                 endAdornment: (
                   <ShortcutWrapper>
                     <ShortcutIcon />
@@ -51,6 +55,13 @@ const Actions = styled(Stack)`
   align-items: center;
   gap: ${({ theme }) => theme.spacing(3)};
   flex: 1;
+`;
+
+const SearchWrapper = styled(Stack)`
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const ShortcutWrapper = styled(Box)`

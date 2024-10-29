@@ -1,7 +1,6 @@
 import { CopyIcon } from "@/icons/CopyIcon";
 import { EditIcon } from "@/icons/EditIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
-import { ShareIcon } from "@/icons/ShareIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
 import { CardLayout } from "@/layouts/CardLayout";
 import { StatusChipProps } from "@components/StatusChip";
@@ -29,32 +28,26 @@ export const AppCard: FC<AppCardProps> = ({
       dropdownOptions={[
         {
           id: 1,
-          label: "Preview",
-          value: "Preview",
-          icon: <ShareIcon />,
-        },
-        {
-          id: 2,
           label: "Edit thumbnail",
           value: "Edit thumbnail",
           icon: <ImageIcon />,
         },
         {
-          id: 3,
+          id: 2,
           label: "Duplicate",
           value: "Duplicate",
           icon: <CopyIcon />,
         },
         {
-          id: 4,
+          id: 3,
           label: "Rename",
           value: "Rename",
           icon: <EditIcon />,
         },
         {
-          id: 5,
-          label: "Delete book",
-          value: "Delete book",
+          id: 4,
+          label: "Delete offer",
+          value: "Delete offer",
           icon: <TrashIcon />,
           color: "error",
           hasDivider: true,

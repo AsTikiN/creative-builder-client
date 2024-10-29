@@ -26,4 +26,7 @@ export const routes = {
   usage: () => "/usage",
   email: () => "/email",
   brandAppearance: () => `${routes.brandSettings()}/appearance`,
+
+  notepad: () => `${routes.brandSettings()}/notepad`,
+  webhooks: () => `${routes.brandSettings()}/webhooks`,
 };

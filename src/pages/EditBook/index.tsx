@@ -6,7 +6,7 @@ import { UsersIcon } from "@/icons/UsersIcon";
 import { IconButton } from "@components/IconButton";
 import { Select } from "@components/Select";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
-import { EditBookSidebar } from "./components/EditBookSidebar";
+import { ContentElement, EditBookSidebar } from "./components/EditBookSidebar";
 import { Editor } from "@modules/Editor";
 import { ModalLayout } from "@/layouts/ModalLayout";
 import { ImageIcon } from "@/icons/ImageIcon";
@@ -15,11 +15,126 @@ import { LowIcon } from "@/icons/LowIcon";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { SettingsIcon } from "@/icons/SettingsIcon";
 import { CheckboxBlock } from "@components/Checkbox/CheckboxBlock";
+import { routes } from "@config/routes";
+import { useNavigate } from "react-router-dom";
+import { FolderIcon } from "@/icons/FolderIcon";
+
+const initialContentElements: ContentElement[] = [
+  // {
+  //   id: 1,
+  //   title: "Cover",
+  //   type: "cover",
+  // },
+  {
+    id: 2,
+    title: "Title Page",
+    type: "titlePage",
+  },
+  // {
+  //   id: 3,
+  //   title: "Copyright",
+  //   type: "copyright",
+  // },
+  {
+    id: 4,
+    title: "Table of Contents",
+    type: "tableOfContents",
+  },
+  {
+    id: 5,
+    title: "Introduction",
+    type: "introduction",
+  },
+  {
+    id: 6,
+    title: "Folder",
+    type: "folder",
+    subElements: [
+      {
+        id: 7,
+        title: "Chapter",
+        type: "chapter",
+      },
+      {
+        id: 8,
+        title: "Chapter",
+        type: "chapter",
+      },
+    ],
+  },
+  {
+    id: 9,
+    title: "Chapter",
+    type: "chapter",
+  },
+];
+
+const initialCheckedItems = {
+  cover: { status: false, element: { title: "Cover", type: "cover" } },
+  titlePage: {
+    status: false,
+    element: { title: "Title Page", type: "titlePage" },
+  },
+  copyright: {
+    status: false,
+    element: { title: "Copyright", type: "copyright" },
+  },
+  tableOfContents: {
+    status: false,
+    element: { title: "Table of Contents", type: "tableOfContents" },
+  },
+  introduction: {
+    status: false,
+    element: { title: "Introduction", type: "introduction" },
+  },
+  folder: {
+    status: false,
+    element: { title: "Folder", type: "folder" },
+  },
+  chapter: {
+    status: false,
+    element: { title: "Chapter", type: "chapter" },
+  },
+  part: {
+    status: false,
+    element: { title: "Part", type: "part" },
+  },
+  conclusion: {
+    status: false,
+    element: { title: "Conclusion", type: "conclusion" },
+  },
+};
+
+// TODO: refactor all the code
+// 1. modal should be a component
+// 2. check if types work correctly
 
 export const EditBookPage = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
+
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState<number | null>(0);
+  const [checkedItems, setCheckedItems] = useState(initialCheckedItems);
+
+  const [contentElements, setContentElements] = useState<ContentElement[]>(
+    initialContentElements
+  );
+
+  const hasCover = contentElements.some((element) => element.type === "cover");
+  const hasCopyright = contentElements.some(
+    (element) => element.type === "copyright"
+  );
+  const hasTableOfContents = contentElements.some(
+    (element) => element.type === "tableOfContents"
+  );
+
+  const handleCheckBlock = (key: keyof typeof checkedItems) => () => {
+    setCheckedItems({
+      ...checkedItems,
+      [key]: { ...checkedItems[key], status: !checkedItems[key].status },
+    });
+  };
 
   return (
     <Wrapper>
@@ -68,13 +183,16 @@ export const EditBookPage = () => {
               <SettingsIcon />
             </IconButton>
 
-            <IconButton>
+            <IconButton onClick={() => navigate(routes.apps())}>
               <CrossIcon />
             </IconButton>
           </Actions>
         </PageHeader>
         <SidebarContent>
-          <EditBookSidebar handleAddContent={() => setCurrentStep(0)} />
+          <EditBookSidebar
+            handleAddContent={() => setCurrentStep(0)}
+            contentElements={contentElements}
+          />
           <EditorWrapper>
             <Editor />
           </EditorWrapper>
@@ -85,7 +203,22 @@ export const EditBookPage = () => {
         open={currentStep === 0}
         handleClose={() => setCurrentStep(null)}
         onCancel={() => setCurrentStep(null)}
-        onNext={() => setCurrentStep(1)}
+        onNext={() => {
+          setContentElements((prev) => [
+            ...prev,
+            ...Object.values(checkedItems)
+              .filter((item) => item.status)
+              .map(
+                (item) =>
+                  ({
+                    id: Math.floor(Math.random() * 1000000),
+                    ...item.element,
+                  }) as ContentElement
+              ),
+          ]);
+          setCurrentStep(null);
+          setCheckedItems(initialCheckedItems);
+        }}
       >
         <Accordions>
           <CheckboxBlock
@@ -93,28 +226,65 @@ export const EditBookPage = () => {
             isFilledIcon
             icon={<ImageIcon />}
             tabs={[]}
-            disabled
+            disabled={hasCover}
+            checked={checkedItems.cover.status}
+            onClick={handleCheckBlock("cover")}
           />
           <CheckboxBlock
             title="Title Page"
             isFilledIcon
             icon={<FileTextIcon />}
             tabs={[]}
-            checked={false}
+            checked={checkedItems.titlePage.status}
+            onClick={handleCheckBlock("titlePage")}
           />
           <CheckboxBlock
             title="Copyright"
-            isFilledIcon
             icon={<LowIcon />}
             tabs={[]}
-            checked={true}
+            disabled={hasCopyright}
+            checked={checkedItems.copyright.status}
+            onClick={handleCheckBlock("copyright")}
           />
           <CheckboxBlock
             title="Table of Contents"
+            icon={<FileSearchIcon />}
+            tabs={[]}
+            disabled={hasTableOfContents}
+            checked={checkedItems.tableOfContents.status}
+            onClick={handleCheckBlock("tableOfContents")}
+          />
+          <CheckboxBlock
+            title="Part"
+            isFilledIcon
+            icon={<FolderIcon />}
+            tabs={[]}
+            checked={checkedItems.part.status}
+            onClick={handleCheckBlock("part")}
+          />
+          <CheckboxBlock
+            title="Introduction"
             isFilledIcon
             icon={<FileSearchIcon />}
             tabs={[]}
-            checked={false}
+            checked={checkedItems.introduction.status}
+            onClick={handleCheckBlock("introduction")}
+          />
+          <CheckboxBlock
+            title="Chapter"
+            isFilledIcon
+            icon={<FileSearchIcon />}
+            tabs={[]}
+            checked={checkedItems.chapter.status}
+            onClick={handleCheckBlock("chapter")}
+          />
+          <CheckboxBlock
+            title="Conclusion"
+            isFilledIcon
+            icon={<FileSearchIcon />}
+            tabs={[]}
+            checked={checkedItems.conclusion.status}
+            onClick={handleCheckBlock("conclusion")}
           />
         </Accordions>
       </ModalLayout>

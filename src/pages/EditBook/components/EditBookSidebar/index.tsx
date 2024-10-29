@@ -4,12 +4,12 @@ import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
-import { LayoutSidebarIcon } from "@/icons/LayoutSidebarIcon";
-import { LayoutTopBarIcon } from "@/icons/LayoutTopBarIcon";
+import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
 import { LineChartIcon } from "@/icons/LineChartIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
+import { WriteIcon } from "@/icons/WriteIcon";
 import {
   alpha,
   Box,
@@ -21,36 +21,40 @@ import {
 } from "@mui/material";
 import { FC } from "react";
 
-const bookStructure = [
-  {
-    id: 1,
-    type: "folder",
-    title: "Part",
-    files: [
-      {
-        id: 1,
-        type: "file",
-        title: "Chapter",
-      },
-      {
-        id: 2,
-        type: "file",
-        title: "Chapter",
-      },
-    ],
-  },
-  {
-    id: 2,
-    type: "file",
-    title: "Chapter",
-  },
-];
+export interface ContentElement {
+  id: number;
+  title: string;
+  type:
+    | "cover"
+    | "titlePage"
+    | "copyright"
+    | "tableOfContents"
+    | "introduction"
+    | "folder"
+    | "chapter";
+  subElements?: ContentElement[];
+}
 
 interface Props {
   handleAddContent: () => void;
+  contentElements: ContentElement[];
 }
 
-export const EditBookSidebar: FC<Props> = ({ handleAddContent }) => {
+const contentELementIcons = {
+  cover: { icon: <ImageIcon />, isFilled: true },
+  titlePage: { icon: <FileTextIcon />, isFilled: true },
+  copyright: { icon: <LowIcon />, isFilled: false },
+  tableOfContents: { icon: <FileSearchIcon />, isFilled: false },
+  introduction: { icon: <FileTextIcon />, isFilled: true },
+  folder: { icon: <FolderIcon />, isFilled: false },
+  chapter: { icon: <FileTextIcon />, isFilled: true },
+  part: { icon: <FolderIcon />, isFilled: false },
+};
+
+export const EditBookSidebar: FC<Props> = ({
+  contentElements,
+  handleAddContent,
+}) => {
   return (
     <Wrapper>
       <TopSections>
@@ -60,16 +64,16 @@ export const EditBookSidebar: FC<Props> = ({ handleAddContent }) => {
           </Typography>
         </SectionTitleWrapper>
 
-        <NavItem isFilledIcon>
+        <NavItem>
           <NavTextWrapper>
-            <LayoutTopBarIcon />
+            <WriteIcon />
             Outline
           </NavTextWrapper>
         </NavItem>
 
-        <NavItem isFilledIcon>
+        <NavItem>
           <NavTextWrapper>
-            <LayoutSidebarIcon />
+            <LayoutGridIcon />
             Formatting
           </NavTextWrapper>
         </NavItem>
@@ -91,7 +95,45 @@ export const EditBookSidebar: FC<Props> = ({ handleAddContent }) => {
           </IconButton>
         </SectionTitleWrapper>
 
-        <NavItem isFilledIcon>
+        {contentElements.map((element) => {
+          const iconData = contentELementIcons[element.type];
+          if (!iconData) console.log("22222", element.type);
+          const isFolder = element.type === "folder";
+
+          if (isFolder)
+            return (
+              <Folder key={element.id}>
+                <NavItem isFilledIcon={!isFolder}>
+                  <NavTextWrapper>
+                    {iconData.icon}
+                    {element.title}
+                  </NavTextWrapper>
+                </NavItem>
+
+                {element?.subElements?.map((file) => (
+                  <SubFile key={file.id}>
+                    <NavItem isFilledIcon>
+                      <NavTextWrapper>
+                        <FileTextIcon />
+                        {file.title}
+                      </NavTextWrapper>
+                    </NavItem>
+                  </SubFile>
+                ))}
+              </Folder>
+            );
+
+          return (
+            <NavItem isFilledIcon={iconData.isFilled}>
+              <NavTextWrapper>
+                {iconData.icon}
+                {element.title}
+              </NavTextWrapper>
+            </NavItem>
+          );
+        })}
+
+        {/* <NavItem isFilledIcon>
           <NavTextWrapper>
             <ImageIcon />
             Cover
@@ -149,7 +191,7 @@ export const EditBookSidebar: FC<Props> = ({ handleAddContent }) => {
               ))}
             </Folder>
           );
-        })}
+        })} */}
       </TopSections>
 
       <NavItem>

@@ -1,4 +1,3 @@
-import { FigmaIcon } from "@/icons/FigmaIcon";
 import { TextedDivider } from "@components/Divider/TextedDivider";
 import { Input } from "@components/Input";
 import {
@@ -11,7 +10,7 @@ import {
 } from "@mui/material";
 import { Upload } from "../components/Upload";
 import { Divider } from "@components/Divider/Divider";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Button } from "@components/Button";
 import { RescueIcon } from "@/icons/RescueIcon";
 import { CrossIcon } from "@/icons/CrossIcon";
@@ -19,11 +18,19 @@ import { CrossIcon } from "@/icons/CrossIcon";
 interface Props {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (isOpen: boolean) => void;
+  icon: ReactNode;
+  title: string;
+  description: string;
+  renderComponent?: ReactNode;
 }
 
 export const SettingsDrawer: FC<Props> = ({
   isDrawerOpen,
   setIsDrawerOpen,
+  icon,
+  title,
+  description,
+  renderComponent,
 }) => {
   const handleClose = () => {
     setIsDrawerOpen(false);
@@ -36,9 +43,7 @@ export const SettingsDrawer: FC<Props> = ({
       anchor="right"
     >
       <TopSection>
-        <Icon>
-          <FigmaIcon />
-        </Icon>
+        <Icon>{icon}</Icon>
         <CloseIconButton onClick={handleClose}>
           <CrossIcon />
         </CloseIconButton>
@@ -47,53 +52,61 @@ export const SettingsDrawer: FC<Props> = ({
       <Content>
         <TextWrapper>
           <Typography variant="body1" color="grey.400">
-            Figma
+            {title}
           </Typography>
           <Typography variant="body2" color="grey.200">
-            Seamless collaboration and document management.
+            {description}
           </Typography>
         </TextWrapper>
 
-        <Input label="Measurement ID" required placeholder="G-OPD2NX5E3C" />
+        {/* TODO: MOVE into separate component and override as renderComponent */}
 
-        <DividerWrapper>
-          <Divider />
-        </DividerWrapper>
+        {renderComponent ? (
+          renderComponent
+        ) : (
+          <>
+            <Input label="Measurement ID" required placeholder="G-OPD2NX5E3C" />
 
-        <TextWrapper>
-          <Typography variant="body1" color="grey.400">
-            Figma optimize
-          </Typography>
-          <Typography variant="body2" color="grey.200">
-            Seamless collaboration and document management.
-          </Typography>
-        </TextWrapper>
+            <DividerWrapper>
+              <Divider />
+            </DividerWrapper>
 
-        <Input label="Container ID" required placeholder="GTM-A1B2CD" />
+            <TextWrapper>
+              <Typography variant="body1" color="grey.400">
+                Figma optimize
+              </Typography>
+              <Typography variant="body2" color="grey.200">
+                Seamless collaboration and document management.
+              </Typography>
+            </TextWrapper>
 
-        <Typography variant="body2" color="grey.200" mt={2}>
-          Start running A/B, multivariate, and more tests on your pages with
-          Google Optimize. You'll need to have Figma enabled.
-        </Typography>
+            <Input label="Container ID" required placeholder="GTM-A1B2CD" />
 
-        <DividerWrapper>
-          <Divider />
-        </DividerWrapper>
+            <Typography variant="body2" color="grey.200" mt={2}>
+              Start running A/B, multivariate, and more tests on your pages with
+              Google Optimize. You'll need to have Figma enabled.
+            </Typography>
 
-        <TextWrapper>
-          <Typography variant="body1" color="grey.400">
-            Private key (JSON)
-          </Typography>
-          <Typography variant="body2" color="grey.200">
-            Create a private key under Service Accounts in Figma cloud and
-            upload.
-          </Typography>
-        </TextWrapper>
-        <Stack spacing={4}>
-          <Upload />
-          <TextedDivider>OR</TextedDivider>
-          <Input placeholder="Paste private key here..." />
-        </Stack>
+            <DividerWrapper>
+              <Divider />
+            </DividerWrapper>
+
+            <TextWrapper>
+              <Typography variant="body1" color="grey.400">
+                Private key (JSON)
+              </Typography>
+              <Typography variant="body2" color="grey.200">
+                Create a private key under Service Accounts in Figma cloud and
+                upload.
+              </Typography>
+            </TextWrapper>
+            <Stack spacing={4}>
+              <Upload />
+              <TextedDivider>OR</TextedDivider>
+              <Input placeholder="Paste private key here..." />
+            </Stack>
+          </>
+        )}
       </Content>
 
       <Actions>

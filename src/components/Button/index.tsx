@@ -28,6 +28,12 @@ export const StyledButton = styled(LoadingButton)`
   }
 
   ${(props) =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+    `}
+
+  ${(props) =>
     props.variant === "contained" &&
     css`
       &.MuiButtonBase-root {
@@ -64,7 +70,7 @@ export const StyledButton = styled(LoadingButton)`
   ${(props) =>
     props.variant === "outlined" &&
     css`
-      width: fit-content;
+      /* width: fit-content; */
       border: 0.5px solid ${props.theme.palette.grey[100]};
       color: ${props.theme.palette.grey[200]};
       box-shadow: none;

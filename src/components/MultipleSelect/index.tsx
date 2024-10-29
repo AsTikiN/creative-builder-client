@@ -27,6 +27,7 @@ interface BasicSelectProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   options: SelectOption[];
   dropdownWidth?: number;
+  label?: string | ReactNode;
 }
 
 const DEFAULT_DROPDOWN_WIDTH = 200;
@@ -34,6 +35,7 @@ const DEFAULT_DROPDOWN_WIDTH = 200;
 export const MultipleSelect: FC<BasicSelectProps> = ({
   options,
   dropdownWidth,
+  label,
 }) => {
   const [personName, setPersonName] = useState<string[]>([]);
 
@@ -57,7 +59,7 @@ export const MultipleSelect: FC<BasicSelectProps> = ({
     <Wrapper>
       <FormControl fullWidth>
         <Label variant="h5" color="grey.200">
-          Display
+          {label ? label : "Display"}
         </Label>
         <StyledSelect
           id="demo-multiple-name"
@@ -119,7 +121,9 @@ export const MultipleSelect: FC<BasicSelectProps> = ({
 };
 
 const Wrapper = styled(Box)`
-  width: 101px;
+  /* TODO: Remove hardcoded width and fix display dropdown width to 101px */
+  max-width: 120px;
+  width: 120px;
 `;
 
 const StyledSelect = styled(Select)`

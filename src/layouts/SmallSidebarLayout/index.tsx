@@ -1,6 +1,8 @@
 import { alpha, Box, css, Stack, styled, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { FC, ReactNode } from "react";
+import { SidebarBackButton } from "@components/SidebarBackButton";
+import { routes } from "@config/routes";
 
 export interface SmallSidebarNavItem {
   id: number;
@@ -11,12 +13,16 @@ export interface SmallSidebarNavItem {
   isFilled?: boolean;
 }
 
-interface Props {
-  navItems: SmallSidebarNavItem[];
+export interface SidebarSection {
   title: string;
+  items: SmallSidebarNavItem[];
 }
 
-export const SmallSidebarLayout: FC<Props> = ({ navItems, title }) => {
+interface Props {
+  navItems: SidebarSection[];
+}
+
+export const SmallSidebarLayout: FC<Props> = ({ navItems }) => {
   const navigate = useNavigate();
 
   const handleNavigate = (path: string) => () => {
@@ -27,24 +33,31 @@ export const SmallSidebarLayout: FC<Props> = ({ navItems, title }) => {
     <Wrapper>
       <SidebarShadow />
       <SidebarContentWrapper>
-        <Title>
-          <Typography variant="h6" color="grey.50">
-            {title}
-          </Typography>
-        </Title>
+        <SidebarBackButton href={routes.apps()} text="Back to dashboard" />
+
         <Navigation>
           {navItems.map((item) => (
-            <NavItem
-              key={item.path}
-              active={location.pathname === item.path}
-              onClick={handleNavigate(item.path)}
-              isFilled={item.isFilled}
-            >
-              <NavTextWrapper>
-                {item.icon}
-                {item.label}
-              </NavTextWrapper>
-            </NavItem>
+            <>
+              <Title>
+                <Typography variant="h6" color="grey.50">
+                  {item.title}
+                </Typography>
+              </Title>
+
+              {item.items.map((item) => (
+                <NavItem
+                  key={item.path}
+                  active={location.pathname === item.path}
+                  onClick={handleNavigate(item.path)}
+                  isFilled={item.isFilled}
+                >
+                  <NavTextWrapper>
+                    {item.icon}
+                    {item.label}
+                  </NavTextWrapper>
+                </NavItem>
+              ))}
+            </>
           ))}
         </Navigation>
       </SidebarContentWrapper>

@@ -31,7 +31,7 @@ const StyledEditorContent = styled(EditorContent)(({ theme }) => ({
 
     "& p": {
       marginBottom: theme.spacing(2),
-      ...theme.typography.label,
+      ...theme.typography.editorText,
       color: theme.palette.grey[200],
     },
     "& h1": {

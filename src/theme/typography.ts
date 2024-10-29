@@ -91,4 +91,9 @@ export const typography: TypographyOptions = {
     lineHeight: "32px",
     letterSpacing: "-0.015em",
   },
+  editorText: {
+    fontSize: "16px",
+    lineHeight: "24px",
+    fontWeight: 400,
+  },
 };

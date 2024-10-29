@@ -1,10 +1,16 @@
 import { DualChevronIcon } from "@/icons/DualChevronIcon";
-import { GroupPeopleIcon } from "@/icons/GroupPeopleIcon";
+import { RescueIcon } from "@/icons/RescueIcon";
+import { SettingsIcon } from "@/icons/SettingsIcon";
+import { UsersIcon } from "@/icons/UsersIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
+import { routes } from "@config/routes";
 import { alpha, Box, css, styled } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const NavigationHeader = () => {
+  const navigate = useNavigate();
+
   const [open, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     null
@@ -39,9 +45,24 @@ export const NavigationHeader = () => {
           options={[
             {
               id: 1,
-              label: "Manage members",
-              value: "Manage members",
-              icon: <GroupPeopleIcon />,
+              label: "Manage team",
+              value: "Manage team",
+              icon: <UsersIcon />,
+            },
+            {
+              id: 2,
+              label: "Help & feedback",
+              value: "Help & feedback",
+              icon: <RescueIcon />,
+            },
+            {
+              id: 3,
+              label: "Brand settings",
+              value: "Brand settings",
+              icon: <SettingsIcon />,
+              onClick: () => {
+                navigate(routes.brandSettings());
+              },
             },
           ]}
           selectedOption={selectedOption}

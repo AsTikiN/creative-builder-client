@@ -1,10 +1,6 @@
 import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
-import { useNavigate } from "react-router-dom";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
-import { IconButton } from "@components/IconButton";
-import { CrossIcon } from "@/icons/CrossIcon";
-import { routes } from "@config/routes";
 import { Header, HeaderProps } from "@modules/Header";
 import { BrandSettingsSidebar } from "../modules/BrandSettingsSidebar";
 
@@ -16,8 +12,6 @@ export const BrandSidebarLayout: FC<BrandSettingsLayoutProps> = ({
   children,
   headerProps,
 }) => {
-  const navigate = useNavigate();
-
   return (
     <Wrapper>
       <WorkspacesBoard />
@@ -27,9 +21,10 @@ export const BrandSidebarLayout: FC<BrandSettingsLayoutProps> = ({
           {...headerProps}
           variant="small"
           actions={
-            <IconButton onClick={() => navigate(routes.apps())}>
-              <CrossIcon />
-            </IconButton>
+            <></>
+            // <IconButton onClick={() => navigate(routes.apps())}>
+            //   <CrossIcon />
+            // </IconButton>
           }
         />
         <Content>{children}</Content>

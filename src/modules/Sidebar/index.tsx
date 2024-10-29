@@ -1,6 +1,6 @@
 import { BarChartIcon } from "@/icons/BarChartIcon";
 import { InboxIcon } from "@/icons/InboxIcon";
-import { RouteIcon } from "@/icons/RouteIcon";
+
 import { SearchIcon } from "@/icons/SearchIcon";
 import { SettingsIcon } from "@/icons/SettingsIcon";
 import { TagIcon } from "@/icons/TagIcon";
@@ -18,7 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "@config/routes";
 import { IconButton } from "@components/IconButton";
 import { InviteIcon } from "@/icons/InviteIcon";
-import { StoreIcon } from "@/icons/StoreIcon";
+import { SquareGridCircleIcon } from "@/icons/SquareGridCircleIcon";
+import { ConnectionIcon } from "@/icons/ConnectionIcon";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -41,9 +42,9 @@ export const Sidebar = () => {
             }}
             placeholder="Search"
           />
-          <IconButton>
+          <CustomIconButton>
             <InboxIcon />
-          </IconButton>
+          </CustomIconButton>
         </SearchWrapper>
 
         <Navigation>
@@ -79,15 +80,8 @@ export const Sidebar = () => {
             onClick={handleNavigate(routes.funnels())}
           >
             <NavTextWrapper>
-              <RouteIcon />
+              <SquareGridCircleIcon />
               Funnels
-            </NavTextWrapper>
-          </NavItem>
-
-          <NavItem>
-            <NavTextWrapper>
-              <StoreIcon />
-              Store
             </NavTextWrapper>
           </NavItem>
 
@@ -107,19 +101,19 @@ export const Sidebar = () => {
 
           <NavItem>
             <NavTextWrapper>
+              <ConnectionIcon />
+              Workflows
+            </NavTextWrapper>
+          </NavItem>
+
+          <NavItem>
+            <NavTextWrapper>
               <UsersIcon />
-              Audience
+              Contacts
             </NavTextWrapper>
           </NavItem>
           <SidebarAccordion {...financesAccordionData} />
         </Navigation>
-
-        <NavItem onClick={handleNavigate(routes.brandSettings())}>
-          <NavTextWrapper>
-            <SettingsIcon />
-            Brand settings
-          </NavTextWrapper>
-        </NavItem>
       </SidebarContentWrapper>
     </Wrapper>
   );
@@ -210,4 +204,10 @@ const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
+`;
+
+const CustomIconButton = styled(IconButton)`
+  svg path {
+    stroke: ${({ theme }) => theme.palette.grey[200]};
+  }
 `;

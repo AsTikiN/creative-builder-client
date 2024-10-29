@@ -14,6 +14,7 @@ export interface CheckboxProps {
   disabled?: boolean;
   isFilledIcon?: boolean;
   checked?: boolean;
+  onClick?: () => void;
 }
 
 export const CheckboxBlock: FC<CheckboxProps> = ({
@@ -22,9 +23,10 @@ export const CheckboxBlock: FC<CheckboxProps> = ({
   disabled,
   isFilledIcon,
   checked,
+  onClick,
 }) => {
   return (
-    <CheckboxWrapper isDisabled={disabled}>
+    <CheckboxWrapper isDisabled={disabled} onClick={onClick}>
       <Summary>
         <SummaryText isDisabled={disabled} isFilledIcon={isFilledIcon}>
           {icon} {title}
@@ -46,6 +48,7 @@ const CheckboxWrapper = styled("div")<{ isDisabled?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(2)};
+  cursor: pointer;
 
   ${({ isDisabled }) =>
     isDisabled &&

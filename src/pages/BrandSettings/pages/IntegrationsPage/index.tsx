@@ -4,7 +4,6 @@ import { IntegrationCard } from "./components/IntegrationCard";
 import { SearchIcon } from "@/icons/SearchIcon";
 import { ReactNode, useState } from "react";
 import { SettingsDrawer } from "./modules/SettingsDrawer";
-import { Select } from "@components/Select";
 import { FilterTimelineIcon } from "@/icons/FilterTimelineIcon";
 import { OpenAiLogoIcon } from "@/icons/OpenAiLogoIcon";
 import { FigmaIcon } from "@/icons/FigmaIcon";

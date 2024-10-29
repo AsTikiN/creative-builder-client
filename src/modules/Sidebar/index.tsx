@@ -2,7 +2,6 @@ import { BarChartIcon } from "@/icons/BarChartIcon";
 import { InboxIcon } from "@/icons/InboxIcon";
 
 import { SearchIcon } from "@/icons/SearchIcon";
-import { SettingsIcon } from "@/icons/SettingsIcon";
 import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";

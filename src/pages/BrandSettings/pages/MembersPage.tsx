@@ -1,43 +1,49 @@
 import { ButtonPlusIcon } from "@/icons/ButtonPlusIcon";
-import { DefaultSearchIcon } from "@/icons/DefaultSearchIcon";
-import { ShortcutIcon } from "@/icons/ShortcutIcon";
 import { TableLayout } from "@/layouts/TableLayout";
 import { Button } from "@components/Button";
-import { Input } from "@components/Input";
-import { styled, Stack, Typography, Box } from "@mui/material";
+import { ToggleButton } from "@components/ToggleButton";
+import { styled, Stack, Box } from "@mui/material";
 
 export const MembersPage = () => {
   return (
     <>
       <TableActionsPanel>
-        <Typography color="grey.400" variant="h6">
-          1 active member
-        </Typography>
+        <ToggleButton
+          options={[
+            {
+              content: <ToggleOptionWrapper>Humans</ToggleOptionWrapper>,
+              value: "humans",
+            },
+            {
+              content: <ToggleOptionWrapper>AI Agents</ToggleOptionWrapper>,
+              value: "ai-agents",
+            },
+          ]}
+        />
         <Actions>
-          <Input
-            placeholder="Search..."
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <SearchWrapper>
-                    <DefaultSearchIcon />
-                  </SearchWrapper>
-                ),
-                endAdornment: (
-                  <ShortcutWrapper>
-                    <ShortcutIcon />
-                  </ShortcutWrapper>
-                ),
-              },
-            }}
-          />
-
           <Button variant="contained" startIcon={<ButtonPlusIcon />}>
             Add member
           </Button>
         </Actions>
       </TableActionsPanel>
-      <TableLayout />
+      <TableLayout
+        members={[
+          {
+            id: "1",
+            name: "John Doe",
+            email: "john@example.com",
+            status: "Active",
+            role: "Admin",
+            avatarText: "JD",
+          },
+        ]}
+        onRoleChange={(memberId, newRole) => {
+          // Handle role change
+        }}
+        onMemberRemove={(memberId) => {
+          // Handle member removal
+        }}
+      />
     </>
   );
 };
@@ -57,19 +63,6 @@ const Actions = styled(Stack)`
   flex: 1;
 `;
 
-const SearchWrapper = styled(Stack)`
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-const ShortcutWrapper = styled(Box)`
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const ToggleOptionWrapper = styled(Box)`
+  width: 156px;
 `;

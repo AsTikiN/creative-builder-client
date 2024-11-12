@@ -1,8 +1,6 @@
+import { SettingsIcon } from "@/icons/SettingsIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
-import { VerticalDots } from "@/icons/VerticalDots";
-import { Checkbox } from "@components/Checkbox";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
-import { Select } from "@components/Select";
 import {
   styled,
   Table,
@@ -18,6 +16,7 @@ import {
   Box,
 } from "@mui/material";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const dropdownOptions = [
   {
@@ -30,25 +29,26 @@ const dropdownOptions = [
 ];
 
 export const TableLayout = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isManageRowOpen, setIsManageRowOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     null
   );
+  const [_, setSearchParams] = useSearchParams();
+
+  const handleManageClick = () => {
+    setIsManageRowOpen(!isManageRowOpen);
+    setSearchParams({ user: "Murat Alpay" });
+  };
 
   return (
     <TableContainer>
       <Table aria-label="simple table">
         <TableHeader>
           <TableRow>
-            <HeaderCell>
-              <FlexTableCell>
-                <Checkbox />
-                Members
-              </FlexTableCell>
-            </HeaderCell>
-            <HeaderCell>Status</HeaderCell>
+            <HeaderCell>Members</HeaderCell>
             <HeaderCell>Role</HeaderCell>
+            <HeaderCell>Location</HeaderCell>
+            <HeaderCell>Permissions</HeaderCell>
             <HeaderCell></HeaderCell>
           </TableRow>
         </TableHeader>
@@ -68,32 +68,18 @@ export const TableLayout = () => {
               </MemberDataWrapper>
             </BodyCell>
             <BodyCell>
-              <CustomBadge label="Disabled" />
+              <CustomBadge label="Senior UX/UI Designer" />
             </BodyCell>
             <BodyCell>
-              <SelectContainer>
-                <Select
-                  open={isOpen}
-                  setIsOpen={() => {
-                    setIsOpen(!isOpen);
-                  }}
-                  options={[
-                    {
-                      label: "Admin",
-                      value: "Admin",
-                    },
-                    {
-                      label: "User",
-                      value: "User",
-                    },
-                  ]}
-                />
-              </SelectContainer>
+              <CustomBadge label="Senior UX/UI Designer" />
+            </BodyCell>
+            <BodyCell>
+              <CustomBadge label="9 permissions" />
             </BodyCell>
             <BodyCell align="right">
-              <DotsWrapper onClick={() => setIsManageRowOpen(!isManageRowOpen)}>
-                <VerticalDots />
-              </DotsWrapper>
+              <ManageWrapper onClick={handleManageClick}>
+                <SettingsIcon />
+              </ManageWrapper>
               <DropdownAnchor>
                 <Dropdown
                   dropdownWidth={182}
@@ -136,12 +122,6 @@ const HeaderCell = styled(TableCell)`
   border: none;
 `;
 
-const FlexTableCell = styled(Stack)`
-  flex-direction: row;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing(2.5)};
-`;
-
 const BodyCell = styled(TableCell)`
   padding: ${({ theme }) => theme.spacing(2, 3)};
   border: none;
@@ -154,7 +134,7 @@ const MemberDataWrapper = styled(Stack)`
 `;
 
 const CustomBadge = styled(Chip)`
-  background-color: ${({ theme }) => theme.palette.grey[100]};
+  background-color: transparent;
   color: ${({ theme }) => theme.palette.grey[200]};
   ${({ theme }) => theme.typography.h6};
   border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
@@ -166,16 +146,12 @@ const CustomBadge = styled(Chip)`
   }
 `;
 
-const SelectContainer = styled(Box)`
-  width: 80px;
-`;
-
 const DropdownAnchor = styled("div")`
   position: absolute;
   /* top: 40px; */
   right: 210px;
 `;
 
-const DotsWrapper = styled(Box)`
+const ManageWrapper = styled(Box)`
   cursor: pointer;
 `;

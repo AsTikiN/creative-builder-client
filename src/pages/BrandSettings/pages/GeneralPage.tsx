@@ -78,8 +78,7 @@ export const GeneralPage = () => {
               Information
             </Typography>
             <Typography variant="body2" color="grey.200">
-              Set your brand's identity by providing a name and a unique URL
-              slug
+              Set your brand name
             </Typography>
           </SectionTitleData>
 
@@ -92,15 +91,53 @@ export const GeneralPage = () => {
                 error={!!errors.fullName}
                 helperText={errors.fullName?.message}
               />
+            </ProfileInputsWrapper>
+          </ProfileForm>
+        </SectionContainer>
+      </InformationSection>
+
+      <Divider />
+
+      <InformationSection>
+        <SectionContainer>
+          <SectionTitleData>
+            <Typography variant="h5" color="grey.400">
+              Default Domain
+            </Typography>
+            <Typography variant="body2" color="grey.200">
+              Set your unique default domain
+            </Typography>
+          </SectionTitleData>
+
+          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+            <ProfileInputsWrapper>
               <Input
-                placeholder="Brand URL"
+                placeholder="Domain"
                 value={watch("username")}
                 onChange={handleInputChange("username")}
                 error={!!errors.username}
                 helperText={errors.username?.message}
-                startIcon={<CustomTagIcon>booklab.ai/</CustomTagIcon>}
+                endIcon={<CustomTagIcon>.latch.so</CustomTagIcon>}
               />
             </ProfileInputsWrapper>
+          </ProfileForm>
+        </SectionContainer>
+      </InformationSection>
+
+      <Divider />
+
+      <InformationSection>
+        <SectionContainer>
+          <SectionTitleData>
+            <Typography variant="h5" color="grey.400">
+              Biography
+            </Typography>
+            <Typography variant="body2" color="grey.200">
+              Describe your brand’s long-term objective
+            </Typography>
+          </SectionTitleData>
+
+          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
             <Textarea
               placeholder="Who do you help and how do you help them"
               value={watch("description")}
@@ -188,7 +225,7 @@ const ProfileInputsWrapper = styled(Box)`
 `;
 
 const SectionContainer = styled(Box)`
-  max-width: 616px;
+  max-width: 342px;
   width: 100%;
 `;
 

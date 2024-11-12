@@ -1,4 +1,3 @@
-import { PlusIcon } from "@/icons/PlusIcon";
 import {
   alpha,
   Avatar,
@@ -22,6 +21,11 @@ import { LifeBuoyIcon } from "@/icons/LifeBuoyIcon";
 import { LogOutIcon } from "@/icons/LogOutIcon";
 import { routes } from "@config/routes";
 import { useNavigate } from "react-router-dom";
+import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
+import { ToggleButton } from "@components/ToggleButton";
+import { StudioDisplayIcon } from "@/icons/StudioDisplayIcon";
+import { RgbIcon } from "@/icons/RgbIcon";
+import { DarkRgbIcon } from "@/icons/DarkRgbIcon";
 
 export const WorkspacesBoard = () => {
   const navigate = useNavigate();
@@ -30,6 +34,7 @@ export const WorkspacesBoard = () => {
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
     null
   );
+  const [selectedTheme, setSelectedTheme] = useState<string>("system");
 
   return (
     <Wrapper>
@@ -39,7 +44,7 @@ export const WorkspacesBoard = () => {
         <Workspace icon={<SketchIcon />} />
         <Workspace icon={<CanvaIcon />} />
         <AddButton>
-          <PlusIcon />
+          <SmallPlusIcon />
         </AddButton>
       </Workspaces>
 
@@ -63,13 +68,45 @@ export const WorkspacesBoard = () => {
             isOpen={isOpen}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
+            topSection={
+              <ToggleButton
+                defaultValue={selectedTheme}
+                onChange={(value) => setSelectedTheme(value || "system")}
+                options={[
+                  {
+                    value: "system",
+                    content: (
+                      <ThemeItemWrapper>
+                        <StudioDisplayIcon />
+                      </ThemeItemWrapper>
+                    ),
+                  },
+                  {
+                    value: "light",
+                    content: (
+                      <ThemeItemWrapper>
+                        <RgbIcon />
+                      </ThemeItemWrapper>
+                    ),
+                  },
+                  {
+                    value: "dark",
+                    content: (
+                      <ThemeItemWrapper>
+                        <DarkRgbIcon />
+                      </ThemeItemWrapper>
+                    ),
+                  },
+                ]}
+              />
+            }
             options={[
               {
                 id: 1,
                 label: "Account settings",
                 value: "Account settings",
                 onClick: () => {
-                  navigate(routes.accountSettings());
+                  navigate(routes.profile());
                 },
                 icon: <ProfileIcon />,
               },
@@ -125,6 +162,10 @@ const AddButton = styled(IconButton)`
 
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+
+  svg path {
+    stroke: ${({ theme }) => theme.palette.grey[200]};
+  }
 `;
 
 const StyledBadge = styled(Badge)<{ isOpen: boolean }>`
@@ -181,4 +222,9 @@ const StyledAvatar = styled(Avatar)<{ isOpen: boolean }>`
         left: -4px;
       }
     `}
+`;
+
+const ThemeItemWrapper = styled(Stack)`
+  justify-content: center;
+  align-items: center;
 `;

@@ -4,10 +4,11 @@ import { BrandSettingsIcon } from "@/icons/BrandSettingsIcon";
 import { ColorPaletteIcon } from "@/icons/ColorPaletteIcon";
 import { CompassIcon } from "@/icons/CompassIcon";
 import { CreditCardIcon } from "@/icons/CreditCardIcon";
-import { FileChartIcon } from "@/icons/FileChartIcon";
+import { FocusAutoIcon } from "@/icons/FocusAutoIcon";
 import { LiveIcon } from "@/icons/LiveIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { NotepadIcon } from "@/icons/NotepadIcon";
+import { NoteTextIcon } from "@/icons/NoteTextIcon";
 import { PhoneIcon } from "@/icons/PhoneIcon";
 import { SettingsToggleIcon } from "@/icons/SettingsToggleIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
@@ -25,7 +26,7 @@ export const BrandSettingsSidebar = () => {
               id: 1,
               icon: <BrandSettingsIcon />,
               label: "Details",
-              path: routes.brandSettings(),
+              path: routes.brandDetails(),
             },
             {
               id: 2,
@@ -38,10 +39,16 @@ export const BrandSettingsSidebar = () => {
               id: 3,
               icon: <UsersIcon />,
               label: "Team",
-              path: routes.members(),
+              path: routes.team(),
             },
             {
               id: 4,
+              icon: <NoteTextIcon />,
+              label: "Apps",
+              path: routes.apps(),
+            },
+            {
+              id: 5,
               icon: <LowIcon />,
               label: "Legal",
               path: routes.legal(),
@@ -49,7 +56,7 @@ export const BrandSettingsSidebar = () => {
           ],
         },
         {
-          title: "Team & Plans",
+          title: "Finance",
           items: [
             {
               id: 5,
@@ -59,13 +66,6 @@ export const BrandSettingsSidebar = () => {
             },
             {
               id: 6,
-              icon: <FileChartIcon />,
-              label: "Usage",
-              path: routes.usage(),
-              isFilled: true,
-            },
-            {
-              id: 7,
               icon: <CreditCardIcon />,
               label: "Billing",
               path: routes.brandBilling(),
@@ -99,6 +99,12 @@ export const BrandSettingsSidebar = () => {
           title: "Advanced",
           items: [
             {
+              id: 10,
+              icon: <FocusAutoIcon />,
+              label: "Branded App",
+              path: routes.brandedApp(),
+            },
+            {
               id: 11,
               icon: <LiveIcon />,
               label: "Webhooks",
@@ -113,7 +119,7 @@ export const BrandSettingsSidebar = () => {
             {
               id: 13,
               icon: <NotepadIcon />,
-              label: "Logs",
+              label: "Event Log",
               path: routes.notepad(),
             },
           ],

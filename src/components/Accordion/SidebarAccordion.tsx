@@ -5,6 +5,7 @@ import {
   AccordionSummary,
   alpha,
   css,
+  Stack,
   styled,
   Tab,
   Tabs,
@@ -20,28 +21,34 @@ export interface SidebarAccordionProps {
   title: string;
   icon: React.ReactNode;
   tabs: TabItem[];
+  isFilled?: boolean;
 }
 
 export const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
   title,
   icon,
   tabs,
+  isFilled,
 }) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number | null>(null);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  const hasSelected = value !== null;
+
   return (
-    <AccordionWrapper>
+    <AccordionWrapper hasSelected={hasSelected}>
       <Summary
         expandIcon={<ChevronDownIcon />}
         aria-controls="panel1-content"
         id="panel1-header"
+        hasSelected={hasSelected}
+        isFilled={isFilled}
       >
         <SummaryText>
-          <div className="main-icon">{icon}</div> {title}
+          <Stack className="main-icon">{icon}</Stack> {title}
         </SummaryText>
       </Summary>
       <Details>
@@ -59,7 +66,7 @@ export const SidebarAccordion: React.FC<SidebarAccordionProps> = ({
   );
 };
 
-const AccordionWrapper = styled(Accordion)`
+const AccordionWrapper = styled(Accordion)<{ hasSelected: boolean }>`
   box-shadow: none;
   color: ${({ theme }) => theme.palette.grey[200]};
   position: relative;
@@ -71,27 +78,34 @@ const AccordionWrapper = styled(Accordion)`
   &.Mui-expanded {
     margin: 0;
 
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 1px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      box-shadow:
-        0px 0px 0.5px #e0e0e0,
-        0px 1px 3px 0px #a6a6a633;
-      width: 100%;
-      height: 32px;
-      border-radius: 8px;
-      opacity: 1;
-      background-color: transparent;
-    }
+    ${({ hasSelected }) =>
+      hasSelected &&
+      css`
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 1px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          box-shadow:
+            0px 0px 0.5px #e0e0e0,
+            0px 1px 3px 0px #a6a6a633;
+          width: 100%;
+          height: 32px;
+          border-radius: 8px;
+          opacity: 1;
+          background-color: transparent;
+        }
+      `}
   }
 `;
 
-const Summary = styled(AccordionSummary)`
+const Summary = styled(AccordionSummary)<{
+  hasSelected: boolean;
+  isFilled?: boolean;
+}>`
   padding: ${({ theme }) => theme.spacing(1.5, 2)};
   min-height: auto;
   display: flex;
@@ -106,18 +120,20 @@ const Summary = styled(AccordionSummary)`
     }
   }
 
-  .MuiAccordionSummary-expandIconWrapper {
-    position: relative;
-    top: -1px;
-  }
-
   &.Mui-expanded {
     min-height: auto;
-    color: ${({ theme }) => theme.palette.grey[400]};
 
-    .main-icon svg path {
-      color: ${({ theme }) => theme.palette.grey[400]};
-    }
+    ${({ theme, hasSelected, isFilled }) =>
+      hasSelected &&
+      css`
+        color: ${theme.palette.grey[400]};
+
+        .main-icon svg path {
+          ${isFilled
+            ? `fill: ${theme.palette.grey[400]}`
+            : `stroke: ${theme.palette.grey[400]}`};
+        }
+      `}
   }
 `;
 
@@ -131,6 +147,12 @@ const StyledTabs = styled(Tabs)`
     border-radius: 2px;
     height: 22px !important;
     transform: translateY(6px);
+  }
+
+  &:not(:has(.Mui-selected)) {
+    .MuiTabs-indicator {
+      background-color: transparent;
+    }
   }
 
   & .MuiTabs-scroller {

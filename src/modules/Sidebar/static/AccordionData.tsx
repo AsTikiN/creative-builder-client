@@ -6,12 +6,12 @@ export const marketingAccordionData: SidebarAccordionProps = {
   title: "Marketing",
   icon: <TargetIcon />,
   tabs: [
-    { id: 1, label: "Email" },
-    { id: 2, label: "SMS" },
-    { id: 3, label: "Messages" },
-    { id: 4, label: "Discounts" },
-    { id: 5, label: "Affiliates" },
+    { id: 1, label: "Profiles" },
+    { id: 2, label: "Communications" },
+    { id: 3, label: "Promotions" },
+    { id: 4, label: "Affiliates" },
   ],
+  isFilled: true,
 };
 
 export const financesAccordionData: SidebarAccordionProps = {

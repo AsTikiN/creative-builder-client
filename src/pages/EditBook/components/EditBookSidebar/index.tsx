@@ -49,6 +49,7 @@ const contentELementIcons = {
   folder: { icon: <FolderIcon />, isFilled: false },
   chapter: { icon: <FileTextIcon />, isFilled: true },
   part: { icon: <FolderIcon />, isFilled: false },
+  conclusion: { icon: <FileTextIcon />, isFilled: true },
 };
 
 export const EditBookSidebar: FC<Props> = ({
@@ -132,66 +133,6 @@ export const EditBookSidebar: FC<Props> = ({
             </NavItem>
           );
         })}
-
-        {/* <NavItem isFilledIcon>
-          <NavTextWrapper>
-            <ImageIcon />
-            Cover
-          </NavTextWrapper>
-        </NavItem>
-
-        <NavItem isFilledIcon>
-          <NavTextWrapper>
-            <FileTextIcon />
-            Title Page
-          </NavTextWrapper>
-        </NavItem>
-
-        <NavItem>
-          <NavTextWrapper>
-            <LowIcon />
-            Copyright
-          </NavTextWrapper>
-        </NavItem>
-        <NavItem>
-          <NavTextWrapper>
-            <FileSearchIcon />
-            Table of Contents
-          </NavTextWrapper>
-        </NavItem>
-        <NavItem isFilledIcon>
-          <NavTextWrapper>
-            <FileTextIcon />
-            Introduction
-          </NavTextWrapper>
-        </NavItem>
-
-        {bookStructure.map((item) => {
-          const isFolder = item.type === "folder";
-          const icon = isFolder ? <FolderIcon /> : <FileTextIcon />;
-
-          return (
-            <Folder key={item.id}>
-              <NavItem isFilledIcon={!isFolder}>
-                <NavTextWrapper>
-                  {icon}
-                  {item.title}
-                </NavTextWrapper>
-              </NavItem>
-
-              {item?.files?.map((file) => (
-                <SubFile key={file.id}>
-                  <NavItem isFilledIcon>
-                    <NavTextWrapper>
-                      <FileTextIcon />
-                      {file.title}
-                    </NavTextWrapper>
-                  </NavItem>
-                </SubFile>
-              ))}
-            </Folder>
-          );
-        })} */}
       </TopSections>
 
       <NavItem>

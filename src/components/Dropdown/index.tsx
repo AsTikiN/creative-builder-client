@@ -4,6 +4,7 @@ import {
   Menu,
   MenuItem,
   PopoverOrigin,
+  Stack,
   styled,
   Typography,
 } from "@mui/material";
@@ -34,6 +35,7 @@ export interface DropdownProps extends PropsWithChildren {
   dropdownWidth?: number;
   anchorOrigin?: PopoverOrigin;
   options: DropdownOption[];
+  topSection?: ReactNode;
 }
 
 export const Dropdown: FC<DropdownProps> = ({
@@ -45,6 +47,7 @@ export const Dropdown: FC<DropdownProps> = ({
   options,
   selectedOption,
   setSelectedOption,
+  topSection,
 }) => {
   const anchorRef = useRef<HTMLDivElement>(null);
 
@@ -67,6 +70,7 @@ export const Dropdown: FC<DropdownProps> = ({
           ...anchorOrigin,
         }}
       >
+        {topSection && <TopSection>{topSection}</TopSection>}
         {options.map((option) => (
           <StyledMenuItem
             key={option.id}
@@ -148,4 +152,9 @@ const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
   &:hover {
     border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
   }
+`;
+
+const TopSection = styled(Stack)`
+  border-bottom: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+  padding: ${({ theme }) => theme.spacing(1)};
 `;

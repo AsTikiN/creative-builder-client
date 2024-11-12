@@ -1,6 +1,5 @@
 import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
-import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { Header, HeaderProps } from "@modules/Header";
 import { BrandSettingsSidebar } from "../modules/BrandSettingsSidebar";
 
@@ -14,7 +13,7 @@ export const BrandSidebarLayout: FC<BrandSettingsLayoutProps> = ({
 }) => {
   return (
     <Wrapper>
-      <WorkspacesBoard />
+      {/* <WorkspacesBoard /> */}
       <BrandSettingsSidebar />
       <Main>
         <Header

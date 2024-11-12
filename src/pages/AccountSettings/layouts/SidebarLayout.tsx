@@ -1,8 +1,9 @@
-import { styled } from "@mui/material";
+import { Breadcrumbs, styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 import { Header, HeaderProps } from "@modules/Header";
 import { AccountSidebar } from "@modules/AccountSidebar";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
+import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 export interface AccountSidebarLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
@@ -12,9 +13,12 @@ export const AccountSidebarLayout: FC<AccountSidebarLayoutProps> = ({
   children,
   headerProps,
 }) => {
+  const breadcrumbs = useBreadcrumbs();
+  console.log(breadcrumbs, "breadcrumbs");
+
   return (
     <Wrapper>
-      <WorkspacesBoard />
+      {/* <WorkspacesBoard /> */}
       <AccountSidebar />
       <Main>
         <Header
@@ -27,6 +31,9 @@ export const AccountSidebarLayout: FC<AccountSidebarLayoutProps> = ({
             // </IconButton>
           }
         />
+        {/* <CustomBreadcrumbs>
+          {breadcrumbs.map((breadcrumb) => breadcrumb.breadcrumb)}
+        </CustomBreadcrumbs> */}
         <Content>{children}</Content>
       </Main>
     </Wrapper>
@@ -48,6 +55,13 @@ const Content = styled("div")`
   padding: ${({ theme }) => theme.spacing(5)};
   height: calc(100vh - 72.5px);
   overflow-x: auto;
+`;
+
+const CustomBreadcrumbs = styled(Breadcrumbs)`
+  & .MuiBreadcrumbs-separator {
+    margin: 0 ${({ theme }) => theme.spacing(3.25)};
+    color: ${({ theme }) => theme.palette.grey[700]};
+  }
 `;
 
 export default AccountSidebarLayout;

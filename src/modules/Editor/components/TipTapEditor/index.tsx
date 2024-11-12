@@ -19,129 +19,6 @@ import { ColorDotIcon } from "@/icons/ColorDotIcon";
 import { CodeIcon } from "@/icons/CodeIcon";
 import { HorizontalDots } from "@/icons/HorizontalDots";
 
-const StyledEditorContent = styled(EditorContent)(({ theme }) => ({
-  color: "#000",
-
-  "& .ProseMirror": {
-    ...theme.typography.body1,
-
-    "& *::selection": {
-      backgroundColor: "#ecf0ff",
-    },
-
-    "& p": {
-      marginBottom: theme.spacing(2),
-      ...theme.typography.editorText,
-      color: theme.palette.grey[200],
-    },
-    "& h1": {
-      ...theme.typography.editorH1,
-    },
-    "& h2": {
-      ...theme.typography.editorH2,
-    },
-    "& h3": {
-      ...theme.typography.h3,
-    },
-    "& ul, & ol": {
-      paddingLeft: theme.spacing(3),
-      marginBottom: theme.spacing(2),
-    },
-    "& li": {
-      marginBottom: theme.spacing(1),
-    },
-    "& a": {
-      color: theme.palette.primary.main,
-      textDecoration: "underline",
-    },
-  },
-}));
-
-const EditorWrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  /* color: #283244; */
-  color: #344054;
-
-  min-height: 400px;
-  min-width: 0;
-  width: 100%;
-  /* text-align: justify; */
-
-  div:focus-visible {
-    outline: none;
-  }
-
-  & p:not(:first-child),
-  & h1:not(:first-child),
-  & h2:not(:first-child),
-  & h3:not(:first-child),
-  & h4:not(:first-child),
-  & h5:not(:first-child),
-  & h6:not(:first-child) {
-    margin-top: ${({ theme }) => theme.spacing(4)};
-  }
-
-  & > div {
-    border: none;
-  }
-
-  .tiptap {
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-    margin-left: -5rem;
-    padding-left: 5rem;
-    min-width: 0;
-    width: 100%;
-
-    @media (max-width: 1200px) {
-      margin-left: -1rem;
-      padding-left: 1rem;
-    }
-  }
-
-  .tiptap .is-empty::before {
-    color: #adb5bd;
-    content: attr(data-placeholder);
-    float: left;
-    height: 0;
-    pointer-events: none;
-  }
-
-  .is-empty-editor::before {
-    color: #667085 !important;
-    font-weight: 400;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 120%;
-    font-weight: 600;
-  }
-
-  h1 {
-    font-size: 20px;
-    margin: 0;
-  }
-
-  h2 {
-    font-size: 18px;
-    margin: ${({ theme }) => theme.spacing(6)} 0 0 0;
-  }
-
-  h3 {
-    font-size: 16px;
-  }
-`;
-
 export const TipTapEditor: React.FC = () => {
   const editor = useEditor({
     extensions: [StarterKit, Underline, Link, TextStyle, Color],
@@ -286,4 +163,127 @@ const VerticalDivider = styled(Box)`
   height: 20px;
   background-color: ${({ theme }) => theme.palette.grey[100]};
   margin: 0 1.5px;
+`;
+
+const StyledEditorContent = styled(EditorContent)(({ theme }) => ({
+  color: "#000",
+
+  "& .ProseMirror": {
+    ...theme.typography.body1,
+
+    "& *::selection": {
+      backgroundColor: "#ecf0ff",
+    },
+
+    "& p": {
+      marginBottom: theme.spacing(2),
+      ...theme.typography.editorText,
+      color: theme.palette.grey[200],
+    },
+    "& h1": {
+      ...theme.typography.editorH1,
+    },
+    "& h2": {
+      ...theme.typography.editorH2,
+    },
+    "& h3": {
+      ...theme.typography.h3,
+    },
+    "& ul, & ol": {
+      paddingLeft: theme.spacing(3),
+      marginBottom: theme.spacing(2),
+    },
+    "& li": {
+      marginBottom: theme.spacing(1),
+    },
+    "& a": {
+      color: theme.palette.primary.main,
+      textDecoration: "underline",
+    },
+  },
+}));
+
+const EditorWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  /* color: #283244; */
+  color: #344054;
+
+  min-height: 400px;
+  min-width: 0;
+  width: 100%;
+  /* text-align: justify; */
+
+  div:focus-visible {
+    outline: none;
+  }
+
+  & p:not(:first-child),
+  & h1:not(:first-child),
+  & h2:not(:first-child),
+  & h3:not(:first-child),
+  & h4:not(:first-child),
+  & h5:not(:first-child),
+  & h6:not(:first-child) {
+    margin-top: ${({ theme }) => theme.spacing(4)};
+  }
+
+  & > div {
+    border: none;
+  }
+
+  .tiptap {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    margin-left: -5rem;
+    padding-left: 5rem;
+    min-width: 0;
+    width: 100%;
+
+    @media (max-width: 1200px) {
+      margin-left: -1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  .tiptap .is-empty::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .is-empty-editor::before {
+    color: #667085 !important;
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 120%;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin: ${({ theme }) => theme.spacing(6)} 0 0 0;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
 `;

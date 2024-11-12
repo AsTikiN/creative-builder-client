@@ -16,7 +16,7 @@ export const useRenderPageDataByRoute = () => {
       title: "General",
       description: "Provide essential details about your brand",
     },
-    [routes.members()]: {
+    [routes.team()]: {
       title: "Members",
       description: "Add, remove, or update your brand’s team members",
     },

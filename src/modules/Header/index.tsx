@@ -1,4 +1,5 @@
-import { alpha, Stack, styled, Typography, useTheme } from "@mui/material";
+import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
+import { alpha, Breadcrumbs, Stack, styled } from "@mui/material";
 import { FC, ReactNode } from "react";
 
 export interface HeaderProps {
@@ -9,28 +10,29 @@ export interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({
-  title,
-  description,
-  variant = "large",
+  // title,
+  // description,
+  // variant = "large",
   actions,
 }) => {
-  const theme = useTheme();
-  const variantProps = {
-    large: {
-      titleVariant: "h3" as const,
-      descriptionVariant: "h5" as const,
-    },
-    small: {
-      titleVariant: "titleLarge" as const,
-      descriptionVariant: "h5" as const,
-    },
-  };
+  const breadcrumbs = useBreadcrumbs();
 
+  // const theme = useTheme();
+  // const variantProps = {
+  //   large: {
+  //     titleVariant: "h3" as const,
+  //     descriptionVariant: "h5" as const,
+  //   },
+  //   small: {
+  //     titleVariant: "titleLarge" as const,
+  //     descriptionVariant: "h5" as const,
+  //   },
+  // };
 
   return (
     <Wrapper>
       <HeaderData>
-        <Typography
+        {/* <Typography
           variant={variantProps[variant].titleVariant}
           component="p"
           color={theme.palette.grey[400]}
@@ -43,7 +45,10 @@ export const Header: FC<HeaderProps> = ({
           color={theme.palette.grey[200]}
         >
           {description}
-        </Typography>
+        </Typography> */}
+        <CustomBreadcrumbs>
+          {breadcrumbs.map((breadcrumb) => breadcrumb.breadcrumb)}
+        </CustomBreadcrumbs>
       </HeaderData>
 
       <HeaderActions>{actions}</HeaderActions>
@@ -52,7 +57,7 @@ export const Header: FC<HeaderProps> = ({
 };
 
 const Wrapper = styled("div")`
-  padding: ${({ theme }) => theme.spacing(3, 5)};
+  padding: ${({ theme }) => theme.spacing(3)};
   display: flex;
   align-items: center;
   border-bottom: 0.5px solid
@@ -68,4 +73,19 @@ const HeaderActions = styled("div")`
   display: flex;
   gap: ${({ theme }) => theme.spacing(3)};
   align-items: center;
+`;
+
+const CustomBreadcrumbs = styled(Breadcrumbs)`
+  padding-left: ${({ theme }) => theme.spacing(2)};
+
+  & .MuiBreadcrumbs-separator {
+    margin: 0 ${({ theme }) => theme.spacing(3.25)};
+    color: ${({ theme }) => theme.palette.grey[700]};
+  }
+
+  & .MuiBreadcrumbs-li {
+    cursor: pointer;
+
+    
+  }
 `;

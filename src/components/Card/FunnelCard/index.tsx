@@ -154,9 +154,9 @@ const CardInfo = styled("div")`
 
   display: flex;
   flex-wrap: wrap;
-  padding-top: ${({ theme }) => theme.spacing(3)};
+  padding-top: ${({ theme }) => theme.spacing(2)};
   // Maintain 8px margin-top to account for 4px gap between sections
-  margin-top: ${({ theme }) => theme.spacing(2)};
+  margin-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 const CardInfoSection = styled(Stack)`

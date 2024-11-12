@@ -6,7 +6,7 @@ import {
 import { CreditCardIcon } from "@/icons/CreditCardIcon";
 import { BellIcon } from "@/icons/BellIcon";
 import { ProfileCircleIcon } from "@/icons/ProfileCircleIcon";
-import { RgbIcon } from "@/icons/RgbIcon";
+import { ShieldCheckIcon } from "@/icons/ShieldCheckIcon";
 
 const navItems: SidebarSection[] = [
   {
@@ -16,13 +16,13 @@ const navItems: SidebarSection[] = [
         id: 1,
         icon: <ProfileCircleIcon />,
         label: "Profile",
-        path: routes.accountSettings(),
+        path: routes.profile(),
       },
       {
         id: 2,
-        icon: <RgbIcon />,
-        label: "Theme",
-        path: routes.accountAppearance(),
+        icon: <ShieldCheckIcon />,
+        label: "Security",
+        path: routes.security(),
       },
       {
         id: 3,

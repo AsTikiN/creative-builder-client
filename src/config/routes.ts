@@ -1,23 +1,42 @@
+export enum SubRoutes {
+  profile = "profile",
+  security = "security",
+  notifications = "notifications",
+  billing = "billing",
+  general = "general",
+  team = "team",
+  plans = "plans",
+  integrations = "integrations",
+  appearance = "appearance",
+  notepad = "notepad",
+  webhooks = "webhooks",
+  brandedApp = "branded-app",
+  details = "details",
+  apps = "apps",
+}
+
 export const routes = {
-  apps: () => "/apps",
+  apps: () => `/${SubRoutes.apps}`,
   login: () => "/login",
   offers: () => "/offers",
   funnels: () => "/funnels",
   editBook: (id: string) => `/book/edit/${id}`,
 
   accountSettings: () => "/account-settings",
-  accountAppearance: () => `${routes.accountSettings()}/appearance`,
-  editor: () => "/editor",
-  notifications: () => `${routes.accountSettings()}/notifications`,
-  general: () => `${routes.brandSettings()}/general`,
-  members: () => `${routes.brandSettings()}/members`,
+  accountAppearance: () => `${routes.accountSettings()}/${SubRoutes.profile}`,
+  security: () => `${routes.accountSettings()}/${SubRoutes.security}`,
 
-  plans: () => `${routes.brandSettings()}/plans`,
-  integrations: () => `${routes.brandSettings()}/integrations`,
-  accountBilling: () => `${routes.accountSettings()}/billing`,
+  editor: () => "/editor",
+  notifications: () => `${routes.accountSettings()}/${SubRoutes.notifications}`,
+  general: () => `${routes.brandSettings()}/${SubRoutes.general}`,
+  team: () => `${routes.brandSettings()}/${SubRoutes.team}`,
+
+  plans: () => `${routes.brandSettings()}/${SubRoutes.plans}`,
+  integrations: () => `${routes.brandSettings()}/${SubRoutes.integrations}`,
+  accountBilling: () => `${routes.accountSettings()}/${SubRoutes.billing}`,
 
   brandSettings: () => "/brand-settings",
-  brandBilling: () => `${routes.brandSettings()}/billing`,
+  brandBilling: () => `${routes.brandSettings()}/${SubRoutes.billing}`,
 
   legal: () => "/legal",
   domain: () => "/domain",
@@ -25,8 +44,12 @@ export const routes = {
   agents: () => "/agents",
   usage: () => "/usage",
   email: () => "/email",
-  brandAppearance: () => `${routes.brandSettings()}/appearance`,
+  profile: () => `${routes.accountSettings()}/${SubRoutes.profile}`,
+  brandAppearance: () => `${routes.brandSettings()}/${SubRoutes.appearance}`,
 
-  notepad: () => `${routes.brandSettings()}/notepad`,
-  webhooks: () => `${routes.brandSettings()}/webhooks`,
+  notepad: () => `${routes.brandSettings()}/${SubRoutes.notepad}`,
+  webhooks: () => `${routes.brandSettings()}/${SubRoutes.webhooks}`,
+
+  brandedApp: () => `${routes.brandSettings()}/${SubRoutes.brandedApp}`,
+  brandDetails: () => `${routes.brandSettings()}/${SubRoutes.details}`,
 };

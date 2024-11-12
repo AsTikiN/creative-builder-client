@@ -150,6 +150,10 @@ const NavItem = styled("div")<{ active?: boolean; isFilled?: boolean }>`
 
       border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)};
     `}
+
+  &:hover {
+    background-color: ${({ theme }) => theme.palette.grey[500]};
+  }
 `;
 
 const NavTextWrapper = styled("div")`

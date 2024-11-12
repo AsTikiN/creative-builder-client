@@ -2,6 +2,91 @@ import { ToggleButton } from "@components/ToggleButton";
 import { Stack, styled, Typography } from "@mui/material";
 import { PlanCard } from "./components/PlanCard";
 
+const plans = [
+  {
+    title: "Basic",
+    price: "29",
+    description: "per month, billed monthly",
+    isActive: true,
+    benefits: [
+      {
+        id: "1",
+        title: "3% transaction fee",
+      },
+      {
+        id: "2",
+        title: "2 team members",
+      },
+      {
+        id: "3",
+        title: "20 apps",
+      },
+      {
+        id: "4",
+        title: "10 offers",
+      },
+      {
+        id: "5",
+        title: "4 funnels",
+      },
+    ],
+  },
+  {
+    title: "Standard",
+    price: "79",
+    description: "per month, billed monthly",
+    benefits: [
+      {
+        id: "1",
+        title: "1.5% transaction fee",
+      },
+      {
+        id: "2",
+        title: "10 team members",
+      },
+      {
+        id: "3",
+        title: "100 apps",
+      },
+      {
+        id: "4",
+        title: "50 offers",
+      },
+      {
+        id: "5",
+        title: "20 funnels",
+      },
+    ],
+  },
+  {
+    title: "Professional",
+    price: "149",
+    description: "per month, billed monthly",
+    benefits: [
+      {
+        id: "1",
+        title: "0% transaction fee",
+      },
+      {
+        id: "2",
+        title: "Unlimited team members",
+      },
+      {
+        id: "3",
+        title: "Unlimited apps",
+      },
+      {
+        id: "4",
+        title: "Unlimited offers",
+      },
+      {
+        id: "5",
+        title: "Unlimited funnels",
+      },
+    ],
+  },
+];
+
 export const PlansPage = () => {
   return (
     <>
@@ -14,92 +99,31 @@ export const PlansPage = () => {
             <Typography color="grey.200" variant="h6">
               Billing period
             </Typography>
-            <ToggleButton />
+            <ToggleButton
+              options={[
+                {
+                  value: "annually",
+                  content: <PlanTypeWrapper>Annually</PlanTypeWrapper>,
+                },
+                {
+                  value: "monthly",
+                  content: <PlanTypeWrapper>Monthly</PlanTypeWrapper>,
+                },
+              ]}
+            />
           </ToggleWrapper>
         </PlansActionsPanel>
         <PlansList>
-          <PlanCard
-            isActive
-            title="Side Hustle"
-            price="29"
-            description="per month, billed monthly"
-            benefits={[
-              {
-                id: "1",
-                title: "3% transaction fee",
-              },
-              {
-                id: "2",
-                title: "2 team members",
-              },
-              {
-                id: "3",
-                title: "20 apps",
-              },
-              {
-                id: "4",
-                title: "10 offers",
-              },
-              {
-                id: "5",
-                title: "4 funnels",
-              },
-            ]}
-          />
-          <PlanCard
-            title="Business"
-            price="79"
-            description="per month, billed monthly"
-            benefits={[
-              {
-                id: "1",
-                title: "1.5% transaction fee",
-              },
-              {
-                id: "2",
-                title: "10 team members",
-              },
-              {
-                id: "3",
-                title: "100 apps",
-              },
-              {
-                id: "4",
-                title: "50 offers",
-              },
-              {
-                id: "5",
-                title: "20 funnels",
-              },
-            ]}
-          />
-          <PlanCard
-            title="Enterprise"
-            price="149"
-            description="per month, billed monthly"
-            benefits={[
-              {
-                id: "1",
-                title: "0% transaction fee",
-              },
-              {
-                id: "2",
-                title: "Unlimited team members",
-              },
-              {
-                id: "3",
-                title: "Unlimited apps",
-              },
-              {
-                id: "4",
-                title: "Unlimited offers",
-              },
-              {
-                id: "5",
-                title: "Unlimited funnels",
-              },
-            ]}
-          />
+          {plans.map((plan) => (
+            <PlanCard
+              key={plan.title}
+              title={plan.title}
+              price={plan.price}
+              description={plan.description}
+              isActive={plan.isActive}
+              benefits={plan.benefits}
+            />
+          ))}
         </PlansList>
       </Container>
     </>
@@ -130,4 +154,10 @@ const PlansList = styled(Stack)`
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(1)};
   background-color: ${({ theme }) => theme.palette.grey[500]};
+`;
+
+const PlanTypeWrapper = styled(Stack)`
+  justify-content: center;
+  align-items: center;
+  width: 114px;
 `;

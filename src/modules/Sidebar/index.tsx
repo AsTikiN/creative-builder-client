@@ -1,7 +1,6 @@
 import { BarChartIcon } from "@/icons/BarChartIcon";
 import { InboxIcon } from "@/icons/InboxIcon";
 
-import { SearchIcon } from "@/icons/SearchIcon";
 import { TagIcon } from "@/icons/TagIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";
@@ -19,6 +18,7 @@ import { IconButton } from "@components/IconButton";
 import { InviteIcon } from "@/icons/InviteIcon";
 import { SquareGridCircleIcon } from "@/icons/SquareGridCircleIcon";
 import { ConnectionIcon } from "@/icons/ConnectionIcon";
+import { MagnifyingGlassIcon } from "@/icons/MagnifyingGlassIcon";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -36,7 +36,11 @@ export const Sidebar = () => {
           <Input
             slotProps={{
               input: {
-                startAdornment: <SearchIcon />,
+                startAdornment: (
+                  <SearchIconWrapper>
+                    <MagnifyingGlassIcon />
+                  </SearchIconWrapper>
+                ),
               },
             }}
             placeholder="Search"
@@ -209,4 +213,9 @@ const CustomIconButton = styled(IconButton)`
   svg path {
     stroke: ${({ theme }) => theme.palette.grey[200]};
   }
+`;
+
+const SearchIconWrapper = styled("div")`
+  min-width: 20px;
+  height: 20px;
 `;

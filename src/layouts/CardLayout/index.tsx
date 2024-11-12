@@ -4,7 +4,6 @@ import { StatusChip, StatusChipProps } from "@components/StatusChip";
 import { alpha, Stack, styled } from "@mui/material";
 import { FC, PropsWithChildren, useState } from "react";
 import { MockOfferImage } from "./components/MockOfferImage";
-import { MockBookImage } from "./components/MockBookImage";
 import { MockFunnelImage } from "./components/MockFunnelImage";
 
 interface CardLayoutProps extends PropsWithChildren {
@@ -27,7 +26,7 @@ export const CardLayout: FC<CardLayoutProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const mockImages = {
-    book: <MockBookImage />,
+    book: <></>,
     offer: <MockOfferImage />,
     funnel: <MockFunnelImage />,
   };
@@ -84,7 +83,7 @@ const CoverImageWrapper = styled("div")<{
   justify-content: center;
   padding: ${({ theme }) => theme.spacing(6)};
   position: relative;
-  height: ${({ variant }) => (variant === "book" ? "212px" : "164px")};
+  height: ${({ variant }) => (variant === "book" ? "240px" : "164px")};
 
   &:hover .action-panel {
     opacity: 1;

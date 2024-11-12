@@ -1,5 +1,3 @@
-import { TextedDivider } from "@components/Divider/TextedDivider";
-import { Input } from "@components/Input";
 import {
   Box,
   Drawer,
@@ -8,14 +6,12 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import { Upload } from "../components/Upload";
-import { Divider } from "@components/Divider/Divider";
 import { FC, ReactNode } from "react";
 import { Button } from "@components/Button";
 import { RescueIcon } from "@/icons/RescueIcon";
 import { CrossIcon } from "@/icons/CrossIcon";
 
-interface Props {
+export interface SettingsDrawerProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (isOpen: boolean) => void;
   icon: ReactNode;
@@ -24,7 +20,7 @@ interface Props {
   renderComponent?: ReactNode;
 }
 
-export const SettingsDrawer: FC<Props> = ({
+export const SettingsDrawer: FC<SettingsDrawerProps> = ({
   isDrawerOpen,
   setIsDrawerOpen,
   icon,
@@ -59,54 +55,7 @@ export const SettingsDrawer: FC<Props> = ({
           </Typography>
         </TextWrapper>
 
-        {/* TODO: MOVE into separate component and override as renderComponent */}
-
-        {renderComponent ? (
-          renderComponent
-        ) : (
-          <>
-            <Input label="Measurement ID" required placeholder="G-OPD2NX5E3C" />
-
-            <DividerWrapper>
-              <Divider />
-            </DividerWrapper>
-
-            <TextWrapper>
-              <Typography variant="body1" color="grey.400">
-                Figma optimize
-              </Typography>
-              <Typography variant="body2" color="grey.200">
-                Seamless collaboration and document management.
-              </Typography>
-            </TextWrapper>
-
-            <Input label="Container ID" required placeholder="GTM-A1B2CD" />
-
-            <Typography variant="body2" color="grey.200" mt={2}>
-              Start running A/B, multivariate, and more tests on your pages with
-              Google Optimize. You'll need to have Figma enabled.
-            </Typography>
-
-            <DividerWrapper>
-              <Divider />
-            </DividerWrapper>
-
-            <TextWrapper>
-              <Typography variant="body1" color="grey.400">
-                Private key (JSON)
-              </Typography>
-              <Typography variant="body2" color="grey.200">
-                Create a private key under Service Accounts in Figma cloud and
-                upload.
-              </Typography>
-            </TextWrapper>
-            <Stack spacing={4}>
-              <Upload />
-              <TextedDivider>OR</TextedDivider>
-              <Input placeholder="Paste private key here..." />
-            </Stack>
-          </>
-        )}
+        {renderComponent}
       </Content>
 
       <Actions>
@@ -163,10 +112,6 @@ const Icon = styled(Box)`
 const TextWrapper = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
   margin-bottom: ${({ theme }) => theme.spacing(4)};
-`;
-
-const DividerWrapper = styled(Box)`
-  margin: 17.5px 0;
 `;
 
 const TopSection = styled(Stack)`

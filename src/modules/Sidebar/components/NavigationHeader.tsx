@@ -61,7 +61,7 @@ export const NavigationHeader = () => {
               value: "Brand settings",
               icon: <SettingsIcon />,
               onClick: () => {
-                navigate(routes.brandSettings());
+                navigate(routes.brandDetails());
               },
             },
           ]}

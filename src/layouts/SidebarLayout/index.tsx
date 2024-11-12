@@ -78,12 +78,12 @@ const Main = styled("div")`
 
 const Content = styled("div")`
   & > div {
-    padding: ${({ theme }) => theme.spacing(5)};
+    padding: ${({ theme }) => theme.spacing(3)};
   }
 
   display: flex;
   flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing(5)};
+  gap: ${({ theme }) => theme.spacing(3)};
 `;
 
 export default SidebarLayout;

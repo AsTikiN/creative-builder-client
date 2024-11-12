@@ -4,41 +4,57 @@ import {
   styled,
   ToggleButtonGroup,
 } from "@mui/material";
-import React from "react";
+import React, { ReactNode } from "react";
 
-export const ToggleButton = () => {
-  const [alignment, setAlignment] = React.useState<string | null>("left");
+export interface ToggleOption {
+  value: string;
+  content: ReactNode;
+  ariaLabel?: string;
+}
 
-  const handleAlignment = (
+export interface ToggleButtonProps {
+  options: ToggleOption[];
+  defaultValue?: string;
+  onChange?: (value: string | null) => void;
+  className?: string;
+}
+
+export const ToggleButton = ({
+  options,
+  defaultValue = options[0]?.value,
+  onChange,
+  className,
+}: ToggleButtonProps) => {
+  const [selected, setSelected] = React.useState<string | null>(defaultValue);
+
+  const handleChange = (
     _: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
+    newValue: string | null
   ) => {
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
+    if (newValue !== null) {
+      setSelected(newValue);
+      onChange?.(newValue);
     }
   };
 
   return (
     <StyledToggleButtonGroup
-      value={alignment}
+      value={selected}
       exclusive
-      onChange={handleAlignment}
-      aria-label="text alignment"
+      onChange={handleChange}
+      aria-label="toggle button group"
+      className={className}
     >
-      <StyledToggleButton
-        isSelected={alignment === "left"}
-        value="left"
-        aria-label="left aligned"
-      >
-        Annually
-      </StyledToggleButton>
-      <StyledToggleButton
-        isSelected={alignment === "center"}
-        value="center"
-        aria-label="centered"
-      >
-        Monthly
-      </StyledToggleButton>
+      {options.map((option) => (
+        <StyledToggleButton
+          key={option.value}
+          isSelected={selected === option.value}
+          value={option.value}
+          aria-label={option.ariaLabel || option.value}
+        >
+          {option.content}
+        </StyledToggleButton>
+      ))}
     </StyledToggleButtonGroup>
   );
 };
@@ -47,7 +63,6 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
   background-color: ${({ theme }) => theme.palette.grey[500]};
   height: 36px;
   padding: 4px;
-  width: 240px;
   gap: 4px;
 `;
 

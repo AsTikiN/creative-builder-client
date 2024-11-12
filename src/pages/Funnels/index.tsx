@@ -65,7 +65,7 @@ const CardsList = styled("div")`
   max-height: calc(100vh - 72.5px);
   overflow-y: auto;
 
-  gap: ${({ theme }) => theme.spacing(5)};
+  gap: ${({ theme }) => theme.spacing(3)};
 
   & > * {
     max-width: 520px;

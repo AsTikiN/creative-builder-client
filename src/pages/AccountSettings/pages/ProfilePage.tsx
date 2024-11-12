@@ -7,9 +7,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Divider } from "@components/Divider/Divider";
 
 type FormValues = {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   username: string;
   description: string;
+  email: string;
 };
 
 export const ProfilePage = () => {
@@ -18,11 +20,14 @@ export const ProfilePage = () => {
     formState: { errors },
     watch,
     setValue,
+    register,
   } = useForm<FormValues>({
     defaultValues: {
-      fullName: "",
+      firstName: "",
+      lastName: "",
       username: "",
       description: "",
+      email: "",
     },
   });
 
@@ -71,23 +76,72 @@ export const ProfilePage = () => {
         <SectionContainer>
           <SectionTitleData>
             <Typography variant="h5" color="grey.400">
-              Information
+              Name
             </Typography>
             <Typography variant="body2" color="grey.200">
-              Provide your full name and set your username
+              Enter your legal first and last name
             </Typography>
           </SectionTitleData>
 
           <ProfileForm onSubmit={handleSubmit(onSubmit)}>
             <ProfileInputsWrapper>
               <Input
-                placeholder="Full name"
-                value={watch("fullName")}
-                onChange={handleInputChange("fullName")}
-                error={!!errors.fullName}
-                helperText={errors.fullName?.message}
+                {...register("firstName", {
+                  required: "First name is required",
+                  minLength: {
+                    value: 2,
+                    message: "First name must be at least 2 characters",
+                  },
+                })}
+                placeholder="First name"
+                value={watch("firstName")}
+                onChange={handleInputChange("firstName")}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
               />
               <Input
+                {...register("lastName", {
+                  required: "Last name is required",
+                  minLength: {
+                    value: 2,
+                    message: "Last name must be at least 2 characters",
+                  },
+                })}
+                placeholder="Last name"
+                value={watch("lastName")}
+                onChange={handleInputChange("lastName")}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+              />
+            </ProfileInputsWrapper>
+          </ProfileForm>
+        </SectionContainer>
+      </InformationSection>
+
+      <Divider />
+
+      <InformationSection>
+        <SectionContainer>
+          <SectionTitleData>
+            <Typography variant="h5" color="grey.400">
+              Username
+            </Typography>
+            <Typography variant="body2" color="grey.200">
+              Set your unique username
+            </Typography>
+          </SectionTitleData>
+
+          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+            <ProfileInputsWrapper>
+              <Input
+                {...register("username", {
+                  required: "Username is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9_-]+$/,
+                    message:
+                      "Username can only contain letters, numbers, underscores and dashes",
+                  },
+                })}
                 placeholder="Username"
                 value={watch("username")}
                 onChange={handleInputChange("username")}
@@ -96,7 +150,80 @@ export const ProfilePage = () => {
                 startIcon={<CustomTagIcon>@</CustomTagIcon>}
               />
             </ProfileInputsWrapper>
+          </ProfileForm>
+        </SectionContainer>
+      </InformationSection>
+
+      <Divider />
+
+      <InformationSection>
+        <SectionContainer>
+          <SectionTitleData>
+            <Typography variant="h5" color="grey.400">
+              Email
+            </Typography>
+            <Typography variant="body2" color="grey.200">
+              Update your account's email address
+            </Typography>
+          </SectionTitleData>
+
+          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+            <ProfileInputsWrapper>
+              <Input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
+                placeholder="Email"
+                value={watch("email")}
+                onChange={handleInputChange("email")}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                endIcon={
+                  <Typography variant="body1" color="grey.200">
+                    Apply
+                  </Typography>
+                }
+              />
+            </ProfileInputsWrapper>
+          </ProfileForm>
+        </SectionContainer>
+      </InformationSection>
+
+      <Divider />
+
+      <InformationSection>
+        <SectionContainer>
+          <SectionTitleData>
+            <Typography variant="h5" color="grey.400">
+              Biography
+            </Typography>
+            <Typography variant="body2" color="grey.200">
+              Set your biography displayed on your public profile
+            </Typography>
+          </SectionTitleData>
+
+          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+            {/* <ProfileInputsWrapper>
+              <Input
+                placeholder="Username"
+                value={watch("username")}
+                onChange={handleInputChange("username")}
+                error={!!errors.username}
+                helperText={errors.username?.message}
+                startIcon={<CustomTagIcon>@</CustomTagIcon>}
+              />
+            </ProfileInputsWrapper> */}
             <Textarea
+              {...register("description", {
+                maxLength: {
+                  value: 500,
+                  message: "Biography must be less than 500 characters",
+                },
+              })}
               placeholder="Describe your professional achievements."
               value={watch("description")}
               onChange={handleInputChange("description")}
@@ -166,11 +293,11 @@ const AccountManagementSection = styled(Stack)`
 
 const ProfileInputsWrapper = styled(Box)`
   display: flex;
-  gap: ${({ theme }) => theme.spacing(4)};
+  gap: ${({ theme }) => theme.spacing(2)};
 `;
 
 const SectionContainer = styled(Box)`
-  max-width: 616px;
+  max-width: 343px;
   width: 100%;
 `;
 

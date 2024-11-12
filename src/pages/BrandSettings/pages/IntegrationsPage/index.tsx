@@ -2,19 +2,16 @@ import { Input } from "@components/Input";
 import { Stack, styled, Typography } from "@mui/material";
 import { IntegrationCard } from "./components/IntegrationCard";
 import { SearchIcon } from "@/icons/SearchIcon";
-import { ReactNode, useState } from "react";
-import { SettingsDrawer } from "./modules/SettingsDrawer";
+import { useState } from "react";
+import { SettingsDrawer, SettingsDrawerProps } from "./modules/SettingsDrawer";
 import { FilterTimelineIcon } from "@/icons/FilterTimelineIcon";
-import { OpenAiLogoIcon } from "@/icons/OpenAiLogoIcon";
-import { FigmaIcon } from "@/icons/FigmaIcon";
 import { MultipleSelect } from "@components/MultipleSelect";
+import { integrationsData } from "./mock/integrationData";
 
-interface DrawerData {
-  icon: ReactNode;
-  title: string;
-  description: string;
-  renderComponent?: ReactNode;
-}
+export type DrawerData = Pick<
+  SettingsDrawerProps,
+  "icon" | "title" | "description" | "renderComponent"
+>;
 
 export const IntegrationsPage = () => {
   const [isSortByOpen, setIsSortByOpen] = useState(false);
@@ -36,21 +33,7 @@ export const IntegrationsPage = () => {
           }}
           placeholder="Search"
         />
-        {/* <Select
-          label={
-            <SortWrapper>
-              <FilterTimelineIcon />
-              <Typography variant="body1" color="grey.200">
-                Sort by
-              </Typography>
-            </SortWrapper>
-          }
-          open={false}
-          setIsOpen={() => {
-            setIsSortByOpen(!isSortByOpen);
-          }}
-          options={[]}
-        /> */}
+
         <MultipleSelect
           label={
             <SortWrapper>
@@ -76,40 +59,18 @@ export const IntegrationsPage = () => {
           ]}
         />
       </Actions>
-      {/* TODO: Move into separate array */}
+
       <IntegrationCards>
-        <IntegrationCard
-          icon={<OpenAiLogoIcon />}
-          title="OpenAI"
-          description="Connect your own AI models our platform to power agents and generate content."
-          href="https://platform.openai.com/settings/api-keys"
-          onSettingsClick={() => {
-            handleDrawerOpen();
-            setDrawerData({
-              icon: <OpenAiLogoIcon />,
-              title: "OpenAI",
-              description:
-                "Connect your own AI models our platform to power agents and generate content.",
-              renderComponent: (
-                <Input label="API Key" placeholder="sk-proj-..." />
-              ),
-            });
-          }}
-        />
-        <IntegrationCard
-          icon={<FigmaIcon />}
-          title="Figma"
-          description="Seamless collaboration and document management."
-          href="https://www.figma.com/settings"
-          onSettingsClick={() => {
-            handleDrawerOpen();
-            setDrawerData({
-              icon: <FigmaIcon />,
-              title: "Figma",
-              description: "Seamless collaboration and document management.",
-            });
-          }}
-        />
+        {integrationsData.map((integration) => (
+          <IntegrationCard
+            key={integration.title}
+            {...integration}
+            onSettingsClick={integration.onSettingsClick(
+              handleDrawerOpen,
+              setDrawerData
+            )}
+          />
+        ))}
       </IntegrationCards>
 
       {drawerData && (

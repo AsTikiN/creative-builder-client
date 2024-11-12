@@ -18,6 +18,7 @@ import { AccountBillingPage } from "@/pages/AccountSettings/pages/BillingPage";
 import { BrandBillingPage } from "@/pages/BrandSettings/pages/BillingPage";
 import { IntegrationsPage } from "@/pages/BrandSettings/pages/IntegrationsPage";
 import { AppearancePage as BrandAppearancePage } from "@/pages/BrandSettings/pages/AppearancePage";
+import { SecurityPage } from "@/pages/AccountSettings/pages/SecurityPage";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -39,7 +40,7 @@ export const AppRoutes: React.FC = () => {
           path={routes.accountSettings()}
           element={<AccountSettingsPage />}
         >
-          <Route index element={<ProfilePage />} />
+          <Route path={routes.profile()} element={<ProfilePage />} />
           <Route
             path={routes.accountAppearance()}
             element={<AccountAppearancePage />}
@@ -52,11 +53,12 @@ export const AppRoutes: React.FC = () => {
             path={routes.accountBilling()}
             element={<AccountBillingPage />}
           />
+          <Route path={routes.security()} element={<SecurityPage />} />
         </Route>
 
         <Route path={routes.brandSettings()} element={<BrandSettings />}>
-          <Route index element={<GeneralPage />} />
-          <Route path={routes.members()} element={<MembersPage />} />
+          <Route path={routes.brandDetails()} element={<GeneralPage />} />
+          <Route path={routes.team()} element={<MembersPage />} />
           <Route path={routes.plans()} element={<PlansPage />} />
           <Route path={routes.brandBilling()} element={<BrandBillingPage />} />
           <Route path={routes.integrations()} element={<IntegrationsPage />} />

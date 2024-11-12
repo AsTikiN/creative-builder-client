@@ -11,9 +11,14 @@ import {
 
 export type InputProps = TextFieldProps & {
   startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 };
 
-export const Input: React.FC<InputProps> = ({ startIcon, ...props }) => {
+export const Input: React.FC<InputProps> = ({
+  startIcon,
+  endIcon,
+  ...props
+}) => {
   return (
     <>
       {props.label && (
@@ -29,6 +34,7 @@ export const Input: React.FC<InputProps> = ({ startIcon, ...props }) => {
       <Wrapper>
         {startIcon && <IconWrapper>{startIcon}</IconWrapper>}
         <StyledInput {...props} label={undefined} />
+        {endIcon && <IconWrapper>{endIcon}</IconWrapper>}
       </Wrapper>
     </>
   );
@@ -39,7 +45,6 @@ const Wrapper = styled(Box)`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  max-width: 300px;
 
   border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
@@ -55,6 +60,12 @@ const IconWrapper = styled(Box)`
   border-right: 0.5px solid
     ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
   padding: ${({ theme }) => theme.spacing(1.5, 2.5)};
+
+  &:last-child {
+    border-right: none;
+    border-left: 0.5px solid
+      ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
+  }
 `;
 
 const StyledInput = styled(TextField)`

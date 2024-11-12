@@ -74,10 +74,10 @@ const CardsList = styled("div")`
   max-height: calc(100vh - 72.5px);
   overflow-y: auto;
 
-  gap: ${({ theme }) => theme.spacing(5)};
+  gap: ${({ theme }) => theme.spacing(3)};
 
   & > * {
-    max-width: 250px;
+    max-width: 240px;
     flex-basis: calc(25% - ${({ theme }) => theme.spacing(5)});
   }
 `;

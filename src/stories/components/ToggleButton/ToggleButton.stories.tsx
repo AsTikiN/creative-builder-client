@@ -14,6 +14,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    checked: false,
+    options: [
+      {
+        value: "Humans",
+        content: <div>Humans</div>,
+      },
+      {
+        value: "AI-Agents",
+        content: <div>AI Agents</div>,
+      },
+    ],
   },
 };

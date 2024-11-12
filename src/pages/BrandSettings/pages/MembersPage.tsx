@@ -26,24 +26,7 @@ export const MembersPage = () => {
           </Button>
         </Actions>
       </TableActionsPanel>
-      <TableLayout
-        members={[
-          {
-            id: "1",
-            name: "John Doe",
-            email: "john@example.com",
-            status: "Active",
-            role: "Admin",
-            avatarText: "JD",
-          },
-        ]}
-        onRoleChange={(memberId, newRole) => {
-          // Handle role change
-        }}
-        onMemberRemove={(memberId) => {
-          // Handle member removal
-        }}
-      />
+      <TableLayout />
     </>
   );
 };

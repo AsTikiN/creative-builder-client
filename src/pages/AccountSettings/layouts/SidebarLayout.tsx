@@ -1,8 +1,7 @@
-import { Breadcrumbs, styled } from "@mui/material";
+import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 import { Header, HeaderProps } from "@modules/Header";
 import { AccountSidebar } from "@modules/AccountSidebar";
-import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 export interface AccountSidebarLayoutProps extends PropsWithChildren {
@@ -55,13 +54,6 @@ const Content = styled("div")`
   padding: ${({ theme }) => theme.spacing(5)};
   height: calc(100vh - 72.5px);
   overflow-x: auto;
-`;
-
-const CustomBreadcrumbs = styled(Breadcrumbs)`
-  & .MuiBreadcrumbs-separator {
-    margin: 0 ${({ theme }) => theme.spacing(3.25)};
-    color: ${({ theme }) => theme.palette.grey[700]};
-  }
 `;
 
 export default AccountSidebarLayout;

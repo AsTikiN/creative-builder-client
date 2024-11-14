@@ -1,15 +1,3 @@
-import { AudioIcon } from "@/icons/AudioIcon";
-import { DashedCopyIcon } from "@/icons/DashedCopyIcon";
-import { FileSearchIcon } from "@/icons/FileSearchIcon";
-import { FileTextIcon } from "@/icons/FileTextIcon";
-import { FolderIcon } from "@/icons/FolderIcon";
-import { ImageIcon } from "@/icons/ImageIcon";
-import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
-import { LineChartIcon } from "@/icons/LineChartIcon";
-import { LowIcon } from "@/icons/LowIcon";
-import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
-import { TrashIcon } from "@/icons/TrashIcon";
-import { WriteIcon } from "@/icons/WriteIcon";
 import {
   alpha,
   Box,
@@ -20,6 +8,15 @@ import {
   Typography,
 } from "@mui/material";
 import { FC } from "react";
+import { DashedCopyIcon } from "@/icons/DashedCopyIcon";
+import { FileSearchIcon } from "@/icons/FileSearchIcon";
+import { FileTextIcon } from "@/icons/FileTextIcon";
+import { FolderIcon } from "@/icons/FolderIcon";
+import { ImageIcon } from "@/icons/ImageIcon";
+import { LineChartIcon } from "@/icons/LineChartIcon";
+import { LowIcon } from "@/icons/LowIcon";
+import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
+import { TrashIcon } from "@/icons/TrashIcon";
 
 export interface ContentElement {
   id: number;
@@ -59,32 +56,32 @@ export const EditBookSidebar: FC<Props> = ({
   return (
     <Wrapper>
       <TopSections>
-        <SectionTitleWrapper>
-          <Typography variant="h6" color="grey.50">
-            General
-          </Typography>
-        </SectionTitleWrapper>
+        {/*<SectionTitleWrapper>*/}
+        {/*  <Typography variant="h6" color="grey.50">*/}
+        {/*    General*/}
+        {/*  </Typography>*/}
+        {/*</SectionTitleWrapper>*/}
 
-        <NavItem>
-          <NavTextWrapper>
-            <WriteIcon />
-            Outline
-          </NavTextWrapper>
-        </NavItem>
+        {/*<NavItem>*/}
+        {/*  <NavTextWrapper>*/}
+        {/*    <WriteIcon />*/}
+        {/*    Outline*/}
+        {/*  </NavTextWrapper>*/}
+        {/*</NavItem>*/}
 
-        <NavItem>
-          <NavTextWrapper>
-            <LayoutGridIcon />
-            Formatting
-          </NavTextWrapper>
-        </NavItem>
+        {/*<NavItem>*/}
+        {/*  <NavTextWrapper>*/}
+        {/*    <LayoutGridIcon />*/}
+        {/*    Formatting*/}
+        {/*  </NavTextWrapper>*/}
+        {/*</NavItem>*/}
 
-        <NavItem>
-          <NavTextWrapper>
-            <AudioIcon />
-            Audiobook
-          </NavTextWrapper>
-        </NavItem>
+        {/*<NavItem>*/}
+        {/*  <NavTextWrapper>*/}
+        {/*    <AudioIcon />*/}
+        {/*    Audiobook*/}
+        {/*  </NavTextWrapper>*/}
+        {/*</NavItem>*/}
 
         <SectionTitleWrapper>
           <Typography variant="h6" color="grey.50">

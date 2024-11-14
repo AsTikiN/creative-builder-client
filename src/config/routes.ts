@@ -13,13 +13,14 @@ export enum SubRoutes {
   brandedApp = "branded-app",
   details = "details",
   apps = "apps",
+  funnels = "funnels",
 }
 
 export const routes = {
   apps: () => `/${SubRoutes.apps}`,
   login: () => "/login",
   offers: () => "/offers",
-  funnels: () => "/funnels",
+  funnels: () => `/${SubRoutes.funnels}`,
   editBook: (id: string) => `/book/edit/${id}`,
 
   accountSettings: () => "/account-settings",

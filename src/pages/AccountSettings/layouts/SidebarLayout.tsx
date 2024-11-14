@@ -2,7 +2,6 @@ import { styled } from "@mui/material";
 import { FC, PropsWithChildren } from "react";
 import { Header, HeaderProps } from "@modules/Header";
 import { AccountSidebar } from "@modules/AccountSidebar";
-import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 export interface AccountSidebarLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
@@ -12,9 +11,6 @@ export const AccountSidebarLayout: FC<AccountSidebarLayoutProps> = ({
   children,
   headerProps,
 }) => {
-  const breadcrumbs = useBreadcrumbs();
-  console.log(breadcrumbs, "breadcrumbs");
-
   return (
     <Wrapper>
       {/* <WorkspacesBoard /> */}

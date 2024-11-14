@@ -14,10 +14,10 @@ import { ItalicIcon } from "@/icons/ItalicIcon";
 import { UnderlineIcon } from "@/icons/UnderlineIcon";
 import { StrokeIcon } from "@/icons/StrokeIcon";
 import { EditorLinkIcon } from "@/icons/EditorLinkIcon";
-import { MenuDropdown } from "../MenuDropdown";
 import { ColorDotIcon } from "@/icons/ColorDotIcon";
 import { CodeIcon } from "@/icons/CodeIcon";
 import { HorizontalDots } from "@/icons/HorizontalDots";
+import { MenuDropdown } from "../MenuDropdown";
 
 export const TipTapEditor: React.FC = () => {
   const editor = useEditor({
@@ -169,8 +169,11 @@ const StyledEditorContent = styled(EditorContent)(({ theme }) => ({
   color: "#000",
 
   "& .ProseMirror": {
+    "p, h1,h2,h3,h4,h5,ul,ol,a": {
+      margin: "0 !important",
+    },
     ...theme.typography.body1,
-
+    gap: "12px",
     "& *::selection": {
       backgroundColor: "#ecf0ff",
     },
@@ -182,6 +185,7 @@ const StyledEditorContent = styled(EditorContent)(({ theme }) => ({
     },
     "& h1": {
       ...theme.typography.editorH1,
+      paddingBottom: "4px",
     },
     "& h2": {
       ...theme.typography.editorH2,
@@ -239,8 +243,6 @@ const EditorWrapper = styled(Box)`
     display: flex;
     flex-direction: column;
     min-height: 300px;
-    margin-left: -5rem;
-    padding-left: 5rem;
     min-width: 0;
     width: 100%;
 

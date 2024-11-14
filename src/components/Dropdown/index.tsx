@@ -147,6 +147,7 @@ const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
         width: calc(100% + 2px);
         height: 0.5px;
         background-color: ${theme.palette.grey[100]};
+      }
     `}
 
   &:hover {

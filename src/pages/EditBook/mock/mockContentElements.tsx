@@ -1,6 +1,7 @@
 import { EditIcon } from "@/icons/EditIcon";
-import { ContentElement } from "../components/EditBookSidebar";
 import { UsersIcon } from "@/icons/UsersIcon";
+import { AnalyticsViewIcon } from "@/icons/AnalyticsViewIcon.tsx";
+import { ContentElement } from "../components/EditBookSidebar";
 
 export const mockContentElements: ContentElement[] = [
   {
@@ -81,4 +82,5 @@ export const initialCheckedItems = {
 export const viewOptions = [
   { label: "Creator view", value: "creator", icon: <EditIcon /> },
   { label: "Consumer view", value: "consumer", icon: <UsersIcon /> },
+  { label: "Analytics view", value: "analytics", icon: <AnalyticsViewIcon /> },
 ];

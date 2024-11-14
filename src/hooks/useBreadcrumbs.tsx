@@ -1,3 +1,5 @@
+import { Stack, styled, Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 import { BagIcon } from "@/icons/BagIcon";
 import { BellIcon } from "@/icons/BellIcon";
 import { BrandSettingsIcon } from "@/icons/BrandSettingsIcon";
@@ -11,8 +13,7 @@ import { SettingsToggleIcon } from "@/icons/SettingsToggleIcon";
 import { ShieldCheckIcon } from "@/icons/ShieldCheckIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { routes, SubRoutes } from "@config/routes";
-import { Stack, styled, Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { FunnelsIcon } from "@/icons/FunnelsIcon.tsx";
 
 const getIcon = (path: string) => {
   return {
@@ -30,14 +31,20 @@ const getIcon = (path: string) => {
     [SubRoutes.brandedApp]: <FocusAutoIcon />,
     [SubRoutes.apps]: <FilePlusIcon />,
     [SubRoutes.details]: <BrandSettingsIcon />,
+    [SubRoutes.funnels]: <FunnelsIcon />,
   }[path];
 };
 
-export const useBreadcrumbs = () => {
-  const { pathname } = useLocation();
+interface IUseBreadcrumbs {
+  customPathname?: string;
+}
+
+export const useBreadcrumbs = ({ customPathname }: IUseBreadcrumbs = {}) => {
+  const location = useLocation();
+  const pathname = customPathname || (location.pathname as string);
 
   const ignorePaths = [routes.accountSettings(), routes.brandSettings()];
-  console.log("pathname", pathname);
+
   const paths = pathname.split("/").filter(Boolean);
 
   const breadcrumbs = paths.reduce<

@@ -1,3 +1,5 @@
+import { styled } from "@mui/material";
+import { FC, PropsWithChildren, useState } from "react";
 import { LayoutTopIcon } from "@/icons/LayoutTopIcon";
 import { MenuIcon } from "@/icons/MenuIcon";
 import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
@@ -6,8 +8,6 @@ import { MultipleSelect } from "@components/MultipleSelect";
 import { Header, HeaderProps } from "@modules/Header";
 import { Sidebar } from "@modules/Sidebar";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
-import { styled } from "@mui/material";
-import { FC, PropsWithChildren, useState } from "react";
 
 export interface SidebarLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
@@ -20,7 +20,6 @@ export const SidebarLayout: FC<SidebarLayoutProps> = ({
   buttonText,
 }) => {
   const [open, setIsOpen] = useState(false);
-
   return (
     <Wrapper>
       <WorkspacesBoard />

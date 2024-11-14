@@ -1,6 +1,6 @@
+import { styled } from "@mui/material";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { FunnelCard } from "@components/Card/FunnelCard";
-import { styled } from "@mui/material";
 
 export const FunnelsPage = () => {
   return (

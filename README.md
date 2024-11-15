@@ -89,4 +89,3 @@ cz
 ### Precommit hooks
 
 Please, note that precommit hooks are in place to maintain code quality standards. Before each commit, your code is processed by Prettier and ESLint according to project configurations
-

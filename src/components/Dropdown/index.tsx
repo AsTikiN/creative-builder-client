@@ -157,5 +157,6 @@ const StyledMenuItem = styled(MenuItem)<{ divider?: boolean }>`
 
 const TopSection = styled(Stack)`
   border-bottom: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
-  padding: ${({ theme }) => theme.spacing(1)};
+  padding-top: ${({ theme }) => theme.spacing(1)};
+  padding-bottom: ${({ theme }) => theme.spacing(1)};
 `;

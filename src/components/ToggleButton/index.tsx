@@ -29,7 +29,7 @@ export const ToggleButton = ({
 
   const handleChange = (
     _: React.MouseEvent<HTMLElement>,
-    newValue: string | null
+    newValue: string | null,
   ) => {
     if (newValue !== null) {
       setSelected(newValue);

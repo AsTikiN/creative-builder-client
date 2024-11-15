@@ -1,19 +1,20 @@
+import { alpha, Box, css, styled } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DualChevronIcon } from "@/icons/DualChevronIcon";
 import { RescueIcon } from "@/icons/RescueIcon";
 import { SettingsIcon } from "@/icons/SettingsIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
 import { routes } from "@config/routes";
-import { alpha, Box, css, styled } from "@mui/material";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { LuggageIcon } from "@/icons/LuggageIcon.tsx";
 
 export const NavigationHeader = () => {
   const navigate = useNavigate();
 
   const [open, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null
+    null,
   );
 
   return (
@@ -51,12 +52,18 @@ export const NavigationHeader = () => {
             },
             {
               id: 2,
+              label: "Manage plan",
+              value: "Manage plan",
+              icon: <LuggageIcon />,
+            },
+            {
+              id: 3,
               label: "Help & feedback",
               value: "Help & feedback",
               icon: <RescueIcon />,
             },
             {
-              id: 3,
+              id: 4,
               label: "Brand settings",
               value: "Brand settings",
               icon: <SettingsIcon />,

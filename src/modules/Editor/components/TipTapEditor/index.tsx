@@ -8,15 +8,11 @@ import { Color } from "@tiptap/extension-color";
 import { styled } from "@mui/material/styles";
 import { Box, Button, Typography } from "@mui/material";
 import { MagicWandIcon } from "@/icons/MagicWandIcon";
-import { AnnotationIcon } from "@/icons/AnnotationIcon";
 import { BoldIcon } from "@/icons/BoldIcon";
 import { ItalicIcon } from "@/icons/ItalicIcon";
 import { UnderlineIcon } from "@/icons/UnderlineIcon";
 import { StrokeIcon } from "@/icons/StrokeIcon";
 import { EditorLinkIcon } from "@/icons/EditorLinkIcon";
-import { ColorDotIcon } from "@/icons/ColorDotIcon";
-import { CodeIcon } from "@/icons/CodeIcon";
-import { HorizontalDots } from "@/icons/HorizontalDots";
 import { MenuDropdown } from "../MenuDropdown";
 
 export const TipTapEditor: React.FC = () => {
@@ -41,10 +37,7 @@ export const TipTapEditor: React.FC = () => {
       {editor && (
         <Bubble editor={editor} tippyOptions={{ duration: 100 }}>
           <Wrapper>
-            <EditorButton startIcon={<MagicWandIcon />}>
-              Improve writing
-            </EditorButton>
-            <EditorButton startIcon={<AnnotationIcon />}>Ask AI</EditorButton>
+            <EditorButton startIcon={<MagicWandIcon />}>Ask AI</EditorButton>
 
             <VerticalDivider />
 
@@ -56,6 +49,7 @@ export const TipTapEditor: React.FC = () => {
                 </Typography>
               }
             />
+            <VerticalDivider />
 
             <IconButton
               onClick={() => editor.chain().focus().toggleBold().run()}
@@ -82,25 +76,18 @@ export const TipTapEditor: React.FC = () => {
             >
               <StrokeIcon />
             </IconButton>
-            <IconButton
-              onClick={() => editor.chain().focus().toggleCode().run()}
-              className={editor.isActive("code") ? "is-active" : ""}
-            >
-              <CodeIcon />
-            </IconButton>
+            <VerticalDivider />
 
-            <MenuDropdown
+            <IconButton
               onClick={() => {
                 const url = window.prompt("Enter the URL");
                 if (url) {
                   editor.chain().focus().setLink({ href: url }).run();
                 }
               }}
-              icon={<EditorLinkIcon />}
-            />
-            <MenuDropdown onClick={() => 123} icon={<ColorDotIcon />} />
-            <IconButton>
-              <HorizontalDots />
+              className={editor.isActive("strike") ? "is-active" : ""}
+            >
+              <EditorLinkIcon />
             </IconButton>
           </Wrapper>
         </Bubble>

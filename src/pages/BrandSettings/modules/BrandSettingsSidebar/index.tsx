@@ -101,13 +101,13 @@ export const BrandSettingsSidebar = () => {
             {
               id: 10,
               icon: <FocusAutoIcon />,
-              label: "Branded App",
+              label: "Branded app",
               path: routes.brandedApp(),
             },
             {
               id: 11,
               icon: <LiveIcon />,
-              label: "Webhooks",
+              label: "Automations",
               path: routes.webhooks(),
             },
             {
@@ -119,7 +119,7 @@ export const BrandSettingsSidebar = () => {
             {
               id: 13,
               icon: <NotepadIcon />,
-              label: "Event Log",
+              label: "Event log",
               path: routes.notepad(),
             },
           ],

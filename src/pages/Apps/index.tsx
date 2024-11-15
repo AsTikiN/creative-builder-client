@@ -78,6 +78,7 @@ const CardsList = styled("div")`
 
   & > * {
     max-width: 240px;
+    width: 100%;
     flex-basis: calc(25% - ${({ theme }) => theme.spacing(5)});
   }
 `;

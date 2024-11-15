@@ -42,7 +42,7 @@ const CardsList = styled("div")`
   gap: ${({ theme }) => theme.spacing(3)};
 
   & > * {
-    max-width: 340px;
+    max-width: 336px;
     flex-basis: calc(33.33% - ${({ theme }) => theme.spacing(5)});
   }
 `;

@@ -14,10 +14,11 @@ import { ShieldCheckIcon } from "@/icons/ShieldCheckIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { routes, SubRoutes } from "@config/routes";
 import { FunnelsIcon } from "@/icons/FunnelsIcon.tsx";
+import { ProfileCircleIcon } from "@/icons/ProfileCircleIcon.tsx";
 
 const getIcon = (path: string) => {
   return {
-    [SubRoutes.profile]: <UsersIcon />,
+    [SubRoutes.profile]: <ProfileCircleIcon />,
     [SubRoutes.security]: <ShieldCheckIcon />,
     [SubRoutes.notifications]: <BellIcon />,
     [SubRoutes.billing]: <CreditCardIcon />,

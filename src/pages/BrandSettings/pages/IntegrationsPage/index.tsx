@@ -1,11 +1,10 @@
-import { Input } from "@components/Input";
 import { Stack, styled, Typography } from "@mui/material";
-import { IntegrationCard } from "./components/IntegrationCard";
-import { SearchIcon } from "@/icons/SearchIcon";
 import { useState } from "react";
-import { SettingsDrawer, SettingsDrawerProps } from "./modules/SettingsDrawer";
 import { FilterTimelineIcon } from "@/icons/FilterTimelineIcon";
 import { MultipleSelect } from "@components/MultipleSelect";
+import SearchInput from "@modules/SearchInput";
+import { SettingsDrawer, SettingsDrawerProps } from "./modules/SettingsDrawer";
+import { IntegrationCard } from "./components/IntegrationCard";
 import { integrationsData } from "./mock/integrationData";
 
 export type DrawerData = Pick<
@@ -25,15 +24,7 @@ export const IntegrationsPage = () => {
   return (
     <>
       <Actions>
-        <Input
-          slotProps={{
-            input: {
-              startAdornment: <SearchIcon />,
-            },
-          }}
-          placeholder="Search"
-        />
-
+        <SearchInput />
         <MultipleSelect
           label={
             <SortWrapper>
@@ -67,7 +58,7 @@ export const IntegrationsPage = () => {
             {...integration}
             onSettingsClick={integration.onSettingsClick(
               handleDrawerOpen,
-              setDrawerData
+              setDrawerData,
             )}
           />
         ))}
@@ -87,6 +78,9 @@ export const IntegrationsPage = () => {
 const Actions = styled(Stack)`
   flex-direction: row;
   justify-content: space-between;
+  & .MuiBox-root:has(.custom-search-input) {
+    max-width: 300px;
+  }
 `;
 
 const IntegrationCards = styled(Stack)`

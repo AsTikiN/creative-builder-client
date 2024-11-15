@@ -1,10 +1,13 @@
 import { ChangeEvent } from "react";
+import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import { Textarea } from "@components/Textarea";
-import { Avatar, Box, Stack, styled, Typography } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { Divider } from "@components/Divider/Divider";
+import HeadingBlock from "@components/HeadingBlock ";
+import ColumnLayout from "@/layouts/ColumnLayout";
+import { DoneIcon } from "@/icons/DoneIcon.tsx";
 
 type FormValues = {
   firstName: string;
@@ -44,170 +47,171 @@ export const ProfilePage = () => {
 
   return (
     <>
-      <UserSection>
-        <SectionTitleData>
-          <Typography variant="h5" color="grey.400">
-            Avatar
-          </Typography>
-          <Typography variant="body2" color="grey.200">
-            Upload your account avatar
-          </Typography>
-        </SectionTitleData>
+      <ColumnLayout
+        variant="sm"
+        firstColumn={
+          <HeadingBlock
+            variant="medium"
+            title="Picture"
+            subtitle="Upload your profile picture."
+          />
+        }
+        secondColumn={
+          <UserData>
+            <StyledAvatar />
+            <UserDataInfoWrapper>
+              <Typography variant="body2" color="grey.200">
+                PNG or JPEG under 10MB (1024px by 1024px)
+              </Typography>
+              <UserActions>
+                <Button variant="contained" color="error">
+                  Remove
+                </Button>
+                <Button variant="outlined">Change</Button>
+              </UserActions>
+            </UserDataInfoWrapper>
+          </UserData>
+        }
+      />
 
-        <UserData>
-          <StyledAvatar />
-          <UserDataInfoWrapper>
-            <Typography variant="body2" color="grey.200">
-              We support PNGs, JPEGs under 10MB
-            </Typography>
-            <UserActions>
-              <Button variant="contained" color="error">
-                Remove
-              </Button>
-              <Button variant="outlined">Change</Button>
-            </UserActions>
-          </UserDataInfoWrapper>
-        </UserData>
-      </UserSection>
+      <Divider sx={{ marginY: "16px !important" }} />
 
-      <Divider />
+      <ColumnLayout
+        firstColumn={
+          <HeadingBlock
+            variant="medium"
+            title="Name"
+            subtitle="Enter your first and last name."
+          />
+        }
+        secondColumn={
+          <SectionContainer>
+            <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+              <ProfileInputsWrapper>
+                <Input
+                  {...register("firstName", {
+                    required: "First name is required",
+                    minLength: {
+                      value: 2,
+                      message: "First name must be at least 2 characters",
+                    },
+                  })}
+                  placeholder="First name"
+                  value={watch("firstName")}
+                  onChange={handleInputChange("firstName")}
+                  error={!!errors.firstName}
+                  helperText={errors.firstName?.message}
+                />
+                <Input
+                  {...register("lastName", {
+                    required: "Last name is required",
+                    minLength: {
+                      value: 2,
+                      message: "Last name must be at least 2 characters",
+                    },
+                  })}
+                  placeholder="Last name"
+                  value={watch("lastName")}
+                  onChange={handleInputChange("lastName")}
+                  error={!!errors.lastName}
+                  helperText={errors.lastName?.message}
+                />
+              </ProfileInputsWrapper>
+            </ProfileForm>
+          </SectionContainer>
+        }
+      />
 
-      <InformationSection>
-        <SectionContainer>
-          <SectionTitleData>
-            <Typography variant="h5" color="grey.400">
-              Name
-            </Typography>
-            <Typography variant="body2" color="grey.200">
-              Enter your legal first and last name
-            </Typography>
-          </SectionTitleData>
+      <Divider sx={{ marginY: "16px !important" }} />
 
-          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
-            <ProfileInputsWrapper>
-              <Input
-                {...register("firstName", {
-                  required: "First name is required",
-                  minLength: {
-                    value: 2,
-                    message: "First name must be at least 2 characters",
-                  },
-                })}
-                placeholder="First name"
-                value={watch("firstName")}
-                onChange={handleInputChange("firstName")}
-                error={!!errors.firstName}
-                helperText={errors.firstName?.message}
-              />
-              <Input
-                {...register("lastName", {
-                  required: "Last name is required",
-                  minLength: {
-                    value: 2,
-                    message: "Last name must be at least 2 characters",
-                  },
-                })}
-                placeholder="Last name"
-                value={watch("lastName")}
-                onChange={handleInputChange("lastName")}
-                error={!!errors.lastName}
-                helperText={errors.lastName?.message}
-              />
-            </ProfileInputsWrapper>
-          </ProfileForm>
-        </SectionContainer>
-      </InformationSection>
+      <ColumnLayout
+        firstColumn={
+          <HeadingBlock
+            variant="medium"
+            title=" Username"
+            subtitle="Set your unique profile username."
+          />
+        }
+        secondColumn={
+          <SectionContainer>
+            <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+              <ProfileInputsWrapper>
+                <Input
+                  {...register("username", {
+                    required: "Username is required",
+                    pattern: {
+                      value: /^[a-zA-Z0-9_-]+$/,
+                      message:
+                        "Username can only contain letters, numbers, underscores and dashes",
+                    },
+                  })}
+                  placeholder="Username"
+                  value={watch("username")}
+                  onChange={handleInputChange("username")}
+                  error={!!errors.username}
+                  helperText={errors.username?.message}
+                  startIcon={<CustomTagIcon>@</CustomTagIcon>}
+                  endIcon={!!watch("username") && <DoneIcon />}
+                />
+              </ProfileInputsWrapper>
+            </ProfileForm>
+          </SectionContainer>
+        }
+      />
 
-      <Divider />
+      <Divider sx={{ marginY: "16px !important" }} />
 
-      <InformationSection>
-        <SectionContainer>
-          <SectionTitleData>
-            <Typography variant="h5" color="grey.400">
-              Username
-            </Typography>
-            <Typography variant="body2" color="grey.200">
-              Set your unique username
-            </Typography>
-          </SectionTitleData>
+      <ColumnLayout
+        firstColumn={
+          <HeadingBlock
+            variant="medium"
+            title="Email"
+            subtitle="Update your account’s email address."
+          />
+        }
+        secondColumn={
+          <SectionContainer>
+            <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+              <ProfileInputsWrapper>
+                <Input
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  placeholder="Email"
+                  value={watch("email")}
+                  onChange={handleInputChange("email")}
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  endIcon={
+                    <Typography variant="body1" color="grey.200">
+                      Apply
+                    </Typography>
+                  }
+                />
+              </ProfileInputsWrapper>
+            </ProfileForm>
+          </SectionContainer>
+        }
+      />
 
-          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
-            <ProfileInputsWrapper>
-              <Input
-                {...register("username", {
-                  required: "Username is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9_-]+$/,
-                    message:
-                      "Username can only contain letters, numbers, underscores and dashes",
-                  },
-                })}
-                placeholder="Username"
-                value={watch("username")}
-                onChange={handleInputChange("username")}
-                error={!!errors.username}
-                helperText={errors.username?.message}
-                startIcon={<CustomTagIcon>@</CustomTagIcon>}
-              />
-            </ProfileInputsWrapper>
-          </ProfileForm>
-        </SectionContainer>
-      </InformationSection>
+      <Divider sx={{ marginY: "16px !important" }} />
 
-      <Divider />
-
-      <InformationSection>
-        <SectionContainer>
-          <SectionTitleData>
-            <Typography variant="h5" color="grey.400">
-              Email
-            </Typography>
-            <Typography variant="body2" color="grey.200">
-              Update your account's email address
-            </Typography>
-          </SectionTitleData>
-
-          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
-            <ProfileInputsWrapper>
-              <Input
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  },
-                })}
-                placeholder="Email"
-                value={watch("email")}
-                onChange={handleInputChange("email")}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                endIcon={
-                  <Typography variant="body1" color="grey.200">
-                    Apply
-                  </Typography>
-                }
-              />
-            </ProfileInputsWrapper>
-          </ProfileForm>
-        </SectionContainer>
-      </InformationSection>
-
-      <Divider />
-
-      <InformationSection>
-        <SectionContainer>
-          <SectionTitleData>
-            <Typography variant="h5" color="grey.400">
-              Biography
-            </Typography>
-            <Typography variant="body2" color="grey.200">
-              Set your biography displayed on your public profile
-            </Typography>
-          </SectionTitleData>
-
-          <ProfileForm onSubmit={handleSubmit(onSubmit)}>
-            {/* <ProfileInputsWrapper>
+      <ColumnLayout
+        firstColumn={
+          <HeadingBlock
+            variant="medium"
+            title="Biography"
+            subtitle="Edit your profile biography."
+          />
+        }
+        secondColumn={
+          <SectionContainer>
+            <ProfileForm onSubmit={handleSubmit(onSubmit)}>
+              {/* <ProfileInputsWrapper>
               <Input
                 placeholder="Username"
                 value={watch("username")}
@@ -217,52 +221,48 @@ export const ProfilePage = () => {
                 startIcon={<CustomTagIcon>@</CustomTagIcon>}
               />
             </ProfileInputsWrapper> */}
-            <Textarea
-              {...register("description", {
-                maxLength: {
-                  value: 500,
-                  message: "Biography must be less than 500 characters",
-                },
-              })}
-              placeholder="Describe your professional achievements."
-              value={watch("description")}
-              onChange={handleInputChange("description")}
+              <Textarea
+                {...register("description", {
+                  maxLength: {
+                    value: 500,
+                    message: "Biography must be less than 500 characters",
+                  },
+                })}
+                placeholder="Describe your professional achievements."
+                value={watch("description")}
+                onChange={handleInputChange("description")}
+              />
+            </ProfileForm>
+          </SectionContainer>
+        }
+      />
+
+      <Divider sx={{ marginY: "16px !important" }} />
+      <ColumnLayout
+        firstColumn={
+          <AccountManagement>
+            <HeadingBlock
+              variant="medium"
+              title="Account management"
+              subtitle="This will permanently delete your account. Brand event logs will still retain actions committed by this account."
             />
-          </ProfileForm>
-        </SectionContainer>
-      </InformationSection>
-
-      <Divider />
-
-      <AccountManagementSection>
-        <SectionTitleData>
-          <Typography variant="h5" color="grey.400">
-            Account Management
-          </Typography>
-          <Typography variant="body2" color="grey.200">
-            Proceed with caution as these actions have significant impacts on
-            your data
-          </Typography>
-        </SectionTitleData>
-
-        <Button variant="contained" color="error">
-          Delete account
-        </Button>
-      </AccountManagementSection>
+          </AccountManagement>
+        }
+        secondColumn={
+          <AccountManagementActions>
+            <Button variant="contained" color="error">
+              Delete account
+            </Button>
+          </AccountManagementActions>
+        }
+      />
     </>
   );
 };
 
-const UserSection = styled(Box)``;
-
-const SectionTitleData = styled(Stack)`
-  gap: ${({ theme }) => theme.spacing(1)};
-`;
-
 const UserData = styled(Box)`
   display: flex;
   gap: ${({ theme }) => theme.spacing(4)};
-  margin: ${({ theme }) => theme.spacing(4)} 0;
 `;
 
 const UserActions = styled(Box)`
@@ -274,20 +274,9 @@ const UserDataInfoWrapper = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(3)};
 `;
 
-const InformationSection = styled(Box)`
-  padding: ${({ theme }) => `${theme.spacing(4)} 0 ${theme.spacing(3.25)}`};
-`;
-
 const ProfileForm = styled("form")`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing(4)};
-  margin-top: ${({ theme }) => theme.spacing(4)};
-`;
-
-const AccountManagementSection = styled(Stack)`
-  padding: ${({ theme }) => `${theme.spacing(4)} 0`};
-  align-items: flex-start;
   gap: ${({ theme }) => theme.spacing(4)};
 `;
 
@@ -311,4 +300,10 @@ const StyledAvatar = styled(Avatar)`
 const CustomTagIcon = styled(Box)`
   ${({ theme }) => theme.typography.label}
   color: ${({ theme }) => theme.palette.grey[200]};
+`;
+const AccountManagement = styled(Stack)`
+  max-width: 350px;
+`;
+const AccountManagementActions = styled(Stack)`
+  width: fit-content;
 `;

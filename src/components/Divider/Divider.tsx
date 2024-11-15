@@ -1,11 +1,10 @@
-import {Box, styled} from "@mui/material";
+import { Box, BoxProps, styled } from "@mui/material";
 
-export const Divider = () => <StyledDivider />
+export const Divider = ({ ...props }: BoxProps) => <StyledDivider {...props} />;
 
-const StyledDivider = styled(Box)`
-  width: 100%;
-  height: 0.5px;
-  background-color: ${({ theme }) => theme.palette.grey[100]};
-  margin: 1.5px 0;
-`;
-
+const StyledDivider = styled(Box)(({ theme }) => ({
+  width: "100%",
+  height: "0.5px",
+  backgroundColor: theme.palette.grey[100],
+  margin: "1.5px 0",
+}));

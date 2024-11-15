@@ -1,24 +1,22 @@
-import { BarChartIcon } from "@/icons/BarChartIcon";
-import { InboxIcon } from "@/icons/InboxIcon";
-
-import { TagIcon } from "@/icons/TagIcon";
-import { UsersIcon } from "@/icons/UsersIcon";
-import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";
-import { Input } from "@components/Input";
 import { alpha, css, Stack, styled, Typography } from "@mui/material";
-import { NavigationHeader } from "./components/NavigationHeader";
-import {
-  financesAccordionData,
-  marketingAccordionData,
-} from "./static/AccordionData";
-import { FilePlusIcon } from "@/icons/FilePlusIcon";
 import { useNavigate } from "react-router-dom";
+import { FilePlusIcon } from "@/icons/FilePlusIcon";
+import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";
+import { UsersIcon } from "@/icons/UsersIcon";
+import { TagIcon } from "@/icons/TagIcon";
+import { InboxIcon } from "@/icons/InboxIcon";
+import { BarChartIcon } from "@/icons/BarChartIcon";
 import { routes } from "@config/routes";
 import { IconButton } from "@components/IconButton";
 import { InviteIcon } from "@/icons/InviteIcon";
 import { SquareGridCircleIcon } from "@/icons/SquareGridCircleIcon";
 import { ConnectionIcon } from "@/icons/ConnectionIcon";
-import { MagnifyingGlassIcon } from "@/icons/MagnifyingGlassIcon";
+import SearchInput from "@modules/SearchInput";
+import {
+  financesAccordionData,
+  marketingAccordionData,
+} from "./static/AccordionData";
+import { NavigationHeader } from "./components/NavigationHeader";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -33,18 +31,7 @@ export const Sidebar = () => {
       <SidebarContentWrapper>
         <NavigationHeader />
         <SearchWrapper>
-          <Input
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <SearchIconWrapper>
-                    <MagnifyingGlassIcon />
-                  </SearchIconWrapper>
-                ),
-              },
-            }}
-            placeholder="Search"
-          />
+          <SearchInput />
           <CustomIconButton>
             <InboxIcon />
           </CustomIconButton>
@@ -213,9 +200,4 @@ const CustomIconButton = styled(IconButton)`
   svg path {
     stroke: ${({ theme }) => theme.palette.grey[200]};
   }
-`;
-
-const SearchIconWrapper = styled("div")`
-  min-width: 20px;
-  height: 20px;
 `;

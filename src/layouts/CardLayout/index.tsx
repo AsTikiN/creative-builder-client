@@ -1,8 +1,8 @@
+import { alpha, Stack, styled } from "@mui/material";
+import { FC, PropsWithChildren, useState } from "react";
 import { DotsIcon } from "@/icons/DotsIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
 import { StatusChip, StatusChipProps } from "@components/StatusChip";
-import { alpha, Stack, styled } from "@mui/material";
-import { FC, PropsWithChildren, useState } from "react";
 import { MockOfferImage } from "./components/MockOfferImage";
 import { MockFunnelImage } from "./components/MockFunnelImage";
 
@@ -21,7 +21,7 @@ export const CardLayout: FC<CardLayoutProps> = ({
   statusChipProps,
 }) => {
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null
+    null,
   );
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,9 +31,15 @@ export const CardLayout: FC<CardLayoutProps> = ({
     funnel: <MockFunnelImage />,
   };
 
+  const imageHeight = {
+    book: 240,
+    offer: 189,
+    funnel: 164,
+  };
+
   return (
     <Wrapper>
-      <CoverImageWrapper variant={variant}>
+      <CoverImageWrapper variant={variant} imageHeight={imageHeight}>
         {coverImage ? (
           <ImageContainer>
             <Image src={coverImage} />
@@ -75,6 +81,7 @@ const Wrapper = styled("div")`
 
 const CoverImageWrapper = styled("div")<{
   variant: "book" | "offer" | "funnel";
+  imageHeight: { book: number; offer: number; funnel: number };
 }>`
   border-bottom: 0.5px solid
     ${({ theme }) => alpha(theme.palette.grey[200], 0.1)};
@@ -83,7 +90,7 @@ const CoverImageWrapper = styled("div")<{
   justify-content: center;
   padding: ${({ theme }) => theme.spacing(6)};
   position: relative;
-  height: ${({ variant }) => (variant === "book" ? "240px" : "164px")};
+  height: ${({ variant, imageHeight }) => `${imageHeight[variant]}px`};
 
   &:hover .action-panel {
     opacity: 1;

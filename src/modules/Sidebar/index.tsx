@@ -12,6 +12,7 @@ import { InviteIcon } from "@/icons/InviteIcon";
 import { SquareGridCircleIcon } from "@/icons/SquareGridCircleIcon";
 import { ConnectionIcon } from "@/icons/ConnectionIcon";
 import SearchInput from "@modules/SearchInput";
+import { ProcessorIcon } from "@/icons/ProcessorIcon.tsx";
 import {
   financesAccordionData,
   marketingAccordionData,
@@ -42,6 +43,16 @@ export const Sidebar = () => {
             <NavTextWrapper>
               <BarChartIcon />
               Overview
+            </NavTextWrapper>
+          </NavItem>
+
+          <NavItem
+            active={location.pathname === routes.agents()}
+            onClick={handleNavigate(routes.agents())}
+          >
+            <NavTextWrapper>
+              <ProcessorIcon />
+              Agents
             </NavTextWrapper>
           </NavItem>
 
@@ -92,7 +103,7 @@ export const Sidebar = () => {
           <NavItem>
             <NavTextWrapper>
               <ConnectionIcon />
-              Workflows
+              Automations
             </NavTextWrapper>
           </NavItem>
 

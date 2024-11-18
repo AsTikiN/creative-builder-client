@@ -1,8 +1,18 @@
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
-import { css, styled } from "@mui/material";
+import { css, lighten, styled } from "@mui/material";
+
+type ButtonColor =
+  | "primary"
+  | "secondary"
+  | "error"
+  | "info"
+  | "success"
+  | "warning"
+  | "inherit";
 
 interface ButtonProps extends LoadingButtonProps {
   children: React.ReactNode;
+  color?: ButtonColor;
 }
 
 export const Button = ({ children, ...props }: ButtonProps) => {
@@ -23,6 +33,23 @@ export const StyledButton = styled(LoadingButton)`
   gap: ${({ theme }) => theme.spacing(0.5)};
   ${({ theme }) => theme.typography.body1};
   min-width: auto;
+  line-height: 20px;
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+  &:hover {
+    background-color: ${({ theme, color }) => {
+      if (color === "inherit") {
+        return "inherit";
+      }
+      return color
+        ? lighten(theme.palette[color]?.main, 0.15)
+        : lighten(theme.palette.primary.main, 0.15);
+    }};
+  }
   & .MuiButton-icon {
     margin: 0;
   }
@@ -32,7 +59,6 @@ export const StyledButton = styled(LoadingButton)`
     css`
       width: 100%;
     `}
-
   ${(props) =>
     props.variant === "contained" &&
     css`
@@ -79,16 +105,10 @@ export const StyledButton = styled(LoadingButton)`
       &.MuiButton-root {
         box-shadow: 0px 1px 2px 0px #0a0d1408;
       }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.02) !important;
+      }
     `}
-
-    line-height: 20px;
-
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    box-shadow: none;
-  }
 `;
 
 const ButtonText = styled("span")`

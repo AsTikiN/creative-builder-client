@@ -15,6 +15,7 @@ import { UsersIcon } from "@/icons/UsersIcon";
 import { routes, SubRoutes } from "@config/routes";
 import { FunnelsIcon } from "@/icons/FunnelsIcon.tsx";
 import { ProfileCircleIcon } from "@/icons/ProfileCircleIcon.tsx";
+import { TagIcon } from "@/icons/TagIcon.tsx";
 
 const getIcon = (path: string) => {
   return {
@@ -33,6 +34,7 @@ const getIcon = (path: string) => {
     [SubRoutes.apps]: <FilePlusIcon />,
     [SubRoutes.details]: <BrandSettingsIcon />,
     [SubRoutes.funnels]: <FunnelsIcon />,
+    [SubRoutes.offers]: <TagIcon />,
   }[path];
 };
 
@@ -67,7 +69,7 @@ export const useBreadcrumbs = ({ customPathname }: IUseBreadcrumbs = {}) => {
       id: index,
       path: fullPath,
       breadcrumb: (
-        <BreadcrumbItem>
+        <BreadcrumbItem isSingle={paths.length === 1}>
           {icon}
           <BreadcrumbLabel
             className="breadcrumb-label"
@@ -86,13 +88,18 @@ export const useBreadcrumbs = ({ customPathname }: IUseBreadcrumbs = {}) => {
   return breadcrumbs;
 };
 
-const BreadcrumbItem = styled(Stack)`
+const BreadcrumbItem = styled(Stack)<{ isSingle: boolean }>`
   flex-direction: row;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(1.5)};
 
   &:hover .breadcrumb-label {
-    border-bottom: 0.5px solid ${({ theme }) => theme.palette.grey[400]};
+    ${({ isSingle, theme }) =>
+      !isSingle &&
+      `
+        cursor: pointer;
+        border-bottom: 0.5px solid ${theme.palette.grey[400]};
+      `}
   }
 
   & svg path {
@@ -101,7 +108,5 @@ const BreadcrumbItem = styled(Stack)`
 `;
 
 const BreadcrumbLabel = styled(Typography)`
-  cursor: pointer;
-
   border-bottom: 0.5px solid transparent;
 `;

@@ -14,12 +14,13 @@ export enum SubRoutes {
   details = "details",
   apps = "apps",
   funnels = "funnels",
+  offers = "offers",
 }
 
 export const routes = {
   apps: () => `/${SubRoutes.apps}`,
   login: () => "/login",
-  offers: () => "/offers",
+  offers: () => `/${SubRoutes.offers}`,
   funnels: () => `/${SubRoutes.funnels}`,
   editBook: (id: string) => `/book/edit/${id}`,
 

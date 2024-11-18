@@ -75,7 +75,7 @@ export const GeneralPage = () => {
         firstColumn={
           <HeadingBlock
             variant="medium"
-            title="Information"
+            title="Name"
             subtitle=" Set your brand name."
           />
         }

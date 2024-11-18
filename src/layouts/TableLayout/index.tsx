@@ -1,6 +1,3 @@
-import { SettingsIcon } from "@/icons/SettingsIcon";
-import { TrashIcon } from "@/icons/TrashIcon";
-import { Dropdown, DropdownOption } from "@components/Dropdown";
 import {
   styled,
   Table,
@@ -14,13 +11,23 @@ import {
   Stack,
   Chip,
   Box,
+  Badge,
 } from "@mui/material";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { SettingsIcon } from "@/icons/SettingsIcon";
+import { TrashIcon } from "@/icons/TrashIcon";
+import { Dropdown, DropdownOption } from "@components/Dropdown";
 
 const dropdownOptions = [
   {
     id: 1,
+    label: "Settings",
+    value: "Settings",
+    icon: <SettingsIcon />,
+  },
+  {
+    id: 2,
     label: "Remove member",
     value: "Remove member",
     icon: <TrashIcon />,
@@ -31,7 +38,7 @@ const dropdownOptions = [
 export const TableLayout = () => {
   const [isManageRowOpen, setIsManageRowOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null
+    null,
   );
   const [_, setSearchParams] = useSearchParams();
 
@@ -56,7 +63,13 @@ export const TableLayout = () => {
           <TableRow>
             <BodyCell>
               <MemberDataWrapper>
-                <TableAvatar>MA</TableAvatar>
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  variant="dot"
+                >
+                  <TableAvatar>MA</TableAvatar>
+                </StyledBadge>
                 <Stack gap="2px">
                   <Typography variant="h6" color="grey.400">
                     Murat Alpay
@@ -97,6 +110,37 @@ export const TableLayout = () => {
     </TableContainer>
   );
 };
+
+const StyledBadge = styled(Badge)`
+  & .MuiBadge-badge {
+    background-color: #44b700;
+    color: #44b700;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.palette.background.paper};
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: ripple 1.2s infinite ease-in-out;
+      border: 1px solid currentColor;
+      content: "";
+    }
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+`;
 
 const TableContainer = styled(MuiTableContainer)`
   box-shadow: none;

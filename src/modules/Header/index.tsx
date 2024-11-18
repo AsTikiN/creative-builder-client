@@ -1,6 +1,6 @@
-import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 import { alpha, Breadcrumbs, Stack, styled } from "@mui/material";
 import { FC, ReactNode } from "react";
+import { useBreadcrumbs } from "@/hooks/useBreadcrumbs";
 
 export interface HeaderProps {
   title: string;
@@ -83,9 +83,7 @@ const CustomBreadcrumbs = styled(Breadcrumbs)`
     color: ${({ theme }) => theme.palette.grey[700]};
   }
 
-  & .MuiBreadcrumbs-li {
-    cursor: pointer;
-
-    
-  }
+  //& .MuiBreadcrumbs-li {
+  //  cursor: pointer;
+  //}
 `;

@@ -79,6 +79,13 @@ const StyledToggleButton = styled(MuiToggleButton)<{ isSelected: boolean }>`
   ${({ isSelected, theme }) =>
     isSelected &&
     css`
+      svg path {
+        stroke: ${theme.palette.grey[400]} !important;
+      }
+      svg.custom-dark-rgb-icon-style path {
+        stroke: transparent !important;
+        fill: ${theme.palette.grey[400]} !important;
+      }
       background-color: #fff !important;
       color: ${theme.palette.grey[400]} !important;
       box-shadow:
@@ -95,6 +102,12 @@ const StyledToggleButton = styled(MuiToggleButton)<{ isSelected: boolean }>`
   ${({ isSelected, theme }) =>
     !isSelected &&
     css`
+      svg.custom-dark-rgb-icon-style path {
+        stroke: transparent !important;
+      }
       color: ${theme.palette.grey[50]} !important;
+      svg path {
+        stroke: ${theme.palette.grey[50]} !important;
+      }
     `}
 `;

@@ -14,6 +14,7 @@ import { SettingsToggleIcon } from "@/icons/SettingsToggleIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
 import { SmallSidebarLayout } from "@/layouts/SmallSidebarLayout";
 import { routes } from "@config/routes";
+import { ProcessorIcon } from "@/icons/ProcessorIcon.tsx";
 
 export const BrandSettingsSidebar = () => {
   return (
@@ -43,12 +44,19 @@ export const BrandSettingsSidebar = () => {
             },
             {
               id: 4,
+              icon: <ProcessorIcon />,
+              label: "Agents",
+              path: routes.team(),
+            },
+
+            {
+              id: 5,
               icon: <NoteTextIcon />,
               label: "Apps",
               path: routes.apps(),
             },
             {
-              id: 5,
+              id: 6,
               icon: <LowIcon />,
               label: "Legal",
               path: routes.legal(),
@@ -107,7 +115,7 @@ export const BrandSettingsSidebar = () => {
             {
               id: 11,
               icon: <LiveIcon />,
-              label: "Automations",
+              label: "Webhooks",
               path: routes.webhooks(),
             },
             {

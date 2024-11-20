@@ -6,20 +6,14 @@ import Link from "@tiptap/extension-link";
 import TextStyle from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import { styled } from "@mui/material/styles";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import { MagicWandIcon } from "@/icons/MagicWandIcon";
+import { Box, Typography } from "@mui/material";
 import { BoldIcon } from "@/icons/BoldIcon";
 import { ItalicIcon } from "@/icons/ItalicIcon";
 import { UnderlineIcon } from "@/icons/UnderlineIcon";
 import { StrokeIcon } from "@/icons/StrokeIcon";
-import { EditorLinkIcon } from "@/icons/EditorLinkIcon";
 import { MenuDropdown } from "../../components/MenuDropdown";
-import { Input } from "@components/Input";
-import { DropdownMenu } from "../../components/Dropdown";
-import { ShineIcon } from "@/icons/ShineIcon";
-import { CircleOutlinedCheckIcon } from "@/icons/CircleOutlinedCheckIcon";
-import { TranslateIcon } from "@/icons/TransalteIcon";
-import { FeatherIcon } from "@/icons/FeatherIcon";
+import { AiButtonModule } from "./modules/AiButtonModule";
+import { LinkButton } from "./components/LinkButton";
 
 export const TipTapEditor: React.FC = () => {
   const editor = useEditor({
@@ -43,75 +37,7 @@ export const TipTapEditor: React.FC = () => {
       {editor && (
         <Bubble editor={editor} tippyOptions={{ duration: 100 }}>
           <Wrapper>
-            <EditorButton startIcon={<MagicWandIcon />}>Ask AI</EditorButton>
-
-            <DropdownAiSection>
-              <AiSearchWrapper>
-                <Input placeholder="Ask AI to do anything..." fullWidth />
-              </AiSearchWrapper>
-
-              <DropdownMenu
-                width="252px"
-                sections={[
-                  {
-                    id: 1,
-                    title: "Suggested",
-                    options: [
-                      {
-                        label: "Improve writing",
-                        value: "improve",
-                        icon: <ShineIcon />,
-                        id: 1,
-                      },
-                      {
-                        label: "Fix spelling & grammar",
-                        value: "grammar",
-                        icon: <CircleOutlinedCheckIcon />,
-                        id: 2,
-                      },
-                      {
-                        label: "Translate",
-                        value: "translate",
-                        icon: <TranslateIcon />,
-                        id: 3,
-                      },
-                    ],
-                  },
-                  {
-                    id: 2,
-                    title: "Edits",
-                    options: [
-                      {
-                        label: "Make longer",
-                        value: "longer",
-                        icon: <FeatherIcon />,
-                        id: 4,
-                      },
-                      {
-                        label: "Make shorter",
-                        value: "shorter",
-                        icon: <FeatherIcon />,
-
-                        id: 5,
-                      },
-                      {
-                        label: "Simplify language",
-                        value: "simplify",
-                        icon: <FeatherIcon />,
-
-                        id: 6,
-                      },
-                      {
-                        label: "Adjust tone",
-                        value: "tone",
-                        icon: <FeatherIcon />,
-                        id: 7,
-                      },
-                    ],
-                  },
-                ]}
-              />
-            </DropdownAiSection>
+            <AiButtonModule />
 
             <VerticalDivider />
 
@@ -152,17 +78,7 @@ export const TipTapEditor: React.FC = () => {
             </IconButton>
             <VerticalDivider />
 
-            <IconButton
-              onClick={() => {
-                const url = window.prompt("Enter the URL");
-                if (url) {
-                  editor.chain().focus().setLink({ href: url }).run();
-                }
-              }}
-              className={editor.isActive("strike") ? "is-active" : ""}
-            >
-              <EditorLinkIcon />
-            </IconButton>
+            <LinkButton />
           </Wrapper>
         </Bubble>
       )}
@@ -205,19 +121,6 @@ const IconButton = styled("button")`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-`;
-
-const EditorButton = styled(Button)`
-  text-transform: none;
-  color: ${({ theme }) => theme.palette.grey[200]};
-  ${({ theme }) => theme.typography.body1};
-  white-space: nowrap;
-  position: relative;
-
-  &:hover {
-    color: ${({ theme }) => theme.palette.grey[400]};
-    background-color: ${({ theme }) => theme.palette.grey[500]};
-  }
 `;
 
 const VerticalDivider = styled(Box)`
@@ -350,33 +253,4 @@ const EditorWrapper = styled(Box)`
   h3 {
     font-size: 16px;
   }
-`;
-
-const DropdownAiSection = styled(Stack)`
-  position: absolute;
-  top: 50px;
-  left: 0;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 100px;
-  gap: ${({ theme }) => theme.spacing(2)};
-  align-items: flex-start;
-
-  .MuiTextField-root {
-    background-color: #fff;
-  }
-`;
-
-const AiSearchWrapper = styled(Box)`
-  width: 545px;
-  box-shadow:
-    0px 24px 24px -8px #0d0d0d08,
-    0px 10px 10px -5px #0d0d0d08,
-    0px 5px 5px -2.5px #0d0d0d08,
-    0px 3px 3px -1.5px #0d0d0d0a,
-    0px 2px 2px -1px #0d0d0d0a,
-    0px 1px 1px -0.5px #0d0d0d08,
-    0px 0px 0px 0.5px #002a570f,
-    0px 0px 0.5px 0px #0d0d0d66;
-  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
 `;

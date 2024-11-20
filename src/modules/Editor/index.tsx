@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-import { TipTapEditor } from "./components/TipTapEditor";
+import { TipTapEditor } from "./modules/TipTapEditor";
 
 export const Editor = () => {
   return (

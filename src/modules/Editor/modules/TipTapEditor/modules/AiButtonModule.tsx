@@ -1,3 +1,5 @@
+import { Box, IconButton, Stack, styled } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpCircleIcon } from "@/icons/ArrowUpCircleIcon";
 import { CircleOutlinedCheckIcon } from "@/icons/CircleOutlinedCheckIcon";
 import { FeatherIcon } from "@/icons/FeatherIcon";
@@ -7,8 +9,6 @@ import { TranslateIcon } from "@/icons/TransalteIcon";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import { DropdownMenu } from "@modules/Editor/components/Dropdown";
-import { Box, IconButton, Stack, styled } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
 
 const sections = [
   {
@@ -32,6 +32,27 @@ const sections = [
         value: "translate",
         icon: <TranslateIcon />,
         id: 3,
+        subItems: [
+          { label: "English", value: "english", id: 1 },
+          { label: "Korean", value: "korean", id: 2 },
+          { label: "Chinese, Simplified", value: "chinese_simplified", id: 3 },
+          {
+            label: "Chinese, Traditional",
+            value: "chinese_traditional",
+            id: 4,
+          },
+          { label: "Japanese", value: "japanese", id: 5 },
+          { label: "Spanish", value: "spanish", id: 6 },
+          { label: "Russian", value: "russian", id: 7 },
+          { label: "French", value: "french", id: 8 },
+          { label: "Portuguese", value: "portuguese", id: 9 },
+          { label: "German", value: "german", id: 10 },
+          { label: "Italian", value: "italian", id: 11 },
+          { label: "Dutch", value: "dutch", id: 12 },
+          { label: "Indonesian", value: "indonesian", id: 13 },
+          { label: "Filipino", value: "filipino", id: 14 },
+          { label: "Vietnamese", value: "vietnamese", id: 15 },
+        ],
       },
     ],
   },
@@ -62,6 +83,13 @@ const sections = [
         value: "tone",
         icon: <FeatherIcon />,
         id: 7,
+        subItems: [
+          { label: "Casual", value: "casual", id: 1 },
+          { label: "Conversational", value: "conversational", id: 2 },
+          { label: "Straightforward", value: "straightforward", id: 3 },
+          { label: "Confident", value: "confident", id: 4 },
+          { label: "Formal", value: "formal", id: 5 },
+        ],
       },
     ],
   },
@@ -123,7 +151,7 @@ const EditorButton = styled(Button)`
   ${({ theme }) => theme.typography.body1};
   white-space: nowrap;
   position: relative;
-
+  padding: 4px 6px;
   &:hover {
     color: ${({ theme }) => theme.palette.grey[400]};
     background-color: ${({ theme }) => theme.palette.grey[500]};
@@ -132,7 +160,7 @@ const EditorButton = styled(Button)`
 
 const DropdownAiSection = styled(Stack)`
   position: absolute;
-  top: 50px;
+  top: 79px;
   left: 0;
   transform: translateX(-50%);
   width: 300px;
@@ -159,6 +187,13 @@ const AiSearchWrapper = styled(Box)`
     0px 0px 0.5px 0px #0d0d0d66;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   position: relative;
+  .MuiBox-root {
+    height: auto;
+  }
+  .MuiFormControl-root {
+    height: auto;
+    padding: 10px 36px 10px 12px;
+  }
 `;
 
 const ArrowUpIconButton = styled(IconButton)`

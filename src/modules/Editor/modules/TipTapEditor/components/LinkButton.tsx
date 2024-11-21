@@ -1,11 +1,11 @@
+import { Box, Stack, styled } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { EditorLinkIcon } from "@/icons/EditorLinkIcon";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
 import { Input } from "@components/Input";
 import { DropdownMenu } from "@modules/Editor/components/Dropdown";
-import { Box, Stack, styled } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
 
 const sections = [
   {
@@ -87,6 +87,11 @@ const IconButton = styled("button")`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  &:hover {
+    color: ${({ theme }) => theme.palette.grey[400]};
+    background-color: ${({ theme }) => theme.palette.grey[500]};
+  }
 `;
 
 const DropdownWrapper = styled(Stack)`

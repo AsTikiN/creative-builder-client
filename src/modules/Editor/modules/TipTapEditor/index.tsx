@@ -91,6 +91,7 @@ export const TipTapEditor: React.FC = () => {
 
 const Wrapper = styled(Box)`
   padding: ${({ theme }) => theme.spacing(1)};
+  gap: ${({ theme }) => theme.spacing(0.5)};
   border-radius: 10px;
   box-shadow:
     0px 24px 24px -8px #0d0d0d08,
@@ -121,6 +122,11 @@ const IconButton = styled("button")`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  &:hover {
+    color: ${({ theme }) => theme.palette.grey[400]};
+    background-color: ${({ theme }) => theme.palette.grey[500]};
+  }
 `;
 
 const VerticalDivider = styled(Box)`

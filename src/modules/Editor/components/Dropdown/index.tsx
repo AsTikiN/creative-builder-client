@@ -8,6 +8,7 @@ interface DropdownSubItemsProps {
   value: string | number;
   icon?: React.ReactNode;
   id: string | number;
+  disabled?: boolean;
 }
 
 interface DropdownOption extends DropdownSubItemsProps {
@@ -38,9 +39,11 @@ export const DropdownMenu = ({
       {topSection}
       {sections.map((section) => (
         <Section key={section.id}>
-          <SectionTitle variant="h6" color="grey.50">
-            {section.title}
-          </SectionTitle>
+          {section.title && (
+            <SectionTitle variant="h6" color="grey.50">
+              {section.title}
+            </SectionTitle>
+          )}
           {section.options.map((option) => (
             <DropdownOptionItem key={option.id} option={option} />
           ))}
@@ -57,6 +60,7 @@ const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
     <Option
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      disabled={option.disabled}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <OptionStyled>
@@ -117,15 +121,18 @@ const OptionStyled = styled(Box)`
   gap: ${({ theme }) => theme.spacing(2)};
 `;
 
-const Option = styled(Box)`
+const Option = styled(Box)<{ disabled?: boolean }>`
   position: relative;
   border: 0.5px solid transparent;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  cursor: pointer;
-
+  cursor: ${({ disabled }) => (disabled ? "null" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? ".3" : "1")};
   &:hover {
-    background-color: ${({ theme }) => theme.palette.grey[500]};
-    border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+    background-color: ${({ theme, disabled }) =>
+      disabled ? "transparent" : theme.palette.grey[500]};
+    border: 0.5px solid
+      ${({ theme, disabled }) =>
+        disabled ? "transparent" : theme.palette.grey[100]};
   }
 `;
 

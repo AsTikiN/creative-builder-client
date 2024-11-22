@@ -1,6 +1,5 @@
 import { EditIcon } from "@/icons/EditIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
-import { AnalyticsViewIcon } from "@/icons/AnalyticsViewIcon.tsx";
 import { ContentElement } from "../components/EditBookSidebar";
 
 export const mockContentElements: ContentElement[] = [
@@ -8,6 +7,7 @@ export const mockContentElements: ContentElement[] = [
     id: 2,
     title: "Title Page",
     type: "titlePage",
+    isActive: true,
   },
   {
     id: 4,
@@ -18,11 +18,13 @@ export const mockContentElements: ContentElement[] = [
     id: 5,
     title: "Introduction",
     type: "introduction",
+    disabled: true,
   },
   {
     id: 6,
     title: "Folder",
     type: "folder",
+    isOpen: true,
     subElements: [
       {
         id: 7,
@@ -82,5 +84,4 @@ export const initialCheckedItems = {
 export const viewOptions = [
   { label: "Creator view", value: "creator", icon: <EditIcon /> },
   { label: "Consumer view", value: "consumer", icon: <UsersIcon /> },
-  { label: "Analytics view", value: "analytics", icon: <AnalyticsViewIcon /> },
 ];

@@ -1,22 +1,16 @@
-import {
-  alpha,
-  Box,
-  css,
-  IconButton,
-  Stack,
-  styled,
-  Typography,
-} from "@mui/material";
+import { Box, css, IconButton, Stack, styled, Typography } from "@mui/material";
 import { FC } from "react";
-import { DashedCopyIcon } from "@/icons/DashedCopyIcon";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
-import { LineChartIcon } from "@/icons/LineChartIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
-import { TrashIcon } from "@/icons/TrashIcon";
+import { HorizontalDots } from "@/icons/HorizontalDots";
+import { AudioIcon } from "@/icons/AudioIcon";
+import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
+import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
+import { ChevronDownSmallIcon } from "@/icons/ChevronDownSmallIcon";
 
 export interface ContentElement {
   id: number;
@@ -30,11 +24,15 @@ export interface ContentElement {
     | "folder"
     | "chapter";
   subElements?: ContentElement[];
+  isActive?: boolean;
+  disabled?: boolean;
+  isOpen?: boolean;
 }
 
 interface Props {
   handleAddContent: () => void;
   contentElements: ContentElement[];
+  handleToggleFolder: (element: ContentElement) => void;
 }
 
 const contentELementIcons = {
@@ -52,6 +50,7 @@ const contentELementIcons = {
 export const EditBookSidebar: FC<Props> = ({
   contentElements,
   handleAddContent,
+  handleToggleFolder,
 }) => {
   return (
     <Wrapper>
@@ -69,19 +68,19 @@ export const EditBookSidebar: FC<Props> = ({
         {/*  </NavTextWrapper>*/}
         {/*</NavItem>*/}
 
-        {/*<NavItem>*/}
-        {/*  <NavTextWrapper>*/}
-        {/*    <LayoutGridIcon />*/}
-        {/*    Formatting*/}
-        {/*  </NavTextWrapper>*/}
-        {/*</NavItem>*/}
+        <NavItem>
+          <NavTextWrapper>
+            <LayoutGridIcon />
+            Formatting
+          </NavTextWrapper>
+        </NavItem>
 
-        {/*<NavItem>*/}
-        {/*  <NavTextWrapper>*/}
-        {/*    <AudioIcon />*/}
-        {/*    Audiobook*/}
-        {/*  </NavTextWrapper>*/}
-        {/*</NavItem>*/}
+        <NavItem>
+          <NavTextWrapper>
+            <AudioIcon />
+            Audiobook
+          </NavTextWrapper>
+        </NavItem>
 
         <SectionTitleWrapper>
           <Typography variant="h6" color="grey.50">
@@ -101,53 +100,72 @@ export const EditBookSidebar: FC<Props> = ({
           if (isFolder)
             return (
               <Folder key={element.id}>
-                <NavItem isFilledIcon={!isFolder}>
+                <FolderNavItem
+                  isFilledIcon={false}
+                  onClick={() => handleToggleFolder(element)}
+                >
                   <NavTextWrapper>
                     {iconData.icon}
-                    {element.title}
+                    <TitleOverflow>{element.title}</TitleOverflow>
                   </NavTextWrapper>
-                </NavItem>
 
-                {element?.subElements?.map((file) => (
-                  <SubFile key={file.id}>
-                    <NavItem isFilledIcon>
-                      <NavTextWrapper>
-                        <FileTextIcon />
-                        {file.title}
-                      </NavTextWrapper>
-                    </NavItem>
-                  </SubFile>
-                ))}
+                  <ChevronIconButton
+                    isOpen={element.isOpen}
+                    className="hide-on-hover"
+                  >
+                    <ChevronDownSmallIcon />
+                  </ChevronIconButton>
+
+                  <DotsIconButton className="dots-icon">
+                    <HorizontalDots />
+                  </DotsIconButton>
+                </FolderNavItem>
+
+                <SubElementsList isOpen={element.isOpen}>
+                  {element?.subElements?.map((file) => (
+                    <SubFile key={file.id}>
+                      <NavItem
+                        disabled={file.disabled}
+                        isFilledIcon
+                        active={file.isActive}
+                      >
+                        <NavTextWrapper>
+                          <FileTextIcon />
+                          {file.title}
+                        </NavTextWrapper>
+                        <DotsIconButton className="dots-icon">
+                          <HorizontalDots />
+                        </DotsIconButton>
+                      </NavItem>
+                    </SubFile>
+                  ))}
+                </SubElementsList>
               </Folder>
             );
 
           return (
-            <NavItem isFilledIcon={iconData.isFilled}>
+            <NavItem
+              active={element.isActive}
+              isFilledIcon={iconData.isFilled}
+              disabled={element.disabled}
+            >
               <NavTextWrapper>
                 {iconData.icon}
                 {element.title}
               </NavTextWrapper>
+
+              <DotsIconButton className="dots-icon">
+                <HorizontalDots />
+              </DotsIconButton>
             </NavItem>
           );
         })}
       </TopSections>
 
-      <NavItem>
+      <NavItem isFilledIcon>
         <NavTextWrapper>
-          <LineChartIcon />
-          Analytics
-        </NavTextWrapper>
-      </NavItem>
-      <NavItem>
-        <NavTextWrapper>
-          <DashedCopyIcon />
-          Templates
-        </NavTextWrapper>
-      </NavItem>
-      <NavItem>
-        <NavTextWrapper>
-          <TrashIcon />
-          Trash
+          <FileDownloadIcon />
+          Download
         </NavTextWrapper>
       </NavItem>
     </Wrapper>
@@ -173,7 +191,11 @@ const SectionTitleWrapper = styled(Box)`
   padding: ${({ theme }) => theme.spacing(1, 2)};
 `;
 
-const NavItem = styled("div")<{ active?: boolean; isFilledIcon?: boolean }>`
+const NavItem = styled("div")<{
+  active?: boolean;
+  isFilledIcon?: boolean;
+  disabled?: boolean;
+}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -200,6 +222,33 @@ const NavItem = styled("div")<{ active?: boolean; isFilledIcon?: boolean }>`
       `}
   }
 
+  &:hover {
+    ${({ theme, isFilledIcon }) => css`
+      color: ${theme.palette.grey[400]};
+
+      svg path {
+        ${!isFilledIcon &&
+        css`
+          stroke: ${theme.palette.grey[400]};
+        `}
+
+        ${isFilledIcon &&
+        css`
+          fill: ${theme.palette.grey[400]};
+          stroke: auto;
+        `}
+      }
+
+      box-shadow:
+        0px 0px 0px 0.5px #e0e0e0,
+        0px 1px 3px 0px #a6a6a633;
+
+      .dots-icon {
+        display: flex;
+      }
+    `}
+  }
+
   ${({ active, theme, isFilledIcon }) =>
     active &&
     css`
@@ -218,14 +267,79 @@ const NavItem = styled("div")<{ active?: boolean; isFilledIcon?: boolean }>`
         `}
       }
 
-      border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)};
+      box-shadow:
+        0px 0px 0px 0.5px #e0e0e0,
+        0px 1px 3px 0px #a6a6a633;
     `}
+
+  ${({ disabled, theme, isFilledIcon }) =>
+    disabled &&
+    css`
+      background-color: ${theme.palette.grey[500]};
+      box-shadow:
+        0px 0px 0px 0.5px #e0e0e0,
+        0px 1px 3px 0px #a6a6a633;
+
+      &:hover {
+        color: ${theme.palette.grey[200]};
+        svg path {
+          ${!isFilledIcon &&
+          css`
+            stroke: ${theme.palette.grey[200]};
+          `}
+
+          ${isFilledIcon &&
+          css`
+            fill: ${theme.palette.grey[200]};
+            stroke: auto;
+          `}
+        }
+      }
+    `}
+`;
+
+const FolderNavItem = styled(NavItem)`
+  &:hover {
+    ${({ theme, isFilledIcon }) => css`
+      background-color: ${theme.palette.grey[500]};
+      color: ${theme.palette.grey[200]};
+
+      svg path {
+        ${!isFilledIcon &&
+        css`
+          stroke: ${theme.palette.grey[200]};
+        `}
+
+        ${isFilledIcon &&
+        css`
+          fill: ${theme.palette.grey[200]};
+          stroke: auto;
+        `}
+      }
+
+      box-shadow:
+        0px 0px 0px 0.5px #e0e0e0,
+        0px 1px 3px 0px #a6a6a633;
+
+      .dots-icon {
+        display: flex;
+      }
+    `}
+  }
+
+  &:hover {
+    .hide-on-hover {
+      display: none;
+    }
+  }
 `;
 
 const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
+  flex: 1;
+  max-width: calc(100% - 32px);
 `;
 
 const TopSections = styled(Stack)`
@@ -237,8 +351,33 @@ const Folder = styled(Stack)`
   gap: ${({ theme }) => theme.spacing(1)};
 `;
 
+const SubElementsList = styled(Stack)<{ isOpen?: boolean }>`
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+`;
+
 const SubFile = styled(Stack)`
   & > div {
-    padding-left: 24px;
+    margin-left: 24px;
   }
+`;
+
+const DotsIconButton = styled(IconButton)`
+  display: none;
+  padding: 4px;
+`;
+
+const ChevronIconButton = styled(IconButton)<{ isOpen?: boolean }>`
+  padding: 4px;
+  transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+
+  svg path {
+    stroke: ${({ theme }) => theme.palette.grey[50]};
+  }
+`;
+
+const TitleOverflow = styled("div")`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 32px);
 `;

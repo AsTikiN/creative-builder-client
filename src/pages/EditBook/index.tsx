@@ -29,6 +29,14 @@ export const EditBookPage = () => {
     customPathname: "apps/Color Mastery in Web Design: Master",
   });
 
+  const handleToggleFolder = (element: ContentElement) => {
+    setContentElements((prevElements) =>
+      prevElements.map((item) =>
+        item.id === element.id ? { ...item, isOpen: !item.isOpen } : item
+      )
+    );
+  };
+
   return (
     <Wrapper>
       <Content>
@@ -67,6 +75,7 @@ export const EditBookPage = () => {
           <EditBookSidebar
             handleAddContent={() => setIsModalOpen(true)}
             contentElements={contentElements}
+            handleToggleFolder={handleToggleFolder}
           />
           <EditorWrapper>
             <Editor />

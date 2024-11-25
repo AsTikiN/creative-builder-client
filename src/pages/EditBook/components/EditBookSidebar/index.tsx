@@ -30,7 +30,7 @@ export interface ContentElement {
 }
 
 interface Props {
-  handleAddContent: () => void;
+  handleAddContent: (event: React.MouseEvent<HTMLButtonElement>) => void;
   contentElements: ContentElement[];
   handleToggleFolder: (element: ContentElement) => void;
 }

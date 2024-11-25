@@ -1,5 +1,5 @@
-import { Box, Stack, styled, Typography } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { Box, Popper, Typography, Stack, styled } from "@mui/material";
+import { ReactNode, useState, useRef } from "react";
 import { ArrowRight } from "@/icons/ArrowRight.tsx";
 import { ArrowCornerDownLeft } from "@/icons/ArrowCornerDownLeft.tsx";
 
@@ -54,12 +54,14 @@ export const DropdownMenu = ({
 };
 
 const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
-  const [hover, setHover] = useState(false);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <Option
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      ref={anchorRef}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
       disabled={option.disabled}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -71,19 +73,47 @@ const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
         </OptionStyled>
         {option.subItems?.length && <ArrowRight />}
       </Stack>
-      {option.subItems && hover && (
-        <SubMenu>
-          {option.subItems.map((child) => (
-            <Option key={child.id}>
-              <SubMenuItem className="subMenuItem">
-                <Typography color="grey.400" variant="body1">
-                  {child.label}
-                </Typography>
-                <ArrowCornerDownLeft />
-              </SubMenuItem>
-            </Option>
-          ))}
-        </SubMenu>
+      {option.subItems && (
+        <Popper
+          disablePortal
+          open={open}
+          anchorEl={anchorRef.current}
+          placement="right-start"
+          modifiers={[
+            {
+              name: "preventOverflow",
+              options: {
+                boundary: "viewport",
+              },
+            },
+            {
+              name: "flip",
+              options: {
+                fallbackPlacements: ["left-start"],
+              },
+            },
+            {
+              name: "offset",
+              options: {
+                offset: [0, -10],
+              },
+            },
+          ]}
+          style={{ zIndex: 1400 }}
+        >
+          <SubMenu>
+            {option.subItems.map((child) => (
+              <Option key={child.id}>
+                <SubMenuItem>
+                  <Typography color="grey.400" variant="body1">
+                    {child.label}
+                  </Typography>
+                  <ArrowCornerDownLeft />
+                </SubMenuItem>
+              </Option>
+            ))}
+          </SubMenu>
+        </Popper>
       )}
     </Option>
   );
@@ -105,6 +135,7 @@ const Wrapper = styled(Stack)<{ width?: string; size?: "small" | "medium" }>`
   width: ${({ width }) => width || "auto"};
   min-width: 200px;
   gap: ${({ theme }) => theme.spacing(3)};
+  z-index: 100;
 `;
 
 const Section = styled(Stack)`
@@ -123,6 +154,7 @@ const OptionStyled = styled(Box)`
 
 const Option = styled(Box)<{ disabled?: boolean }>`
   position: relative;
+  z-index: 1;
   border: 0.5px solid transparent;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   cursor: ${({ disabled }) => (disabled ? "null" : "pointer")};
@@ -137,11 +169,9 @@ const Option = styled(Box)<{ disabled?: boolean }>`
 `;
 
 const SubMenu = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 100%;
   background-color: ${({ theme }) => theme.palette.background.primary};
   border-radius: 10px;
+  position: relative;
   box-shadow:
     0px 24px 24px -8px #0d0d0d08,
     0px 10px 10px -5px #0d0d0d08,
@@ -153,7 +183,8 @@ const SubMenu = styled(Box)`
     0px 0px 0.5px 0px #0d0d0d66;
   padding: ${({ theme }) => theme.spacing(1)};
   min-width: 200px;
-  z-index: 1;
+  left: 5px;
+  z-index: 120;
 `;
 
 const SubMenuItem = styled(Box)`

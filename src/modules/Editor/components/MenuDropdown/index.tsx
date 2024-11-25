@@ -1,13 +1,13 @@
-import { ChevronDownSmallIcon } from "@/icons/ChevronDownSmallIcon";
 import { Box, css, styled } from "@mui/material";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import { DropdownMenu } from "../Dropdown";
+import { ChevronDownSmallIcon } from "@/icons/ChevronDownSmallIcon";
 import { HeadingIcon } from "@/icons/HeadingIcon";
 import { BulletListIcon } from "@/icons/BulletListIcon";
 import { NumericListIcon } from "@/icons/NumericlistIcon";
 import { SquareCheckIcon } from "@/icons/SquareCheckIcon";
 import { DividerIcon } from "@/icons/DividerIcon";
 import { QuoteIcon } from "@/icons/QuoteIcon";
+import { DropdownMenu } from "../Dropdown";
 
 interface Props {
   icon: ReactNode;
@@ -115,7 +115,13 @@ const Wrapper = styled(Box)<{ variant: "text" | "icon" }>`
   position: relative;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(0.5)};
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+
   cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.palette.grey[400]};
+    background-color: ${({ theme }) => theme.palette.grey[500]};
+  }
 
   ${({ variant, theme }) =>
     variant === "text" &&

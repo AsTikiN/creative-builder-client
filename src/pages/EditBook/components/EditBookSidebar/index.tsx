@@ -13,7 +13,6 @@ import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
-import { LineChartIcon } from "@/icons/LineChartIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
@@ -33,7 +32,7 @@ export interface ContentElement {
 }
 
 interface Props {
-  handleAddContent: () => void;
+  handleAddContent: (event: React.MouseEvent<HTMLButtonElement>) => void;
   contentElements: ContentElement[];
 }
 
@@ -131,13 +130,6 @@ export const EditBookSidebar: FC<Props> = ({
           );
         })}
       </TopSections>
-
-      <NavItem>
-        <NavTextWrapper>
-          <LineChartIcon />
-          Analytics
-        </NavTextWrapper>
-      </NavItem>
       <NavItem>
         <NavTextWrapper>
           <DashedCopyIcon />

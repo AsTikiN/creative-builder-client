@@ -1,11 +1,18 @@
 import { Box, Stack, styled, Typography } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { ArrowRight } from "@/icons/ArrowRight.tsx";
+import { ArrowCornerDownLeft } from "@/icons/ArrowCornerDownLeft.tsx";
 
-interface DropdownOption {
+interface DropdownSubItemsProps {
   label: string;
   value: string | number;
   icon?: React.ReactNode;
   id: string | number;
+  disabled?: boolean;
+}
+
+interface DropdownOption extends DropdownSubItemsProps {
+  subItems?: DropdownSubItemsProps[];
 }
 
 interface DropdownSection {
@@ -32,22 +39,53 @@ export const DropdownMenu = ({
       {topSection}
       {sections.map((section) => (
         <Section key={section.id}>
-          <SectionTitle variant="h6" color="grey.50">
-            {section.title}
-          </SectionTitle>
+          {section.title && (
+            <SectionTitle variant="h6" color="grey.50">
+              {section.title}
+            </SectionTitle>
+          )}
           {section.options.map((option) => (
-            <Option key={option.id}>
-              <Stack direction="row" alignItems="center" spacing={2}>
-                <IconWrapper>{option.icon}</IconWrapper>
-                <Typography color="grey.400" variant="body1">
-                  {option.label}
-                </Typography>
-              </Stack>
-            </Option>
+            <DropdownOptionItem key={option.id} option={option} />
           ))}
         </Section>
       ))}
     </Wrapper>
+  );
+};
+
+const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <Option
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      disabled={option.disabled}
+    >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <OptionStyled>
+          <IconWrapper>{option.icon}</IconWrapper>
+          <Typography color="grey.400" variant="body1">
+            {option.label}
+          </Typography>
+        </OptionStyled>
+        {option.subItems?.length && <ArrowRight />}
+      </Stack>
+      {option.subItems && hover && (
+        <SubMenu>
+          {option.subItems.map((child) => (
+            <Option key={child.id}>
+              <SubMenuItem className="subMenuItem">
+                <Typography color="grey.400" variant="body1">
+                  {child.label}
+                </Typography>
+                <ArrowCornerDownLeft />
+              </SubMenuItem>
+            </Option>
+          ))}
+        </SubMenu>
+      )}
+    </Option>
   );
 };
 
@@ -77,15 +115,70 @@ const SectionTitle = styled(Typography)`
   padding: ${({ theme }) => theme.spacing(1, 2)};
 `;
 
-const Option = styled(Box)`
+const OptionStyled = styled(Box)`
+  display: flex;
   padding: ${({ theme }) => theme.spacing(1.75, 2)};
+  gap: ${({ theme }) => theme.spacing(2)};
+`;
+
+const Option = styled(Box)<{ disabled?: boolean }>`
+  position: relative;
   border: 0.5px solid transparent;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "null" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? ".3" : "1")};
+  &:hover {
+    background-color: ${({ theme, disabled }) =>
+      disabled ? "transparent" : theme.palette.grey[500]};
+    border: 0.5px solid
+      ${({ theme, disabled }) =>
+        disabled ? "transparent" : theme.palette.grey[100]};
+  }
+`;
+
+const SubMenu = styled(Box)`
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: ${({ theme }) => theme.palette.background.primary};
+  border-radius: 10px;
+  box-shadow:
+    0px 24px 24px -8px #0d0d0d08,
+    0px 10px 10px -5px #0d0d0d08,
+    0px 5px 5px -2.5px #0d0d0d08,
+    0px 3px 3px -1.5px #0d0d0d0a,
+    0px 2px 2px -1px #0d0d0d0a,
+    0px 1px 1px -0.5px #0d0d0d08,
+    0px 0px 0px 0.5px #002a570f,
+    0px 0px 0.5px 0px #0d0d0d66;
+  padding: ${({ theme }) => theme.spacing(1)};
+  min-width: 200px;
+  z-index: 1;
+`;
+
+const SubMenuItem = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: ${({ theme }) => theme.spacing(2)};
+  padding: ${({ theme }) => theme.spacing(1.75, 2)};
+  svg {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s;
+  }
 
   &:hover {
-    background-color: ${({ theme }) => theme.palette.grey[500]};
-    border: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
+    svg {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
   }
 `;
 

@@ -1,5 +1,5 @@
 import { Box, Breadcrumbs, styled } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CrossIcon } from "@/icons/CrossIcon";
 import { IconButton } from "@components/IconButton";
@@ -12,7 +12,7 @@ import { routes } from "@config/routes";
 
 import { Button } from "@components/Button";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs.tsx";
-import { AddContentModal } from "./modules/AddContentModal";
+import NestedMenu from "@components/Menu";
 import { mockContentElements, viewOptions } from "./mock/mockContentElements";
 import { ContentElement, EditBookSidebar } from "./components/EditBookSidebar";
 
@@ -20,15 +20,21 @@ export const EditBookPage = () => {
   const navigate = useNavigate();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [contentElements, setContentElements] =
-    useState<ContentElement[]>(mockContentElements);
 
   const breadcrumbs = useBreadcrumbs({
     customPathname: "apps/Color Mastery in Web Design: Master",
   });
+  const [contentElements] = useState<ContentElement[]>(mockContentElements);
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Wrapper>
       <Content>
@@ -65,21 +71,15 @@ export const EditBookPage = () => {
         </PageHeader>
         <SidebarContent>
           <EditBookSidebar
-            handleAddContent={() => setIsModalOpen(true)}
+            handleAddContent={handleClick}
             contentElements={contentElements}
           />
+          <NestedMenu anchorEl={anchorEl} handleClose={handleClose} />
           <EditorWrapper>
             <Editor />
           </EditorWrapper>
         </SidebarContent>
       </Content>
-
-      <AddContentModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        contentElements={contentElements}
-        setContentElements={setContentElements}
-      />
     </Wrapper>
   );
 };

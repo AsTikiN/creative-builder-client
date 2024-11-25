@@ -5,6 +5,10 @@ import { FileTextIcon } from "@/icons/FileTextIcon.tsx";
 import { LowIcon } from "@/icons/LowIcon.tsx";
 import { FileSearchIcon } from "@/icons/FileSearchIcon.tsx";
 import { FolderIcon } from "@/icons/FolderIcon.tsx";
+import {
+  ContentElement,
+  ContentElementType,
+} from "@/pages/EditBook/modules/EditBookSidebar";
 
 const sections = [
   {
@@ -16,28 +20,28 @@ const sections = [
         value: "cover",
         icon: <ImageIcon />,
         id: 1,
-        disabled: true,
+        // disabled: true,
       },
       {
         label: "Title Page",
         value: "titlePage",
         icon: <FileTextIcon />,
         id: 2,
-        disabled: true,
+        // disabled: true,
       },
       {
         label: "Copyright",
         value: "copyright",
         icon: <LowIcon />,
         id: 3,
-        disabled: true,
+        // disabled: true,
       },
       {
         label: "Table of Contents",
         value: "tableOfContents",
         icon: <FileSearchIcon />,
         id: 4,
-        disabled: true,
+        // disabled: true,
       },
       {
         label: "Part",
@@ -70,9 +74,11 @@ const sections = [
 const NestedMenu = ({
   anchorEl,
   handleClose,
+  handleAddElement,
 }: {
   anchorEl: HTMLElement | null;
   handleClose: () => void;
+  handleAddElement: (element: ContentElement) => () => void;
 }) => {
   return (
     <div>
@@ -95,7 +101,21 @@ const NestedMenu = ({
           },
         }}
       >
-        <DropdownMenu sections={sections} />
+        <DropdownMenu
+          sections={[
+            {
+              ...sections[0],
+              options: sections[0].options.map((option) => ({
+                ...option,
+                onClick: handleAddElement({
+                  title: option.label,
+                  type: option.value as ContentElementType,
+                  id: Math.floor(Math.random() * 1000000),
+                }),
+              })),
+            },
+          ]}
+        />
       </Menu>
     </div>
   );

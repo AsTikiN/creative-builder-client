@@ -6,6 +6,7 @@ import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
 import { Input } from "@components/Input";
 import { DropdownMenu } from "@modules/Editor/components/Dropdown";
+import { Editor } from "@tiptap/react";
 
 const sections = [
   {
@@ -34,9 +35,14 @@ const sections = [
   },
 ];
 
-export const LinkButton = () => {
+interface Props {
+  editor: Editor;
+}
+
+export const LinkButton = ({ editor }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [link, setLink] = useState("");
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -54,6 +60,14 @@ export const LinkButton = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (link) {
+      editor.commands.setLink({ href: link });
+    } else {
+      editor.commands.unsetLink();
+    }
+  }, [link]);
+
   return (
     <Wrapper ref={wrapperRef}>
       <IconButton onClick={() => setIsOpen(!isOpen)}>
@@ -64,7 +78,13 @@ export const LinkButton = () => {
         <DropdownWrapper>
           <DropdownMenu
             size="medium"
-            topSection={<Input placeholder="Paste link or search content" />}
+            topSection={
+              <Input
+                placeholder="Paste link or search content"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+            }
             sections={sections}
           />
         </DropdownWrapper>

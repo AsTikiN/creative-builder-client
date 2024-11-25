@@ -116,6 +116,7 @@ export const TipTapEditor: React.FC = () => {
             <VerticalDivider />
 
             <MenuDropdown
+              editor={editor}
               onClick={() => 123}
               icon={
                 <Typography variant="body1" color="grey.200">

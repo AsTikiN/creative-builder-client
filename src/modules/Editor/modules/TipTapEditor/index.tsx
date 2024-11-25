@@ -3,6 +3,8 @@ import { useEditor, EditorContent, BubbleMenu } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
+import TaskItem from "@tiptap/extension-task-item";
+import TaskList from "@tiptap/extension-task-list";
 import TextStyle from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import { styled } from "@mui/material/styles";
@@ -17,7 +19,17 @@ import { LinkButton } from "./components/LinkButton";
 
 export const TipTapEditor: React.FC = () => {
   const editor = useEditor({
-    extensions: [StarterKit, Underline, Link, TextStyle, Color],
+    extensions: [
+      StarterKit,
+      Underline,
+      Link,
+      TextStyle,
+      Color,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
+    ],
     content: `
       <h1>Getting started</h1>
       <h2>There should be nothing to hide</h2>
@@ -37,12 +49,13 @@ export const TipTapEditor: React.FC = () => {
       {editor && (
         <Bubble editor={editor} tippyOptions={{ duration: 100 }}>
           <Wrapper>
-            <AiButtonModule />
+            <AiButtonModule editor={editor} />
 
             <VerticalDivider />
 
             <MenuDropdown
               onClick={() => 123}
+              editor={editor}
               icon={
                 <Typography variant="body1" color="grey.200">
                   Text
@@ -78,7 +91,7 @@ export const TipTapEditor: React.FC = () => {
             </IconButton>
             <VerticalDivider />
 
-            <LinkButton />
+            <LinkButton editor={editor} />
           </Wrapper>
         </Bubble>
       )}
@@ -174,6 +187,75 @@ const StyledEditorContent = styled(EditorContent)(({ theme }) => ({
     "& a": {
       color: theme.palette.primary.main,
       textDecoration: "underline",
+    },
+    "& [data-type='taskList'] > li > div, & [data-type='taskList'] > li > div > p, & [data-type='taskList'] > li > label":
+      {
+        display: "inline",
+      },
+    "& [data-type='taskList']": {
+      paddingLeft: 0,
+    },
+    "& [data-type='taskList'] > li": {
+      listStyleType: "none",
+    },
+    "& [data-type='taskList'] > li > label": {
+      gap: theme.spacing(1),
+      cursor: "pointer",
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative",
+      top: "2px",
+
+      "& input[type='checkbox']": {
+        appearance: "none",
+        width: "16px",
+        height: "16px",
+        border: `1px solid ${theme.palette.grey[100]}`,
+        borderRadius: "4px",
+        cursor: "pointer",
+        margin: 0,
+
+        position: "relative",
+
+        "&:checked": {
+          backgroundColor: theme.palette.primary.main,
+          borderColor: theme.palette.primary.main,
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            left: "4px",
+            top: "1px",
+            width: "6px",
+            height: "9px",
+            border: "solid white",
+            borderWidth: "0 2px 2px 0",
+            transform: "rotate(45deg)",
+          },
+        },
+
+        "&:hover": {
+          borderColor: theme.palette.primary.main,
+        },
+      },
+
+      "& span": {
+        flex: 1,
+        ...theme.typography.editorText,
+        color: theme.palette.grey[200],
+      },
+    },
+    "& blockquote": {
+      borderLeft: `4px solid ${theme.palette.grey[100]}`,
+      margin: theme.spacing(0),
+      padding: theme.spacing(0, 0, 0, 2),
+      color: theme.palette.grey[200],
+      fontStyle: "italic",
+
+      "& p": {
+        margin: 0,
+      },
     },
   },
 }));

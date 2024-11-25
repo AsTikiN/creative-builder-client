@@ -2420,6 +2420,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tiptap/extension-task-item@npm:^2.10.2":
+  version: 2.10.2
+  resolution: "@tiptap/extension-task-item@npm:2.10.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+    "@tiptap/pm": ^2.7.0
+  checksum: 10c0/5f1b33604ef1eb1690ce30413f4e9c6172898077e2965fbd64cb5fbc7464b81c31346862136fb71d0639ec34a8447712834d577f794870ed4a069a1abf42adcc
+  languageName: node
+  linkType: hard
+
+"@tiptap/extension-task-list@npm:^2.10.2":
+  version: 2.10.2
+  resolution: "@tiptap/extension-task-list@npm:2.10.2"
+  peerDependencies:
+    "@tiptap/core": ^2.7.0
+  checksum: 10c0/4d1606ad8ad82a9549b38dfd24ded9435af83e8cbf842e4db9d6351b24a9e059d8440f7d6596bfb65e6b42d52e307a347772b99eba5b9b41aac8d2e0147fb0ec
+  languageName: node
+  linkType: hard
+
 "@tiptap/extension-text-style@npm:^2.8.0":
   version: 2.8.0
   resolution: "@tiptap/extension-text-style@npm:2.8.0"
@@ -9514,6 +9533,8 @@ __metadata:
     "@storybook/test": "npm:^8.3.3"
     "@tiptap/extension-color": "npm:^2.8.0"
     "@tiptap/extension-link": "npm:^2.8.0"
+    "@tiptap/extension-task-item": "npm:^2.10.2"
+    "@tiptap/extension-task-list": "npm:^2.10.2"
     "@tiptap/extension-text-style": "npm:^2.8.0"
     "@tiptap/extension-underline": "npm:^2.8.0"
     "@tiptap/pm": "npm:^2.8.0"

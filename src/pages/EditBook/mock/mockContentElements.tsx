@@ -1,6 +1,6 @@
 import { EditIcon } from "@/icons/EditIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
-import { ContentElement } from "../components/EditBookSidebar";
+import { ContentElement } from "../modules/EditBookSidebar";
 
 export const mockContentElements: ContentElement[] = [
   {

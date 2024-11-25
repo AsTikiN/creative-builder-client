@@ -1,5 +1,5 @@
 import { Box, Breadcrumbs, styled } from "@mui/material";
-import React, { useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CrossIcon } from "@/icons/CrossIcon";
 import { IconButton } from "@components/IconButton";
@@ -14,7 +14,7 @@ import { Button } from "@components/Button";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs.tsx";
 import NestedMenu from "@components/Menu";
 import { mockContentElements, viewOptions } from "./mock/mockContentElements";
-import { ContentElement, EditBookSidebar } from "./components/EditBookSidebar";
+import { ContentElement, EditBookSidebar } from "./modules/EditBookSidebar";
 
 export const EditBookPage = () => {
   const navigate = useNavigate();
@@ -24,6 +24,7 @@ export const EditBookPage = () => {
   const breadcrumbs = useBreadcrumbs({
     customPathname: "apps/Color Mastery in Web Design: Master",
   });
+
   const [contentElements, setContentElements] =
     useState<ContentElement[]>(mockContentElements);
 
@@ -37,13 +38,21 @@ export const EditBookPage = () => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddContentClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleAddElement = (element: ContentElement) => () => {
+    setContentElements((prevElements) => [...prevElements, element]);
+    setAnchorEl(null);
+  };
+
   return (
     <Wrapper>
       <Content>
@@ -80,11 +89,16 @@ export const EditBookPage = () => {
         </PageHeader>
         <SidebarContent>
           <EditBookSidebar
-            handleAddContent={handleClick}
+            handleAddContent={handleAddContentClick}
             contentElements={contentElements}
+            setContentElements={setContentElements}
             handleToggleFolder={handleToggleFolder}
           />
-          <NestedMenu anchorEl={anchorEl} handleClose={handleClose} />
+          <NestedMenu
+            anchorEl={anchorEl}
+            handleClose={handleClose}
+            handleAddElement={handleAddElement}
+          />
           <EditorWrapper>
             <Editor />
           </EditorWrapper>

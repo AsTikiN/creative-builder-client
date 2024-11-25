@@ -27,6 +27,8 @@
     "@rtk-query/codegen-openapi": "^1.2.0",
     "@tiptap/extension-color": "^2.8.0",
     "@tiptap/extension-link": "^2.8.0",
+    "@tiptap/extension-task-item": "^2.10.2",
+    "@tiptap/extension-task-list": "^2.10.2",
     "@tiptap/extension-text-style": "^2.8.0",
     "@tiptap/extension-underline": "^2.8.0",
     "@tiptap/pm": "^2.8.0",

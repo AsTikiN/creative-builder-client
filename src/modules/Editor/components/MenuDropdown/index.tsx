@@ -8,11 +8,13 @@ import { SquareCheckIcon } from "@/icons/SquareCheckIcon";
 import { DividerIcon } from "@/icons/DividerIcon";
 import { QuoteIcon } from "@/icons/QuoteIcon";
 import { DropdownMenu } from "../Dropdown";
+import { Editor } from "@tiptap/react";
 
 interface Props {
   icon: ReactNode;
   onClick: () => void;
   variant?: "text" | "icon";
+  editor: Editor;
 }
 
 const sections = [
@@ -25,54 +27,75 @@ const sections = [
         value: "h1",
         id: 1,
         icon: <HeadingIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleHeading({ level: 1 }).run(),
       },
       {
         label: "Heading 2",
         value: "h2",
         id: 2,
         icon: <HeadingIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleHeading({ level: 2 }).run(),
       },
       {
         label: "Heading 3",
         value: "h3",
         id: 3,
         icon: <HeadingIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleHeading({ level: 3 }).run(),
       },
       {
         label: "Bulleted list",
         value: "bullet",
         id: 4,
         icon: <BulletListIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleBulletList().run(),
       },
       {
         label: "Numbered list",
         value: "ordered",
         id: 5,
         icon: <NumericListIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleOrderedList().run(),
       },
       {
         label: "To-do list",
         value: "todo",
         id: 6,
         icon: <SquareCheckIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleTaskList().run(),
       },
       {
         label: "Quote",
         value: "quote",
         id: 7,
         icon: <QuoteIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().toggleBlockquote().run(),
       },
       {
         label: "Divider",
         value: "divider",
         id: 8,
         icon: <DividerIcon />,
+        handler: (editor: Editor) =>
+          editor.chain().focus().setHorizontalRule().run(),
       },
     ],
   },
 ];
 
-export const MenuDropdown = ({ icon, onClick, variant = "text" }: Props) => {
+export const MenuDropdown = ({
+  icon,
+  onClick,
+  variant = "text",
+  editor,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -103,7 +126,18 @@ export const MenuDropdown = ({ icon, onClick, variant = "text" }: Props) => {
       <ChevronDownSmallIcon />
       {isOpen && (
         <DropDownWrapper>
-          <DropdownMenu width="252px" sections={sections} />
+          <DropdownMenu
+            width="252px"
+            sections={[
+              {
+                ...sections[0],
+                options: sections[0].options.map((option) => ({
+                  ...option,
+                  onClick: () => option.handler(editor),
+                })),
+              },
+            ]}
+          />
         </DropDownWrapper>
       )}
     </Wrapper>

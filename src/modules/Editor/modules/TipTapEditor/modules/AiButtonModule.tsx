@@ -1,5 +1,11 @@
 import { Box, IconButton, Stack, styled } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEvent as ReactMouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ArrowUpCircleIcon } from "@/icons/ArrowUpCircleIcon";
 import { CircleOutlinedCheckIcon } from "@/icons/CircleOutlinedCheckIcon";
 import { FeatherIcon } from "@/icons/FeatherIcon";
@@ -9,6 +15,7 @@ import { TranslateIcon } from "@/icons/TransalteIcon";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
 import { DropdownMenu } from "@modules/Editor/components/Dropdown";
+import { Editor } from "@tiptap/react";
 
 const sections = [
   {
@@ -95,11 +102,15 @@ const sections = [
   },
 ];
 
-export const AiButtonModule = () => {
+interface Props {
+  editor: Editor;
+}
+
+export const AiButtonModule: FC<Props> = ({ editor }) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleOpenDropdown = () => {
+  const handleOpenDropdownClick = (e: ReactMouseEvent) => {
     setIsOpenDropdown(!isOpenDropdown);
   };
 
@@ -121,7 +132,10 @@ export const AiButtonModule = () => {
 
   return (
     <Wrapper ref={dropdownRef}>
-      <EditorButton onClick={handleOpenDropdown} startIcon={<MagicWandIcon />}>
+      <EditorButton
+        onClick={handleOpenDropdownClick}
+        startIcon={<MagicWandIcon />}
+      >
         Ask AI
       </EditorButton>
 
@@ -160,7 +174,7 @@ const EditorButton = styled(Button)`
 
 const DropdownAiSection = styled(Stack)`
   position: absolute;
-  top: 79px;
+  top: 42px;
   left: 0;
   transform: translateX(-50%);
   width: 300px;
@@ -187,12 +201,22 @@ const AiSearchWrapper = styled(Box)`
     0px 0px 0.5px 0px #0d0d0d66;
   border-radius: ${({ theme }) => theme.shape.borderRadius}px;
   position: relative;
+  border: none;
+
   .MuiBox-root {
     height: auto;
+    border: none;
   }
+
   .MuiFormControl-root {
     height: auto;
-    padding: 10px 36px 10px 12px;
+    /* padding: 10px 36px 10px 12px; */
+    padding: 4px;
+    border: none;
+
+    & > .MuiInputBase-root {
+      padding: 6px 6px 6px 8px;
+    }
   }
 `;
 

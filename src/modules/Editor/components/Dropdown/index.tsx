@@ -1,5 +1,5 @@
 import { Box, Stack, styled, Typography } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { MouseEventHandler, ReactNode, useState } from "react";
 import { ArrowRight } from "@/icons/ArrowRight.tsx";
 import { ArrowCornerDownLeft } from "@/icons/ArrowCornerDownLeft.tsx";
 
@@ -9,6 +9,7 @@ interface DropdownSubItemsProps {
   icon?: React.ReactNode;
   id: string | number;
   disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 interface DropdownOption extends DropdownSubItemsProps {
@@ -61,6 +62,7 @@ const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       disabled={option.disabled}
+      onClick={option.onClick}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <OptionStyled>

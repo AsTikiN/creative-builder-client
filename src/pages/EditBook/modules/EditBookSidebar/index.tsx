@@ -1,5 +1,12 @@
 import { Box, css, IconButton, Stack, styled, Typography } from "@mui/material";
-import { FC } from "react";
+import {
+  Dispatch,
+  FC,
+  MouseEvent,
+  MouseEventHandler,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
@@ -11,31 +18,46 @@ import { AudioIcon } from "@/icons/AudioIcon";
 import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
 import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
 import { ChevronDownSmallIcon } from "@/icons/ChevronDownSmallIcon";
+import { DotsButton } from "./components/DotsButton";
+import { NavItem } from "./components/NavItem";
+import { SidebarFolder } from "./components/SidebarFolder";
+import { DropdownOption } from "@components/Dropdown";
+
+export type ContentElementType =
+  | "cover"
+  | "titlePage"
+  | "copyright"
+  | "tableOfContents"
+  | "introduction"
+  | "folder"
+  | "chapter"
+  | "part"
+  | "conclusion";
+
+export interface IconData {
+  icon: ReactNode;
+  isFilled: boolean;
+}
 
 export interface ContentElement {
   id: number;
   title: string;
-  type:
-    | "cover"
-    | "titlePage"
-    | "copyright"
-    | "tableOfContents"
-    | "introduction"
-    | "folder"
-    | "chapter";
+  type: ContentElementType;
   subElements?: ContentElement[];
   isActive?: boolean;
   disabled?: boolean;
   isOpen?: boolean;
+  handleDotsClick?: () => void;
 }
 
 interface Props {
   handleAddContent: (event: React.MouseEvent<HTMLButtonElement>) => void;
   contentElements: ContentElement[];
+  setContentElements: Dispatch<SetStateAction<ContentElement[]>>;
   handleToggleFolder: (element: ContentElement) => void;
 }
 
-const contentELementIcons = {
+const contentELementIcons: Record<ContentElementType, IconData> = {
   cover: { icon: <ImageIcon />, isFilled: true },
   titlePage: { icon: <FileTextIcon />, isFilled: true },
   copyright: { icon: <LowIcon />, isFilled: false },
@@ -49,9 +71,34 @@ const contentELementIcons = {
 
 export const EditBookSidebar: FC<Props> = ({
   contentElements,
+  setContentElements,
   handleAddContent,
   handleToggleFolder,
 }) => {
+  const handleDotsClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  };
+
+  const handleDotsOptionClick = (
+    option: DropdownOption,
+    element: ContentElement
+  ) => {
+    const value = option.value;
+
+    if (value === "delete") {
+      setContentElements((prevElements) =>
+        prevElements.filter((el) => el.id !== element.id)
+      );
+    }
+
+    if (value === "duplicate") {
+      setContentElements((prevElements) => [
+        ...prevElements,
+        { ...element, id: Math.floor(Math.random() * 1000000) },
+      ]);
+    }
+  };
+
   return (
     <Wrapper>
       <TopSections>
@@ -99,48 +146,14 @@ export const EditBookSidebar: FC<Props> = ({
 
           if (isFolder)
             return (
-              <Folder key={element.id}>
-                <FolderNavItem
-                  isFilledIcon={false}
-                  onClick={() => handleToggleFolder(element)}
-                >
-                  <NavTextWrapper>
-                    {iconData.icon}
-                    <TitleOverflow>{element.title}</TitleOverflow>
-                  </NavTextWrapper>
-
-                  <ChevronIconButton
-                    isOpen={element.isOpen}
-                    className="hide-on-hover"
-                  >
-                    <ChevronDownSmallIcon />
-                  </ChevronIconButton>
-
-                  <DotsIconButton className="dots-icon">
-                    <HorizontalDots />
-                  </DotsIconButton>
-                </FolderNavItem>
-
-                <SubElementsList isOpen={element.isOpen}>
-                  {element?.subElements?.map((file) => (
-                    <SubFile key={file.id}>
-                      <NavItem
-                        disabled={file.disabled}
-                        isFilledIcon
-                        active={file.isActive}
-                      >
-                        <NavTextWrapper>
-                          <FileTextIcon />
-                          {file.title}
-                        </NavTextWrapper>
-                        <DotsIconButton className="dots-icon">
-                          <HorizontalDots />
-                        </DotsIconButton>
-                      </NavItem>
-                    </SubFile>
-                  ))}
-                </SubElementsList>
-              </Folder>
+              <SidebarFolder
+                key={element.id}
+                element={element}
+                handleToggleFolder={handleToggleFolder}
+                handleDotsClick={handleDotsClick}
+                handleDotsOptionClick={handleDotsOptionClick}
+                iconData={iconData}
+              />
             );
 
           return (
@@ -154,9 +167,11 @@ export const EditBookSidebar: FC<Props> = ({
                 {element.title}
               </NavTextWrapper>
 
-              <DotsIconButton className="dots-icon">
-                <HorizontalDots />
-              </DotsIconButton>
+              <DotsButton
+                element={element}
+                handleDotsClick={handleDotsClick}
+                handleDotsOptionClick={handleDotsOptionClick}
+              />
             </NavItem>
           );
         })}
@@ -189,113 +204,6 @@ const SectionTitleWrapper = styled(Box)`
   align-items: center;
   justify-content: space-between;
   padding: ${({ theme }) => theme.spacing(1, 2)};
-`;
-
-const NavItem = styled("div")<{
-  active?: boolean;
-  isFilledIcon?: boolean;
-  disabled?: boolean;
-}>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  height: 32px;
-
-  color: ${({ theme }) => theme.palette.grey[200]};
-  gap: ${({ theme }) => theme.spacing(2)};
-  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  padding: ${({ theme }) => theme.spacing(1.5, 2)};
-  border: 0.5px solid transparent;
-
-  svg path {
-    ${({ isFilledIcon, theme }) =>
-      !isFilledIcon &&
-      css`
-        stroke: ${theme.palette.grey[200]};
-      `}
-
-    ${({ isFilledIcon, theme }) =>
-      isFilledIcon &&
-      css`
-        fill: ${theme.palette.grey[200]};
-      `}
-  }
-
-  &:hover {
-    ${({ theme, isFilledIcon }) => css`
-      color: ${theme.palette.grey[400]};
-
-      svg path {
-        ${!isFilledIcon &&
-        css`
-          stroke: ${theme.palette.grey[400]};
-        `}
-
-        ${isFilledIcon &&
-        css`
-          fill: ${theme.palette.grey[400]};
-          stroke: auto;
-        `}
-      }
-
-      box-shadow:
-        0px 0px 0px 0.5px #e0e0e0,
-        0px 1px 3px 0px #a6a6a633;
-
-      .dots-icon {
-        display: flex;
-      }
-    `}
-  }
-
-  ${({ active, theme, isFilledIcon }) =>
-    active &&
-    css`
-      color: ${theme.palette.grey[400]};
-
-      svg path {
-        ${!isFilledIcon &&
-        css`
-          stroke: ${theme.palette.grey[400]};
-        `}
-
-        ${isFilledIcon &&
-        css`
-          fill: ${theme.palette.grey[400]};
-          stroke: auto;
-        `}
-      }
-
-      box-shadow:
-        0px 0px 0px 0.5px #e0e0e0,
-        0px 1px 3px 0px #a6a6a633;
-    `}
-
-  ${({ disabled, theme, isFilledIcon }) =>
-    disabled &&
-    css`
-      background-color: ${theme.palette.grey[500]};
-      box-shadow:
-        0px 0px 0px 0.5px #e0e0e0,
-        0px 1px 3px 0px #a6a6a633;
-
-      &:hover {
-        color: ${theme.palette.grey[200]};
-        svg path {
-          ${!isFilledIcon &&
-          css`
-            stroke: ${theme.palette.grey[200]};
-          `}
-
-          ${isFilledIcon &&
-          css`
-            fill: ${theme.palette.grey[200]};
-            stroke: auto;
-          `}
-        }
-      }
-    `}
 `;
 
 const FolderNavItem = styled(NavItem)`

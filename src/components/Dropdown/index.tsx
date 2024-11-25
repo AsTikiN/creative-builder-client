@@ -74,7 +74,8 @@ export const Dropdown: FC<DropdownProps> = ({
         {options.map((option) => (
           <StyledMenuItem
             key={option.id}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setSelectedOption(option);
               setIsOpen(false);
               option.onClick?.();

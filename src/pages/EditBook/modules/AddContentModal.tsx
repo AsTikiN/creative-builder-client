@@ -1,7 +1,7 @@
 import { ModalLayout } from "@/layouts/ModalLayout";
 import { Stack, styled } from "@mui/material";
 import { Dispatch, FC, SetStateAction, useState } from "react";
-import { ContentElement } from "../components/EditBookSidebar";
+import { ContentElement } from "./EditBookSidebar";
 import { initialCheckedItems } from "../mock/mockContentElements";
 import { CheckboxBlock } from "@components/Checkbox/CheckboxBlock";
 import { FileTextIcon } from "@/icons/FileTextIcon";

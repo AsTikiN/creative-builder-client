@@ -1,27 +1,18 @@
-import { Box, css, IconButton, Stack, styled, Typography } from "@mui/material";
-import {
-  Dispatch,
-  FC,
-  MouseEvent,
-  MouseEventHandler,
-  ReactNode,
-  SetStateAction,
-} from "react";
+import { Box, IconButton, Stack, styled, Typography } from "@mui/material";
+import { Dispatch, FC, MouseEvent, ReactNode, SetStateAction } from "react";
 import { FileSearchIcon } from "@/icons/FileSearchIcon";
 import { FileTextIcon } from "@/icons/FileTextIcon";
 import { FolderIcon } from "@/icons/FolderIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
-import { HorizontalDots } from "@/icons/HorizontalDots";
 import { AudioIcon } from "@/icons/AudioIcon";
 import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
-import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
-import { ChevronDownSmallIcon } from "@/icons/ChevronDownSmallIcon";
 import { DotsButton } from "./components/DotsButton";
 import { NavItem } from "./components/NavItem";
 import { SidebarFolder } from "./components/SidebarFolder";
 import { DropdownOption } from "@components/Dropdown";
+import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
 
 export type ContentElementType =
   | "cover"
@@ -206,42 +197,6 @@ const SectionTitleWrapper = styled(Box)`
   padding: ${({ theme }) => theme.spacing(1, 2)};
 `;
 
-const FolderNavItem = styled(NavItem)`
-  &:hover {
-    ${({ theme, isFilledIcon }) => css`
-      background-color: ${theme.palette.grey[500]};
-      color: ${theme.palette.grey[200]};
-
-      svg path {
-        ${!isFilledIcon &&
-        css`
-          stroke: ${theme.palette.grey[200]};
-        `}
-
-        ${isFilledIcon &&
-        css`
-          fill: ${theme.palette.grey[200]};
-          stroke: auto;
-        `}
-      }
-
-      box-shadow:
-        0px 0px 0px 0.5px #e0e0e0,
-        0px 1px 3px 0px #a6a6a633;
-
-      .dots-icon {
-        display: flex;
-      }
-    `}
-  }
-
-  &:hover {
-    .hide-on-hover {
-      display: none;
-    }
-  }
-`;
-
 const NavTextWrapper = styled("div")`
   display: flex;
   align-items: center;
@@ -253,39 +208,4 @@ const NavTextWrapper = styled("div")`
 const TopSections = styled(Stack)`
   flex: 1;
   gap: ${({ theme }) => theme.spacing(1)};
-`;
-
-const Folder = styled(Stack)`
-  gap: ${({ theme }) => theme.spacing(1)};
-`;
-
-const SubElementsList = styled(Stack)<{ isOpen?: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
-`;
-
-const SubFile = styled(Stack)`
-  & > div {
-    margin-left: 24px;
-  }
-`;
-
-const DotsIconButton = styled(IconButton)`
-  display: none;
-  padding: 4px;
-`;
-
-const ChevronIconButton = styled(IconButton)<{ isOpen?: boolean }>`
-  padding: 4px;
-  transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
-
-  svg path {
-    stroke: ${({ theme }) => theme.palette.grey[50]};
-  }
-`;
-
-const TitleOverflow = styled("div")`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: calc(100% - 32px);
 `;

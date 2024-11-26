@@ -1,5 +1,5 @@
 import { Box, Breadcrumbs, styled } from "@mui/material";
-import React, { MouseEvent, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CrossIcon } from "@/icons/CrossIcon";
 import { IconButton } from "@components/IconButton";

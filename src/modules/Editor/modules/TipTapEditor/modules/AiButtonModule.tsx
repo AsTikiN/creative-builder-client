@@ -1,11 +1,5 @@
 import { Box, IconButton, Stack, styled } from "@mui/material";
-import {
-  FC,
-  MouseEvent as ReactMouseEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { ArrowUpCircleIcon } from "@/icons/ArrowUpCircleIcon";
 import { CircleOutlinedCheckIcon } from "@/icons/CircleOutlinedCheckIcon";
 import { FeatherIcon } from "@/icons/FeatherIcon";
@@ -106,11 +100,11 @@ interface Props {
   editor: Editor;
 }
 
-export const AiButtonModule: FC<Props> = ({ editor }) => {
+export const AiButtonModule: FC<Props> = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleOpenDropdownClick = (e: ReactMouseEvent) => {
+  const handleOpenDropdownClick = () => {
     setIsOpenDropdown(!isOpenDropdown);
   };
 

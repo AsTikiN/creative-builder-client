@@ -1,5 +1,5 @@
 import { Box, Breadcrumbs, styled } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CrossIcon } from "@/icons/CrossIcon";
 import { IconButton } from "@components/IconButton";
@@ -12,9 +12,16 @@ import { routes } from "@config/routes";
 
 import { Button } from "@components/Button";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs.tsx";
-import NestedMenu from "@components/Menu";
+
 import { mockContentElements, viewOptions } from "./mock/mockContentElements";
 import { ContentElement, EditBookSidebar } from "./modules/EditBookSidebar";
+import Menu from "@components/Menu";
+import { DropdownMenu } from "@modules/Editor/components/Dropdown";
+import { ImageIcon } from "@/icons/ImageIcon";
+import { FileTextIcon } from "@/icons/FileTextIcon";
+import { LowIcon } from "@/icons/LowIcon";
+import { FileSearchIcon } from "@/icons/FileSearchIcon";
+import { FolderIcon } from "@/icons/FolderIcon";
 
 export const EditBookPage = () => {
   const navigate = useNavigate();
@@ -48,10 +55,66 @@ export const EditBookPage = () => {
     setAnchorEl(null);
   };
 
-  const handleAddElement = (element: ContentElement) => () => {
-    setContentElements((prevElements) => [...prevElements, element]);
-    setAnchorEl(null);
-  };
+  const sections = [
+    {
+      id: 1,
+      title: "",
+      options: [
+        {
+          label: "Cover",
+          value: "cover",
+          icon: <ImageIcon />,
+          id: 1,
+          disabled: true,
+        },
+        {
+          label: "Title Page",
+          value: "titlePage",
+          icon: <FileTextIcon />,
+          id: 2,
+          disabled: true,
+        },
+        {
+          label: "Copyright",
+          value: "copyright",
+          icon: <LowIcon />,
+          id: 3,
+          disabled: true,
+        },
+        {
+          label: "Table of Contents",
+          value: "tableOfContents",
+          icon: <FileSearchIcon />,
+          id: 4,
+          disabled: true,
+        },
+        {
+          label: "Part",
+          value: "part",
+          icon: <FolderIcon />,
+          id: 5,
+        },
+        {
+          label: "Introduction",
+          value: "part",
+          icon: <FileTextIcon />,
+          id: 6,
+        },
+        {
+          label: "Chapter",
+          value: "chapter",
+          icon: <FileTextIcon />,
+          id: 7,
+        },
+        {
+          label: "Conclusion",
+          value: "part",
+          icon: <FileTextIcon />,
+          id: 8,
+        },
+      ],
+    },
+  ];
 
   return (
     <Wrapper>
@@ -94,11 +157,18 @@ export const EditBookPage = () => {
             setContentElements={setContentElements}
             handleToggleFolder={handleToggleFolder}
           />
-          <NestedMenu
+          {/* <NestedMenu
             anchorEl={anchorEl}
             handleClose={handleClose}
             handleAddElement={handleAddElement}
-          />
+          /> */}
+          <Menu
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            handleClose={handleClose}
+          >
+            <DropdownMenu sections={sections} />
+          </Menu>
           <EditorWrapper>
             <Editor />
           </EditorWrapper>

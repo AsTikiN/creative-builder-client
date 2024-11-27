@@ -18,9 +18,11 @@ import { MenuDropdown } from "../../components/MenuDropdown";
 import { AiButtonModule } from "./modules/AiButtonModule";
 import { LinkButton } from "./components/LinkButton";
 
-type TTipTapEditor = TCurrentChapter;
+interface ITipTapEditor {
+  currentChapter?: TCurrentChapter;
+}
 
-export const TipTapEditor: React.FC = ({ currentChapter }: TTipTapEditor) => {
+export const TipTapEditor: React.FC<ITipTapEditor> = ({ currentChapter }) => {
   const editor = useEditor({
     extensions: [
       StarterKit,

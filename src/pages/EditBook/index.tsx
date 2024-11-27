@@ -60,9 +60,9 @@ export const EditBookPage = () => {
 
   const [currentChapter, setCurrentChapter] = useState<TCurrentChapter>(null);
 
-  const handleChangeChapter = (id) => {
-    const newChapter = chapters.find((chapter) => chapter.id === id);
-    return setCurrentChapter(newChapter);
+  const handleChangeChapter = (id: string) => {
+    const newChapter = chapters?.find((chapter) => chapter.id === id);
+    return setCurrentChapter((prev) => newChapter || prev);
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

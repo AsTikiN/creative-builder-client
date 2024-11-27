@@ -67,6 +67,13 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["app"],
       }),
+      cloneApp: build.mutation<CloneAppApiResponse, CloneAppApiArg>({
+        query: (queryArg) => ({
+          url: `/apps/${queryArg.id}/clone`,
+          method: "POST",
+        }),
+        invalidatesTags: ["app"],
+      }),
       createBrand: build.mutation<CreateBrandApiResponse, CreateBrandApiArg>({
         query: (queryArg) => ({
           url: `/brands`,
@@ -328,6 +335,10 @@ export type UpdateAppApiArg = {
 };
 export type DeleteAppApiResponse = /** status 204  */ void;
 export type DeleteAppApiArg = {
+  id: string;
+};
+export type CloneAppApiResponse = /** status 200  */ AppDto;
+export type CloneAppApiArg = {
   id: string;
 };
 export type CreateBrandApiResponse = /** status 201  */ BrandDto;
@@ -878,6 +889,7 @@ export const {
   useGetAppQuery,
   useUpdateAppMutation,
   useDeleteAppMutation,
+  useCloneAppMutation,
   useCreateBrandMutation,
   useGetBrandsQuery,
   useGetBrandQuery,

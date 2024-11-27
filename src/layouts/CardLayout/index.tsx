@@ -1,5 +1,13 @@
 import { alpha, Stack, styled } from "@mui/material";
-import { FC, PropsWithChildren, useState } from "react";
+import {
+  Dispatch,
+  FC,
+  MouseEvent,
+  MouseEventHandler,
+  PropsWithChildren,
+  SetStateAction,
+  useState,
+} from "react";
 import { DotsIcon } from "@/icons/DotsIcon";
 import { Dropdown, DropdownOption } from "@components/Dropdown";
 import { StatusChip, StatusChipProps } from "@components/StatusChip";
@@ -11,6 +19,9 @@ interface CardLayoutProps extends PropsWithChildren {
   dropdownOptions: DropdownOption[];
   variant?: "book" | "offer" | "funnel";
   statusChipProps?: StatusChipProps;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+  selectedOption: DropdownOption | null;
+  setSelectedOption: Dispatch<SetStateAction<DropdownOption | null>>;
 }
 
 export const CardLayout: FC<CardLayoutProps> = ({
@@ -19,10 +30,10 @@ export const CardLayout: FC<CardLayoutProps> = ({
   dropdownOptions,
   variant = "book",
   statusChipProps,
+  onClick,
+  selectedOption,
+  setSelectedOption,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    null,
-  );
   const [isOpen, setIsOpen] = useState(false);
 
   const mockImages = {
@@ -37,8 +48,12 @@ export const CardLayout: FC<CardLayoutProps> = ({
     funnel: 164,
   };
 
+  const stopPropagation = (event: MouseEvent) => {
+    event.stopPropagation();
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <CoverImageWrapper variant={variant} imageHeight={imageHeight}>
         {coverImage ? (
           <ImageContainer>
@@ -47,7 +62,11 @@ export const CardLayout: FC<CardLayoutProps> = ({
         ) : (
           mockImages[variant]
         )}
-        <ActionPanel open={isOpen} className="action-panel">
+        <ActionPanel
+          open={isOpen}
+          className="action-panel"
+          onClick={stopPropagation}
+        >
           {statusChipProps && <StatusChip {...statusChipProps} />}
 
           <DotsWrapper onClick={() => setIsOpen(!isOpen)}>

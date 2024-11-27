@@ -1,7 +1,12 @@
 import { Stack, styled } from "@mui/material";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { AppCard } from "@components/Card/AppCard";
-import { useCreateAppMutation, useGetAppsQuery } from "@store/api/baseApi";
+import {
+  useCloneAppMutation,
+  useCreateAppMutation,
+  useDeleteAppMutation,
+  useGetAppsQuery,
+} from "@store/api/baseApi";
 import { Skeleton } from "@components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@config/routes";
@@ -11,6 +16,8 @@ export const AppsPage = () => {
 
   const { data: apps, isLoading: appsLoading } = useGetAppsQuery();
   const [createApp, { isLoading: createAppLoading }] = useCreateAppMutation();
+  const [cloneApp] = useCloneAppMutation();
+  const [deleteApp] = useDeleteAppMutation();
 
   const handleCreateApp = async () => {
     const result = await createApp({
@@ -26,6 +33,18 @@ export const AppsPage = () => {
     if (id) {
       navigate(routes.editBook(id));
     }
+  };
+
+  const handleAppClick = (id: string) => () => {
+    navigate(routes.editBook(id));
+  };
+
+  const handleCloneApp = (id: string) => () => {
+    cloneApp({ id });
+  };
+
+  const handleDeleteApp = (id: string) => () => {
+    deleteApp({ id });
   };
 
   return (
@@ -56,9 +75,11 @@ export const AppsPage = () => {
           apps?.map((app) => (
             <AppCard
               key={app.id}
-              title={app.title}
-              date="Nov 23, 2024 at 8:12 PM"
+              {...app}
               statusChipProps={{ label: "Lead App", status: "success" }}
+              onClick={handleAppClick(app.id)}
+              handleCloneApp={handleCloneApp(app.id)}
+              handleDeleteApp={handleDeleteApp(app.id)}
             />
           ))}
       </CardsList>

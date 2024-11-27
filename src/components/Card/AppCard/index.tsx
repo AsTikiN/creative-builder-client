@@ -3,28 +3,35 @@ import { EditIcon } from "@/icons/EditIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
 import { CardLayout } from "@/layouts/CardLayout";
+import { DropdownOption } from "@components/Dropdown";
 import { StatusChipProps } from "@components/StatusChip";
 import { styled, Typography, useTheme } from "@mui/material";
-import { FC } from "react";
+import { AppDto } from "@store/api/baseApi";
+import { FC, MouseEventHandler, useState } from "react";
 
-interface AppCardProps {
-  title: string;
-  date: string;
-  coverImage?: string;
+interface AppCardProps extends AppDto {
   statusChipProps?: StatusChipProps;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+  handleCloneApp: () => void;
+  handleDeleteApp: () => void;
 }
 
 export const AppCard: FC<AppCardProps> = ({
   title,
-  date,
-  coverImage,
+  creationDate,
   statusChipProps,
+  onClick,
+  handleCloneApp,
+  handleDeleteApp,
 }) => {
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    null
+  );
   const theme = useTheme();
 
   return (
     <CardLayout
-      coverImage={coverImage}
+      // coverImage={undefined}
       dropdownOptions={[
         {
           id: 1,
@@ -37,6 +44,7 @@ export const AppCard: FC<AppCardProps> = ({
           label: "Duplicate",
           value: "Duplicate",
           icon: <CopyIcon />,
+          onClick: handleCloneApp,
         },
         {
           id: 3,
@@ -51,16 +59,20 @@ export const AppCard: FC<AppCardProps> = ({
           icon: <TrashIcon />,
           color: "error",
           hasDivider: true,
+          onClick: handleDeleteApp,
         },
       ]}
       variant="book"
       statusChipProps={statusChipProps}
+      onClick={onClick}
+      selectedOption={selectedOption}
+      setSelectedOption={setSelectedOption}
     >
       <BookTitle variant="h5" color={theme.palette.grey[400]}>
         {title}
       </BookTitle>
       <Typography variant="body2" color={theme.palette.grey[50]}>
-        {date}
+        {creationDate.toString()}
       </Typography>
     </CardLayout>
   );

@@ -28,6 +28,8 @@ interface BasicSelectProps {
   options: SelectOption[];
   dropdownWidth?: number;
   label?: string | ReactNode;
+  value: string[];
+  setValue: Dispatch<SetStateAction<string[]>>;
 }
 
 const DEFAULT_DROPDOWN_WIDTH = 200;
@@ -36,14 +38,14 @@ export const MultipleSelect: FC<BasicSelectProps> = ({
   options,
   dropdownWidth,
   label,
+  value,
+  setValue,
 }) => {
-  const [personName, setPersonName] = useState<string[]>([]);
-
   const handleChange = (event: any) => {
     const {
       target: { value },
     } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
+    setValue(typeof value === "string" ? value.split(",") : value);
   };
 
   const getComponentByType = (option: SelectOption) => {
@@ -64,7 +66,7 @@ export const MultipleSelect: FC<BasicSelectProps> = ({
         <StyledSelect
           id="demo-multiple-name"
           multiple
-          value={personName}
+          value={value}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           IconComponent={ChevronIcon}

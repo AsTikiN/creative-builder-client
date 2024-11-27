@@ -20,6 +20,8 @@ export const SidebarLayout: FC<SidebarLayoutProps> = ({
   buttonProps,
 }) => {
   const [open, setIsOpen] = useState(false);
+  const [displayDensity, setDisplayDensity] = useState<string[]>([]);
+
   return (
     <Wrapper>
       <WorkspacesBoard />
@@ -30,6 +32,8 @@ export const SidebarLayout: FC<SidebarLayoutProps> = ({
           actions={
             <>
               <MultipleSelect
+                value={displayDensity}
+                setValue={setDisplayDensity}
                 open={open}
                 setIsOpen={setIsOpen}
                 options={[

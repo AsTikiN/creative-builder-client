@@ -1,10 +1,13 @@
 import { Box, styled } from "@mui/material";
+import { TCurrentChapter } from "@/pages/EditBook";
 import { TipTapEditor } from "./modules/TipTapEditor";
 
-export const Editor = () => {
+type TEditor = TCurrentChapter;
+
+export const Editor = ({ currentChapter }: TEditor) => {
   return (
     <Wrapper>
-      <TipTapEditor />
+      <TipTapEditor currentChapter={currentChapter} />
     </Wrapper>
   );
 };

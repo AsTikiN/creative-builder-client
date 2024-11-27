@@ -8,12 +8,14 @@ import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
 import { AudioIcon } from "@/icons/AudioIcon";
 import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
-import { DotsButton } from "./components/DotsButton";
-import { NavItem } from "./components/NavItem";
-import { SidebarFolder } from "./components/SidebarFolder";
 import { DropdownOption } from "@components/Dropdown";
 import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
 import { Skeleton } from "@components/Skeleton";
+import { useDeleteChapterMutation } from "@store/api/baseApi.ts";
+import { TCurrentChapter } from "@/pages/EditBook";
+import { DotsButton } from "./components/DotsButton";
+import { NavItem } from "./components/NavItem";
+import { SidebarFolder } from "./components/SidebarFolder";
 
 export type ContentElementType =
   | "cover"
@@ -44,6 +46,8 @@ export interface ContentElement {
 
 interface Props {
   chaptersLoading: boolean;
+  currentChapter: TCurrentChapter;
+  handleChangeChapter: (id: string) => void;
   handleAddContent: (event: React.MouseEvent<HTMLButtonElement>) => void;
   contentElements: ContentElement[];
   setContentElements: Dispatch<SetStateAction<ContentElement[]>>;
@@ -68,21 +72,24 @@ export const EditBookSidebar: FC<Props> = ({
   setContentElements,
   handleAddContent,
   handleToggleFolder,
+  handleChangeChapter,
+  currentChapter,
 }) => {
+  const [deleteChapter] = useDeleteChapterMutation();
   const handleDotsClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
   };
 
   const handleDotsOptionClick = (
     option: DropdownOption,
-    element: ContentElement
+    element: ContentElement,
   ) => {
     const value = option.value;
 
     if (value === "delete") {
-      setContentElements((prevElements) =>
-        prevElements.filter((el) => el.id !== element.id)
-      );
+      deleteChapter({
+        id: element.id,
+      });
     }
 
     if (value === "duplicate") {
@@ -99,19 +106,6 @@ export const EditBookSidebar: FC<Props> = ({
   return (
     <Wrapper>
       <TopSections>
-        {/*<SectionTitleWrapper>*/}
-        {/*  <Typography variant="h6" color="grey.50">*/}
-        {/*    General*/}
-        {/*  </Typography>*/}
-        {/*</SectionTitleWrapper>*/}
-
-        {/*<NavItem>*/}
-        {/*  <NavTextWrapper>*/}
-        {/*    <WriteIcon />*/}
-        {/*    Outline*/}
-        {/*  </NavTextWrapper>*/}
-        {/*</NavItem>*/}
-
         <NavItem>
           <NavTextWrapper>
             <LayoutGridIcon />
@@ -169,9 +163,10 @@ export const EditBookSidebar: FC<Props> = ({
 
             return (
               <NavItem
-                active={element.isActive}
+                active={currentChapter?.id === element.id}
                 isFilledIcon={iconData.isFilled}
                 disabled={element.disabled}
+                onClick={() => handleChangeChapter(element.id)}
               >
                 <NavTextWrapper>
                   {iconData.icon}

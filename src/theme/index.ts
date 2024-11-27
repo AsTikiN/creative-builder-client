@@ -14,6 +14,17 @@ export const createTheme = (mode: Mode) => {
     typography: typography,
     shape,
     spacing: (factor: number) => `${0.25 * factor}rem`,
+    components: {
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              backgroundColor: "transparent",
+            },
+          },
+        },
+      },
+    },
   };
 
   const theme = createMuiTheme(themeOptions);

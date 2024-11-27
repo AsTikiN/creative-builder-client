@@ -106,26 +106,12 @@ export const EditBookSidebar: FC<Props> = ({
   return (
     <Wrapper>
       <TopSections>
-        <NavItem>
-          <NavTextWrapper>
-            <LayoutGridIcon />
-            Formatting
-          </NavTextWrapper>
-        </NavItem>
-
-        <NavItem>
-          <NavTextWrapper>
-            <AudioIcon />
-            Audiobook
-          </NavTextWrapper>
-        </NavItem>
-
         <SectionTitleWrapper>
           <Typography variant="h6" color="grey.50">
             Content
           </Typography>
 
-          <IconButton onClick={handleAddContent}>
+          <IconButton onClick={handleAddContent} sx={{ p: 0 }}>
             <SidebarPlusIcon />
           </IconButton>
         </SectionTitleWrapper>

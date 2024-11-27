@@ -13,111 +13,57 @@ import { routes } from "@config/routes";
 import { Button } from "@components/Button";
 import { useBreadcrumbs } from "@/hooks/useBreadcrumbs.tsx";
 
-import { viewOptions } from "./mock/mockContentElements";
-import { ContentElement, EditBookSidebar } from "./modules/EditBookSidebar";
 import Menu from "@components/Menu";
 import {
   DropdownMenu,
   DropdownOption,
-  DropdownSection,
 } from "@modules/Editor/components/Dropdown";
-import { ImageIcon } from "@/icons/ImageIcon";
-import { FileTextIcon } from "@/icons/FileTextIcon";
-import { LowIcon } from "@/icons/LowIcon";
-import { FileSearchIcon } from "@/icons/FileSearchIcon";
-import { FolderIcon } from "@/icons/FolderIcon";
 import {
   ChapterDto,
   useCreateChapterMutation,
   useGetAppQuery,
   useGetChaptersQuery,
 } from "@store/api/baseApi";
+import { sections } from "@/pages/EditBook/settings.tsx";
+import { ContentElement, EditBookSidebar } from "./modules/EditBookSidebar";
+import { viewOptions } from "./mock/mockContentElements";
 import { chaptersToSidebarElements } from "./utils/chaptersToSidebarElements";
 
-interface Option extends DropdownOption {
-  value: ChapterDto["type"];
+export interface ICurrentChapter {
+  id: string;
+  title: string;
+  content: string;
+  type: string;
+  appId: string;
 }
 
-interface Section extends DropdownSection {
-  options: Option[];
-}
-
-const sections: Section[] = [
-  {
-    id: 1,
-    title: "",
-    options: [
-      {
-        label: "Cover",
-        value: "cover",
-        icon: <ImageIcon />,
-        id: 1,
-      },
-      {
-        label: "Title Page",
-        value: "titlePage",
-        icon: <FileTextIcon />,
-        id: 2,
-      },
-      {
-        label: "Copyright",
-        value: "copyright",
-        icon: <LowIcon />,
-        id: 3,
-      },
-      {
-        label: "Table of Contents",
-        value: "tableOfContents",
-        icon: <FileSearchIcon />,
-        id: 4,
-      },
-      {
-        label: "Part",
-        value: "part",
-        icon: <FolderIcon />,
-        id: 5,
-      },
-      {
-        label: "Introduction",
-        value: "introduction",
-        icon: <FileTextIcon />,
-        id: 6,
-      },
-      {
-        label: "Chapter",
-        value: "chapter",
-        icon: <FileTextIcon />,
-        id: 7,
-      },
-      {
-        label: "Conclusion",
-        value: "conclusion",
-        icon: <FileTextIcon />,
-        id: 8,
-      },
-    ],
-  },
-];
+export type TCurrentChapter = ICurrentChapter | null;
 
 export const EditBookPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [addChapter] = useCreateChapterMutation();
 
   const { data: book } = useGetAppQuery(
     { id: id as string },
     {
       skip: !id,
-    }
+    },
   );
 
   const { data: chapters, isLoading: chaptersLoading } = useGetChaptersQuery(
     { appId: id as string },
     {
       skip: !id,
-    }
+    },
   );
 
-  const [addChapter] = useCreateChapterMutation();
+  const [currentChapter, setCurrentChapter] = useState<TCurrentChapter>(null);
+
+  const handleChangeChapter = (id) => {
+    const newChapter = chapters.find((chapter) => chapter.id === id);
+    return setCurrentChapter(newChapter);
+  };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -126,21 +72,21 @@ export const EditBookPage = () => {
   });
 
   const [contentElements, setContentElements] = useState<ContentElement[]>(
-    chaptersToSidebarElements([])
+    chaptersToSidebarElements([]),
   );
 
   const handleToggleFolder = (element: ContentElement) => {
     setContentElements((prevElements) =>
       prevElements.map((item) =>
-        item.id === element.id ? { ...item, isOpen: !item.isOpen } : item
-      )
+        item.id === element.id ? { ...item, isOpen: !item.isOpen } : item,
+      ),
     );
   };
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleAddContentClick = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     setAnchorEl(event.currentTarget);
   };
@@ -162,8 +108,8 @@ export const EditBookPage = () => {
 
   useEffect(() => {
     if (!chapters) return;
-
     setContentElements(chaptersToSidebarElements(chapters));
+    setCurrentChapter((prev) => prev || chapters[0]);
   }, [chapters]);
 
   return (
@@ -202,17 +148,14 @@ export const EditBookPage = () => {
         </PageHeader>
         <SidebarContent>
           <EditBookSidebar
+            currentChapter={currentChapter}
+            handleChangeChapter={handleChangeChapter}
             handleAddContent={handleAddContentClick}
             contentElements={contentElements}
             chaptersLoading={chaptersLoading}
             setContentElements={setContentElements}
             handleToggleFolder={handleToggleFolder}
           />
-          {/* <NestedMenu
-            anchorEl={anchorEl}
-            handleClose={handleClose}
-            handleAddElement={handleAddElement}
-          /> */}
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}
@@ -221,7 +164,7 @@ export const EditBookPage = () => {
             <DropdownMenu sections={sections} onClick={handleAddElement} />
           </Menu>
           <EditorWrapper>
-            <Editor />
+            <Editor currentChapter={currentChapter} />
           </EditorWrapper>
         </SidebarContent>
       </Content>

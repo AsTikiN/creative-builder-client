@@ -13,11 +13,14 @@ import { BoldIcon } from "@/icons/BoldIcon";
 import { ItalicIcon } from "@/icons/ItalicIcon";
 import { UnderlineIcon } from "@/icons/UnderlineIcon";
 import { StrokeIcon } from "@/icons/StrokeIcon";
+import { TCurrentChapter } from "@/pages/EditBook";
 import { MenuDropdown } from "../../components/MenuDropdown";
 import { AiButtonModule } from "./modules/AiButtonModule";
 import { LinkButton } from "./components/LinkButton";
 
-export const TipTapEditor: React.FC = () => {
+type TTipTapEditor = TCurrentChapter;
+
+export const TipTapEditor: React.FC = ({ currentChapter }: TTipTapEditor) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -30,14 +33,7 @@ export const TipTapEditor: React.FC = () => {
         nested: true,
       }),
     ],
-    content: `
-      <h1>Getting started</h1>
-      <h2>There should be nothing to hide</h2>
-      <p>Sending money abroad is a big deal for many people living international lives. You might be supporting your family, planning your next adventure, or expanding your business. But did you know that most people are unaware of what they actually pay to send, spend, or receive money internationally?</p>
-    
-      <h2>There should be nothing to hide</h2>
-      <p>Sending money abroad is a big deal for many people living international lives. You might be supporting your family, planning your next adventure, or expanding your business. But did you know that most people are unaware of what they actually pay to send, spend, or receive money internationally?</p>
-    `,
+    content: currentChapter?.content || "",
   });
 
   if (!editor) {

@@ -49,5 +49,7 @@ export const Default: Story = {
     dropdownWidth: 200,
     open: false,
     setIsOpen: () => {},
+    value: [],
+    setValue: () => {},
   },
 };

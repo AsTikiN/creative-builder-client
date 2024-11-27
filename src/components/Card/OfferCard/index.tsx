@@ -3,9 +3,10 @@ import { EditIcon } from "@/icons/EditIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
 import { TrashIcon } from "@/icons/TrashIcon";
 import { CardLayout } from "@/layouts/CardLayout";
+import { DropdownOption } from "@components/Dropdown";
 import { StatusChipProps } from "@components/StatusChip";
 import { Stack, styled, Typography, useTheme } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface OfferCardProps {
   title: string;
@@ -21,6 +22,9 @@ export const OfferCard: FC<OfferCardProps> = ({
   statusChipProps,
 }) => {
   const theme = useTheme();
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    null
+  );
 
   return (
     <CardLayout
@@ -55,6 +59,8 @@ export const OfferCard: FC<OfferCardProps> = ({
       ]}
       variant="offer"
       statusChipProps={statusChipProps}
+      selectedOption={selectedOption}
+      setSelectedOption={setSelectedOption}
     >
       <BookTitle variant="h5" color={theme.palette.grey[400]}>
         {title}

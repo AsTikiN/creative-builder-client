@@ -10,8 +10,7 @@ const meta = {
 
   argTypes: {
     title: { control: "text" },
-    coverImage: { control: "text" },
-    date: { control: "text" },
+    creationDate: { control: "text" },
   },
 } satisfies Meta<typeof AppCard>;
 
@@ -22,12 +21,16 @@ export const Default: Story = {
   args: {
     title:
       "The Incredibly Long and Unnecessarily Verbose Title of a Book That Goes On and On",
-    date: "Nov 23, 2024 at 8:12 PM",
-    coverImage:
-      "https://plus.unsplash.com/premium_photo-1681426414801-f36575c2de9e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXJ8ZW58MHx8MHx8fDA%3D",
+    creationDate: "Nov 23, 2024 at 8:12 PM",
+    status: "active",
+    id: "1",
+    authorId: "1",
+    lastUpdateDate: "Nov 23, 2024 at 8:12 PM",
+    type: "book",
+    handleCloneApp: () => {},
+    handleDeleteApp: () => {},
   },
 };
-
 
 export const Stack: Story = {
   render: (args) => (
@@ -46,8 +49,13 @@ export const Stack: Story = {
   args: {
     title:
       "The Incredibly Long and Unnecessarily Verbose Title of a Book That Goes On and On",
-    date: "Nov 23, 2024 at 8:12 PM",
-    coverImage:
-      "https://plus.unsplash.com/premium_photo-1681426414801-f36575c2de9e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXJ8ZW58MHx8MHx8fDA%3D",
+    creationDate: "Nov 23, 2024 at 8:12 PM",
+    status: "active",
+    id: "1",
+    authorId: "1",
+    lastUpdateDate: "Nov 23, 2024 at 8:12 PM",
+    type: "book",
+    handleCloneApp: () => {},
+    handleDeleteApp: () => {},
   },
 };

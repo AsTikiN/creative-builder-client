@@ -16,6 +16,7 @@ export const IntegrationsPage = () => {
   const [isSortByOpen, setIsSortByOpen] = useState(false);
   const [drawerData, setDrawerData] = useState<DrawerData | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [sortBy, setSortBy] = useState<string[]>([]);
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
@@ -26,6 +27,8 @@ export const IntegrationsPage = () => {
       <Actions>
         <SearchInput />
         <MultipleSelect
+          value={sortBy}
+          setValue={setSortBy}
           label={
             <SortWrapper>
               <FilterTimelineIcon />
@@ -58,7 +61,7 @@ export const IntegrationsPage = () => {
             {...integration}
             onSettingsClick={integration.onSettingsClick(
               handleDrawerOpen,
-              setDrawerData,
+              setDrawerData
             )}
           />
         ))}

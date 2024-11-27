@@ -9,7 +9,9 @@ export const FunnelsPage = () => {
         title: "Funnels",
         description: "Build and manage your sales funnels with ease.",
       }}
-      buttonText="New funnel"
+      buttonProps={{
+        children: "New funnel",
+      }}
     >
       <CardsList>
         <FunnelCard

@@ -10,7 +10,7 @@ type ButtonColor =
   | "warning"
   | "inherit";
 
-interface ButtonProps extends LoadingButtonProps {
+export interface ButtonProps extends LoadingButtonProps {
   children: React.ReactNode;
   color?: ButtonColor;
 }

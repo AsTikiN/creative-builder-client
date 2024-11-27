@@ -13,6 +13,7 @@ import { NavItem } from "./components/NavItem";
 import { SidebarFolder } from "./components/SidebarFolder";
 import { DropdownOption } from "@components/Dropdown";
 import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
+import { Skeleton } from "@components/Skeleton";
 
 export type ContentElementType =
   | "cover"
@@ -31,7 +32,7 @@ export interface IconData {
 }
 
 export interface ContentElement {
-  id: number;
+  id: string;
   title: string;
   type: ContentElementType;
   subElements?: ContentElement[];
@@ -42,6 +43,7 @@ export interface ContentElement {
 }
 
 interface Props {
+  chaptersLoading: boolean;
   handleAddContent: (event: React.MouseEvent<HTMLButtonElement>) => void;
   contentElements: ContentElement[];
   setContentElements: Dispatch<SetStateAction<ContentElement[]>>;
@@ -61,6 +63,7 @@ const contentELementIcons: Record<ContentElementType, IconData> = {
 };
 
 export const EditBookSidebar: FC<Props> = ({
+  chaptersLoading,
   contentElements,
   setContentElements,
   handleAddContent,
@@ -85,7 +88,10 @@ export const EditBookSidebar: FC<Props> = ({
     if (value === "duplicate") {
       setContentElements((prevElements) => [
         ...prevElements,
-        { ...element, id: Math.floor(Math.random() * 1000000) },
+        {
+          ...element,
+          id: Math.floor(Math.random() * 1000000).toString(),
+        },
       ]);
     }
   };
@@ -130,42 +136,56 @@ export const EditBookSidebar: FC<Props> = ({
           </IconButton>
         </SectionTitleWrapper>
 
-        {contentElements.map((element) => {
-          const iconData = contentELementIcons[element.type];
-          if (!iconData) console.log("22222", element.type);
-          const isFolder = element.type === "folder";
+        {chaptersLoading && (
+          <Stack gap={1}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton
+                key={i}
+                variant="rectangular"
+                height={32}
+                sx={{ mb: 1 }}
+              />
+            ))}
+          </Stack>
+        )}
 
-          if (isFolder)
+        {!chaptersLoading &&
+          contentElements.map((element) => {
+            const iconData = contentELementIcons[element.type];
+            if (!iconData) console.log("22222", element.type);
+            const isFolder = element.type === "folder";
+
+            if (isFolder)
+              return (
+                <SidebarFolder
+                  key={element.id}
+                  element={element}
+                  handleToggleFolder={handleToggleFolder}
+                  handleDotsClick={handleDotsClick}
+                  handleDotsOptionClick={handleDotsOptionClick}
+                  iconData={iconData}
+                />
+              );
+
             return (
-              <SidebarFolder
-                key={element.id}
-                element={element}
-                handleToggleFolder={handleToggleFolder}
-                handleDotsClick={handleDotsClick}
-                handleDotsOptionClick={handleDotsOptionClick}
-                iconData={iconData}
-              />
+              <NavItem
+                active={element.isActive}
+                isFilledIcon={iconData.isFilled}
+                disabled={element.disabled}
+              >
+                <NavTextWrapper>
+                  {iconData.icon}
+                  {element.title}
+                </NavTextWrapper>
+
+                <DotsButton
+                  element={element}
+                  handleDotsClick={handleDotsClick}
+                  handleDotsOptionClick={handleDotsOptionClick}
+                />
+              </NavItem>
             );
-
-          return (
-            <NavItem
-              active={element.isActive}
-              isFilledIcon={iconData.isFilled}
-              disabled={element.disabled}
-            >
-              <NavTextWrapper>
-                {iconData.icon}
-                {element.title}
-              </NavTextWrapper>
-
-              <DotsButton
-                element={element}
-                handleDotsClick={handleDotsClick}
-                handleDotsOptionClick={handleDotsOptionClick}
-              />
-            </NavItem>
-          );
-        })}
+          })}
       </TopSections>
 
       <NavItem isFilledIcon>

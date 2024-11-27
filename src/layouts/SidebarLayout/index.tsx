@@ -3,7 +3,7 @@ import { FC, PropsWithChildren, useState } from "react";
 import { LayoutTopIcon } from "@/icons/LayoutTopIcon";
 import { MenuIcon } from "@/icons/MenuIcon";
 import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
-import { Button } from "@components/Button";
+import { Button, ButtonProps } from "@components/Button";
 import { MultipleSelect } from "@components/MultipleSelect";
 import { Header, HeaderProps } from "@modules/Header";
 import { Sidebar } from "@modules/Sidebar";
@@ -11,13 +11,13 @@ import { WorkspacesBoard } from "@modules/WorksapcesBoard";
 
 export interface SidebarLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
-  buttonText: string;
+  buttonProps?: ButtonProps;
 }
 
 export const SidebarLayout: FC<SidebarLayoutProps> = ({
   children,
   headerProps,
-  buttonText,
+  buttonProps,
 }) => {
   const [open, setIsOpen] = useState(false);
   return (
@@ -51,8 +51,12 @@ export const SidebarLayout: FC<SidebarLayoutProps> = ({
                 ]}
               />
 
-              <Button startIcon={<SmallPlusIcon />} variant="contained">
-                {buttonText}
+              <Button
+                startIcon={<SmallPlusIcon />}
+                variant="contained"
+                {...buttonProps}
+              >
+                {buttonProps?.children}
               </Button>
             </>
           }

@@ -12,11 +12,11 @@ interface DropdownSubItemsProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-interface DropdownOption extends DropdownSubItemsProps {
+export interface DropdownOption extends DropdownSubItemsProps {
   subItems?: DropdownSubItemsProps[];
 }
 
-interface DropdownSection {
+export interface DropdownSection {
   id: string | number;
   title: string;
   options: DropdownOption[];
@@ -27,6 +27,7 @@ interface DropdownMenuProps {
   width?: string;
   topSection?: ReactNode;
   size?: "small" | "medium";
+  onClick?: (option: DropdownOption) => MouseEventHandler<HTMLDivElement>;
 }
 
 export const DropdownMenu = ({
@@ -34,6 +35,7 @@ export const DropdownMenu = ({
   width,
   topSection,
   size = "small",
+  onClick,
 }: DropdownMenuProps) => {
   return (
     <Wrapper width={width} size={size}>
@@ -46,7 +48,11 @@ export const DropdownMenu = ({
             </SectionTitle>
           )}
           {section.options.map((option) => (
-            <DropdownOptionItem key={option.id} option={option} />
+            <DropdownOptionItem
+              key={option.id}
+              option={option}
+              onClick={onClick?.(option)}
+            />
           ))}
         </Section>
       ))}
@@ -54,7 +60,13 @@ export const DropdownMenu = ({
   );
 };
 
-const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
+const DropdownOptionItem = ({
+  option,
+  onClick,
+}: {
+  option: DropdownOption;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+}) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
@@ -64,7 +76,7 @@ const DropdownOptionItem = ({ option }: { option: DropdownOption }) => {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       disabled={option.disabled}
-      onClick={option.onClick}
+      onClick={option.onClick || onClick}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <OptionStyled>

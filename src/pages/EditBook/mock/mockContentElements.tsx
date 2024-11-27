@@ -1,49 +1,5 @@
 import { EditIcon } from "@/icons/EditIcon";
 import { UsersIcon } from "@/icons/UsersIcon";
-import { ContentElement } from "../modules/EditBookSidebar";
-
-export const mockContentElements: ContentElement[] = [
-  {
-    id: 2,
-    title: "Title Page",
-    type: "titlePage",
-    isActive: true,
-  },
-  {
-    id: 4,
-    title: "Table of Contents",
-    type: "tableOfContents",
-  },
-  {
-    id: 5,
-    title: "Introduction",
-    type: "introduction",
-    disabled: true,
-  },
-  {
-    id: 6,
-    title: "Folder",
-    type: "folder",
-    isOpen: true,
-    subElements: [
-      {
-        id: 7,
-        title: "Chapter",
-        type: "chapter",
-      },
-      {
-        id: 8,
-        title: "Chapter",
-        type: "chapter",
-      },
-    ],
-  },
-  {
-    id: 9,
-    title: "Chapter",
-    type: "chapter",
-  },
-];
 
 export const initialCheckedItems = {
   cover: { status: false, element: { title: "Cover", type: "cover" } },

@@ -8,6 +8,7 @@ export const addTagTypes = [
   "plan",
   "ai",
   "book",
+  "chapter",
 ] as const;
 const injectedRtkApi = api
   .enhanceEndpoints({
@@ -260,6 +261,42 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["book"],
       }),
+      createChapter: build.mutation<
+        CreateChapterApiResponse,
+        CreateChapterApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/chapters/${queryArg.appId}`,
+          method: "POST",
+          body: queryArg.createChapterDto,
+        }),
+        invalidatesTags: ["chapter"],
+      }),
+      getChapters: build.query<GetChaptersApiResponse, GetChaptersApiArg>({
+        query: (queryArg) => ({ url: `/chapters/${queryArg.appId}` }),
+        providesTags: ["chapter"],
+      }),
+      updateChapter: build.mutation<
+        UpdateChapterApiResponse,
+        UpdateChapterApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/chapters/${queryArg.id}`,
+          method: "PUT",
+          body: queryArg.updateChapterDto,
+        }),
+        invalidatesTags: ["chapter"],
+      }),
+      deleteChapter: build.mutation<
+        DeleteChapterApiResponse,
+        DeleteChapterApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/chapters/${queryArg.id}`,
+          method: "DELETE",
+        }),
+        invalidatesTags: ["chapter"],
+      }),
     }),
     overrideExisting: false,
   });
@@ -400,6 +437,24 @@ export type AddBookElementsApiResponse = /** status 200  */ BookDto;
 export type AddBookElementsApiArg = {
   id: string;
   addBookElementsDto: AddBookElementsDto;
+};
+export type CreateChapterApiResponse = /** status 201  */ ChapterDto;
+export type CreateChapterApiArg = {
+  appId: string;
+  createChapterDto: CreateChapterDto;
+};
+export type GetChaptersApiResponse = /** status 200  */ ChapterDto[];
+export type GetChaptersApiArg = {
+  appId: string;
+};
+export type UpdateChapterApiResponse = /** status 200  */ ChapterDto;
+export type UpdateChapterApiArg = {
+  id: string;
+  updateChapterDto: UpdateChapterDto;
+};
+export type DeleteChapterApiResponse = /** status 204  */ void;
+export type DeleteChapterApiArg = {
+  id: string;
 };
 export type UserDto = {
   /** The id of the user */
@@ -760,6 +815,60 @@ export type AddBookElementsDto = {
   /** Array of book elements */
   elements: BookElementDto[];
 };
+export type ChapterDto = {
+  /** The id of the chapter */
+  id: string;
+  /** The title of the chapter */
+  title: string;
+  /** The content of the chapter */
+  content: string;
+  /** The type of the chapter */
+  type:
+    | "introduction"
+    | "chapter"
+    | "conclusion"
+    | "titlePage"
+    | "copyright"
+    | "tableOfContents"
+    | "part"
+    | "cover";
+  /** The id of the app this chapter belongs to */
+  appId: string;
+};
+export type CreateChapterDto = {
+  /** The title of the chapter */
+  title: string;
+  /** The content of the chapter */
+  content: string;
+  /** The type of the chapter */
+  type:
+    | "introduction"
+    | "chapter"
+    | "conclusion"
+    | "titlePage"
+    | "copyright"
+    | "tableOfContents"
+    | "part"
+    | "cover";
+};
+export type UpdateChapterDto = {
+  /** The title of the chapter */
+  title?: string;
+  /** The content of the chapter */
+  content?: string;
+  /** The type of the chapter */
+  type:
+    | "introduction"
+    | "chapter"
+    | "conclusion"
+    | "titlePage"
+    | "copyright"
+    | "tableOfContents"
+    | "part"
+    | "cover";
+  /** The id of the app this chapter belongs to */
+  appId?: string;
+};
 export const {
   useSignupMutation,
   useLoginMutation,
@@ -797,4 +906,8 @@ export const {
   useUpdateBookMutation,
   useDeleteBookMutation,
   useAddBookElementsMutation,
+  useCreateChapterMutation,
+  useGetChaptersQuery,
+  useUpdateChapterMutation,
+  useDeleteChapterMutation,
 } = injectedRtkApi;

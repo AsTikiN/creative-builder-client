@@ -9,7 +9,9 @@ export const OffersPage = () => {
         title: "Offers",
         description: "Design compelling offers for your funnels.",
       }}
-      buttonText="New offer"
+      buttonProps={{
+        children: "New offer",
+      }}
     >
       <CardsList>
         <OfferCard

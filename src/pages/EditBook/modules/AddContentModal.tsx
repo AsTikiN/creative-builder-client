@@ -52,7 +52,7 @@ export const AddContentModal: FC<Props> = ({
         .map(
           (item) =>
             ({
-              id: Math.floor(Math.random() * 1000000),
+              id: Math.floor(Math.random() * 1000000).toString(),
               ...item.element,
             }) as ContentElement
         ),

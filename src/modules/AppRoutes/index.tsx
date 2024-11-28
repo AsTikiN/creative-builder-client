@@ -5,7 +5,7 @@ import { AppsPage } from "@/pages/Apps";
 import { OffersPage } from "@/pages/Offers";
 import { FunnelsPage } from "@/pages/Funnels";
 import { EditBookPage } from "@/pages/EditBook";
-import { Editor } from "@modules/Editor";
+// import { Editor } from "@modules/Editor";
 import { BrandSettings } from "@/pages/BrandSettings";
 import { GeneralPage } from "@/pages/BrandSettings/pages/GeneralPage";
 import { MembersPage } from "@/pages/BrandSettings/pages/MembersPage";
@@ -28,12 +28,17 @@ export const AppRoutes: React.FC = () => {
         <Route path={routes.offers()} element={<OffersPage />} />
         <Route path={routes.funnels()} element={<FunnelsPage />} />
         <Route path={routes.editBook(":id")} element={<EditBookPage />} />
+        <Route
+          path={routes.bookChapter(":id", ":chapterId")}
+          element={<EditBookPage />}
+        />
+
         {/* <Route
           path={routes.accountSettings()}
           element={<AccountSettingsPage />}
         /> */}
         {/* <Route path={routes.accountAppearance()} element={<AppearancePage />} /> */}
-        <Route path={routes.editor()} element={<Editor />} />
+        {/*<Route path={routes.editor()} element={<Editor />} />*/}
         {/* <Route path={routes.notifications()} element={<Notifications />} /> */}
 
         <Route

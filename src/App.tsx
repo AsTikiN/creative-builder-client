@@ -5,6 +5,7 @@ import { useAppSelector } from "./store";
 import { createTheme } from "./theme/index";
 import "./App.css";
 import { AppRoutes } from "@modules/AppRoutes";
+import { Outlet } from "react-router-dom";
 
 export const App = () => {
   const mode = useAppSelector(selectMode);
@@ -14,10 +15,8 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
       <AppRoutes />
+      <Outlet />
     </ThemeProvider>
   );
 };
-
-

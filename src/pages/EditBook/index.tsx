@@ -20,15 +20,17 @@ import {
 } from "@modules/Editor/components/Dropdown";
 import {
   ChapterDto,
+  UpdateChapterApiArg,
+  UpdateChapterDto,
   useCreateChapterMutation,
   useGetAppQuery,
   useGetChaptersQuery,
+  useUpdateChapterMutation,
 } from "@store/api/baseApi";
 import { sections } from "@/pages/EditBook/settings.tsx";
 import { ContentElement, EditBookSidebar } from "./modules/EditBookSidebar";
 import { viewOptions } from "./mock/mockContentElements";
 import { chaptersToSidebarElements } from "./utils/chaptersToSidebarElements";
-
 export interface ICurrentChapter {
   id: string;
   title: string;
@@ -41,29 +43,27 @@ export type TCurrentChapter = ICurrentChapter | null;
 
 export const EditBookPage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id: bookId, chapterId } = useParams<{
+    id: string;
+    chapterId: string;
+  }>();
   const [addChapter] = useCreateChapterMutation();
+  const [updateMutation] = useUpdateChapterMutation<UpdateChapterDto>();
 
   const { data: book } = useGetAppQuery(
-    { id: id as string },
+    { id: bookId as string },
     {
-      skip: !id,
+      skip: !bookId,
     },
   );
 
   const { data: chapters, isLoading: chaptersLoading } = useGetChaptersQuery(
-    { appId: id as string },
+    { appId: bookId as string },
     {
-      skip: !id,
+      skip: !bookId,
     },
   );
-
-  const [currentChapter, setCurrentChapter] = useState<TCurrentChapter>(null);
-
-  const handleChangeChapter = (id: string) => {
-    const newChapter = chapters?.find((chapter) => chapter.id === id);
-    return setCurrentChapter((prev) => newChapter || prev);
-  };
+  console.log("chapters", chapters);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -97,7 +97,7 @@ export const EditBookPage = () => {
 
   const handleAddElement = (option: DropdownOption) => () => {
     addChapter({
-      appId: id as string,
+      appId: bookId as string,
       createChapterDto: {
         title: option.label,
         content: "",
@@ -106,11 +106,50 @@ export const EditBookPage = () => {
     });
   };
 
+  const handleUpdateChapter = (content: string) => {
+    updateMutation({
+      id: currentChapter?.id,
+      updateChapterDto: {
+        content,
+        appId: bookId,
+      },
+    } as UpdateChapterApiArg);
+  };
+
+  const handleChangeChapter = (chapterId: string) => {
+    if (!bookId) return;
+    navigate(routes.bookChapter(bookId, chapterId), {
+      replace: true,
+    });
+  };
   useEffect(() => {
-    if (!chapters) return;
+    if (!chapters || !bookId) return;
+    if (!chapters.length || !chapterId) {
+      navigate(routes.editBook(bookId), {
+        replace: true,
+      });
+    }
+  }, [chapterId, chapters]);
+  const [currentChapter, setCurrentChapter] = useState<TCurrentChapter>(null);
+
+  useEffect(() => {
+    if (!chapters || !bookId) return;
     setContentElements(chaptersToSidebarElements(chapters));
-    setCurrentChapter((prev) => prev || chapters[0]);
-  }, [chapters]);
+    if (chapters && chapterId) {
+      const matchedChapter = chapters.find(
+        (chapter) => chapter.id === chapterId,
+      );
+      setCurrentChapter(matchedChapter || chapters[0]);
+    } else if (chapters.length >= 1) {
+      const defaultChapter = chapters[0];
+      setCurrentChapter(defaultChapter);
+      if (defaultChapter) {
+        navigate(routes.bookChapter(bookId, defaultChapter.id), {
+          replace: true,
+        });
+      }
+    }
+  }, [chapterId, chapters, bookId, navigate]);
 
   return (
     <Wrapper>
@@ -164,7 +203,10 @@ export const EditBookPage = () => {
             <DropdownMenu sections={sections} onClick={handleAddElement} />
           </Menu>
           <EditorWrapper>
-            <Editor currentChapter={currentChapter} />
+            <Editor
+              currentChapter={currentChapter}
+              handleUpdateChapter={handleUpdateChapter}
+            />
           </EditorWrapper>
         </SidebarContent>
       </Content>

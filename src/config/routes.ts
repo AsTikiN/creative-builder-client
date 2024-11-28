@@ -23,6 +23,8 @@ export const routes = {
   offers: () => `/${SubRoutes.offers}`,
   funnels: () => `/${SubRoutes.funnels}`,
   editBook: (id: string) => `/book/edit/${id}`,
+  bookChapter: (id: string, chapterId: string) =>
+    `${routes.editBook(id)}/chapter/${chapterId}`,
 
   accountSettings: () => "/account-settings",
   accountAppearance: () => `${routes.accountSettings()}/${SubRoutes.profile}`,

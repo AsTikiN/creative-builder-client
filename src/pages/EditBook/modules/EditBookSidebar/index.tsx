@@ -6,8 +6,6 @@ import { FolderIcon } from "@/icons/FolderIcon";
 import { ImageIcon } from "@/icons/ImageIcon";
 import { LowIcon } from "@/icons/LowIcon";
 import { SidebarPlusIcon } from "@/icons/SidebarPlusIcon";
-import { AudioIcon } from "@/icons/AudioIcon";
-import { LayoutGridIcon } from "@/icons/LayoutGridIcon";
 import { DropdownOption } from "@components/Dropdown";
 import { FileDownloadIcon } from "@/icons/FileDownloadIcon";
 import { Skeleton } from "@components/Skeleton";

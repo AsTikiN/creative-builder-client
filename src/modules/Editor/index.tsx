@@ -3,13 +3,17 @@ import { TCurrentChapter } from "@/pages/EditBook";
 import { TipTapEditor } from "./modules/TipTapEditor";
 
 interface IEditor {
-  currentChapter?: TCurrentChapter;
+  currentChapter: TCurrentChapter;
+  handleUpdateChapter: (content: string) => void;
 }
 
-export const Editor = ({ currentChapter }: IEditor) => {
+export const Editor = ({ currentChapter, handleUpdateChapter }: IEditor) => {
   return (
     <Wrapper>
-      <TipTapEditor currentChapter={currentChapter} />
+      <TipTapEditor
+        currentChapter={currentChapter}
+        handleUpdateChapter={handleUpdateChapter}
+      />
     </Wrapper>
   );
 };

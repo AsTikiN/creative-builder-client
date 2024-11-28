@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { useEditor, EditorContent, BubbleMenu } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -14,15 +14,20 @@ import { ItalicIcon } from "@/icons/ItalicIcon";
 import { UnderlineIcon } from "@/icons/UnderlineIcon";
 import { StrokeIcon } from "@/icons/StrokeIcon";
 import { TCurrentChapter } from "@/pages/EditBook";
+import { debounce } from "@utils/debounce.ts";
 import { MenuDropdown } from "../../components/MenuDropdown";
 import { AiButtonModule } from "./modules/AiButtonModule";
 import { LinkButton } from "./components/LinkButton";
 
 interface ITipTapEditor {
   currentChapter?: TCurrentChapter;
+  handleUpdateChapter: (content: string) => void;
 }
 
-export const TipTapEditor: React.FC<ITipTapEditor> = ({ currentChapter }) => {
+export const TipTapEditor: React.FC<ITipTapEditor> = ({
+  currentChapter,
+  handleUpdateChapter,
+}) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -36,11 +41,39 @@ export const TipTapEditor: React.FC<ITipTapEditor> = ({ currentChapter }) => {
       }),
     ],
     content: currentChapter?.content || "",
+    onUpdate: ({ editor }) => {
+      const content = editor.getJSON();
+      onSave(content);
+    },
   });
 
-  if (!editor) {
-    return null; // Return null if editor is not initialized
-  }
+  const onSave = useMemo(
+    () =>
+      debounce((content) => handleUpdateChapter(JSON.stringify(content)), 1000),
+    [handleUpdateChapter],
+  );
+
+  useEffect(() => {
+    if (!editor) return;
+
+    //If content is empty, initialize the editor with empty content
+    const newContent = currentChapter?.content || "";
+
+    if (newContent !== editor.getHTML()) {
+      // Updating the content of the editor
+      try {
+        if (newContent) {
+          const contentJSON = JSON.parse(newContent);
+          editor.commands.setContent(contentJSON);
+        } else {
+          // If content is empty, clear the editor
+          editor.commands.setContent("");
+        }
+      } catch (error) {
+        console.error("Error while setting content:", error);
+      }
+    }
+  }, [editor, currentChapter?.content]);
 
   return (
     <>

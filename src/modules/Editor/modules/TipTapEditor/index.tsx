@@ -18,6 +18,7 @@ import { debounce } from "@utils/debounce.ts";
 import { MenuDropdown } from "../../components/MenuDropdown";
 import { AiButtonModule } from "./modules/AiButtonModule";
 import { LinkButton } from "./components/LinkButton";
+import Placeholder from "@tiptap/extension-placeholder";
 
 interface ITipTapEditor {
   currentChapter?: TCurrentChapter;
@@ -38,6 +39,10 @@ export const TipTapEditor: React.FC<ITipTapEditor> = ({
       TaskList,
       TaskItem.configure({
         nested: true,
+      }),
+      Placeholder.configure({
+        placeholder: "Start writing...",
+        emptyEditorClass: "is-empty-editor",
       }),
     ],
     content: currentChapter?.content || "",

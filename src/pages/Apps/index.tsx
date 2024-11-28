@@ -10,14 +10,20 @@ import {
 import { Skeleton } from "@components/Skeleton";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@config/routes";
+import { useDisplayDensity } from "@/hooks/useDisplayDensity";
 
 export const AppsPage = () => {
   const navigate = useNavigate();
 
-  const { data: apps, isLoading: appsLoading } = useGetAppsQuery();
+  const { displayDensity, setDisplayDensity, ordering } = useDisplayDensity();
+
   const [createApp, { isLoading: createAppLoading }] = useCreateAppMutation();
   const [cloneApp] = useCloneAppMutation();
   const [deleteApp] = useDeleteAppMutation();
+
+  const { data: apps, isLoading: appsLoading } = useGetAppsQuery({
+    ordering: ordering || "recentActivity",
+  });
 
   const handleCreateApp = async () => {
     const result = await createApp({
@@ -53,6 +59,8 @@ export const AppsPage = () => {
         title: "Apps",
         description: "Create and customize apps for your offers.",
       }}
+      displayDensity={displayDensity}
+      setDisplayDensity={setDisplayDensity}
       buttonProps={{
         onClick: handleCreateApp,
         children: "New app",

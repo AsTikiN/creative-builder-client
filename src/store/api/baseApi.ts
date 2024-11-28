@@ -45,7 +45,10 @@ const injectedRtkApi = api
         invalidatesTags: ["app"],
       }),
       getApps: build.query<GetAppsApiResponse, GetAppsApiArg>({
-        query: () => ({ url: `/apps` }),
+        query: (queryArg) => ({
+          url: `/apps`,
+          params: { ordering: queryArg.ordering },
+        }),
         providesTags: ["app"],
       }),
       getApp: build.query<GetAppApiResponse, GetAppApiArg>({
@@ -323,7 +326,10 @@ export type CreateAppApiArg = {
   createAppDto: CreateAppDto;
 };
 export type GetAppsApiResponse = /** status 200  */ AppDto[];
-export type GetAppsApiArg = void;
+export type GetAppsApiArg = {
+  /** Order apps by creation time or recent activity */
+  ordering?: "createdTime" | "recentActivity";
+};
 export type GetAppApiResponse = /** status 200  */ AppDto;
 export type GetAppApiArg = {
   id: string;
@@ -519,6 +525,8 @@ export type AppDto = {
   type: "course" | "book" | "guide";
   /** The last update date of the app */
   lastUpdateDate: string;
+  /** The last activity date of the app */
+  recentActivity: string;
 };
 export type CreateAppDto = {
   /** The title of the app */

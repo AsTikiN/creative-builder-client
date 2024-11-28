@@ -29,6 +29,7 @@ export const Default: Story = {
     type: "book",
     handleCloneApp: () => {},
     handleDeleteApp: () => {},
+    recentActivity: "Nov 23, 2024 at 8:12 PM",
   },
 };
 
@@ -57,5 +58,6 @@ export const Stack: Story = {
     type: "book",
     handleCloneApp: () => {},
     handleDeleteApp: () => {},
+    recentActivity: "Nov 23, 2024 at 8:12 PM",
   },
 };

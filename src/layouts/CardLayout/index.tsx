@@ -62,26 +62,29 @@ export const CardLayout: FC<CardLayoutProps> = ({
         ) : (
           mockImages[variant]
         )}
-        <ActionPanel
-          open={isOpen}
-          className="action-panel"
-          onClick={stopPropagation}
-        >
+        <ActionPanel open={isOpen} className="action-panel">
           {statusChipProps && <StatusChip {...statusChipProps} />}
 
-          <DotsWrapper onClick={() => setIsOpen(!isOpen)}>
-            <DotsIcon />
-          </DotsWrapper>
-          <DropdownAnchor>
-            <Dropdown
-              dropdownWidth={182}
-              options={dropdownOptions}
-              selectedOption={selectedOption}
-              setSelectedOption={setSelectedOption}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-            />
-          </DropdownAnchor>
+          <div onClick={stopPropagation}>
+            <DotsWrapper
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen(!isOpen);
+              }}
+            >
+              <DotsIcon />
+            </DotsWrapper>
+            <DropdownAnchor>
+              <Dropdown
+                dropdownWidth={182}
+                options={dropdownOptions}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+              />
+            </DropdownAnchor>
+          </div>
         </ActionPanel>
       </CoverImageWrapper>
       <Data>{children}</Data>

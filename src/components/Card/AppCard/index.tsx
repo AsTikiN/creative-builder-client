@@ -8,7 +8,7 @@ import { StatusChipProps } from "@components/StatusChip";
 import { styled, Typography, useTheme } from "@mui/material";
 import { AppDto } from "@store/api/baseApi";
 import { FC, MouseEventHandler, useState } from "react";
-
+import { format } from "date-fns";
 interface AppCardProps extends AppDto {
   statusChipProps?: StatusChipProps;
   onClick?: MouseEventHandler<HTMLDivElement>;
@@ -54,8 +54,8 @@ export const AppCard: FC<AppCardProps> = ({
         },
         {
           id: 4,
-          label: "Delete offer",
-          value: "Delete offer",
+          label: "Delete app",
+          value: "Delete app",
           icon: <TrashIcon />,
           color: "error",
           hasDivider: true,
@@ -72,7 +72,7 @@ export const AppCard: FC<AppCardProps> = ({
         {title}
       </BookTitle>
       <Typography variant="body2" color={theme.palette.grey[50]}>
-        {creationDate.toString()}
+        {format(new Date(creationDate), "MMM d, yyyy 'at' h:mm a")}
       </Typography>
     </CardLayout>
   );

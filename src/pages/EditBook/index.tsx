@@ -54,16 +54,15 @@ export const EditBookPage = () => {
     { id: bookId as string },
     {
       skip: !bookId,
-    },
+    }
   );
 
   const { data: chapters, isLoading: chaptersLoading } = useGetChaptersQuery(
     { appId: bookId as string },
     {
       skip: !bookId,
-    },
+    }
   );
-  console.log("chapters", chapters);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -72,21 +71,21 @@ export const EditBookPage = () => {
   });
 
   const [contentElements, setContentElements] = useState<ContentElement[]>(
-    chaptersToSidebarElements([]),
+    chaptersToSidebarElements([])
   );
 
   const handleToggleFolder = (element: ContentElement) => {
     setContentElements((prevElements) =>
       prevElements.map((item) =>
-        item.id === element.id ? { ...item, isOpen: !item.isOpen } : item,
-      ),
+        item.id === element.id ? { ...item, isOpen: !item.isOpen } : item
+      )
     );
   };
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleAddContentClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
     setAnchorEl(event.currentTarget);
   };
@@ -104,6 +103,7 @@ export const EditBookPage = () => {
         type: option.value as ChapterDto["type"],
       },
     });
+    setAnchorEl(null);
   };
 
   const handleUpdateChapter = (content: string) => {
@@ -118,10 +118,12 @@ export const EditBookPage = () => {
 
   const handleChangeChapter = (chapterId: string) => {
     if (!bookId) return;
+
     navigate(routes.bookChapter(bookId, chapterId), {
       replace: true,
     });
   };
+
   useEffect(() => {
     if (!chapters || !bookId) return;
     if (!chapters.length || !chapterId) {
@@ -130,19 +132,22 @@ export const EditBookPage = () => {
       });
     }
   }, [chapterId, chapters]);
+
   const [currentChapter, setCurrentChapter] = useState<TCurrentChapter>(null);
 
   useEffect(() => {
     if (!chapters || !bookId) return;
     setContentElements(chaptersToSidebarElements(chapters));
+
     if (chapters && chapterId) {
       const matchedChapter = chapters.find(
-        (chapter) => chapter.id === chapterId,
+        (chapter) => chapter.id === chapterId
       );
       setCurrentChapter(matchedChapter || chapters[0]);
     } else if (chapters.length >= 1) {
       const defaultChapter = chapters[0];
       setCurrentChapter(defaultChapter);
+
       if (defaultChapter) {
         navigate(routes.bookChapter(bookId, defaultChapter.id), {
           replace: true,

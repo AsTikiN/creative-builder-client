@@ -1,26 +1,38 @@
 import { styled } from "@mui/material";
-import { FC, PropsWithChildren, useState } from "react";
+import {
+  Dispatch,
+  FC,
+  PropsWithChildren,
+  SetStateAction,
+  useState,
+} from "react";
 import { LayoutTopIcon } from "@/icons/LayoutTopIcon";
 import { MenuIcon } from "@/icons/MenuIcon";
 import { SmallPlusIcon } from "@/icons/SmallPlusIcon";
 import { Button, ButtonProps } from "@components/Button";
-import { MultipleSelect } from "@components/MultipleSelect";
+import { MultipleSelect, SelectOption } from "@components/MultipleSelect";
 import { Header, HeaderProps } from "@modules/Header";
 import { Sidebar } from "@modules/Sidebar";
 import { WorkspacesBoard } from "@modules/WorksapcesBoard";
+import { displayDensityOptions } from "./static/displayDensityOptions";
 
 export interface SidebarLayoutProps extends PropsWithChildren {
   headerProps: HeaderProps;
   buttonProps?: ButtonProps;
+  displayDensity: string[];
+  setDisplayDensity: Dispatch<SetStateAction<string[]>>;
+  options?: SelectOption[];
 }
 
 export const SidebarLayout: FC<SidebarLayoutProps> = ({
   children,
   headerProps,
   buttonProps,
+  displayDensity,
+  setDisplayDensity,
+  options = displayDensityOptions,
 }) => {
   const [open, setIsOpen] = useState(false);
-  const [displayDensity, setDisplayDensity] = useState<string[]>([]);
 
   return (
     <Wrapper>
@@ -36,23 +48,7 @@ export const SidebarLayout: FC<SidebarLayoutProps> = ({
                 setValue={setDisplayDensity}
                 open={open}
                 setIsOpen={setIsOpen}
-                options={[
-                  {
-                    value: "Display density",
-                    label: "Display density",
-                    type: "title",
-                  },
-                  { value: "Compact", label: "Compact", icon: <MenuIcon /> },
-                  {
-                    value: "Comfortable",
-                    label: "Comfortable",
-                    icon: <LayoutTopIcon />,
-                  },
-                  { value: "", label: "", type: "divider" },
-                  { value: "Ordering", label: "Ordering", type: "title" },
-                  { value: "Recent activity", label: "Recent activity" },
-                  { value: "Created", label: "Created" },
-                ]}
+                options={options}
               />
 
               <Button

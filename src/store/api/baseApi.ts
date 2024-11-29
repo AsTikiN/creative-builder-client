@@ -307,6 +307,26 @@ const injectedRtkApi = api
         }),
         invalidatesTags: ["chapter"],
       }),
+      cloneChapter: build.mutation<CloneChapterApiResponse, CloneChapterApiArg>(
+        {
+          query: (queryArg) => ({
+            url: `/chapters/${queryArg.id}/clone`,
+            method: "POST",
+          }),
+          invalidatesTags: ["chapter"],
+        }
+      ),
+      reorderChapter: build.mutation<
+        ReorderChapterApiResponse,
+        ReorderChapterApiArg
+      >({
+        query: (queryArg) => ({
+          url: `/chapters/${queryArg.id}/reorder`,
+          method: "POST",
+          body: queryArg.reorderChapterDto,
+        }),
+        invalidatesTags: ["chapter"],
+      }),
     }),
     overrideExisting: false,
   });
@@ -472,6 +492,15 @@ export type UpdateChapterApiArg = {
 export type DeleteChapterApiResponse = /** status 204  */ void;
 export type DeleteChapterApiArg = {
   id: string;
+};
+export type CloneChapterApiResponse = /** status 204  */ void;
+export type CloneChapterApiArg = {
+  id: string;
+};
+export type ReorderChapterApiResponse = /** status 200  */ ChapterDto;
+export type ReorderChapterApiArg = {
+  id: string;
+  reorderChapterDto: ReorderChapterDto;
 };
 export type UserDto = {
   /** The id of the user */
@@ -869,6 +898,8 @@ export type CreateChapterDto = {
     | "tableOfContents"
     | "part"
     | "cover";
+  /** The order of the chapter */
+  order: number;
 };
 export type UpdateChapterDto = {
   /** The title of the chapter */
@@ -887,6 +918,12 @@ export type UpdateChapterDto = {
     | "cover";
   /** The id of the app this chapter belongs to */
   appId?: string;
+};
+export type ReorderChapterDto = {
+  /** New order position of the chapter */
+  order: number;
+  /** Parent chapter ID if moving into a folder */
+  parentId?: object;
 };
 export const {
   useSignupMutation,
@@ -930,4 +967,6 @@ export const {
   useGetChaptersQuery,
   useUpdateChapterMutation,
   useDeleteChapterMutation,
+  useCloneChapterMutation,
+  useReorderChapterMutation,
 } = injectedRtkApi;

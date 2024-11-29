@@ -101,6 +101,7 @@ export const EditBookPage = () => {
         title: option.label,
         content: "",
         type: option.value as ChapterDto["type"],
+        order: chapters?.length || 1,
       },
     });
     setAnchorEl(null);

@@ -17,6 +17,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ["@tiptap/react", "@tiptap/starter-kit"],
-    exclude: ["styled-components"],
   },
 });

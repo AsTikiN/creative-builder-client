@@ -5,6 +5,7 @@
   font-family: "Inter", sans-serif;
 }
 
-.MuiTouchRipple-root {
-  display: none !important;
+body {
+  margin: 0;
+  padding: 0;
 }

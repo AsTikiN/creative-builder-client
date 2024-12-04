@@ -1,22 +1,25 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { useMemo } from "react";
-import { selectMode } from "@store/features/theme";
-import { useAppSelector } from "./store";
-import { createTheme } from "./theme/index";
 import "./App.css";
-import { AppRoutes } from "@modules/AppRoutes";
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
+
 import { Outlet } from "react-router-dom";
+import { ApolloProvider } from "@apollo/client";
+import { PrimeReactProvider } from "primereact/api";
+
+import { CssBaseline } from "@mui/material";
+import { AppRoutes } from "@modules/AppRoutes";
+import { apolloClient } from "@config/apollo";
 
 export const App = () => {
-  const mode = useAppSelector(selectMode);
-
-  const theme = useMemo(() => createTheme(mode), [mode]);
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppRoutes />
-      <Outlet />
-    </ThemeProvider>
+    <ApolloProvider client={apolloClient}>
+      <PrimeReactProvider>
+        <CssBaseline />
+        <AppRoutes />
+        <Outlet />
+      </PrimeReactProvider>
+    </ApolloProvider>
   );
 };

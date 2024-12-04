@@ -1,195 +1,42 @@
-import { alpha, css, Stack, styled, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { FilePlusIcon } from "@/icons/FilePlusIcon";
-import { SidebarAccordion } from "@components/Accordion/SidebarAccordion";
-import { UsersIcon } from "@/icons/UsersIcon";
-import { TagIcon } from "@/icons/TagIcon";
-import { InboxIcon } from "@/icons/InboxIcon";
-import { BarChartIcon } from "@/icons/BarChartIcon";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Menu } from "primereact/menu";
+import { styled } from "styled-components";
+
 import { routes } from "@config/routes";
-import { IconButton } from "@components/IconButton";
-import { InviteIcon } from "@/icons/InviteIcon";
-import { SquareGridCircleIcon } from "@/icons/SquareGridCircleIcon";
-import SearchInput from "@modules/SearchInput";
-import {
-  financesAccordionData,
-  marketingAccordionData,
-} from "./static/AccordionData";
-import { NavigationHeader } from "./components/NavigationHeader";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleNavigate = (path: string) => () => {
-    navigate(path);
-  };
+  const navItems = [
+    {
+      label: "Home",
+      command: () => navigate(routes.main()),
+      className: location.pathname === routes.main() ? "active" : "",
+    },
+    {
+      label: "Creatives",
+      command: () => navigate(routes.creatives()),
+      className: location.pathname === routes.creatives() ? "active" : "",
+    },
+  ];
 
   return (
     <Wrapper>
-      <SidebarShadow />
-      <SidebarContentWrapper>
-        <NavigationHeader />
-        <SearchWrapper>
-          <SearchInput />
-          <CustomIconButton>
-            <InboxIcon />
-          </CustomIconButton>
-        </SearchWrapper>
-
-        <Navigation>
-          <NavItem>
-            <NavTextWrapper>
-              <BarChartIcon />
-              Overview
-            </NavTextWrapper>
-          </NavItem>
-
-          <NavItem
-            active={location.pathname === routes.apps()}
-            onClick={handleNavigate(routes.apps())}
-          >
-            <NavTextWrapper>
-              <FilePlusIcon />
-              Apps
-            </NavTextWrapper>
-          </NavItem>
-
-          <NavItem
-            active={location.pathname === routes.offers()}
-            onClick={handleNavigate(routes.offers())}
-          >
-            <NavTextWrapper>
-              <TagIcon />
-              Offers
-            </NavTextWrapper>
-          </NavItem>
-
-          <NavItem
-            active={location.pathname === routes.funnels()}
-            onClick={handleNavigate(routes.funnels())}
-          >
-            <NavTextWrapper>
-              <SquareGridCircleIcon />
-              Funnels
-            </NavTextWrapper>
-          </NavItem>
-
-          <SidebarAccordion {...marketingAccordionData} />
-
-          <NavItem>
-            <NavTextWrapper>
-              <InviteIcon />
-              Orders
-            </NavTextWrapper>
-            <Chip>
-              <Typography variant="h6" color="grey.200">
-                23,345
-              </Typography>
-            </Chip>
-          </NavItem>
-
-          <NavItem>
-            <NavTextWrapper>
-              <UsersIcon />
-              Contacts
-            </NavTextWrapper>
-          </NavItem>
-          <SidebarAccordion {...financesAccordionData} />
-        </Navigation>
-      </SidebarContentWrapper>
+      <StyledMenu style={{ width: "100%", height: "100%" }} model={navItems} />
     </Wrapper>
   );
 };
 
-const Wrapper = styled(Stack)`
-  width: 272px;
-
-  position: relative;
-  z-index: 10;
+const Wrapper = styled.div`
+  min-width: 200px;
+  height: 100vh;
+  padding: 10px;
 `;
 
-const SidebarShadow = styled("div")`
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100px;
-  box-shadow:
-    -5px 0px 20px 0px rgba(0, 0, 0, 0.05),
-    -2px 0px 4px 0px rgba(0, 0, 0, 0.03);
-  z-index: 50;
-`;
-
-const SidebarContentWrapper = styled(Stack)`
-  gap: ${({ theme }) => theme.spacing(3)};
-  padding: ${({ theme }) => theme.spacing(3)};
-  overflow: auto;
-  border-right: 0.5px solid ${({ theme }) => theme.palette.grey[100]};
-  background-color: ${({ theme }) => theme.palette.background.primary};
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 100;
-`;
-
-const SearchWrapper = styled("div")`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing(3)};
-`;
-
-const Navigation = styled(Stack)`
-  flex: 1;
-  gap: ${({ theme }) => theme.spacing(1)};
-`;
-
-const NavItem = styled("div")<{ active?: boolean }>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  height: 32px;
-
-  color: ${({ theme }) => theme.palette.grey[200]};
-  gap: ${({ theme }) => theme.spacing(2)};
-  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  padding: ${({ theme }) => theme.spacing(1.5, 2)};
-
-  svg path {
-    stroke: ${({ theme }) => theme.palette.grey[200]};
-  }
-
-  ${({ active, theme }) =>
-    active &&
-    css`
-      color: ${theme.palette.grey[400]};
-
-      svg path {
-        stroke: ${theme.palette.grey[400]};
-      }
-
-      /* border: 0.5px solid ${alpha(theme.palette.grey[300], 0.1)}; */
-      box-shadow:
-        0px 0px 0px 0.5px #e0e0e0,
-        0px 1px 3px 0px #a6a6a633;
-    `}
-`;
-
-const Chip = styled("div")`
-  padding: ${({ theme }) => theme.spacing(0.75, 2)};
-  border-radius: 6px;
-  border: 0.5px solid ${({ theme }) => alpha(theme.palette.grey[300], 0.1)};
-`;
-
-const NavTextWrapper = styled("div")`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing(2)};
-`;
-
-const CustomIconButton = styled(IconButton)`
-  svg path {
-    stroke: ${({ theme }) => theme.palette.grey[200]};
+const StyledMenu = styled(Menu)`
+  .active {
+    background-color: #e9ecef;
+    border-radius: 4px;
   }
 `;

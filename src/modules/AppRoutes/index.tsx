@@ -1,79 +1,21 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { routes } from "@config/routes";
 
-import { AppsPage } from "@/pages/Apps";
-import { OffersPage } from "@/pages/Offers";
-import { FunnelsPage } from "@/pages/Funnels";
-import { EditBookPage } from "@/pages/EditBook";
-// import { Editor } from "@modules/Editor";
-import { BrandSettings } from "@/pages/BrandSettings";
-import { GeneralPage } from "@/pages/BrandSettings/pages/GeneralPage";
-import { MembersPage } from "@/pages/BrandSettings/pages/MembersPage";
-import { AccountSettingsPage } from "@/pages/AccountSettings";
-import { ProfilePage } from "@/pages/AccountSettings/pages/ProfilePage";
-import { AppearancePage as AccountAppearancePage } from "@/pages/AccountSettings/pages/AppearancePage";
-import { NotificationsPage } from "@/pages/AccountSettings/pages/NotificationsPage";
-import { PlansPage } from "@/pages/BrandSettings/pages/PlansPage";
-import { AccountBillingPage } from "@/pages/AccountSettings/pages/BillingPage";
-import { BrandBillingPage } from "@/pages/BrandSettings/pages/BillingPage";
-import { IntegrationsPage } from "@/pages/BrandSettings/pages/IntegrationsPage";
-import { AppearancePage as BrandAppearancePage } from "@/pages/BrandSettings/pages/AppearancePage";
-import { SecurityPage } from "@/pages/AccountSettings/pages/SecurityPage";
+import { CreativesPage } from "@/pages/Creatives";
+import { MainPage } from "@/pages/Main";
+
+import { routes } from "@config/routes";
+import { SidebarLayout } from "@/layouts/SidebarLayout";
+import { CreativePage } from "@/pages/Creative";
 
 export const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path={routes.apps()} element={<AppsPage />} />
-        <Route path={routes.offers()} element={<OffersPage />} />
-        <Route path={routes.funnels()} element={<FunnelsPage />} />
-        <Route path={routes.editBook(":id")} element={<EditBookPage />} />
-        <Route
-          path={routes.bookChapter(":id", ":chapterId")}
-          element={<EditBookPage />}
-        />
-
-        {/* <Route
-          path={routes.accountSettings()}
-          element={<AccountSettingsPage />}
-        /> */}
-        {/* <Route path={routes.accountAppearance()} element={<AppearancePage />} /> */}
-        {/*<Route path={routes.editor()} element={<Editor />} />*/}
-        {/* <Route path={routes.notifications()} element={<Notifications />} /> */}
-
-        <Route
-          path={routes.accountSettings()}
-          element={<AccountSettingsPage />}
-        >
-          <Route path={routes.profile()} element={<ProfilePage />} />
-          <Route
-            path={routes.accountAppearance()}
-            element={<AccountAppearancePage />}
-          />
-          <Route
-            path={routes.notifications()}
-            element={<NotificationsPage />}
-          />
-          <Route
-            path={routes.accountBilling()}
-            element={<AccountBillingPage />}
-          />
-          <Route path={routes.security()} element={<SecurityPage />} />
+        <Route path={routes.main()} element={<SidebarLayout />}>
+          <Route index element={<MainPage />} />
+          <Route path={routes.creatives()} element={<CreativesPage />} />
+          <Route path={routes.creative(":id")} element={<CreativePage />} />
         </Route>
-
-        <Route path={routes.brandSettings()} element={<BrandSettings />}>
-          <Route path={routes.brandDetails()} element={<GeneralPage />} />
-          <Route path={routes.team()} element={<MembersPage />} />
-          <Route path={routes.plans()} element={<PlansPage />} />
-          <Route path={routes.brandBilling()} element={<BrandBillingPage />} />
-          <Route path={routes.integrations()} element={<IntegrationsPage />} />
-          <Route
-            path={routes.brandAppearance()}
-            element={<BrandAppearancePage />}
-          />
-        </Route>
-
-        {/* <Route path={routes.plans()} element={<PlansPage />} /> */}
       </Routes>
     </Router>
   );

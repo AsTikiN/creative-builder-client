@@ -67,7 +67,7 @@ yarn format
 Sync your API code with the OpenAPI schema using RTK Query Codegen:
 
 ```bash
-yarn api:generate
+yarn codegen
 ```
 
 ## Contribution
